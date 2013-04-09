@@ -1,0 +1,45 @@
+#!/bin/bash
+
+#
+#   This file is part of the MLV Library.
+#
+#   Copyright (C) 2010,2011,2012,2013 Adrien Boussicault, Marc Zipstein
+#
+#
+#    This library is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This library is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this Library.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+source definition_of_environement_variables
+
+(
+cd $FAKE32_SRC
+cd @PACKAGE_TARNAME@-@PACKAGE_VERSION@
+
+#
+# L'option libxml_CFLAGS="-I$FAKE32/include/libxml2" libxml_LIBS="-lxml2"
+# pour empecher ques les flags -lmingw32 et -lSDL_main soient positionner.
+# en effet cela empeche la creation de .DLL
+#
+# L'option LIBS="-lasprintf" est la pour permettre le linkage pour les fonction asprintf.
+#
+if ! test -a ./Makefile;
+then
+	libxml_CFLAGS="-I$FAKE32/include/libxml2" libxml_LIBS="-lxml2" CPPFLAGS="-DWIN32 -I$FAKE32/include -I$FAKE32/include/glib-2.0 -I$FAKE32/lib/glib-2.0/include" LDFLAGS="-L$FAKE32/lib -L/usr/i586-mingw32msvc/lib" LIBS="-lasprintf" ./configure --prefix=$FAKE32 --host="$HOST" --enable-relativepath='./data'
+fi
+
+make  RANLIB="$RANLIB" RC="$RC" AR="$AR" CC="$CC" prefix=$FAKE32 CPPFLAGS="-DWIN32 -I$FAKE32/include -I$FAKE32/include/glib-2.0 -I$FAKE32/lib/glib-2.0/include" LDFLAGS="-L$FAKE32/lib -L/usr/i586-mingw32msvc/lib"
+make install 
+)
+
+
