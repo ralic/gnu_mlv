@@ -919,7 +919,7 @@ AM_PATH_SDL($SDL_VERSION,
 )
 CFLAGS="$CFLAGS $SDL_CFLAGS"
 # Remove dependencies from 'sdl-config' not meant for us libraries:
-SDL_LIBS=$(echo "$SDL_LIBS" | sed -e 's/-lmingw32//' -e 's/-lSDLmain//')
+SDL_LIBS=$(echo "$SDL_LIBS" |sed -e 's/-lmingw32//' -e 's/-lSDLmain//')
 LIBS="$LIBS $SDL_LIBS"
 \endverbatim
 par les lignes
@@ -1248,7 +1248,7 @@ $(TARGET): $(DEPENDS) $(OBJECTS)
 	$(CC) -o $@ $(LDFLAGS) $(OBJECTS) $(LDLIBS)
  
 %.d:%.c
-	$(CC) -M $(CFLAGS) -MT '$(shell echo "$&lt;" | sed 's,\($*\)\.c,\1.o $@,' )'  $&lt; &gt; $@
+	$(CC) -M $(CFLAGS) -MT '$(shell echo "$&lt;" |sed 's,\($*\)\.c,\1.o $@,' )'  < > $@
  
 include $(INCLUDE_DEPENDS)
  
@@ -2141,7 +2141,7 @@ AM_PATH_SDL($SDL_VERSION,
 )
 CFLAGS="$CFLAGS $SDL_CFLAGS"
 # Remove dependencies from 'sdl-config' not meant for us libraries:
-SDL_LIBS=$(echo "$SDL_LIBS" | sed -e 's/-lmingw32//' -e 's/-lSDLmain//')
+SDL_LIBS=$(echo "$SDL_LIBS" |sed -e 's/-lmingw32//' -e 's/-lSDLmain//')
 LIBS="$LIBS $SDL_LIBS"
 \endverbatim
 par les lignes
