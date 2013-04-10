@@ -5,60 +5,22 @@
  * Cette démonstration  utilise les fonctions suivantes : 
  *
  *------------------------------------------------------------------------------
- * MLV_init_audio : Cette fonction initialise la libraire MLV pour pouvoir jouer
- *                  de la musique et des sons.
- *
- *                  Cette fonction renvoie 0 si l'infrastructure audio a été 
- *                  correctement initialisé, renvoie -1 sinon.
- *
- * int MLV_init_audio();
+ * MLV_init_audio : 
  * 
  *------------------------------------------------------------------------------
- * MLV_free_audio : Ferme proprement les différents périphériques audios.
- *
- * void MLV_free_audio();
+ * MLV_free_audio : 
  * 
  *------------------------------------------------------------------------------
- * MLV_load_music : Charge un ficher contenant de la musique en mémoire.
- *
- *                  Cette fonction prends en paramètre le chemin d'acces du 
- *                  fichier contenant la musique et renvoie un pointeur vers 
- *                  l'espace mémoire où a été chargé la musique.
- *
- *                  Les formats de fichier acceptés sont le .ogg, .mp3, .wav,
- *                  etc...
- *
- *                  Cette fonctione renvoie un pointeur vers la musique chargée
- *                  en mémoire, ou NULL si la librairie n'a pas réussi à charger
- *                  la musique en mémoire.
- *
- * MLV_Music* MLV_load_music(
- *     const char*     file_music     Chemin d'accès vers un fichier contenant 
- *                                    de la musique.
- * );
+ * MLV_load_music : 
  * 
  *------------------------------------------------------------------------------
- * MLV_free_music : Ferme un morceau de musique chargé en mémoire.
- *
- * void MLV_free_music(
- *     MLV_Music*     music     Le morceau de musique à fermer
- * );
+ * MLV_free_music : 
  * 
  *------------------------------------------------------------------------------
- * MLV_play_music : Joue une musique qui est chargée en mémoire.
- *
- * void MLV_play_music(
- *     MLV_Music*     music,     Le morceau de musique à jouer.
- *     float          volume,    Le volume sonore.
- *     int            loop       Le nombre de fois que le morceau doit être 
- *                               joué. Si loop est strivtement négatif, le 
- *                               morceau sera joué indéfiniment.
- * );
+ * MLV_play_music : 
  * 
  *------------------------------------------------------------------------------
- * Arrête toutes les musiques.
- *
- * void MLV_stop_music();
+ * MLV_stop_music : 
  * 
  *------------------------------------------------------------------------------
  *

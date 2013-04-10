@@ -3,110 +3,37 @@
  * avec les chemins d'acces des fichiers.
  *
  *------------------------------------------------------------------------------
- * MLV_get_base_name: Renvoie la chaîne de caractères après le dernier séparteur
- *                    / dans un chemin donné en paramètre.
- *
- * Cette fonction renvoie une chaîne de caractère.
- *
- * char* MLV_get_base_name(
- *     const char*     path     Le chemin à analyser.
- * );
+ * MLV_get_base_name : 
  *
  *------------------------------------------------------------------------------
- * MLV_get_directory_name: Renvoie la chaîne de caractère s'étendnant jusqu'au 
- *                         dernier séparateur / du chemin donné en paramètre.
- *
- * Cette fonction renvoie une chaîne de caractère.
- *
- * char* MLV_get_directory_name(
- *     const char*     path     Le chemin à analyser.
- * );
+ * MLV_get_directory_name : 
  *
  *------------------------------------------------------------------------------
- * MLV_path_is_absolute: Teste si un chemin est absolu.
- *
- * Cette fonction renvoie 1 si le chemin est absolue, 0 sinon.
- *
- * int MLV_path_is_absolute(
- *     const char* path     Le chemin à analyser.
- * );
+ * MLV_path_is_absolute : 
  *
  *------------------------------------------------------------------------------
- * MLV_path_is_relative: Teste si un chemin est relatif.
- *
- * Cette fonction renvoie 1 si le chemin est relatif, 0 sinon.
- *
- * int MLV_path_is_relative(
- *     const char*     path     Le chemin à analyser.
- * );
+ * MLV_path_is_relative : 
  *
  *------------------------------------------------------------------------------
- * MLV_path_exists: Teste si le chemin corespond au chemin d'un fichier ou 
- *                 dossier existant.
- *
- * Cette fonction renvoie renvoie 1 si le chemin est associé à un dossier ou un
- * fichier existant, 0 sinon.
- *
- * int MLV_path_exists(
- *     const char*     path     Le chemin à analyser.
- * );
+ * MLV_path_exists : 
  *
  *------------------------------------------------------------------------------
- * MLV_path_is_a_directory: Vérifie si un chemin est un associé à un répertoire.
- *
- * Cette fonction renvoie 1 si le chemin est associé à un dossier, 0 sinon.
- *
- * int MLV_path_is_a_directory(
- *     const char*     path     Le chemin à analyser.
- * );
+ * MLV_path_is_a_directory : 
  *
  *------------------------------------------------------------------------------
- * MLV_path_is_a_file: Vérifie si un chemin est un associé à un fichier.
- *
- * Cette fonction renvoie 1 si le chemin est associé à un fichier, 0 sinon.
- *
- * int MLV_path_is_a_file(
- *     const char*     path     Le chemin à analyser.
- * );
+ * MLV_path_is_a_file : 
  *
  *------------------------------------------------------------------------------
- * MLV_build_path: Construit en concaténant différents textes, une chaine de 
- *                 caractère représentant un chemin dont les séparateurs 
- *                 corespondent aux spécifications de la plateforme sur laquel 
- *                 s'execute le programme.
- *
- * Cette fonction renvoie le chemin vérifiant les normes de la plateforme hôte.
- *
- * char* MLV_build_path(
- *     const char*     first_element,     La premiere chaîne à concatener
- *     ...                                les autres éléments à concatener
- * );
+ * MLV_build_path : 
  *
  *------------------------------------------------------------------------------
- * MLV_get_current_directory: Determine le répertoire courant.
- *
- * Cette fonction renvoie le chemin du répertire courant.
- *
- * const char * MLV_get_current_directory( );
+ * MLV_get_current_directory : 
  *
  *------------------------------------------------------------------------------
- * MLV_get_temporary_directory: Determine le répertoire temporaire.
- *
- * Le répertoire temporaire est le repertoire dans lequel les applications ont
- * ont le droit d'ajouter et de modifier des fichiers.
- * Ce répertoire génaralement vidé lorqsue la machine est étteinte.
- *
- * Cette fonction renvoie le chemin du répertire temporaire.
- *
- * const char * MLV_get_temporary_directory( );
+ * MLV_get_temporary_directory : 
  *
  *------------------------------------------------------------------------------
- * MLV_get_home_directory: Determine le répertoire personnel de l'utilisateur 
- *                         courant.
- *
- * Cette fonction renvoie le chemin du répertire personnel.
- *
- * const char * MLV_get_home_directory( );
+ * MLV_get_home_directory : 
  *
  *------------------------------------------------------------------------------
  *

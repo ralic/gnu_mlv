@@ -16,31 +16,13 @@
  * courante de la souris, sans utiliser la fonction MLV_get_event();
  *
  *------------------------------------------------------------------------------
- * MLV_get_keyboard_state : Renvoie l'état (préssé ou relaché) de l'une touche 
- *                          du clavier.
- *
- * MLV_State MLV_get_keyboard_state(
- *     MLV_Keyboard     keyboard_code     Le code de la touche dont il faut 
- *                                        renvoyer l'état.
- * );
+ * MLV_get_keyboard_state : 
  *
  *------------------------------------------------------------------------------
- * MLV_get_mouse_position: Renvoie la position courante de la souris. 
- *
- * void MLV_get_mouse_position(
- *     int*     x,    Coordonnée en X de la position de la souris dans la
- *                    fenêtre.
- *     int*     y     Coordonnée en Y de la position de la souris dans la 
- *                    fenêtre.
- * );
+ * MLV_get_mouse_position : 
  *
  *------------------------------------------------------------------------------
- * MLV_get_mouse_button_state: Renvoie l'état (préssé ou relaché) d'un bouton de
- *                             la souris.
- *
- * MLV_State MLV_get_mouse_button_state(
- *     MLV_Button     mouse_button     Le code du bouton de la souris
- * );
+ * MLV_get_mouse_button_state : 
  *
  *------------------------------------------------------------------------------
  * 

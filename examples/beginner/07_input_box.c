@@ -5,42 +5,8 @@
  * Pour cela le programme utilise la fonction :
  *
  *------------------------------------------------------------------------------
- * MLV_wait_input_box : Suspend l'exécution du programme, affiche deux zonnes de 
- *                   textes.
- *                   La première zone n'est pas modifiable et sert à afficher un
- *                   message d'information. La deuxième est vide et peut être 
- *                   modifiée par l'utilisateur.
- *                   Lorsque l'utilisateur appuie sur la touche entrée, le texte
- *                   qui se trouve dans la zone de texte est renvoyé par la 
- *                   fonction grâce au paramètre text.
- *                   Le texte, la taille et les couleurs des différents éléments
- *                   sont paramétrables grâces aux différents paramètres de la 
- *                   fonction.
+ * MLV_wait_input_box : 
  *
- *     MLV_wait_input_box alloue lui même la mémoire associée au texte.
- *     Une fois l'espace mémoire alloué, il ne le libère à aucun moment.
- *     Cette tâche est laissé au programmeur.
- *
- * void MLV_wait_input_box(
- *    int            sommetHautGaucheX,     Coordonnee en X du coin Nord-Ouest 
- *                                          de la boîte de saisie.
- *    int            sommetHautGaucheY,     Coordonnee en Y du coin Nord-Ouest
- *                                          de la boîte de saisie
- *    int            sommetBasDroitX,       Coordonnee en X du coin Sud-Est de
- *                                          la boîte de saisie.
- *    int            sommetBasDroitY,       Coordonnee en Y du coin Sud-Est de
- *                                          la boîte de saisie.
- *    MLV_Color      borderColor,           Couleur de la bordure de la boîte
- *                                          de saisie.
- *    MLV_Color      textColor,             Couleur du texte de la boîte de
- *                                          saisie.
- *    MLV_Color      backgroundColor,       Couleur de fond de la boîte de
- *                                          saisie.
- *    const char*    informativeMessage,    Message à afficher devant la boîte 
- *                                          de saisie.
- *    char**         text                   Adresse où sera placé la réponse
- *                                          donnée par l'utilisateur.
- * );
  *------------------------------------------------------------------------------
  *
  */

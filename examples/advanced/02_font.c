@@ -9,39 +9,13 @@
  * l'utiliser pour afficher du texte avec cette dernière.
  *
  *------------------------------------------------------------------------------
- * MLV_Font* MLV_load_font : Charge une police de caractères en mémoire. Cette
- *                           police est chargée à partir du chemin d'accés du 
- *                           fichier contenant la police et de la taille de la
- *                           police souhaitée.
- *
- * MLV_Font* MLV_load_font(
- *    const char*    file_font,    Chemin d'accès du fichier contenant la police
- *                                 de caractères  
- *    int            size          Taille de la police de caractères
- * );
+ * MLV_load_font : 
  *
  *------------------------------------------------------------------------------
- * void MLV_free_font : Ferme une police de caractères qui a précédement été 
- *                       mis en mémoire.
- *
- * void MLV_free_font(
- *    MLV_Font*    font    La police de caractères à fermer.
- * );
+ * MLV_free_font : 
  *
  *------------------------------------------------------------------------------
- * MLV_draw_text_with_font : Imprime un texte donné à une position, une police 
- *                           de caractères et une couleur données.
- *
- * void MLV_draw_text_with_font(
- *     int             x,       Coordonnée en X de la position du coin 
- *                              Nord-Ouest de la boîte
- *     int             y,       Coordonnée en Y de la position du coin
- *                              Nord-Ouest de la boîte
- *     const char *    text,    texte à afficher
- *     MLV_Font*       font,    police de caractères à utiliser pour afficher le
- *                              texte
- *     MLV_Color       color    couleur du tracé
- * );
+ * MLV_draw_text_with_font : 
  *
  *------------------------------------------------------------------------------
  */

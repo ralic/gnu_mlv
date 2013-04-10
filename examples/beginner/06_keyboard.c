@@ -4,25 +4,7 @@
  * Pour cela, le programme utilise la fonction :
  *
  *------------------------------------------------------------------------------
- * MLV_wait_keyboard : Suspend l'exécution jusqu'à ce que l'utilisateur
- *                     appuie sur une touche du clavier.
- *                     Lorsque l'utilisateur appuie sur une touche, la 
- *                     fonction retourne trois valeurs ( sym, mod et unicode )
- *                     correspondant respectivement au code de la touche, au
- *                     mode dans lequel se trouve le clavier (majuscule etc ...)
- *                     et au caractère unicode obtenu en combinant le mode du
- *                     clavier et le code de la touche appuyée.
- *
- *                     La fonction accepte des valeurs nulles pour les 
- *                     pointeurs sym, mod et unicode.
- *                     Dans ce cas la fonction ignore les champs en question.
- *
- * void MLV_wait_keyboard(
- *     int*        sym,        Code de la touche 
- *     int*        mod,        Mode dans lequel se trouve le clavier
- *     int*        unicode     Caractère codé en unicode de la lettre obtenu
- *                             en combinant le code et le mode de la touche
- * );
+ * MLV_wait_keyboard : 
  *
  *------------------------------------------------------------------------------
  * Il est possible d'obtenir la liste exaustive des :

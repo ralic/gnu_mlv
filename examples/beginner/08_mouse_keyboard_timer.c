@@ -4,126 +4,16 @@
  * l'utilisateur est invité à cliquer ou appuyer sur une touche du clavier
  *
  *------------------------------------------------------------------------------
- * MLV_wait_mouse_or_seconds: Suspend l'exécution jusqu'à ce que l'utilisateur 
- *                            clique sur le bouton gauche de la souris où 
- *                            jusqu'à ce qu'un nombre de seconds, passé en 
- *     paramètres, se soient écoulées.
- *
- *     Au moment où l'utilisateur clique, la fonction retourne les coordonnées 
- *     de la position de la souris dans la fenêtre.
- *
- *     Cette fonction renvoie 1 si l'utilisateur cliqué avec le bouton gauche 
- *     de la souris, et 0 si le temps s'est écoulé.
- *
- * int MLV_wait_mouse_or_seconds(
- *     int *    x,         Coordonnée en X de la position de la souris dans la 
- *                         fenêtre.
- *     int *    y,         Coordonnée en Y de la position de la souris dans la 
- *                         fenêtre.
- *     int      seconds    Le nombre de second à attendre avant de quitter la 
- *                         fonction.
- * );
+ * MLV_wait_mouse_or_seconds : 
  *
  *------------------------------------------------------------------------------
- * MLV_wait_keyboard_or_seconds : Suspend l'exécution jusqu'à ce que 
- *                                l'utilisateur appuie sur une touche du  
- *                                clavier ou jusq'à ce q'un nombre de secondes 
- *     passées en paramètres soient écoulées.
- * 
- *     Lorsque l'utilisateur appuie sur une touche, la fonction retourne trois 
- *     valeurs ( sym, mod et unicode ) correspondant respectivement au code de 
- *     la touche, au mode dans lequel se trouve le clavier (majuscule etc ...) 
- *     et au caractère unicode correspondnant obtenu en combinant le mode du 
- *     clavier et le code de la touche appuyée.
- *
- *     La fonction accepte des valeurs nulles pour les pointeurs sym, mod et 
- *     unicode.
- *     Dans ce cas la fonction ignore les champs en questions.
- *
- *     Cette fonction renvoie 1 si l'utilisateur à utiliser le calvier, 0 si le 
- *     temps s'est écoulé.
- *
- * int MLV_wait_keyboard_or_seconds(
- *     int*    sym,        Code de la touche
- *     int*    mod,        Mode dans lequel se trouve le clavier
- *     int*    unicode,    Caractère codé en unicode de la lettre obtenue en 
- *                         combinant le code et le mode précédent
- *     int     seconds     Le nombre de secondes à attendre
- * );
+ * MLV_wait_keyboard_or_seconds : 
  *
  *------------------------------------------------------------------------------
- * MLV_wait_keyboard_or_mouse : Suspend l'exécution jusqu'à ce que l'utilisateur
- *                              appuie sur une touche du clavier ou sur le 
- *                              bouton gauche de la souris.
- *
- *     Cette fonction renvoie un entier codant le type de l'évènement qui a été 
- *     récupéré ( clavier ou souris )
- *
- *     Lorsque l'utilisateur appuie sur une touche, la fonction retourne trois 
- *     valeurs ( sym, mod et unicode ) correspondant respectivement au code de 
- *     la touche, au mode dans lequel se trouve le clavier (majuscule etc ...) 
- *     et au caractère unicode correspondnant obtenu en combinant le mode du 
- *     clavier et le code de la touche appuyée.
- *
- *     Lorsque l'utilisateur appuie sur le bouton gauche de la souris, la 
- *     fonction remplit les parametres correspondant aux coordonnées en X et Y 
- *     de la position de la souris sur l'écran. 
- *
- *     Cette fonction renvoie un entier codant le type de l'évènement qui a été
- *     récupéré ( MLV_KEY ou MLV_MOUSE_BUTTON )
- *
- * MLV_Event MLV_wait_keyboard_or_mouse(
- *     int*    sym,        Code de la touche qui a été appuyée ou relachée. 
- *                         La valeur de ce champs est définie par l'énumération:
- *                         MLV_Keyboard_button.
- *     int*    mo,         Mode dans lequel se trouve le clavier lorsqu'une 
- *                         touche est appuyée ou relachée. La valeur de ce 
- *                         champs est définie par l'énumération : 
- *                             MLV_Keyboard_modifier.
- *     int*    unicode,    unicode Caractère codé en unicode de la lettre 
- *                         obtenue en combinant le code et le mode précédent
- *     int*    mouse_x,    Coordonnée en X de la position de la souris
- *     int*    mouse_y     Coordonnée en Y de la position de la souris
- * );
+ * MLV_wait_keyboard_or_mouse : 
  *
  *------------------------------------------------------------------------------
- * MLV_wait_keyboard_or_mouse_or_seconds : Suspend l'exécution jusqu'à ce que 
- *                                         l'utilisateur appuie sur une touche
- *                                         du clavier, sur le bouton gauche de
- *    la souris ou qu'un certain nombre de secondes passéesn en paramètres se 
- *    soient écoulées.
- *
- *    Cette fonction renvoie un entier codant le type de l'évènement qui a été 
- *    récupéré ( clavier ou souris )
- *
- *     Lorsque l'utilisateur appuie sur une touche, la fonction retourne trois 
- *     valeurs ( sym, mod et unicode ) correspondant respectivement au code de 
- *     la touche, au mode dans lequel se trouve le clavier (majuscule etc ...) 
- *     et au caractère unicode correspondnant obtenu en combinant le mode du 
- *     clavier et le code de la touche appuyée.
- *
- *     Lorsque l'utilisateur appuie sur le bouton gauche de la souris, la 
- *     fonction remplit les parametres correspondant aux coordonnées en X et Y 
- *     de la position de la souris sur l'écran.
- *
- *     Cette fonction renvoie un entier codant le type de l'évènement qui a été
- *     récupéré ( MLV_KEY ou MLV_MOUSE_BUTTON ), ou MLV_NONE si le temps s'est 
- *     écoulé.
- *
- * MLV_Event MLV_wait_keyboard_or_mouse_or_seconds(
- *     int*    sym,        Code de la touche qui a été appuyée ou relachée. 
- *                         La valeur de ce champs est définie par l'énumération:
- *                         MLV_Keyboard_button.
- *     int*    mo,         Mode dans lequel se trouve le clavier lorsqu'une 
- *                         touche est appuyée ou relachée. La valeur de ce 
- *                         champs est définie par l'énumération : 
- *                             MLV_Keyboard_modifier.
- *     int*    unicode,    unicode Caractère codé en unicode de la lettre 
- *                         obtenue en combinant le code et le mode précédent
- *     int*    mouse_x,    Coordonnée en X de la position de la souris
- *     int*    mouse_y     Coordonnée en Y de la position de la souris
- *     int     seconds     Le nombre de secondes à attendre
- * );
+ * MLV_wait_keyboard_or_mouse_or_seconds : 
  *
  *------------------------------------------------------------------------------
  */

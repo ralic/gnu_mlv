@@ -18,133 +18,37 @@
  * Pour cela le programme utilise les fonctions suivantes :
  *
  *------------------------------------------------------------------------------
- * MLV_draw_circle: Dessine un cercle à une position et un rayon spécifiés en
- *                  paramètres.
- *   
- * void MLV_draw_circle(
- *    int        x,         Coordonnée en X du centre du cercle
- *    int        y,         Coordonnée en Y du centre du cercle
- *    int        radius,    Rayon du cercle
- *    MLV_Color  color      Couleur du tracé
- * );
+ * MLV_draw_circle: 
  *
  * -----------------------------------------------------------------------------
- * MLV_draw_filled_circle : Dessine un disque plein dont le centre et le rayon
- *                          sont passés en parametres.
- *
- * void MLV_draw_filled_circle(
- *    int         x,          Coordonnée en X du centre du cercle
- *    int         y,          Coordonnée en Y du centre du cercle
- *    int         radius,     Rayon du cercle
- *    MLV_Color   color       Couleur du tracé
- * );
+ * MLV_draw_filled_circle : 
  *
  * -----------------------------------------------------------------------------
- * MLV_draw_ellipse : Dessine une ellipse dont la position, les rayons et la
- *                    couleur sont passés en paramètres.
- * 
- * MLV_draw_ellipse(
- *     int       x,         Coordonnée en X du centre de l'ellipse
- *     int       y,         Coordonnée en Y du centre de l'ellipse
- *     int       radius_x,  Rayon en X de l'ellipse
- *     int       radius_y,  Rayon en Y de l'ellipse
- *     MLV_Color color      Couleur du tracé
- * );
+ * MLV_draw_ellipse : 
  *
  * -----------------------------------------------------------------------------
- * MLV_draw_filled_ellipse : Dessine une ellipse pleine dont la position, les 
- *                           rayons et la couleur sont passés en paramètres.
- *
- * void MLV_draw_filled_ellipse(
- *     int       x,         Coordonnee en X du centre de l'ellipse
- *     int       y,         Coordonnee en Y du centre de l'ellipse
- *     int       radius_x,  Rayon en X de l'ellipse
- *     int       radius_y,  Rayon en Y de l'ellipse
- *     MLV_Color color      Couleur du tracé
- * );
+ * MLV_draw_filled_ellipse : 
  *
  * -----------------------------------------------------------------------------
- * MLV_draw_rectangle : Dessine un rectangle dont la taille, la couleur et la
- *                      position du sommet Nord-Ouest sont données en 
- *                      paramètres.
- *
- * void MLV_draw_rectangle(
- *     int       x,       Coordonnée en X du sommet Nord-Ouest du rectangle
- *     int       y,       Coordonnée en Y du sommet Nord-Ouest du rectangle
- *     int       width,   Largeur du rectangle
- *     int       height,  Hauteur du rectangle
- *     MLV_Color color    Couleur du tracé
- * );
+ * MLV_draw_rectangle : 
  *
  * -----------------------------------------------------------------------------
- * MLV_draw_filled_rectangle : Dessine un rectangle dont la taille, la couleur 
- *                             et la position du sommet Nord-Ouest sont données
- *                             en paramètres.
- * void MLV_draw_filled_rectangle(
- *     int       x,       Coordonnée en X du sommet Nord-Ouest du rectangle
- *     int       y,       Coordonnée en Y du sommet Nord-Ouest du rectangle
- *     int       width,   Largeur du rectangle
- *     int       height,  Hauteur du rectangle
- *     MLV_Color color    Couleur du tracé
- * );
+ * MLV_draw_filled_rectangle : 
  *
  * -----------------------------------------------------------------------------
- * MLV_draw_line : Dessine une ligne dont les coordonnées des deux extrémités
- *                 sont passées en paramètres. 
- * void MLV_draw_line(
- *    int       x1,       Coordonnée en X de la première extrémité de la ligne
- *    int       y1,       Coordonnée en Y de la première extrémité de la ligne
- *    int       x2,       Coordonnée en X de la deuxième extrémité de la ligne
- *    int       y2,       Coordonnée en Y de la deuxième extrémité de la ligne
- *    MLV_Color color     Couleur du tracé
- * );
+ * MLV_draw_line : 
  *
  * -----------------------------------------------------------------------------
- * MLV_draw_point : Dessine un point dont les coordonées sont passées
- *                  en paramètres.
- *
- * void MLV_draw_point(
- *    int       x,      Coordonnée en X du point
- *    int       y,      Coordonnée en Y du point
- *    MLV_Color color   Couleur du tracé
- * );
+ * MLV_draw_point : 
  *
  * -----------------------------------------------------------------------------
- * MLV_draw_bezier_curve: Dessine une courbe de Bézier à partir d'une liste de
- * sommets.
- *
- * void MLV_draw_bezier_curve( 
- *    const int*    vx,         La liste des coordonnées en X des différents 
- *                              sommets de la courbe.
- *    const int*    vy,         La liste des coordonnées en Y des différents
- *                              sommets de la courbe.
- *    int           npoints,    Le nombre de sommets de la courbe de Bézier.
- *    MLV_Color     color       La couleur du tracé
- * );
+ * MLV_draw_bezier_curve: 
  *
  * -----------------------------------------------------------------------------
- * MLV_draw_polygon: Dessine un polygone à partir d'une liste de sommets.
- *
- * void MLV_draw_polygon( 
- *    const int*    vx,         La liste des coordonnées en X des différents
- *                              sommets du polygone.
- *    const int*    vy,         La liste des coordonnées en Y des différents
- *                              sommets du polygone.
- *    int           npoints,    Le nombre de sommets du polygone.
- *    MLV_Color     color       La couleur du tracé
- * );
+ * MLV_draw_polygon: 
  *
  * -----------------------------------------------------------------------------
- * MLV_draw_polygon: Dessine un polygone plein à partir d'une liste de sommets.
- *
- * void MLV_draw_filled_polygon( 
- *    const int*    vx,         La liste des coordonnées en X des différents
- *                              sommets du polygone.
- *    const int*    vy,         La liste des coordonnées en Y des différents
- *                              sommets du polygone.
- *    int           npoints,    Le nombre de sommets du polygone.
- *    MLV_Color     color       La couleur du tracé
- * );
+ * MLV_draw_filled_polygon: 
  *
  * -----------------------------------------------------------------------------
  *

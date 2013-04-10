@@ -5,43 +5,10 @@
  * Pour cela le programme  utilise les fonctions suivantes : 
  *
  *------------------------------------------------------------------------------
- * MLV_get_time : Renvoie le nombre de millisecondes écoulées depuis le début de
- *                l'initialisation de la librairie MLV
- *                ( avec MLV_create_window ).
- *
- * int MLV_get_time(
- * );
+ * MLV_get_time : 
  *
  *------------------------------------------------------------------------------
- * MLV_get_date : Donne la date du jour (seconde/heure/jour/mois/annee).
- *
- *                L'année est donnée depuis l'an 0.
- *
- *                Une valeur nulle peut être passé en paramètre de la fonction.
- *                Dans ce cas, le paramètre est ignorée par la fonction.
- *
- *                Cette fonction utilise la fonction ctime présent dane time.h.
- *                Vous pouvez utilisez cette fonction directement à la place de
- *                MLV_get_date()
- *                Faites    man time.h  ou  man ctime  pour plus d'informations.
- *
- *     Cette fonction Renvoie 1 si le decalage heure d'hivers-été a été pris en
- *     compte, 0 si il ne l'a pas été et -1 si l'information n'est pas
- *     disponible.
- *
- * int MLV_get_date(
- *     int*     seconds,            Le nombre de secondes écoulées depuis le 
- *                                  dernier changement de minute.
- *     int*     minutes,            Le nombre de minutes écoulées depuis le
- *                                  dernier changement d'heure
- *     int*     hours,              Le nombre d'heures écoulées depuis minuit.
- *     int*     day,                Le quantième du mois
- *     int*     month,              Le nombre de mois écoulés depuis le début de
- *                                  l'année.
- *     int*     year,               Le nombre d'année depuis l'an 0.
- *     int*     day_of_the_week     Le jour de la semaine ( 0: Lundi, 1:Mardi,
- *                                  ..., 6:Dimanche).
- * );
+ * MLV_get_date : 
  *
  *------------------------------------------------------------------------------
  */

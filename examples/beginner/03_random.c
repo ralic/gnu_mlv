@@ -6,27 +6,14 @@
  * Pour cela, il utilise les fonctions suivantes:
  *
  *------------------------------------------------------------------------------
- * MLV_get_random_boolean:  Renvoie 0 ou 1 aléatoirement.
- *
- * int MLV_get_random_boolean();
+ * MLV_get_random_boolean :
  *
  *------------------------------------------------------------------------------
- * MLV_get_random_integer : Renvoie un entier aléatoire choisi dans un 
- *                          intervalle donné en paramètre.
- * 
- * int MLV_get_random_integer(
- *    int    begin,    Borne inférieur de l'intervalle ( inclusif )
- *    int    end       Borne supérieur de l'intervalle ( inclusif )
- * );
+ * MLV_get_random_integer :
  *
  *------------------------------------------------------------------------------
- * MLV_get_random_double : Renvoie un réel aléatoire choisi dans un intervalle 
- *                         donné en paramètre.
+ * MLV_get_random_double :
  *
- * double MLV_get_random_double(
- *    double    begin,    Borne inférieur de l'intervalle ( inclusif )
- *    double    end       Borne supérieur de l'intervalle ( inclusif )
- * );
  *
  * Ces fonctions sont décrites dans le fichier MLV_random.h.
  * Leurs documentations sont accéssibles en tapant dans le terminal la commande

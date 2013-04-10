@@ -4,44 +4,22 @@
  * plein écran.
  *
  *------------------------------------------------------------------------------
- * MLV_enable_full_screen : Affiche la fenêtre en plein ecran.
- *                          La résolution de l'image est donné alors par la
- *                          taille de l'image. Pour que l'application soit en 
- *                          plein écran, il faut que la taille de la fenetre soit
- *                          compatible avec la résolution de l'écran.
- *
- * void MLV_enable_full_screen();
+ * MLV_enable_full_screen : 
  *
  *------------------------------------------------------------------------------
- * MLV_disable_full_screen : Désactve le mode plein écran de la fenêtre.
- *
- * void MLV_disable_full_screen();
+ * MLV_disable_full_screen : 
  *
  *------------------------------------------------------------------------------
- * MLV_change_window_size : Change la taille de la fenêtre.
- *                          Si la fenetre a configuré en mode plein ecran, 
- *                          l'appliqcation reste alors en mode plein écran. 
- *                          Pour que l'application soit en plein écran, il faut
- *                          que la taille de la fenetre soit compatible avec la 
- *                          résolution de l'écran.
- *                          De plus, en mode plein écran, la taille de la 
- *                          fenêtre correspond à la résolution de l'image sur
- *                          l'écran.
- *
- * void MLV_change_window_size(
- *     unsigned int     width,     la largeur de la fenêtre
- *     unsigned int     height     la hauteur de la fenêtre
- * );
+ * MLV_is_full_screen : 
  *
  *------------------------------------------------------------------------------
- * MLV_get_window_height : Retourne la hauteur de la fenêtre.
+ * MLV_change_window_size : 
  *
- * int MLV_get_window_height( );
+ *------------------------------------------------------------------------------
+ * MLV_get_window_height : 
  * 
  *------------------------------------------------------------------------------
- * MLV_get_window_width : Retourne la largeur de la fenetre.
- *
- * int MLV_get_window_width( );
+ * MLV_get_window_width : 
  *
  *------------------------------------------------------------------------------
  */

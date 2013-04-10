@@ -4,40 +4,13 @@
  * configuration au format xml et d'un certain nombre d'image donnée.
  *
  *------------------------------------------------------------------------------
- * MLV_load_animation_book: Charge en memoire un livre contenant une multitude
- *                          d'animations.
- *
- * Cette fonction renvoie l'adresse de la sructure de données contenant toutes 
- * les animations.
- *
- * MLV_Animation_book* MLV_load_animation_book(
- *      const char*     xml_file,          Fichiers xml.
- *      const char*     image_directory    image_directory Le dossier ou se 
- *                                         trouve toutes les images du livre 
- *                           d'animation. Si NULL est passe en parametre, alors 
- *                           le programme cherche dans le repertoire du fichier
- *                           de configuration du livre  d'animation.
- * );
+ * MLV_load_animation_book : 
  *
  *------------------------------------------------------------------------------
- * MLV_free_animation_book: Libère la memoire contenue par le livre d'animation.
- *
- * void MLV_free_animation_book(
- *     MLV_Animation_book*     animation_book     Le livre d'animation.
- * );
- *
+ * MLV_free_animation_book : 
  *
  *------------------------------------------------------------------------------
- * MLV_get_animation_from_name: Renvoie une animation donnée contenue dans le 
- *                              livre d'animation.
- *
- * Renvoie la séquence d'animation.
- *
- * MLV_Animation_sequence* MLV_get_animation_from_name(
- *     MLV_Animation_book*     animation_book,     animation_book Le livre
- *                                                 d'animation.
- *     const char*             name                Le nom de l'animation
- * );
+ * MLV_get_animation_from_name : 
  *
  *------------------------------------------------------------------------------
  *

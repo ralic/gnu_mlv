@@ -4,108 +4,22 @@
  * format xml.
  *
  * -----------------------------------------------------------------------------
- * MLV_load_xml: Charge en mémoire un fichier au format xml.
- *
- * Cette fonction renvoi NULL, lorsque le fichier n'a pas pu être correctement
- * chargé.
- *
- * Cette fonction renvoie le fichier xml lu, anamlysé et chargé.
- *
- * MLV_Xml* MLV_load_xml(
- *     const char*     xml_file_path     Chemin d'accès du fichier xml.
- * );
+ * MLV_load_xml : 
  *
  * -----------------------------------------------------------------------------
- * MLV_get_string_value_from_xml: Permet d'accéder à l'interieur d'un champs 
- :                                donné du fichier xml.
- *
- * Cette fonction peut contenir un nombre variable de paramètres.
- * Comme avec la fonction printf les paramètres suplémentaires, 
- * situées après le paramètre xpath, permettent de construire des
- * requêtes xpath évolué.
- *
- * Par exemple,
- *
- * int id_batiment = 2;
- * char * type_salle = "informatique"
- * int id_salle = 4;
- * char* nom_salle;
- * MLV_get_string_value_from_xml(
- *		xml_data, &(nom_salle),
- *      "/batiment[%d]/salle[type=%s][%d]/nom",
- *      id_batiment, type_salle, id_salle
- * )
- * free( nom_salle ); // on oublie pas de libérer la mémoire après avoir 
- *                    // utilisé nom_salle
- *
- * permet de recupérer le contenu du champ nb_place situé dans la 4eme salle
- * informatique du 2eme batiment.
- *
- * Attention: Il ne faut pas oublier de libérer la mémoire associée au champs 
- *            result
- *
- * Cette fonction renvoie un code erreur si la fonction n'a pa reussie à 
- * extraire la donnée souhaitée du document xml.
- *
- * MLV_Xml_error MLV_get_string_value_from_xml(
- *     MLV_Xml* 	   xml_data,     les données xml.
- *     char**          result,       Un pointeur vers une addresse vide qui 
- *                                   contiendra l'addreese de la chaine de 
- *                                   caractères correspondant au résultat de 
- *                                   la fonction.
- *     const char*     xpath,        Le chemin d'acces
- *     ...                           Les paramètres suplémentaites pour 
- *                                   constuire un chemin d'acces évolué.
- * );
+ * MLV_get_string_value_from_xml : 
  *
  * -----------------------------------------------------------------------------
- * MLV_get_integer_value_from_xml: Permet de recuperer l'entier d'un champs donne
- *                                 du fichier xml.
- *
- * Tout comme la fonction MLV_get_string_value_from_xml, cette fonction peut 
- * contenir un nombre variable de paramètres.
- * Pour plus d'informations, veuillez lire la documentation de la fonction 
- * MLV_get_string_value_from_xml.
- *
- * Cette fonction renvoie un code erreur si la fonction n'a pa reussie à 
- * extraire la donnée souhaitée du document xml.
- *
- * MLV_Xml_error MLV_get_integer_value_from_xml(
- *     MLV_Xml*        xml_data,    les données xml.
- *     int*            result,      Un pointeur vers un entier dans lequel le 
- *                                  résultat de la fonction sera enregistré.
- *     const char*     xpath,       Le chemin d'accesles parametres de la fonction.
- *     ...                          Les paramètres suplémentaites pour 
- *                                  constuire un chemin d'acces évolué.
- * );
+ * MLV_get_integer_value_from_xml : 
  *
  * -----------------------------------------------------------------------------
- * MLV_get_double_value_from_xml: Permet de recupere le reel d'un champs donne
- *                                du fichier xml.
- *
- * Tout comme la fonction MLV_get_string_value_from_xml, cette fonction peut 
- * contenir un nombre variable de paramètres.
- * Pour plus d'informations, veuillez lire la documentation de la fonction 
- * MLV_get_string_value_from_xml.
- *
- * Cette fonction renvoie un code erreur si la fonction n'a pa reussie à 
- * extraire la donnée souhaitée du document xml.
- *
- * MLV_Xml_error MLV_get_double_value_from_xml(
- *     MLV_Xml*        xml_data,     les données xml.
- *     double*         result,       Un pointeur vers un réel dans lequel le 
- *                                   résultat de la fonction sera enregistré.
- *     const char*     xpath,        Le chemin d'acces
- *     ...                           Les paramètres suplémentaites pour 
- *                                   constuire un chemin d'acces évolué.
- * );
+ * MLV_get_double_value_from_xml : 
  *
  * -----------------------------------------------------------------------------
- * MLV_free_xml: Libère la mémoire utilisée par les donnees du fichier xml.
+ * MLV_get_number_of_objects_from_xml : 
  *
- * void MLV_free_xml(
- *     MLV_Xml*     xml_data     les données xml a supprimer.
- * );
+ * -----------------------------------------------------------------------------
+ * MLV_free_xml : 
  *
  * -----------------------------------------------------------------------------
  *

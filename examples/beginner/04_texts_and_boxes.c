@@ -9,81 +9,10 @@
  * Cette boîte s'obtient à l'aide de la fonction MLV_draw_text_box.
  *
  *------------------------------------------------------------------------------
- * MLV_draw_adapted_text_box : Dessine une boîte contenant du texte.
- *                             La taille de la boîte dessinée s'adapte à la
- *                             taille du texte.
- *                             Les différentes couleurs de la boîte et du texte,
- *                             ainsi que la taille des interlignes sont
- *                             paramétrables.
- *
- *                             Il est possible de préciser la justiifcation du
- *                             texte à l'aide du champs : text_justification
- *                             
- * void MLV_draw_adapted_text_box(
- *     int            x,                 Coordonnée en X de la position du coin
- *                                       Nord-Ouest de la boîte
- *     int            y,                 Coordonnée en X de la position du coin
- *                                       Nord-Ouest de la boîte
- *     const char*    message,           Texte à afficher
- *     int            sizeInterligne,    Taille de l'interligne
- *     MLV_Color      borderColor,       Couleur des bordures
- *     MLV_Color      textColor,         Couleur du texte
- *     MLV_Color      backgroundColor,   Couleur du fond de la boîte
- *     MLV_Text_justification    text_justification,    Justification du texte.
- *                                                      Valeurs possibles : 
- *                                                          MLV_TEXT_CENTER
- *                                                          MLV_TEXT_LEFT
- *                                                          MLV_TEXT_RIGHT 
- * );
+ * MLV_draw_adapted_text_box : 
  *
  *------------------------------------------------------------------------------
- * MLV_draw_text_box : Dessine une boîte de taille donnée par l'utilisateur et 
- *                     contenant un texte donné par l'utilisateur.
- *
- *                     Les différentes couleurs de la boîte et du texte,
- *                     ainsi que la taille de l'interligne sont paramétrables.
- *
- *                     Il est possible de préciser la justification du
- *                     texte contenu dans la boîte.
- *
- *                     De même , il est possible de préciser la position du 
- *                     texte à l'intérieur de la boîte.
- *                     
- *                     Cette fonction ne remet pas en forme le texte. Cela 
- *                     veux dire que si le texte est trop grand alors il 
- *                     depassera de la boîte et les parties qui depassent ne 
- *                     seront pas affichées.
- *
- * void MLV_draw_text_box( 
- *    int            x,                  Coordonnée en X de la position du coin
- *                                       Nord-Ouest de la boîte
- *    int            y,                  Coordonnée en Y de la position du coin
- *                                       Nord-Ouest de la boîte
- *    int            width,              Hauteur de la boîte
- *    int            height,             Largeur de la boîte
- *    const char*    message,            Texte à afficher
- *    int            sizeInterligne,     Taille de l'interligne
- *    MLV_Color      borderColor,        Couleur des bordures
- *    MLV_Color      textColor,          Couleur du texte
- *    MLV_Color      backgroundColor,    Couleur du fond de la boîte.
- *    MLV_Text_justification     text_justification,    Justification du texte.
- *                                                      Valeurs possibles : 
- *                                                          MLV_TEXT_CENTER
- *                                                          MLV_TEXT_LEFT
- *                                                          MLV_TEXT_RIGHT 
- *    MLV_Horizontal_position    horizontal_position,   Position horizontale du 
- *                                                      texte dans la boîte.
- *                                                      Valeurs possibles : 
- *                                                         MLV_HORIZONTAL_CENTER
- *                                                         MLV_HORIZONTAL_LEFT
- *                                                         MLV_HORIZONTAL_RIGHT
- *    MLV_Vertical_position      vertical_position      Position verticale du 
- *                                                      texte dans la boîte.
- *                                                      Valeurs possibles : 
- *                                                          MLV_VERTICAL_CENTER
- *                                                          MLV_VERTICAL_TOP
- *                                                          MLV_VERTICAL_BOTTOM 
- * );
+ * MLV_draw_text_box : 
  *
  *------------------------------------------------------------------------------
  *

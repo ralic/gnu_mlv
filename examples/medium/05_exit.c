@@ -5,21 +5,7 @@
  * la fenêtre, ou en envoyant un signal sytème d'arret du programme.
  *
  *------------------------------------------------------------------------------
- * MLV_execute_at_exit : Exécute la fonction de call back donnée en paramètre
- *                       lorsque le système envoie un signal d'arrêt, ou lorsque
- *                       l'utilisateur clique sur la croix de la fenêtre.
- *                       la fonction de call back est alors executée avec en
- *                       paramètre un pointeur vers une structure de donnée qui 
- *                       est aussi donné en paramètre à la fonction 
- *                       MLV_execute_at_exit.
- *
- * void MLV_execute_at_exit(
- *     void (*    function    )(void*),       pointeur de la fonction de call 
- *                                            back qui doit être exécutée. 
- *     void*      data                        Donné à passer en paramètre à la 
- *                                            fonction de call back lors de son
- *                                            exécution.
- * );
+ * MLV_execute_at_exit : 
  *
  *------------------------------------------------------------------------------
  */

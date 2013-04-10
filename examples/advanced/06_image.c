@@ -7,35 +7,19 @@
  * Pour cela, il suffit d'utiliser les fonctions suivantes :
  * 
  *------------------------------------------------------------------------------
- * MLV_load_image : Charge en mémoire une image contenue dans un fichier au 
- *                      format PNG, BMP, JPG, etc ...
- *
- * MLV_Image* MLV_load_image(
- *    const char*    file_image    Chemin d'accès du fichier contenant l'image.
- * );
+ * MLV_load_image : 
  *
  *------------------------------------------------------------------------------
- * MLV_free_image : Libère la mémoire utilisée par l'image
- *
- * void MLV_free_image(
- *    MLV_Image *    image    image à suprimer de la mémoire
- * );
+ * MLV_get_image_size : 
  *
  *------------------------------------------------------------------------------
- * MLV_resize_image_with_proportions : redimensionne l'image de telle sorte que 
- *                                     les proportions d'origines soient 
- *     respectées et que la hauteur et la largeur de la nouvelle image soient à 
- *     la fois maximales et inférieures ou égales à la hauteur et la largeur 
- *     données en paramètres. 
- *     L'utilisateur peut entrer un entier négatif pour les champs width et 
- *     height. Ces champs ne sont alors pas pris en compte dans le 
- *     redimensionnement de l'image.
- *                                    
- * void MLV_resize_image_with_proportions(
- *    MLV_Image*    image,    image à redimentionner
- *    int           width,    Nouvelle largeur de l'image
- *    int           height    Nouvelle hauteur de l'image
- * );
+ * MLV_free_image : 
+ *
+ *------------------------------------------------------------------------------
+ * MLV_resize_image_with_proportions : 
+ *
+ *------------------------------------------------------------------------------
+ * MLV_change_window_size : 
  *
  *------------------------------------------------------------------------------
  *

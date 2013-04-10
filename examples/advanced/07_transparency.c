@@ -41,15 +41,10 @@
  * Fonctions utilisées :
  * 
  *------------------------------------------------------------------------------
- * MLV_set_alpha_on_image : Ajuste les propriétés de transparence de l'image.
- *                       La composante alpja de l'image est remplacée par une
- *                       composante alpha homogene dont la valeur est donnée en
- *                       paramètre.
+ * MLV_set_alpha_on_image : 
  *
- * void MLV_set_alpha_on_image(
- *     MLV_Alpha     alpha,     Nouvelle composante alpha de l'image
- *     MLV_Image     *image     Image à modifier
- * );
+ *------------------------------------------------------------------------------
+ * MLV_clear_window : 
  *
  *------------------------------------------------------------------------------
  *

@@ -20,29 +20,12 @@
  * Pour cela, le programme utilise les fonctions suivantes:
  *
  *------------------------------------------------------------------------------
- * MLV_get_pixel : Renvoie la couleur du pixel présent à une position donnée 
- *                 d'une image donnée.
- *
- *                 Les paramètres red, blue, green et alpha peuvent être égale 
- *                 à NULL. Dans ce cas, ils sont ignorés.
- *
- * void MLV_get_pixel(
- *     MLV_Image*     image,     Image à inspecter.
- *     int            x,         Coordonnée en X de la position du pixel à
- *                               inspecter
- *     int            y,         Coordonnée en Y de la position du pixel à
- *                               inspecter
- *     int*           red,       Composante rouge du pixel
- *     int*           green,     Composante verte du pixel
- *     int*           blue,      Composante vleue du pixel
- *     int*           alpha      Composante alpha (transparence) du pixel
- * );
+ * MLV_get_pixel : 
  *
  *------------------------------------------------------------------------------
  */
 
 #include  <MLV/MLV_all.h>
-#define DEBUG(x) fprintf( stderr, "DEBUG : %s - line : %d- file : %s \n", x, __LINE__, __FILE__ );
 
 //
 // Attention ! 

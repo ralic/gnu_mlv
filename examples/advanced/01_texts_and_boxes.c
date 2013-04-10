@@ -5,28 +5,10 @@
  * Pour cela, le programme utilise les fonctions suivantes:
  *
  *------------------------------------------------------------------------------
- * MLV_get_size_of_text : Calcule la taille de la ligne qui sera affiché à l'écran
- *
- * void MLV_get_size_of_text(
- *     const char *    text,     Texte qui dit être affiché
- *     int *           width,    largeur du texte
- *     int *           height    hauteur du texte
- * );
+ * MLV_get_size_of_text : 
  *
  *------------------------------------------------------------------------------
- * MLV_get_size_of_adapted_text_box : Calcule la taille de la boîte de texte qui
- *                                    serait obtenue si vous utilisez la 
- *                                    fonction MLV_adapted_box_size.
- *
- * int MLV_get_size_of_adapted_text_box(
- *     const char*    message,           texte qui sera affiché lorsque vous 
- *                                       utiliserez MLV_adapted_box.
- *     int            sizeInterligne,    Taille de l'interligne
- *     int *          result_width,      Largeur de la boîte que vous obtiendrez
- *                                       en utilisant MLV_adapted_box.
- *     int *          result_height      Hauteur de la boîte que vous obtiendrez
- *                                       en utilisant MLV_adapted_box.
- * );
+ * MLV_get_size_of_adapted_text_box : 
  *
  *------------------------------------------------------------------------------
  */

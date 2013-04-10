@@ -5,37 +5,16 @@
  * Pour cela le programme  utilise les fonctions suivantes : 
  *
  *------------------------------------------------------------------------------
- * MLV_create_window: Créé une fenêtre dont la taille, et les differents noms 
- *                    sont passés en paramètres.
- *                    Un programme donné ne peut pas ouvrir plus d'une fenêtre à
- *                    la fois.
- *
- * void MLV_create_window(
- *    const char*     display_name,   Nom de la fenêtre
- *    const char*     icone_name,     Nom de l'icone associée à la fenêtre
- *    int             width,          Largeur de la fenêtre
- *    int             height          Hauteur de la fenêtre
- * );
+ * MLV_create_window : 
  *
  *------------------------------------------------------------------------------
- * MLV_free_window : Ferme la fenêtre courante.
- *
- * void MLV_free_window();
+ * MLV_free_window : 
  *
  *------------------------------------------------------------------------------
- * MLV_actualise_window : Met à jour l'affichage de la fenêtre courante.
- *
- * void MLV_actualise_window();
+ * MLV_actualise_window : 
  * 
  *------------------------------------------------------------------------------
- * MLV_draw_text : Imprime un texte donne à une position et une couleur données.
- *
- * void MLV_draw_text(
- *    int             x,       Coordonnee en X du coin Nord-Ouest du texte
- *    int             y,       Coordonnee en Y du coin Nord-Ouest du texte
- *    const char *    text,    texte a afficher
- *    MLV_Color       color    couleur du trace
- * );
+ * MLV_draw_text : 
  *
  *------------------------------------------------------------------------------
  *
@@ -49,12 +28,7 @@
  * la fonction :
  *
  *------------------------------------------------------------------------------
- * MLV_wait_seconds : Le programme s'interrompt pendant un nombre de secondes
- *                     donné en paramètre.
- *
- * void MLV_wait_seconds(
- *    int    seconds    Le nombre de secondes à attendre.
- * );
+ * MLV_wait_seconds : 
  *
  *------------------------------------------------------------------------------
  */

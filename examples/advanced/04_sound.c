@@ -5,43 +5,16 @@
  * Cette démonstration utilise les fonctions suivantes : 
  *
  *------------------------------------------------------------------------------
- * MLV_load_sound : Charge un ficher contenant un échantillon sonore en mémoire.
- *
- *                  Cette fonction prends en paramètre le chemin d'acces du 
- *                  fichier contenant l'échantillon sonore et renvoie un 
- *                  pointeur vers l'espace mémoire où a été chargé l'échantillon
- *                  sonore.
- *
- *                  Les formats de fichier accepté sont les suivants : WAVE, 
- *                  AIFF, RIFF, OGG, and VOC.
- *
- *                  Cette fonction renvoie Null si le fichier n'a put être 
- *                  chargé en mémoire, un pointeur vers l'échantllon sonore.
- *
- * MLV_Sound* MLV_load_sound(
- *     const char*     file_sound     Chemin d'accès vers un fichier contenant
- *                                    d'échantillon sonore.
- * );
+ * MLV_load_sound : 
  * 
  *------------------------------------------------------------------------------
- * Ferme un échantillon sonore chargé en mémoire.
- *
- * void MLV_free_sound(
- *      MLV_Sound*     sound     L'échantillon sonore à fermer
- * );
+ * MLV_free_sound : 
  * 
  *------------------------------------------------------------------------------
- * Joue un échantillon sonore chargée en mémoire.
- *
- * void MLV_play_sound(
- *      MLV_Sound*     sound,     L'échantillon sonore à jouer.
- *      float          volume     Le volume sonore.
- * );
+ * MLV_play_sound : 
  * 
  *------------------------------------------------------------------------------
- * Arrête tous les échantillons sonores.
- *
- * void MLV_stop_all_sound();
+ * MLV_stop_all_sounds : 
  *
  *------------------------------------------------------------------------------
  *

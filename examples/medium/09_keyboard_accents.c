@@ -6,17 +6,7 @@
  * Pour cela, le programme utilise la fonction :
  *
  *------------------------------------------------------------------------------
- * MLV_convert_unicode_to_string : Transforme un caractère en format unicode en
- *                                 chaine de caractères compatible avec le 
- *                                 codage local.
- *
- *         Cette fonction renvoie un pointeur vers une nouvelle chaine de 
- *         caractère. Il ne faut donc pas oublier oublier de libérer l'espace 
- *         allouer apès utilisation de la chaîne de caractère. 
- * 
- * char* MLV_convert_unicode_to_string(
- *     int unicode    Caractère en format unicode 
- * );
+ * MLV_convert_unicode_to_string : 
  *
  *------------------------------------------------------------------------------
  *

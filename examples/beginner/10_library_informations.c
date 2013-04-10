@@ -7,25 +7,22 @@
  * la librairie MLV.
  * 
  *------------------------------------------------------------------------------
- * MLV_get_package_name : Renvoie le nom de la librairie.
- *
- * const char* MLV_get_package_name( );
+ * MLV_get_package_name : 
  *
  *------------------------------------------------------------------------------
- * MLV_get_version : Renvoie la version de la librairie
- *
- * const char* MLV_get_version( );
+ * MLV_get_version : 
  *
  *------------------------------------------------------------------------------
- * MLV_get_licence : Renvoie la licence de la librairie.
- *
- * const char* MLV_get_licence( );
+ * MLV_get_licence : 
  *
  *------------------------------------------------------------------------------
- * MLV_get_web_distribution : Renvoie l'addresse internet où l'on peut trouver 
- *                            les code source de la librairie.
+ * MLV_get_web_distribution : 
  *
- * const char* MLV_get_web_distribution( );
+ *------------------------------------------------------------------------------
+ * MLV_get_repository : 
+ *
+ *------------------------------------------------------------------------------
+ * MLV_get_revision_of_revision_control_software : 
  *
  *------------------------------------------------------------------------------
  *

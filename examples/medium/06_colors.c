@@ -12,17 +12,7 @@
  * suivante:
  *
  * -----------------------------------------------------------------------------
- * MLV_rgba : Convertit une couleur codée sur 4 entier de 8 bits représentant 
- *            les composantes rouge, bleue et verte en un entier 32 bits.
- *
- * Cette fonction renvoit un entier codé sur 32 bits.
- *
- * MLV_Color MLV_rgba(
- *     Uint8     red,      La composante rouge de la couleur
- *     Uint8     green,    La composante verte de la couleur
- *     Uint8     blue,     La composante bleue de la couleur
- *     Uint8     alpha     La composante alpha de la couleur
- * );
+ * MLV_rgba : 
  *
  * -----------------------------------------------------------------------------
  *

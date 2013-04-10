@@ -7,15 +7,8 @@
  * Pour cela, le programme utilise la fonction :
  *
  *-----------------------------------------------------------------------------
- * MLV_wait_mouse : Suspend l'exécution du programme jusqu'à ce que 
- *                  l'utilisateur clique sur le bouton gauche de la souris.
- *                  Au moment où l'utilisateur clique, la fonction retourne les
- *                  coordonnées de la position de la souris dans la fenêtre.
+ * MLV_wait_mouse : 
  *
- * void MLV_wait_mouse(
- *     int *    x,    Coordonnée en X de la position de la souris
- *     int *    y     Coordonnée en Y de la position de la souris
- * );
  *-----------------------------------------------------------------------------
  */
 

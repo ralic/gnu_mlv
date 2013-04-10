@@ -5,6 +5,38 @@
  * Pour cela le programme  utilise les fonctions suivantes : 
  *
  *------------------------------------------------------------------------------
+ * MLV_create_animation : 
+ *
+ *------------------------------------------------------------------------------
+ * MLV_add_frame_in_animation : 
+ *
+ *------------------------------------------------------------------------------
+ * MLV_create_animation_player : 
+ *
+ *------------------------------------------------------------------------------
+ * MLV_play_animation_player : 
+ *
+ *------------------------------------------------------------------------------
+ * MLV_turn_on_sound_of_animation_player : 
+ *
+ *------------------------------------------------------------------------------
+ * MLV_change_sound_volume_of_animation_player : 
+ *
+ *------------------------------------------------------------------------------
+ * MLV_update_animation_player : 
+ *
+ *------------------------------------------------------------------------------
+ * MLV_free_animation_player : 
+ *
+ *------------------------------------------------------------------------------
+ * MLV_free_animation : 
+ *
+ *------------------------------------------------------------------------------
+ * MLV_delay_according_to_frame_rate() : 
+ *
+ *------------------------------------------------------------------------------
+ * MLV_change_frame_rate : 
+ * 
  *------------------------------------------------------------------------------
  */
 
@@ -77,7 +109,9 @@ int main( int argc, char *argv[] ){
 	);
 
 	// Création d'un lecteur d'animation
-	MLV_Animation_player* animation_player = MLV_create_animation_player( animation );
+	MLV_Animation_player* animation_player = MLV_create_animation_player(
+		animation
+	);
 
 	// On lance la lecture de l'animation
 	MLV_play_animation_player( animation_player );
