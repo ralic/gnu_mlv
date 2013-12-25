@@ -23,7 +23,7 @@
 # - if interfaces have been removed or changed then increase mlvcurrent, 
 #   set mlvrevision to 0 and mlvage to 0
 # - if interfaces have been added then increase mlvcurrent, increase mlvage and 
-#   set mlvcode to 0.
+#   set mlvrevision to 0.
 define([mlvcurrent], [1])dnl
 define([mlvrevision], [1])dnl
 define([mlvage], [1])dnl
@@ -70,7 +70,7 @@ AC_SUBST(MLV_WIN_32_BINARIES,[${PACKAGE_TARNAME}-${PACKAGE_VERSION}-win32.zip])
 AC_SUBST(MLV_WIN_64_BINARIES,[${PACKAGE_TARNAME}-${PACKAGE_VERSION}-win64.zip])
 AC_SUBST(MLV_DEVCPP_32_PACKAGE,[${PACKAGE_TARNAME}-${PACKAGE_VERSION}-dev-cpp.zip])
 AC_SUBST(MLV_CODEBLOCKS_32_PACKAGE,[${PACKAGE_TARNAME}-${PACKAGE_VERSION}-code_blocks.zip])
-AC_SUBST(MLV_MACOSX_PACKAGE,[${PACKAGE_TARNAME}-${PACKAGE_VERSION}_macos-10.5.pkg])
+AC_SUBST(MLV_MACOSX_PACKAGE,[${PACKAGE_TARNAME}-${PACKAGE_VERSION}_macos-10.9.pkg])
 
 AC_SUBST(MLV_FEDORA_VERSION,[13])
 AC_SUBST(MLV_FEDORA_CODE_VERSION,[fc${MLV_FEDORA_VERSION}])
