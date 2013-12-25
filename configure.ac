@@ -86,9 +86,13 @@ AC_SUBST(MLV_FEDORA_32_KEY_PACKAGE,[RPM-GPG-KEY-Boussicault])
 
 AC_PREREQ([2.63])
 AC_CONFIG_AUX_DIR([config])
+AC_CONFIG_MACRO_DIR([config/m4])
+m4_include([config/m4/ax_prog_doxygen.m4])
+
 AM_INIT_AUTOMAKE([-Wall -Werror])
 AM_CONFIG_HEADER([MLV/config.h])
 
+AM_PROG_AR
 
 AC_PROG_CC
 AM_PROG_CC_STDC   # To compile .dll

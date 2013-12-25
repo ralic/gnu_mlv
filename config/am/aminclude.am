@@ -180,9 +180,10 @@ doxygen-run: @DX_DOCDIR@/@PACKAGE@.tag
 
 doxygen-doc: doxygen-run $(DX_PS_GOAL) $(DX_PDF_GOAL)
 
+# Modification - 2013 - A. Boussicault
 @DX_DOCDIR@/@PACKAGE@.tag: $(DX_CONFIG) $(pkginclude_HEADERS)
-	for l in @DX_LANGUAGE@; do # Modification - 2013 - A. Boussicualt \
-		rm -rf @DX_DOCDIR@/$$l; # Modification - 2013 - A. Boussicualt \
+	for l in @DX_LANGUAGE@; do \
+		rm -rf @DX_DOCDIR@/$$l; \
 		echo "LANGUAGE='$$l' DOCDIR='@DX_DOCDIR@/$$l' $(DX_ENV) $(DX_DOXYGEN) $(top_srcdir)/$(DX_CONFIG)"; \
 		LANGUAGE="$$l" DOCDIR="@DX_DOCDIR@/$$l" $(DX_ENV) $(DX_DOXYGEN) $(top_srcdir)/$(DX_CONFIG); \
 	done;

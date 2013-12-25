@@ -18,12 +18,11 @@
 #    along with this Library.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+ACLOCAL_AMFLAGS=-Iconfig/m4
+
 include $(top_srcdir)/config/am/aminclude.am
 
 EXTRA_DIST=gpl.txt
-
-ACLOCAL_AMFLAGS = -I config/m4
-
 
 if RELATIVEPATH
 SUBDIRS = MLV data doc packaging
