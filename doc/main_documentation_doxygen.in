@@ -613,9 +613,9 @@ et en le mettant dans le répertoire
 $HOME/fakeroot/src
 \endverbatim
 
-Il est important de NE PAS PRENDRE LA DERNIÈRE VERSION DE PKG-CONFIG.
-En effet, pkg-config utilise une autre bibliothèque qui n'est pas incluse dans le codes source de la dernière version de pkg-config.
-Ce qui n'est pas le cas de l'avant-dernière.
+Il est important de PRENDRE LA DERNIÈRE VERSION DE PKG-CONFIG.
+En effet, pkg-config utilise une autre bibliothèque qui n'est pas incluse 
+dans le codes source des anciennes versions.
 
 Désarchivez le fichier en tapant la ligne de commande suivante:
 
@@ -630,7 +630,7 @@ Nous allons maintenant installer pkg-config :
 
 \verbatim
 cd ./pkg-config-X.X
-./configure --prefix=$FAKEROOT
+./configure --with-internal-glib --prefix=$FAKEROOT
 make
 make install
 \endverbatim
@@ -834,7 +834,7 @@ make install
 \subsubsection install_sdl_macos Installation de SDL
 
 Téléchargez le paquet d'installation pour MacOSX de la bibliothèque sur le site 
-http://www.libsdl.org/download-1.2.php.
+http://www.libsdl.org/download-1.2.php
 
 Ce paquet a pour nom : SDL-1.2.X.dmg (Intel10.5+)
 
@@ -853,7 +853,7 @@ hdiutil detach /Volumes/SDL
 \subsubsection install_sdlimage_macos Installation de SDL_image
 
 Téléchargez le paquet d'installation pour MacOSX de la bibliothèque sur le site
-http://www.libsdl.org/projects/SDL_image/
+http://www.libsdl.org/projects/SDL_image/release-1.2.html
 
 Ce paquet a pour nom : SDL_image-1.2.X.dmg (Intel10.5+)
 
@@ -869,7 +869,7 @@ hdiutil detach /Volumes/SDL_image
 \subsubsection install_sdlmixer_macos Installation de SDL_mixer
 
 Téléchargez le paquet d'installation pour MacOSX de la bibliothèque sur le site
-http://www.libsdl.org/projects/SDL_mixer/
+http://www.libsdl.org/projects/SDL_mixer/release-1.2.html
 
 Ce paquet a pour nom : SDL_mixer-1.2.X.dmg (Intel10.5+)
 
@@ -886,7 +886,7 @@ hdiutil detach /Volumes/SDL_mixer
 \subsubsection install_sdlttf_macos Installation de SDL_ttf
 
 Téléchargez le paquet d'installation pour MacOSX de la bibliothèque sur le site
-http://www.libsdl.org/projects/SDL_ttf/
+http://www.libsdl.org/projects/SDL_ttf/release-1.2.html
 
 Ce paquet a pour nom : SDL_ttf-X.X.X.dmg (Intel10.5+)
 
@@ -910,6 +910,9 @@ cd  $FAKEROOT/src
 tar -xzf SDL_gfx-X.X.tar.gz
 \endverbatim
 
+ATTENTION ! Il faut prendre la version de SDL_gfx prévue pour la version
+1.2 de SDL (il ne faut pas prendre SDL2_gfx qui est prévue pour SDL 2.0) !
+
 Modifiez le configure.in en remplacant les lignes
 \verbatim
 dnl Check for SDL
@@ -932,7 +935,10 @@ LIBS="$LIBS $SDL_LIBS -framework SDL"
 
 Reconfigurez la bibliothèque en exécutant la commande:
 \verbatim
-cd SDL_gdx-X.X
+cd SDL_gfx-X.X
+rm libtool
+rm ltmain.sh
+rm aclocal.m4
 autoreconf --install
 \endverbatim
 
@@ -970,7 +976,7 @@ Installez la bibliothèque en tapant les commandes suivantes:
 cd $FAKEROOT/src
 tar -xzf @PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz
 cd @PACKAGE_TARNAME@-@PACKAGE_VERSION@
-./configure  --prefix=$FAKEROOT 
+./configure --prefix=$FAKEROOT libxml_LIBS=-lxml2 libxml_CFLAGS=-I/usr/include/libxml2
 make
 make install
 \endverbatim
@@ -1834,9 +1840,9 @@ http://pkgconfig.freedesktop.org/releases/
 
 et en le mettant dans le répertoire $FAKEROOT/src.
 
-Il est important de NE PAS PRENDRE LA DERNIÈRE VERSION DE PKG-CONFIG.
-En effet, pkg-config utilise une autre bibliothèque qui n'est jamais incluse dans le code source de la dernière version de pkg-config.
-Ce qui n'est pas le cas de l'avant-dernière.
+Il est important de PRENDRE LA DERNIÈRE VERSION DE PKG-CONFIG.
+En effet, pkg-config utilise une autre bibliothèque qui n'est jamais incluse 
+dans les anciennes versions.
 
 Désarchivez le fichier en tapant la ligne de commande suivante:
 
@@ -1851,7 +1857,7 @@ Nous allons maintenant compiler pkg-config :
 
 \verbatim
 cd ./pkg-config-X.X
-./configure --prefix=$SYSROOT
+./configure --with-internal-glib --prefix=$SYSROOT
 make
 \endverbatim
 
@@ -2051,7 +2057,7 @@ make install DESTDIR=$MACOS_PACKAGE
 \subsubsection install_sdl_paquet_macos Installation de SDL
 
 Téléchargez le paquet d'installation pour MacOSX de la bibliothèque sur le site 
-http://www.libsdl.org/download-1.2.php.
+http://www.libsdl.org/download-1.2.php
 
 Ce paquet a pour nom : SDL-1.2.X.dmg (Intel10.5+)
 
@@ -2072,7 +2078,7 @@ hdiutil detach /Volumes/SDL
 \subsubsection install_sdlimage_paquet_macos Installation de SDL_image
 
 Téléchargez le paquet d'installation pour MacOSX de la bibliothèque sur le site
-http://www.libsdl.org/projects/SDL_image/
+http://www.libsdl.org/projects/SDL_image/release-1.2.html
 
 Ce paquet a pour nom : SDL_image-1.2.X.dmg (Intel10.5+)
 
@@ -2089,7 +2095,7 @@ hdiutil detach /Volumes/SDL_image
 \subsubsection install_sdlmixer_paquet_macos Installation de SDL_mixer
 
 Téléchargez le paquet d'installation pour MacOSX de la bibliothèque sur le site
-http://www.libsdl.org/projects/SDL_mixer/
+http://www.libsdl.org/projects/SDL_mixer/release-1.2.html
 
 Ce paquet a pour nom : SDL_mixer-1.2.X.dmg (Intel10.5+)
 
@@ -2107,7 +2113,7 @@ hdiutil detach /Volumes/SDL_mixer
 \subsubsection install_sdlttf_paquet_macos Installation de SDL_ttf
 
 Téléchargez le paquet d'installation pour MacOSX de la bibliothèque sur le site
-http://www.libsdl.org/projects/SDL_ttf/
+http://www.libsdl.org/projects/SDL_ttf/release-1.2.html
 
 Ce paquet a pour nom : SDL_ttf-X.X.X.dmg (Intel10.5+)
 
@@ -2132,6 +2138,10 @@ cd  $FAKEROOT/src
 tar -xzf SDL_gfx-X.X.tar.gz
 \endverbatim
 
+ATTENTION ! Il est important de télécharger la verions de SDL_gfx qui a été 
+prévu pour la version 1.2 de SDL (il ne faut surtout pas prendre SDL2_gfx qui 
+est prévue pour la version 2.0 de SDL ) !
+
 Modifiez le configure.in en remplacant les lignes
 \verbatim
 dnl Check for SDL
@@ -2155,6 +2165,9 @@ LIBS="$LIBS $SDL_LIBS -framework SDL"
 Reconfigurez la bibliothèque en exécutant la commande:
 \verbatim
 cd SDL_gfx-X.X
+rm libtool
+tm ltmain.sh
+rm aclocal.m4
 autoreconf --install
 \endverbatim
 
@@ -2193,7 +2206,7 @@ Installez la bibliothèque en tapant les commandes suivantes:
 cd $FAKEROOT/src
 tar -xzf @PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz
 cd @PACKAGE_TARNAME@-@PACKAGE_VERSION@
-./configure  --prefix=$SYSROOT
+./configure --prefix=$SYSROOT libxml_LIBS=-lxml2 libxml_CFLAGS=-I/usr/include/libxml2
 make
 sudo make install
 make install DESTDIR=$MACOS_PACKAGE
@@ -2202,7 +2215,7 @@ make install DESTDIR=$MACOS_PACKAGE
 \section creer_paquet_installation_macos Création du paquet d'installation de MLV pour MacOX
 
 Installer PackageMaker en allant sur le site:
-http://developper.apple.com/downloads
+https://developer.apple.com/downloads/index.action
 
 Installer PackageMaker.
 
@@ -2379,8 +2392,8 @@ sudo rm -rf /usr/share/man/man1/pkg-config.1
 
 Puis, il faut juste dire au système d'oublier l'existence du paquet en question en tapant la commande:
 \verbatim
-sudo pkgutil --forget @PACKAGE_TARNAME@-@PACKAGE_VERSION@.macos-10.5.dev.mlv.pkg
-sudo pkgutil --forget @PACKAGE_TARNAME@-@PACKAGE_VERSION@.macos-10.5.dev.sdl.pkg
+sudo pkgutil --forget multimedia.library.mlv.mlv_infrastructure.pkg
+sudo pkgutil --forget multimedia.library.mlv.sdl_framework.pkg
 \endverbatim
 
 */
