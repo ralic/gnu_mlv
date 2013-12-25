@@ -774,7 +774,7 @@ cd $FAKEROOT/src
 tar -xzf libffi-X.X.tar.gz
 cd libffi-X.X
 ./configure --prefix=$FAKEROOT
-cd x86_64-apple-darwin11.3.0
+cd x86_64-apple-darwinX.X.X
 make
 make install
 \endverbatim
@@ -936,9 +936,6 @@ LIBS="$LIBS $SDL_LIBS -framework SDL"
 Reconfigurez la bibliothèque en exécutant la commande:
 \verbatim
 cd SDL_gfx-X.X
-rm libtool
-rm ltmain.sh
-rm aclocal.m4
 autoreconf --install
 \endverbatim
 
@@ -1996,7 +1993,7 @@ cd $FAKEROOT/src
 tar -xzf libffi-X.X.tar.gz
 cd libffi-X.X
 ./configure --prefix=$LOCALSYSROOT
-cd x86_64-apple-darwin11.3.0
+cd x86_64-apple-darwinX.X.X
 make
 sudo make install
 make install DESTDIR=$MACOS_PACKAGE
@@ -2165,9 +2162,6 @@ LIBS="$LIBS $SDL_LIBS -framework SDL"
 Reconfigurez la bibliothèque en exécutant la commande:
 \verbatim
 cd SDL_gfx-X.X
-rm libtool
-tm ltmain.sh
-rm aclocal.m4
 autoreconf --install
 \endverbatim
 
@@ -2340,7 +2334,7 @@ sudo rm -rf /Library/Frameworks/SDL_image.framework
 sudo rm -rf /Library/Frameworks/SDL.framework
 cd $FAKEROOT/src/glib-2.X.X && sudo make uninstall
 cd $FAKEROOT/src/gettext-X.X.X.X && sudo make uninstall
-cd $FAKEROOT/src/libffi-X.X/x86_64-apple-darwin11.3.0 && sudo make uninstall
+cd $FAKEROOT/src/libffi-X.X/x86_64-apple-darwinX.X.X && sudo make uninstall
 cd $FAKEROOT/src/libtool-X.X && sudo make uninstall
 cd $FAKEROOT/src/automake-X.X.X && sudo make uninstall
 cd $FAKEROOT/src/autoconf-archive-X.X && sudo make uninstall
