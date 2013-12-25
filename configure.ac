@@ -24,6 +24,10 @@
 #   set mlvrevision to 0 and mlvage to 0
 # - if interfaces have been added then increase mlvcurrent, increase mlvage and 
 #   set mlvrevision to 0.
+#
+# This version follow the libtool version recommendation :
+# http://www.gnu.org/software/libtool/manual/html_node/Updating-version-info.html
+#
 define([mlvcurrent], [1])dnl
 define([mlvrevision], [1])dnl
 define([mlvage], [1])dnl
