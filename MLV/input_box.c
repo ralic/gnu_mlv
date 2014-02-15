@@ -118,7 +118,10 @@ struct _MLV_Input_box {
  *
  *
  * */
-inline void recalculateTextPositions_NTS( MLV_Input_box* input_box ){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+void recalculateTextPositions_NTS( MLV_Input_box* input_box ){
 	int width_message, height_message;
 	MLV_get_size_of_text_with_font(
 		input_box->informativeMessage,
@@ -196,7 +199,10 @@ new
                         |
                       curseur
  */
-inline void add_carac_input_box_NTS( MLV_Input_box* input_box, char c ){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+void add_carac_input_box_NTS( MLV_Input_box* input_box, char c ){
     int l = strlen(input_box->history->data);
     int m = input_box->positionCursor ;
 //	DEBUG("Add History Entry");
@@ -228,7 +234,10 @@ resultat
                     |
                  curseur
  */
-inline void suppress_carac_input_box_NTS( MLV_Input_box* input_box ){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+void suppress_carac_input_box_NTS( MLV_Input_box* input_box ){
     int l = strlen(input_box->history->data);
     int m = input_box->positionCursor ;
     if( l == m ) return;
@@ -252,7 +261,10 @@ resulat
                 |
               curseur
  */
-inline void return_deletion_carac_input_box_NTS( MLV_Input_box* input_box ){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+void return_deletion_carac_input_box_NTS( MLV_Input_box* input_box ){
     int l = strlen(input_box->history->data);
     int m = input_box->positionCursor ;
     if( m != 0 ){
@@ -262,12 +274,18 @@ inline void return_deletion_carac_input_box_NTS( MLV_Input_box* input_box ){
 }
 
 
-inline void recalculateSommetBas_NTS( MLV_Input_box* input_box ){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+void recalculateSommetBas_NTS( MLV_Input_box* input_box ){
     input_box->sommetBasDroit[0] = input_box->sommetHautGauche[0] + input_box->width;
     input_box->sommetBasDroit[1] = input_box->sommetHautGauche[1] + input_box->height;
 }
 
-inline void change_position_input_box_NTS(MLV_Input_box* input_box, int sommetHautGaucheX, int sommetHautGaucheY){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+void change_position_input_box_NTS(MLV_Input_box* input_box, int sommetHautGaucheX, int sommetHautGaucheY){
     input_box->sommetHautGauche[0] = sommetHautGaucheX;
     input_box->sommetHautGauche[1] = sommetHautGaucheY;
     input_box->rectangle.x = sommetHautGaucheX;
@@ -282,7 +300,10 @@ void MLV_change_position_input_box(MLV_Input_box* input_box, int sommetHautGauch
     unlock_input_box( input_box );
 }
 
-inline void change_size_input_box_NTS(MLV_Input_box* input_box, int width, int height){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+void change_size_input_box_NTS(MLV_Input_box* input_box, int width, int height){
     if( (width < 0) || (height < 0)){
 		ERROR_FULL( "Les tailles ne sont pas correctes." );
     }
@@ -306,7 +327,10 @@ void MLV_change_input_box_size(MLV_Input_box* input_box, int width, int height){
     unlock_input_box( input_box );
 }
 
-inline void change_geometry_input_box_NTS(MLV_Input_box* input_box,  int sommetHautGaucheX, int sommetHautGaucheY, int width, int height){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+void change_geometry_input_box_NTS(MLV_Input_box* input_box,  int sommetHautGaucheX, int sommetHautGaucheY, int width, int height){
     change_size_input_box_NTS( input_box, width, height );
     change_position_input_box_NTS( input_box, sommetHautGaucheX, sommetHautGaucheY);
 };
@@ -317,19 +341,28 @@ void MLV_change_input_box_geometry(MLV_Input_box* input_box,  int sommetHautGauc
     unlock_input_box( input_box );
 };
 
-inline void change_colors_input_box_NTS( MLV_Input_box* input_box,  MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor ){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+void change_colors_input_box_NTS( MLV_Input_box* input_box,  MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor ){
     input_box->borderColor = borderColor;
     input_box->textColor = textColor;
     input_box->backgroundColor = backgroundColor;
 };
 
-inline void MLV_change_input_box_colors( MLV_Input_box* input_box,  MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor ){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+void MLV_change_input_box_colors( MLV_Input_box* input_box,  MLV_Color borderColor, MLV_Color textColor, MLV_Color backgroundColor ){
     lock_input_box( input_box );
     change_colors_input_box_NTS( input_box, borderColor, textColor, backgroundColor );
     unlock_input_box( input_box );
 }
 
-inline void desactivate_input_box_NTS( ){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+void desactivate_input_box_NTS( ){
 	if( input_box_information.input_box_activated ){
 		input_box_information.input_box_activated->isListenning = 0;
 		input_box_information.input_box_activated = NULL;
@@ -342,7 +375,10 @@ void MLV_desactivate_input_box( ){
     unlock_input_box_information();
 }
 
-inline void  activate_imput_box_NTS( MLV_Input_box* input_box ){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+void  activate_imput_box_NTS( MLV_Input_box* input_box ){
 	desactivate_input_box_NTS( );
 	input_box->isListenning = 1;
 	input_box_information.input_box_activated = input_box;
@@ -356,7 +392,10 @@ void MLV_activate_input_box( MLV_Input_box* input_box ){
     unlock_input_box_information();
 }
 
-inline int is_in_input_box_NTS( MLV_Input_box* input_box, int x, int y ){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+int is_in_input_box_NTS( MLV_Input_box* input_box, int x, int y ){
     int result = 0;
     if( (x >= input_box->sommetHautGauche[0]) &&
         (x <= input_box->sommetBasDroit[0]) &&
@@ -366,7 +405,10 @@ inline int is_in_input_box_NTS( MLV_Input_box* input_box, int x, int y ){
     return result;
 }
 
-inline MLV_Input_box* is_in_an_input_box_NTS( int x, int y ){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+MLV_Input_box* is_in_an_input_box_NTS( int x, int y ){
     MLV_Input_box* result = NULL;
     MLV_List* list = input_box_information.input_box_list;
     while( list ){
@@ -380,7 +422,10 @@ inline MLV_Input_box* is_in_an_input_box_NTS( int x, int y ){
     return result;
 }
 
-inline void construct_input_box_NTS( MLV_Input_box* input_box ){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+void construct_input_box_NTS( MLV_Input_box* input_box ){
 	int width_message_before_input_box, height_message_before_input_box;
 
     boxColor(
@@ -461,11 +506,17 @@ inline void construct_input_box_NTS( MLV_Input_box* input_box ){
 	);
 }
 
-inline void input_box_register_NTS(MLV_Input_box* input_box){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+void input_box_register_NTS(MLV_Input_box* input_box){
     input_box_information.input_box_list = MLV_prepend_list( input_box_information.input_box_list , input_box );
 }
 
-inline void input_box_unregister_NTS(MLV_Input_box* input_box){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+void input_box_unregister_NTS(MLV_Input_box* input_box){
     if( input_box_information.input_box_activated == input_box ) desactivate_input_box_NTS();
     input_box_information.input_box_list = MLV_remove_list( input_box_information.input_box_list, input_box );
 }
@@ -601,7 +652,10 @@ void free_NTS( void* data, void* useless ){
 	MLV_FREE( data, char );
 }
 
-inline void suppressHistory_NTS( MLV_Input_box* input_box ){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+void suppressHistory_NTS( MLV_Input_box* input_box ){
     MLV_foreach_list( input_box->history, free_NTS, NULL );
 //	DEBUG("Free history");
     MLV_free_list( input_box->history );
@@ -697,7 +751,10 @@ void quit_input_box_mechanism(){
 	SDL_DestroySemaphore(input_box_information.semaphore);
 }
 
-inline void replaceEntreeByHistory_NTS( MLV_Input_box* input_box ){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+void replaceEntreeByHistory_NTS( MLV_Input_box* input_box ){
     char* dst = input_box->history->data;
     if( input_box->positionHistory != input_box->history ){
         char* src = (char*) input_box->positionHistory->data;
@@ -718,7 +775,10 @@ inline void replaceEntreeByHistory_NTS( MLV_Input_box* input_box ){
     input_box->positionCursor = strlen(input_box->history->data);
 }
 
-inline void goDownInHistory_NTS( MLV_Input_box* input_box ){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+void goDownInHistory_NTS( MLV_Input_box* input_box ){
     if( input_box->positionHistory->previous ){
         input_box->positionHistory = input_box->positionHistory->previous;
     }else{
@@ -727,7 +787,10 @@ inline void goDownInHistory_NTS( MLV_Input_box* input_box ){
     replaceEntreeByHistory_NTS( input_box );
 }
 
-inline void goUpInHistory_NTS( MLV_Input_box* input_box ){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+void goUpInHistory_NTS( MLV_Input_box* input_box ){
     if( input_box->positionHistory->next ){
         input_box->positionHistory = input_box->positionHistory->next;
     }else{
@@ -736,24 +799,36 @@ inline void goUpInHistory_NTS( MLV_Input_box* input_box ){
     replaceEntreeByHistory_NTS( input_box );
 }
 
-inline void make_the_input_box_visible_NTS( MLV_Input_box* input_box ){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+void make_the_input_box_visible_NTS( MLV_Input_box* input_box ){
     input_box->lastTime = SDL_GetTicks();
     input_box->cursorIsVisible = 1;
 }
 
-inline void input_box_move_left_answer_NTS( MLV_Input_box* input_box ){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+void input_box_move_left_answer_NTS( MLV_Input_box* input_box ){
     if( input_box->positionCursor > 0 ){
         input_box->positionCursor--;
     }
 }
 
-inline void input_box_move_right_answer_NTS( MLV_Input_box* input_box ){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+void input_box_move_right_answer_NTS( MLV_Input_box* input_box ){
     if( input_box->positionCursor < strlen( input_box->history->data ) ){
         input_box->positionCursor++;
     }
 }
 
-inline void validate_input_box_NTS( MLV_Input_box* input_box ){
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+void validate_input_box_NTS( MLV_Input_box* input_box ){
     SDL_Event event;
     event.type = SDL_USEREVENT;
 	event.user.code = MLV_INPUT_BOX;
