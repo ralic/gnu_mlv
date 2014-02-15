@@ -473,7 +473,7 @@ void wrapper_destroy_node_of_tree_set( MLV_TreeSet* tree_set, void* useless_data
 	destroy_node_of_tree_set( tree_set );
 }
 
-inline void free_tree_set( MLV_TreeSet* tree_set, void* useless_data ){
+void free_tree_set( MLV_TreeSet* tree_set, void* useless_data ){
 	MLV_FREE( tree_set, MLV_TreeSet );
 }
 
@@ -484,7 +484,7 @@ void MLV_init_tree_set( MLV_TreeSet* tree_set ){
 	foreach_node_tree_set( free_tree_set, NULL, tree_set );
 }
 
-inline void deep_free_tree_set( MLV_TreeSet* tree_set, void* useless_data  ){
+void deep_free_tree_set( MLV_TreeSet* tree_set, void* useless_data  ){
 	destroy_node_data_of_tree_set( tree_set );
 	free_tree_set( tree_set, useless_data );
 }

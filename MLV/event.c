@@ -65,10 +65,12 @@ MLV_Event MLV_get_event(
 				case SDL_KEYDOWN: {
 					if( key_sym || key_mod || state ){
 						if( key_sym ){
-							(*key_sym) = event.key.keysym.sym;
+							(*key_sym) = (MLV_Keyboard_button) 
+								event.key.keysym.sym;
 						}
 						if( key_mod ){
-							(*key_mod) = event.key.keysym.mod;
+							(*key_mod) = (MLV_Keyboard_modifier) 
+								event.key.keysym.mod;
 						}
 						if( unicode ){
 							(*unicode) = event.key.keysym.unicode;
@@ -83,10 +85,12 @@ MLV_Event MLV_get_event(
 				case SDL_KEYUP:{
 					if( key_sym || key_mod || state ){
 						if( key_sym ){
-							(*key_sym) = event.key.keysym.sym;
+							(*key_sym) = (MLV_Keyboard_button) 
+								event.key.keysym.sym;
 						}
 						if( key_mod ){
-							(*key_mod) = event.key.keysym.mod;
+							(*key_mod) = (MLV_Keyboard_modifier) 
+								event.key.keysym.mod;
 						}
 						if( unicode ){
 							(*unicode) = event.key.keysym.unicode;
@@ -119,7 +123,8 @@ MLV_Event MLV_get_event(
 							(*mouse_y) = event.button.y;
 						}
 						if( mouse_button ){
-							(*mouse_button) = event.button.button;
+							(*mouse_button) = (MLV_Mouse_button) 
+								event.button.button;
 						}
 						if( state ){
 							(*state) = MLV_RELEASED;
@@ -137,7 +142,8 @@ MLV_Event MLV_get_event(
 							(*mouse_y) = event.button.y;
 						}
 						if( mouse_button ){
-							(*mouse_button) = event.button.button;
+							(*mouse_button) = (MLV_Mouse_button) 
+								event.button.button;
 						}
 						if( state ){
 							(*state) = MLV_PRESSED;

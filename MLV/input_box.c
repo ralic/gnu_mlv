@@ -596,7 +596,7 @@ MLV_Input_box* MLV_create_input_box(
 	return result;
 }
 
-inline void free_NTS( void* data, void* useless ){
+void free_NTS( void* data, void* useless ){
 //	DEBUG("Free Entry Hystory");
 	MLV_FREE( data, char );
 }
