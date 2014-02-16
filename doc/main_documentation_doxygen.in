@@ -58,6 +58,10 @@ Sommaire:
 - \subpage documentation_paquet :
   Ce chapitre indique comment créer des paquets de la bibliothèque pour votre distribution.
 
+- \subpage release_new_version :
+  Ce chapitre est dédié aux contributeur de libMLV. Il explique la procédure à 
+  suivre pour sortir une nouvelle version de libMLV.
+
 - \subpage contact_auteur :
   Ce chapitre donne les addresses électroniques des auteurs de la bibliothèque.
 
@@ -1347,6 +1351,170 @@ des fonctions qui permettent de dessiner des figures géométriques avec MLV.
 */
 
 
+
+// ============================================================================
+
+
+
+
+
+/*!
+\~french
+\page release_new_version Procédure pour sortir une nouvelle version de MLV
+
+Cette page explique la procédure à suivre pour publier officiellement une 
+nouvelleversion en provenance de la branche de développement de MLV du serveur
+git.
+
+On supposera, dans la suite de ce document que votre depôt git est nettoyé, 
+comme si vous veniez de le cloner.
+
+\section merge_develop_release Fusionner la branche develop dans celle de release
+
+Commencez par fusionner la branche develop dans celle de release :
+\verbatim
+git checkout release
+git merge develop
+\endverbatim
+
+\section change_version Changer Le numéro de version
+
+Modifier les numéros de version <code>mlvcurrent</code>, 
+<code>mlvrevision</code> et <code>mlvage</code> situés dans le fichier 
+<code>configure.ac</code>.
+
+La logique à suivre est expliquée en commentaire dans le fichier. 
+
+Les lignes à modifier sont les suivantes :
+\verbatim
+define([mlvcurrent], [1])dnl                                                    
+define([mlvrevision], [2])dnl                                                   
+define([mlvage], [1])dnl
+\endverbatim
+
+\section update_new_todo Mettre a jour les fichiers ChangeLog et todo
+
+Modifiez le fichier <code>ChangeLog</code> situé à la racine de la bibliothèque.
+Pour cela, mettez à jour, si nécessaire, le numéro de version apparaissant dans
+la première ligne de ChangeLog, puis, ajoutez d'éventuels changements qui 
+auraient étés oubliés.
+
+Mettez à jour le fichier <code>todo</code> situé à la racine de la bibliothèque.
+
+\section verify_lib Verifiez le bon fonctionnement de la bibliothèque (optionel)
+
+Vérifiez maintenant le bon fonctionement de la bibliothèque.
+
+Pour cela, créez tout les paquets de distribution en suivant les procédure
+présente à la page :  \subpage documentation_paquet .
+
+Testez ensuite tous les paquets crées et vérifiez le bon fonctionnement des 
+programmes en compilant et testant tous les exemples présents dans le dossier 
+<code>example</code> du dossier de documentation qui a été installé par le paquet.
+Sous linux, il est situé dans <code>/usr/share/doc/mlv/</code>.
+
+Vous prendrez bien soin de bien vérifier que les programmes qui utilisent le son
+fonctionne correctement (notament sous Mac OS X et windows).
+
+Vous vérifiez aussi que la documentation est bien à jour en verifiant que les 
+nouveaux numéros de version sont à jour, notament dans la partie téléchargement
+de la documentation.
+Pour cela, il suffit de suivre les différents liens présents à la page 
+<code>doc/index.html</code>.
+
+
+\section merge_release_master_develop Fusionner la branche release dans master et dans develop
+
+Quand la bibliothèque est prête à être publiée, il ne reste plus qu'à fusionner 
+release dans master.
+
+Commencez par bien vérifier que vous avez sauvegardé les dernières modifications
+de release :
+\verbatim
+git status
+\endverbatim
+
+Ensuite, procédez à la fusion de merge dans master en tapant :
+\verbatim
+git checkout master
+git merge release
+\endverbatim
+
+Ajouter un tag pour préciser que ce dernier commit est une nouvelle version.
+\verbatim
+git tag -a vX -m 'The version X of MLV.'
+\endverbatim
+où <code>X</code> est le nouveau numéro de version de la bibliothèque.
+Vous pouvez éventuellement, ajoutez des commentaires dans l'opition -m.
+
+On fusionne ensuite release dans develop :
+\verbatim
+git checkout develop
+git merge release
+\endverbatim
+
+Il ne reste plus qu'à envoyer tous les changements sur le dépot git.
+\verbatim
+git push
+\endverbatim
+
+\section build_package Créer les nouveaux paquets de distributions
+
+A partir du code source situé dans la branche master uniquement,
+recréez l'ensemble des paquets de distribution en utilisant les procédures 
+présentes dans la page \subpage  documentation_paquet .
+
+Vérifiez le bon fonctionnement de ces paquets.
+
+\section update_web_site Mettre a jour le site web officiel
+
+A FAIRE
+
+\section verify_documentation Verifier la documentation et les fichiers publiés officiellement
+
+Testez un à un tous les liens présents dans la section téléchargement de la 
+documentation.
+
+Vérifiez que les paquets s'installent correctement et vérifiez que les 
+exemples s'executent correctement.
+
+*/
+
+
+
+/*!
+\~french
+\page fix_a_bug
+Procédure pour corriger un bug dans la version courante de MLV
+
+\section fix_hot_bug Le bug est urgent et doit être corrigé dans la version courante
+
+\subsection bug_branch_from_master  Créer une branche du nom du bug à partir de master avec la correction du bug
+
+\subsection fix_the_bug Corriger le bug
+
+\subsection change_bug_version Changer Le numéro de version
+
+\subsection update_bug_news_bug_todo Mettre a jour les fichiers NEWS et TODO
+
+\subsection verify_bug Verfifer le bon fonctionnement de la bibliothèque (optionel)
+
+\subsection merge_bug_master Fusionner la branche du bug dans master et l'appliquer dans develop
+
+\subsection build_bug_package Créer les nouveaux paquets de distributions
+
+\subsection update_web_site_bug Mettre a jour le site web officiel
+
+
+\section fix_no_hot_bug Le bug peut être corrigé dans la prochaine version
+
+\subsection bug_branch_from_develop Créer une branche du nom du bug à partir de master avec la correction du bug
+
+\subsection fix_the_no_hot_bug Corriger le bug
+
+\subsection merge_bug_branch_into_develop Fusionner la branche dans develop
+ 
+*/
 
 
 // ============================================================================
