@@ -53,7 +53,7 @@ AC_DEFINE_UNQUOTED([MLV_REPOSITORY],["$MLV_REPOSITORY"],[Define the revision con
 AC_SUBST(MLV_RCS_REVISION,[rcsrevision])
 AC_DEFINE_UNQUOTED([MLV_RCS_REVISION],["$MLV_RCS_REVISION"],[Define the revision in the source repository])
 
-AC_SUBST(MLV_SOURCE_REPOSITORY,[http://www-igm.univ-mlv.fr/~boussica/mlv/depot])
+AC_SUBST(MLV_SOURCE_REPOSITORY,[http://download.savannah.gnu.org/releases/mlv])
 AC_SUBST(MLV_URL,[${PACKAGE_URL}])
 AC_DEFINE_UNQUOTED([MLV_SOURCE_REPOSITORY],["$MLV_SOURCE_REPOSITORY"],[Define the address of the MLV repository])
 
