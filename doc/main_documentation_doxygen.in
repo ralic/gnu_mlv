@@ -181,14 +181,18 @@ sudo apt-get install libsdl-image1.2-dev
 \endverbatim
 
 Téléchargez ensuite les paquets de la bibliothèque :
-- <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_DEBIAN_32_BINARY_PACKAGE@">@MLV_DEBIAN_32_BINARY_PACKAGE@</a>
-- <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_DEBIAN_32_DEV_PACKAGE@">@MLV_DEBIAN_32_DEV_PACKAGE@</a>
+- <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_DEBIAN_64_BINARY_PACKAGE@">@MLV_DEBIAN_64_BINARY_PACKAGE@</a>
+- <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_DEBIAN_64_DEV_PACKAGE@">@MLV_DEBIAN_64_DEV_PACKAGE@</a>
 
+(si vous utilisez un ordinateur 32 bits, vous devez utilisez les paquets 
+<a href="@MLV_PACKAGE_REPOSITORY@/@MLV_DEBIAN_32_BINARY_PACKAGE@">@MLV_DEBIAN_32_BINARY_PACKAGE@</a> et 
+<a href="@MLV_PACKAGE_REPOSITORY@/@MLV_DEBIAN_32_DEV_PACKAGE@">@MLV_DEBIAN_32_DEV_PACKAGE@</a>
+à la place)
 
 et installez-les en tapant la commande suivante:
 
 \verbatim
-sudo dpkg -i @MLV_DEBIAN_32_BINARY_PACKAGE@ @MLV_DEBIAN_32_DEV_PACKAGE@
+sudo dpkg -i @MLV_DEBIAN_64_BINARY_PACKAGE@ @MLV_DEBIAN_64_DEV_PACKAGE@
 \endverbatim
 
 La bibliothèque MLV est installée.
