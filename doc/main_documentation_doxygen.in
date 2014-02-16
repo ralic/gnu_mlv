@@ -1478,6 +1478,10 @@ documentation.
 Vérifiez que les paquets s'installent correctement et vérifiez que les 
 exemples s'executent correctement.
 
+Vérifiez que, lors de l'exécution du programme 
+<code>example/beginner/10_library_information</code>,
+le numéro de version et la révision git qui apparaît à l'écran, correspond bien
+à la révision courante présente dans la branche master du dépôt git.
 */
 
 
