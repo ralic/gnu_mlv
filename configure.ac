@@ -29,7 +29,7 @@
 # http://www.gnu.org/software/libtool/manual/html_node/Updating-version-info.html
 #
 define([mlvcurrent], [1])dnl
-define([mlvrevision], [1])dnl
+define([mlvrevision], [2])dnl
 define([mlvage], [1])dnl
 
 # We deduce other version numbers
