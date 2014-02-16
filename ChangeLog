@@ -1,4 +1,4 @@
-mlv-0.7
+mlv-1.2.1
  * Image and text :
    * Wa move MLV_save_screen() and MLV_load_screen() inside MLV_image.h
    * Text functions can construct strings by using extra arguments.
@@ -27,9 +27,14 @@ mlv-0.7
      Now Lintian do not produce errors.
  * Documentation:
    * We add a FAQ in the web documentation.
+   * We add procedures explain how to publish a new verion of the MLV library.
+ * Mac OS X 10.9 Problem :
+   * We remove all inline functions to solve the flat namespace problem.
+     Mac OS 10.9 Programs doesn't arrive to find function declared as 
+     inlined during the exectution of the program (when the functions are not
+     inlined).
 
 mlv-0.6
-
   * API :
     * The sound api has been completely rewritten. 
     * Add an animation API.
