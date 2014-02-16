@@ -59,8 +59,8 @@ Sommaire:
   Ce chapitre indique comment créer des paquets de la bibliothèque pour votre distribution.
 
 - \subpage release_new_version :
-  Ce chapitre est dédié aux contributeur de libMLV. Il explique la procédure à 
-  suivre pour sortir une nouvelle version de libMLV.
+  Ce chapitre est dédié aux contributeurs de MLV. Il explique la procédure à 
+  suivre pour sortir une nouvelle version de MLV.
 
 - \subpage contact_auteur :
   Ce chapitre donne les addresses électroniques des auteurs de la bibliothèque.
@@ -1468,7 +1468,73 @@ Vérifiez le bon fonctionnement de ces paquets.
 
 \section update_web_site Mettre a jour le site web officiel
 
+Commencez par créer deux dossiers : <code>depot</code> et <code>site</code>, 
+dans le répertoir <code>/tmp</code>.
+
+Dans le dossier <code>depot</code>, créez un dossier 
+<code>@PACKAGE_TARNAME@-@PACKAGE_VERSION@</code>.
+
+Mettez dans le dossier <code>depot</code> le fichier 
+<code>@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz</code>.
+
+Ensuite, mettez les fichiers suivants, dans le dossier 
+<code>depot/@PACKAGE_TARNAME@-@PACKAGE_VERSION@</code>:
+\verbatim
+@MLV_DEBIAN_32_BINARY_PACKAGE@
+@MLV_DEBIAN_32_DEV_PACKAGE@
+@MLV_DEBIAN_64_BINARY_PACKAGE@
+@MLV_DEBIAN_64_DEV_PACKAGE@
+@MLV_FEDORA_32_BINARY_PACKAGE@
+@MLV_FEDORA_32_DEV_PACKAGE@
+@MLV_FEDORA_32_STATIC_PACKAGE@
+@MLV_FEDORA_32_SOURCE_PACKAGE@
+@MLV_FEDORA_32_KEY_PACKAGE@
+@MLV_WIN_32_BINARIES@
+@MLV_CODEBLOCKS_32_PACKAGE@
+@MLV_DEVCPP_32_PACKAGE@
+@MLV_MACOSX_PACKAGE@
+@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz
+\endverbatim
+N'oubliez surtout pas de mettre de nouveau le fichier <code>@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz</code>.
+
+Il faut maintenant signer tous ces fichiers :
+\verbatim
 A FAIRE
+\endverbatim
+
+Copiez le fichier <code>@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz</code> dans 
+le dossier <code>/tmp</code> et générez la documentation de la bibliothèque en
+tapant les commandes suivantes:
+\verbatim
+cd /tmp
+tar -xzf @PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz
+cd @PACKAGE_TARNAME@-@PACKAGE_VERSION@
+./configure
+make 
+cp -r doc/api /tmp/depot/@PACKAGE_TARNAME@-@PACKAGE_VERSION@/
+\endverbatim
+
+Préparons maintenant le code source du site. Pour cela, tapez les commandes
+suivantes
+\verbatim
+cd /tmp/@PACKAGE_TARNAME@-@PACKAGE_VERSION@/doc
+cp -r index.html api /tmp/site
+\endverbatim
+
+Il ne reste plus qu'à télécharger les fichiers de distributions sur le serveur 
+de Savannah en tapant les commandes suivantes :
+\verbatim
+cd /tmp/depot/
+chmod 644 *
+rsync -av /tmp/depot/. LOGIN@dl.sv.nongnu.org:/releases/mlv/.
+\endverbatim
+où LOGIN est votre login du serveur savannah.
+
+Il faut maintenant mettre à jour le site web en tapant les commandes suivantes :
+\verbatim
+TODO : Monter le site web !
+rsync -av --delete /tmp/site/. LE_SITE_WEB
+\endverbatim
 
 \section verify_documentation Verifier la documentation et les fichiers publiés officiellement
 
