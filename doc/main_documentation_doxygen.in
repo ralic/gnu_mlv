@@ -1387,9 +1387,9 @@ La logique à suivre est expliquée en commentaire dans le fichier.
 
 Les lignes à modifier sont les suivantes :
 \verbatim
-define([mlvcurrent], [1])dnl                                                    
-define([mlvrevision], [2])dnl                                                   
-define([mlvage], [1])dnl
+define([mlvcurrent], [@MLV_CURRENT@])dnl                                                    
+define([mlvrevision], [@MLV_REVISION@])dnl                                                   
+define([mlvage], [@MLV_AGE@])dnl
 \endverbatim
 
 \section update_new_todo Mettre a jour les fichiers ChangeLog et todo
