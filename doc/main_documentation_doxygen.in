@@ -39,7 +39,7 @@ bibliothèques MLV.
 La bibliothèque est portable, elle peut donc être compilée et exécutée sous 
 Linux, Macintosh (Lion et plus) et Windows (XP et Seven).
 Enfin, même si cette bibliothèque n'est pas orienté objet, il est possible de 
-l'utiliser dans un projet écrit C++, 
+l'utiliser dans un projet écrit en C++, 
 
 Sommaire:
 - \subpage download :
@@ -1469,7 +1469,7 @@ Vérifiez le bon fonctionnement de ces paquets.
 \section update_web_site Mettre a jour le site web officiel
 
 Commencez par créer deux dossiers : <code>depot</code> et <code>site</code>, 
-dans le répertoir <code>/tmp</code>.
+dans le répertoire <code>/tmp</code>.
 
 Dans le dossier <code>depot</code>, créez un dossier 
 <code>@PACKAGE_TARNAME@-@PACKAGE_VERSION@</code>.
@@ -1972,15 +1972,15 @@ Pour pouvoir créer ces paquets, nous allons compiler et installer des outils et
 
 Avant d'être mis en paquet, ces bibliothèques et ces outils doivent être installés dans différents répertoires :
  - Les outils et bibliothèques nécessaires uniquement à la compilation de MLV sont installés dans le répertoire $HOME/fakeroot_to_compile_@PACKAGE_TARNAME@-@PACKAGE_VERSION@;
- - Les bibliothèques et les outils nécessaires à l'utilisation de MLV sont installés simultanément dans /usr et dans $HOME/@PACKAGE_TARNAME@-@PACKAGE_VERSION@_macos-10.5.
+ - Les bibliothèques et les outils nécessaires à l'utilisation de MLV sont installés simultanément dans /usr et dans $HOME/@PACKAGE_TARNAME@-@PACKAGE_VERSION@_macos-@MLV_MACOSX_VERSION@.
 
 Le repertoire fakeroot_to_compile_@PACKAGE_TARNAME@-@PACKAGE_VERSION@ est un repertoire temporaire de construction.
 Le repertoire /usr est le repertoire d'installation de la bibliothèque.
 Dans notre cas, il est utilisé pour pouvoir configurer et tester en conditions réelles l'infrastructure MLV.
-Le repertoire $HOME/@PACKAGE_TARNAME@-@PACKAGE_VERSION@_macos-10.5 contient exactement les même composantes que ceux qui sont installées dans /usr.
+Le repertoire $HOME/@PACKAGE_TARNAME@-@PACKAGE_VERSION@_macos-@MLV_MACOSX_VERSION@ contient exactement les même composantes que ceux qui sont installées dans /usr.
 Nous utiliserons ce dernier repertoire pour construire le paquet d'installation pour MacOS X.
 
-Il est important de travailler avec les deux repertoires /usr et $HOME/@PACKAGE_TARNAME@-@PACKAGE_VERSION@_macos-10.5.
+Il est important de travailler avec les deux repertoires /usr et $HOME/@PACKAGE_TARNAME@-@PACKAGE_VERSION@_macos-@MLV_MACOSX_VERSION@.
 En effet, /usr fait partie du système d'exploitation et contient déjà d'autres bibliothèques.
 On ne peut donc pas distribuer /usr, d'où l'obligation de créer une copie de /usr qui ne contient que l'infrastucture de MLV.
 
@@ -2016,7 +2016,7 @@ Créez les répertoires suivants en tapant les commandes suivantes :
 \verbatim
 mkdir $HOME/fakeroot_to_compile_@PACKAGE_TARNAME@-@PACKAGE_VERSION@
 mkdir $HOME/fakeroot_to_compile_@PACKAGE_TARNAME@-@PACKAGE_VERSION@/src
-mkdir $HOME/@PACKAGE_TARNAME@-@PACKAGE_VERSION@_macos-10.5
+mkdir $HOME/@PACKAGE_TARNAME@-@PACKAGE_VERSION@_macos-@MLV_MACOSX_VERSION@
 \endverbatim
 
 Il est nécessaire de configurer le système d'exploitation, pour qu'il sache 
@@ -2032,7 +2032,7 @@ Ajoutez, à la fin du fichier, les commandes suivantes:
 export FAKEROOT="$HOME/fakeroot_to_compile_@PACKAGE_TARNAME@-@PACKAGE_VERSION@" 
 export SYSROOT="/usr" 
 export LOCALSYSROOT="/usr/local/MLV" 
-export MACOS_PACKAGE="$HOME/@PACKAGE_TARNAME@-@PACKAGE_VERSION@_macos-10.5"
+export MACOS_PACKAGE="$HOME/@PACKAGE_TARNAME@-@PACKAGE_VERSION@_macos-@MLV_MACOSX_VERSION@"
 export PATH="$FAKEROOT/bin:$LOCALSYSROOT/bin:$SYSROOT/bin:$PATH"
 export DYLD_LIBRARY_PATH="$FAKEROOT/lib:$LOCALSYSROOT/lib:$SYSROOT/lib:$DYLD_LIBRARY_PATH"
 export PKG_CONFIG_PATH="$FAKEROOT/lib/pkgconfig:$LOCALSYSROOT/lib/pkgconfig:$SYSROOT/lib/pkgconfig:$PKG_CONFIG_PATH"
@@ -2469,7 +2469,7 @@ Mac OS X v10.5 Leopard
 
 Cliquez sur "Untitled", puis sur Configuration.
 
-Modifiez le titre de sorte qu'il devienne: "@PACKAGE_TARNAME@-@PACKAGE_VERSION@_macos-10.5"
+Modifiez le titre de sorte qu'il devienne: "@PACKAGE_TARNAME@-@PACKAGE_VERSION@_macos-@MLV_MACOSX_VERSION@"
 
 Dans "Install Destination", décochez l'option "Volume selected by user" et remplacez le par "System volume".
 
@@ -2527,7 +2527,7 @@ Le paquet est prêt !
 Commencer par vérifier que votre paquet d'installation est correcte en copiant le paquet dans un repertoire de test.
 Décompressez le paquet à l'aide de la commande :
 \verbatim
-tar -xzf @PACKAGE_TARNAME@-@PACKAGE_VERSION@_macos-10.5.pkg
+tar -xzf @MLV_MACOSX_PACKAGE@
 tar -xzf usr.pkg/Payload
 tar -xzf library.pkg/Payload
 \endverbatim
@@ -2621,6 +2621,7 @@ sudo rm -rf /usr/share/MLV
 sudo rm -rf /usr/share/doc/mlv
 sudo rm -rf /usr/share/man/man3/MLV_*.h.3
 sudo rm -rf /usr/bin/pkg-config
+sudo rm -rf /usr/bin/x86_64-apple-darwin13.0.0-pkg-config
 sudo rm -rf /usr/share/aclocal/pkg.m4
 sudo rm -rf /usr/share/doc/pkg-config
 sudo rm -rf /usr/share/man/man1/pkg-config.1
@@ -2669,12 +2670,12 @@ Lorsque j'exécute mon programme, j'obtiens l'erreur : "Error detected by the fu
 Cette erreur apparaît quand on essaye de créer deux fois une fenêtre.
 
 Si vous vouliez créer 2 fenêtres avec MLV.
-Alors, il n'y a pas de solution à votre problème car MLV a été prévue pour ne
-réer qu'une et qu'une seule fenêtre.
+Alors, il n'y a pas de solutions à votre problème car MLV a été prévue pour ne
+créer qu'une et qu'une seule fenêtre.
 Il s'agit d'un choix délibéré pour simplifier l'utilisation de la bibliothèque.
 
-Si vous vouliez créé qu'une seule fenêtre, alors vous devez supprimer les 
-appels à MLV_create_windows() jusqu'à ne plus en avoir qu'un seul.
+Si vous vouliez créer qu'une seule fenêtre, alors vous devez supprimer les 
+appels à MLV_create_windows() jusqu'à ne plus avoir qu'un seul appel.
 
 <b>
 Pourquoi y-a-t-il une latence entre le moment ou j'utilise le calvier et la 
