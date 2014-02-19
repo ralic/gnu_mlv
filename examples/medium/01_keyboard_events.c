@@ -127,7 +127,7 @@ void affichage( int nb, int width, int height ){
 	//
 	MLV_draw_text(
 		10, 10,
-		"Appuyer sur     shift+q     et     relâcher uniquement la touche q     pour quitter !",
+		"Appuyer sur     shift+k     et     relâcher uniquement la touche k     pour quitter !",
 		MLV_COLOR_GREEN
 	);
 
@@ -216,7 +216,7 @@ int main(int argc, char *argv[]){
 		};
 	} while(
 		!(
-			( sym == MLV_KEYBOARD_q ) &&
+			( sym == MLV_KEYBOARD_k ) &&
 			MLV_shift_key_was_pressed( mod ) &&
 			( state == MLV_RELEASED )
 		) 

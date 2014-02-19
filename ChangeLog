@@ -22,7 +22,9 @@ mlv-1.2.1
  * Examples :
    * Add a new example medium/10_keys_code allowing to know the sym, mod
      and unicode of keyboard events.
- * packaging :
+   * For the example, we choose key compatible with azerty and qwerty.
+     This is to help the user to understand how the examples works.
+* packaging :
    * We normailze the debian package to follow the Debian Policy.
      Now Lintian do not produce errors.
  * Documentation:

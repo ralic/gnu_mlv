@@ -109,7 +109,7 @@ int main( int argc, char *argv[] ){
 		MLV_clear_window( MLV_COLOR_BROWN );
 		MLV_draw_text( 
 			20,150, 
-			"Laissez la touche m appuyee pour entendre le son des animations.", 
+			"Laissez la touche k appuyee pour entendre le son des animations.", 
 			MLV_COLOR_BLACK
 		);
 		MLV_draw_image_from_animation_player(	run_animation_player, 0, x_run, y );
@@ -118,7 +118,7 @@ int main( int argc, char *argv[] ){
 		MLV_play_sound_from_animation_player( run_animation_player, 0 );
 		MLV_play_sound_from_animation_player( walk_animation_player, 0 );
 
-		if( touche==MLV_KEYBOARD_m ){
+		if( touche==MLV_KEYBOARD_k ){
 			if( sound ){
 				MLV_turn_off_sound_of_animation_player( walk_animation_player, 0 );
 				MLV_turn_off_sound_of_animation_player( run_animation_player, 0 );

@@ -74,15 +74,15 @@ int main(int argc, char *argv[]){
 		//
 		// On récupère puis affiche l'état de la touche a
 		//
-		if( MLV_get_keyboard_state( MLV_KEYBOARD_a ) == MLV_PRESSED ){
+		if( MLV_get_keyboard_state( MLV_KEYBOARD_k ) == MLV_PRESSED ){
 			MLV_draw_text(  
-				0, 20, "L'utilisateur est en train d'appuyer sur la touche a",
+				0, 20, "L'utilisateur est en train d'appuyer sur la touche k",
 				MLV_COLOR_GREEN
 			);
 		}else{
 			MLV_draw_text( 
 				0, 20,
-				"L'utilisateur n'est pas en train d'appuyer sur la touche a",
+				"L'utilisateur n'est pas en train d'appuyer sur la touche k",
 				MLV_COLOR_GREEN
 			);
 		}
