@@ -1401,6 +1401,20 @@ auraient étés oubliés.
 
 Mettez à jour le fichier <code>todo</code> situé à la racine de la bibliothèque.
 
+\section key_gen Préparer une clé pour signer les différents paquets d'indstallation
+
+Créez uen clé qui servira à signer tous les paquets d'installation.
+Pour cela, tapez la commande suivante :
+\verbatim
+gpg --gen-key
+\endverbatim
+et choisisez une clef RSA de 2048 bits sans temps d'expiration.
+
+Exportez la clé publique pour pouvoir la comuniquer à différents utilisateurs
+\verbatim
+gpg --export --armor > @PACKAGE_TARNAME@-@PACKAGE_VERSION@-packaging-gpg-key-votre_nom 
+\endverbatim
+
 \section verify_lib Verifiez le bon fonctionnement de la bibliothèque (optionel)
 
 Vérifiez maintenant le bon fonctionement de la bibliothèque.
@@ -1461,8 +1475,15 @@ git push
 \section build_package Créer les nouveaux paquets de distributions
 
 A partir du code source situé dans la branche master uniquement,
-recréez l'ensemble des paquets de distribution en utilisant les procédures 
-présentes dans la page \subpage  documentation_paquet .
+recréez l'ensemble des paquets de distribution.
+
+Pour cela vous pouvez utiliser l'émulateur <code>virt-manageur</code> pour 
+installer localement une debian 32 bit, une debian 64 bit, un fedora 32 bits et 
+64 bits.
+
+Créez ensuite les paquets de distrubtion en suivant les procédures 
+présentes dans la page \subpage documentation_paquet et en utilisant toujours
+la clé publique de signature créé précédement pour les signatures des paquets.
 
 Vérifiez le bon fonctionnement de ces paquets.
 
@@ -1497,9 +1518,28 @@ Ensuite, mettez les fichiers suivants, dans le dossier
 \endverbatim
 N'oubliez surtout pas de mettre de nouveau le fichier <code>@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz</code>.
 
-Il faut maintenant signer tous ces fichiers :
+Il faut maintenant signer tous les fichiers qui n'ont pas encore été signés :
 \verbatim
-A FAIRE
+cd /tmp/depot
+gpg -b --use-agent @PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz
+cd /tmp/depot/@PACKAGE_TARNAME@-@PACKAGE_VERSION@
+gpg -b --use-agent @MLV_WIN_32_BINARIES@
+gpg -b --use-agent @MLV_CODEBLOCKS_32_PACKAGE@
+gpg -b --use-agent @MLV_DEVCPP_32_PACKAGE@
+gpg -b --use-agent @MLV_MACOSX_PACKAGE@
+gpg -b --use-agent @PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz
+\endverbatim
+
+Puis on vérifie les signatures créés :
+\verbatim
+cd /tmp/depot
+gpg -b --use-agent @PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz
+cd /tmp/depot/@PACKAGE_TARNAME@-@PACKAGE_VERSION@
+gpg --verifiy @MLV_WIN_32_BINARIES@.sig
+gpg --verifiy @MLV_CODEBLOCKS_32_PACKAGE@.sig
+gpg --verifiy @MLV_DEVCPP_32_PACKAGE@.sig
+gpg --verifiy @MLV_MACOSX_PACKAGE@.sig
+gpg --verifiy @PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz.sig
 \endverbatim
 
 Copiez le fichier <code>@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz</code> dans 
@@ -1680,7 +1720,7 @@ sub   4096R/CA53E162 2012-07-06 [expire: 2014-07-06]
 
 Vous pouvez enfin créer le paquet en tapant:
 \verbatim
-./script_pkg -kkey-id XXX 
+./script_pkg -k XXX 
 \endverbatim
 où XXXX est l'id de votre clé. Dans mon exemple, XXX=A4812E81.
 
