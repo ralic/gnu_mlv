@@ -25,11 +25,12 @@ source definition_of_environement_variables
 (
 if ! test -a $FAKE32/bin/SDL_mixer.lib;
 then
-	echo "Compilation de l'infrastrucutre de cross compilation"
+	print_red "Building the cross compilation infrastructure."
 	./cross_compilation_ubuntu
 fi
 )
 
+print_red "Preparation of the source of @PACKAGE_TARNAME@-@PACKAGE_VERSION@"
 (
 cd @abs_top_srcdir@ && make dist
 )
@@ -44,5 +45,6 @@ rm -rf @PACKAGE_TARNAME@-@PACKAGE_VERSION@
 tar -xzf @PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz
 )
 
+print_red "Compilation of @PACKAGE_TARNAME@-@PACKAGE_VERSION@"
 ./mlv_compilation_ubuntu
 

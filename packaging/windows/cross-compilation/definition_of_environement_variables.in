@@ -34,7 +34,7 @@ then
 fi
 if test "x${BUILD}" == 'x'
 then
-	BUILD='i586-linux'
+	BUILD='i686-linux-gnu'
 fi
 if test "x${CC}" == 'x'
 then
@@ -62,3 +62,12 @@ fi
 FAKE32="$TOP_CROSS/fakeroot-mingw32"
 FAKE32_SRC="$FAKE32/src"
 
+function print_red
+{
+	echo -e "\e[0;31m$1\e[0m\n"
+}
+
+function print_green
+{
+	echo -e "\e[0;32m$1\e[0m\n"
+}

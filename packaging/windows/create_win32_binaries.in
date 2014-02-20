@@ -22,9 +22,21 @@
 #    along with this Library.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+function print_red
+{
+	echo -e "\e[0;31m$1\e[0m\n"
+}
+
+function print_green
+{
+	echo -e "\e[0;32m$1\e[0m\n"
+}
+
+
 CURRENT=`pwd .`
 MAIN_DEV=@PACKAGE_TARNAME@-@PACKAGE_VERSION@-win32
 
+print_red "Cleaning old building."
 rm -rf $MAIN_DEV
 rm -rf $MAIN_DEV.zip
 
@@ -34,11 +46,13 @@ CROSS_DIRECTORY=$TOP_CROSS/fakeroot-mingw32
 if ! test -a $CROSS_DIRECTORY/bin/libMLV-0.dll;
 then
 	echo "Compilation de la librairie MLV avec Mingw32"
+	print_red "Compiling all the Win 32 binary of MLV and his dependencies."
 	cd $TOP_CROSS
 	./mlv_compilation_from_scratch_ubuntu
 fi
 )
 
+print_red "We build the Win 32 package of MLV."
 mkdir $MAIN_DEV
 mkdir $MAIN_DEV/include 
 mkdir $MAIN_DEV/lib 

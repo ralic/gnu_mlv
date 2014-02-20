@@ -3,6 +3,10 @@
 #endif
 #include <stdio.h>
 
+#if defined( __WIN32__ ) || defined( _WIN32 ) || defined( __CYGWIN__ )
+extern int asprintf (char **, const char *, ...);
+#endif
+
 #include <stdlib.h>
 #include <string.h>
 #include <MLV/MLV_all.h>

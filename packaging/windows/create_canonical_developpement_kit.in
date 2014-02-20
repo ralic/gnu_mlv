@@ -161,7 +161,7 @@ do
 		PKG_CONFIG_PATH=$CROSS_DIRECTORY/lib/pkgconfig pkg-config --cflags MLV \
 	) $i $( \
 		PKG_CONFIG_PATH=$CROSS_DIRECTORY/lib/pkgconfig pkg-config --libs MLV \
-	) -o $MLV_FINAL_PRODUCT/$j.exe
+	) -L$FAKE32/lib -lasprintf -o $MLV_FINAL_PRODUCT/$j.exe
 done;
 )
 
