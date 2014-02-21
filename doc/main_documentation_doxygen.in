@@ -98,8 +98,15 @@ Paquets RPM pour Fedora 32 bits :
 - binaires: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_32_BINARY_PACKAGE@">@MLV_FEDORA_32_BINARY_PACKAGE@</a>
 - développement: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_32_DEV_PACKAGE@">@MLV_FEDORA_32_DEV_PACKAGE@</a>
 - bibliothèques statiques: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_32_STATIC_PACKAGE@">@MLV_FEDORA_32_STATIC_PACKAGE@</a>
-- code source: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_32_SOURCE_PACKAGE@">@MLV_FEDORA_32_SOURCE_PACKAGE@</a>
-- Clé: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_32_KEY_PACKAGE@">@MLV_FEDORA_32_KEY_PACKAGE@</a>
+- code source: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_SOURCE_PACKAGE@">@MLV_FEDORA_SOURCE_PACKAGE@</a>
+- Clé: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_KEY_PACKAGE@">@MLV_FEDORA_KEY_PACKAGE@</a>
+
+Paquets RPM pour Fedora 64 bits : 
+- binaires: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_64_BINARY_PACKAGE@">@MLV_FEDORA_64_BINARY_PACKAGE@</a>
+- développement: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_64_DEV_PACKAGE@">@MLV_FEDORA_64_DEV_PACKAGE@</a>
+- bibliothèques statiques: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_64_STATIC_PACKAGE@">@MLV_FEDORA_64_STATIC_PACKAGE@</a>
+- code source: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_64_SOURCE_PACKAGE@">@MLV_FEDORA_64_SOURCE_PACKAGE@</a>
+- Clé: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_KEY_PACKAGE@">@MLV_FEDORA_KEY_PACKAGE@</a>
 
 
 <!--
@@ -229,23 +236,26 @@ La bibliothèque MLV est installée.
 
 \section installation_fedora Fedora
 
+Nous supposerons que vous avez installer une ferdora 64 bits. Les utilisateurs 
+utilisant une fedora 32 bits, devroint adapter le tutoriel en remplacant, la
+chaîne de caractere "x86_64" par "i686".
+
 Commencez par télécharger les paquets de la bibliothèque suivants:
 
-- <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_32_BINARY_PACKAGE@">@MLV_FEDORA_32_BINARY_PACKAGE@</a>
-- <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_32_DEV_PACKAGE@">@MLV_FEDORA_32_DEV_PACKAGE@</a>
-- <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_32_STATIC_PACKAGE@">@MLV_FEDORA_32_STATIC_PACKAGE@</a>
-- <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_32_KEY_PACKAGE@">@MLV_FEDORA_32_KEY_PACKAGE@</a>
+- <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_64_BINARY_PACKAGE@">@MLV_FEDORA_64_BINARY_PACKAGE@</a>
+- <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_64_DEV_PACKAGE@">@MLV_FEDORA_64_DEV_PACKAGE@</a>
+- <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_64_STATIC_PACKAGE@">@MLV_FEDORA_64_STATIC_PACKAGE@</a>
+- <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_KEY_PACKAGE@">@MLV_FEDORA_KEY_PACKAGE@</a>
 
 
 et installez-les en tapant la commande suivante:
 
 \verbatim
-RA_32_KEY_PACKAGE
 yum update
-rpm --import @MLV_FEDORA_32_KEY_PACKAGE@
-yum install @MLV_FEDORA_32_BINARY_PACKAGE@
-yum install @MLV_FEDORA_32_DEV_PACKAGE@
-yum install @MLV_FEDORA_32_STATIC_PACKAGE@
+rpm --import @MLV_FEDORA_KEY_PACKAGE@
+yum install @MLV_FEDORA_64_BINARY_PACKAGE@
+yum install @MLV_FEDORA_64_DEV_PACKAGE@
+yum install @MLV_FEDORA_64_STATIC_PACKAGE@
 exit
 \endverbatim
 
@@ -1509,7 +1519,11 @@ Ensuite, mettez les fichiers suivants, dans le dossier
 @MLV_FEDORA_32_DEV_PACKAGE@
 @MLV_FEDORA_32_STATIC_PACKAGE@
 @MLV_FEDORA_32_SOURCE_PACKAGE@
-@MLV_FEDORA_32_KEY_PACKAGE@
+@MLV_FEDORA_64_BINARY_PACKAGE@
+@MLV_FEDORA_64_DEV_PACKAGE@
+@MLV_FEDORA_64_STATIC_PACKAGE@
+@MLV_FEDORA_64_SOURCE_PACKAGE@
+@MLV_FEDORA_KEY_PACKAGE@
 @MLV_WIN_32_BINARIES@
 @MLV_CODEBLOCKS_32_PACKAGE@
 @MLV_DEVCPP_32_PACKAGE@
@@ -1742,7 +1756,7 @@ Commencez par installer les différents outils permettant de créer des paquets
 RPM en installant les paquets suivants:
 \verbatim
 su
-yum install rpmdevtools yum-utils
+yum install rpmdevtools yum-utils rpm-sign
 exit
 \endverbatim
 
@@ -1793,7 +1807,7 @@ Si vous ne savez pas quoi répondre, choisissez les réponses par default.
 
 
 Modifiez le fichier <code>.rpmmacros</code> pour indiquer l'emplacement des clés
-crées et quelques informations vous concernant:
+crées et le nom qui a été utilisé lors de la création de la clé : 
 
 \verbatim
 %_signature             gpg
@@ -1851,27 +1865,38 @@ rpmbuild -bi --short-circuit @PACKAGE_TARNAME@.spec
 rpmbuild -ba @PACKAGE_TARNAME@.spec
 \endverbatim
 
-Voilà, le processus a créé quatres paquets rpm :
+Si vous utilisez une fedora 32 bits, le processus a créé quatres paquets rpm :
 
-- RPMS/i386/@MLV_FEDORA_32_BINARY_PACKAGE@
-- RPMS/i386/@MLV_FEDORA_32_DEV_PACKAGE@
-- RPMS/i386/@MLV_FEDORA_32_STATIC_PACKAGE@
+- RPMS/i686/@MLV_FEDORA_32_BINARY_PACKAGE@
+- RPMS/i686/@MLV_FEDORA_32_DEV_PACKAGE@
+- RPMS/i686/@MLV_FEDORA_32_STATIC_PACKAGE@
 - SRPMS/@MLV_FEDORA_32_SOURCE_PACKAGE@
 
+Si vous utilisez une fedora 64 bits, le processus a créé quatres paquets rpm :
+
+- RPMS/x86_64/@MLV_FEDORA_64_BINARY_PACKAGE@
+- RPMS/x86_64/@MLV_FEDORA_64_DEV_PACKAGE@
+- RPMS/x86_64/@MLV_FEDORA_64_STATIC_PACKAGE@
+- SRPMS/@MLV_FEDORA_64_SOURCE_PACKAGE@
+
 Il ne vous reste plus qu'à signer les paquets pour garantir leurs intégrités.
-Pour cela, tapez les commandes suivantes:
+Pour cela, tapez les commandes suivantes (pour une fedora 64 bits):
 
 \verbatim
 cd ~
-rpmsign --addsign rpmbuild/RPMS/i386/@MLV_FEDORA_32_BINARY_PACKAGE@
-rpmsign --addsign rpmbuild/RPMS/i386/@MLV_FEDORA_32_DEV_PACKAGE@
-rpmsign --addsign rpmbuild/RPMS/i386/@MLV_FEDORA_32_STATIC_PACKAGE@
-rpmsign --addsign rpmbuild/SRPMS/@MLV_FEDORA_32_SOURCE_PACKAGE@
+rpmsign --addsign rpmbuild/RPMS/x86_64/@MLV_FEDORA_64_BINARY_PACKAGE@
+rpmsign --addsign rpmbuild/RPMS/x86_64/@MLV_FEDORA_64_DEV_PACKAGE@
+rpmsign --addsign rpmbuild/RPMS/x86_64/@MLV_FEDORA_64_STATIC_PACKAGE@
+rpmsign --addsign rpmbuild/SRPMS/@MLV_FEDORA_64_SOURCE_PACKAGE@
 \endverbatim
 
+La clé utilisé pour la signature est celle qui a pour nom, le nom du champ <code>%_gpg_name</code>
+dans le fichier <code>.rpmmacros</code>.
+
 Les paquets RPM pour fedora sont enfin prêt.
-
-
+Vous pouvez maintenant les tester en suivant la procédure d'installation 
+présente à la page :
+\subpage installation_fedora .
 
 */
 
