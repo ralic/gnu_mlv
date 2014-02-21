@@ -73,6 +73,7 @@ MLV_Xml_error MLV_get_string_value_from_xml_va(
  * \param xml_data Les données xml.
  * \param result Un pointeur vers un entier dans lequel le résultat de la fonction sera enregistré.
  * \param xpath Le chemin d'accès.
+ * \param pile La pile des complements de paramètres comme dans vaprintf.
  * \return renvoie un code d'erreur si la fonction n'a pa reussie à extraire la donnée souhaitée du document xml.
  */
 MLV_Xml_error MLV_get_integer_value_from_xml_va(
@@ -90,6 +91,7 @@ MLV_Xml_error MLV_get_integer_value_from_xml_va(
  * \param xml_data Les données xml.
  * \param result Un pointeur vers un réel dans lequel le résultat de la fonction sera enregistré.
  * \param xpath Le chemin d'accès.
+ * \param pile La pile des complements de paramètres comme dans vaprintf.
  * \return renvoie un code d'erreur (voir MLV_Xml_error) si la fonction n'a pas reussie à extraire la donnée souhaitée du document xml.
  */
 MLV_Xml_error MLV_get_double_value_from_xml_va(
@@ -107,6 +109,7 @@ MLV_Xml_error MLV_get_double_value_from_xml_va(
  * \param xml_data Les données xml.
  * \param result Un pointeur vers un réel dans lequel le résultat de la fonction sera enregistré.
  * \param xpath Le chemin d'accès.
+ * \param pile La pile des complements de paramètres comme dans vaprintf.
  * \return renvoie un code d'erreur (voir MLV_Xml_error) si la fonction n'a pas reussie à extraire la donnée souhaitée du document xml.
  */
 MLV_Xml_error MLV_get_float_value_from_xml_va(
@@ -120,7 +123,7 @@ MLV_Xml_error MLV_get_float_value_from_xml_va(
  *
  * \param xml_data Les données xml.
  * \param xpath Le chemin d'accès.
- * \param ... Les paramètres de la fonction.
+ * \param pile La pile des complements de paramètres comme dans vaprintf.
  *
  * \return Cette fonction renvoie le nombre d'objet ayant pour chemin d'accès 
  *         "xpath". 
@@ -137,7 +140,7 @@ int MLV_get_number_of_objects_from_xml_va(
  *
  * \param xml_data Les données xml.
  * \param xpath Le chemin d'accès.
- * \param ... Les paramètres de la fonction.
+ * \param pile La pile des complements de paramètres comme dans vaprintf.
  *
  * \return Un noeud interne de l'arbre XML.
  */

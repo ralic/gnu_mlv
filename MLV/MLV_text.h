@@ -100,7 +100,7 @@ void MLV_free_font( MLV_Font* font );
 
 /** \~french 
  * \brief Cette fonction calcule la taille du texte qui sera affiché sur 
- *        l'écran à l'aide de la fonction MLV_text().
+ *        l'écran à l'aide de la fonction MLV_draw_text().
  *
  * \param text Le texte qui doit être affiché.
  * \param width La largeur du texte.
@@ -316,6 +316,8 @@ void MLV_draw_adapted_text_box_with_font_on_image(
  *                     MLV_draw_adapted_text_box_with_font().
  * \param result_height La hauteur de la boîte que vous obtiendrez en utilisant 
  *                      MLV_draw_adapted_text_box_with_font().
+ *
+ * \return La fonction renvoie la taille de la boîte de texte.
  */
 int MLV_get_size_of_adapted_text_box_with_font(
 	const char* message,

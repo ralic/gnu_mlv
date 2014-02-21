@@ -75,6 +75,7 @@ extern "C" {
  * \param informativeMessage    Le message à afficher devant la boîte de saisie.
  * \param text                  L'addresse où sera placé la réponse donnée par 
  *                              l'utilisateur.
+ * \param pile La pile des complements de paramètres comme dans vaprintf.
  */
 void MLV_wait_input_box_va(
 	int sommetHautGaucheX, int sommetHautGaucheY,
@@ -111,6 +112,7 @@ void MLV_wait_input_box_va(
  * \param text                L'addresse où sera placé la réponse donnée par 
  *                            l'utilisateur.
  * \param font                La font du texte à utiliser.
+ * \param pile La pile des complements de paramètres comme dans vaprintf.
  */
 void MLV_wait_input_box_with_font_va(
 	int sommetHautGaucheX, int sommetHautGaucheY,
@@ -149,6 +151,7 @@ void MLV_wait_input_box_with_font_va(
  * \param textColor La couleur du texte.
  * \param backgroundColor La couleur du fond.
  * \param informativeMessage La message d'entête de la boîte de saisie.
+ * \param pile La pile des complements de paramètres comme dans vaprintf.
  */
 MLV_Input_box* MLV_create_input_box_va(
 	int sommetHautGaucheX, int sommetHautGaucheY,
@@ -171,6 +174,7 @@ MLV_Input_box* MLV_create_input_box_va(
  * \param backgroundColor La couleur du fond.
  * \param informativeMessage Le message d'entête de la boîte de saisie.
  * \param font La font à utiliser pour le texte.
+ * \param pile La pile des complements de paramètres comme dans vaprintf.
  */
 MLV_Input_box* MLV_create_input_box_with_font_va(
 	int sommetHautGaucheX, int sommetHautGaucheY,
@@ -187,6 +191,7 @@ MLV_Input_box* MLV_create_input_box_with_font_va(
  *
  * \param input_box La boîte de saisie à modifier.
  * \param message Le message d'entête.
+ * \param pile La pile des complements de paramètres comme dans vaprintf.
  */
 void MLV_change_informative_message_of_input_box_va(
 	MLV_Input_box* input_box, const char* message, va_list pile
