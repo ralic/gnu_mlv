@@ -87,7 +87,7 @@ int main( int argc, char *argv[] ){
 /*
  *   This file is part of the MLV Library.
  *
- *   Copyright (C) 2010,2011,2012,2013 Adrien Boussicault, Marc Zipstein
+ *   Copyright (C) 2010-2014 Adrien Boussicault, Marc Zipstein
  *
  *
  *    This Library is free software: you can redistribute it and/or modify
