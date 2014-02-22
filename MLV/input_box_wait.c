@@ -18,6 +18,8 @@
  *    along with this Library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <stdio.h>
+
 #include "MLV_input_box.h"
 #include "MLV_shape.h"
 #include "MLV_color.h"

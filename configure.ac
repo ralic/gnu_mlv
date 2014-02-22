@@ -101,6 +101,50 @@ m4_include([config/m4/ax_prog_doxygen.m4])
 AM_INIT_AUTOMAKE([-Wall -Werror])
 AM_CONFIG_HEADER([MLV/config.h])
 
+
+#######################################################################
+# Configuration options  (part 1)                                     #
+#######################################################################
+AC_ARG_ENABLE([dev],
+	      AS_HELP_STRING([--enable-dev], [If you want to launch the game in the directory of compilation use this option. If you want to install the game don't use this option. This option is generally for developpers.]),
+	      [dev=$enableval],
+	      [dev=no])
+AM_CONDITIONAL([DEV],[test x$dev = xyes])
+
+AC_ARG_ENABLE([debug],
+	      AS_HELP_STRING([--enable-debug], [Add debug flags (-g -pg -O0)]),
+	      [debug=$enableval],
+	      [debug=no])
+AM_CONDITIONAL([DEBUG],[test x$debug = xyes])
+
+AC_ARG_ENABLE([memorydebug],
+	      AS_HELP_STRING([--enable-memorydebug], [This option is for developpers. This option permit to help the user to debug problem memory.]),
+	      [memorydebug=$enableval],
+	      [memorydebug=no])
+AM_CONDITIONAL([MEMORY_DEBUG],[test x$memorydebug = xyes])
+
+AC_ARG_ENABLE([relativepath],
+	      AS_HELP_STRING([--enable-relativepath], [If you want to install the MLV in the same directory than your program using the MLV library, you have to use this option. This option will correctly configure a relative path to find the libraries font from the binary directory. This option is for windows DLL compilations. If you want to change the default relative path for the data directory, you can pass as parameter you prefered path.By default the relative data path is ../share/MLV/data .]),
+	      [relativepath=$enableval],
+	      [relativepath=no])
+AM_CONDITIONAL([RELATIVEPATH],[test x$relativepath != xno])
+
+if test x$debug = xyes
+then
+	CXXFLAGS="-g -ggdb -pg -O0 ${CXXFLAGS}"
+	CFLAGS="-g -ggdb -pg -O0 ${CFLAGS}"
+	LDFLAGS="-g -ggdb -pg -O0 ${LDFLAGS}"
+else
+	if test x$dev = xyes
+	then
+		CXXFLAGS="-g ${CXXFLAGS}"
+		CFLAGS="-g ${CFLAGS}"
+	fi
+fi
+
+#######################################################################
+# Configure Compilation flags                                         #
+#######################################################################
 AM_PROG_AR
 
 AC_PROG_CC
@@ -111,20 +155,8 @@ AC_LIBTOOL_WIN32_DLL # To compile .dll
 AC_PROG_OBJC
 
 #######################################################################
-# Configuration options                                               #
+# Configuration options  (part 2)                                     #
 #######################################################################
-
-AC_ARG_ENABLE([dev],
-	      AS_HELP_STRING([--enable-dev], [If you want to launch the game in the directory of compilation use this option. If you want to install the game don't use this option. This option is generally for developpers.]),
-	      [dev=$enableval],
-	      [dev=no])
-AM_CONDITIONAL([DEV],[test x$dev = xyes])
-
-AC_ARG_ENABLE([relativepath],
-	      AS_HELP_STRING([--enable-relativepath], [If you want to install the MLV in the same directory than your program using the MLV library, you have to use this option. This option will correctly configure a relative path to find the libraries font from the binary directory. This option is for windows DLL compilations. If you want to change the default relative path for the data directory, you can pass as parameter you prefered path.By default the relative data path is ../share/MLV/data .]),
-	      [relativepath=$enableval],
-	      [relativepath=no])
-AM_CONDITIONAL([RELATIVEPATH],[test x$relativepath != xno])
 
 if test x$relativepath = xyes
 then
@@ -176,13 +208,6 @@ AM_CONDITIONAL([CROSS_COMPILATION],[test "x$host_os" != "x$build_os"])
 #Option de compilation pour tout le monde
 CXXFLAGS="-I\${top_srcdir} -Wall ${CXXFLAGS}"
 CFLAGS="-I\${top_srcdir} -Wall ${CFLAGS}"
-
-
-AC_ARG_ENABLE([debug],
-	      AS_HELP_STRING([--enable-debug], [This option is for developpers. This option permit to help the user to debug problem memory.]),
-	      [debug=$enableval],
-	      [debug=no])
-AM_CONDITIONAL([DEBUG],[test x$debug = xyes])
 
 case "$host_os" in
 	darwin*)
@@ -334,13 +359,13 @@ PKG_CHECK_MODULES(glib, glib-2.0)
 
 PKG_CHECK_MODULES(libxml, libxml-2.0)
 
-if test x$dev = xyes
+if test x$debug = xyes || test x$dev = xyes
 then
-	CXXFLAGS="-g -Werror ${CXXFLAGS}"
-	CFLAGS="-g -Werror ${CFLAGS}"
+	CXXFLAGS="${CXXFLAGS} -Werror"
+	CFLAGS="${CFLAGS} -Werror"
 fi
 
-if test x$debug = xyes
+if test x$memorydebug = xyes
 then
 	CXXFLAGS="-DMEMORY_DEBUG ${CXXFLAGS}"
 	CFLAGS="-DMEMORY_DEBUG ${CFLAGS}"

@@ -18,6 +18,8 @@
  *    along with this Library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <stdio.h>
+
 #include "MLV_animation.h"
 #include "MLV_path.h"
 
@@ -26,7 +28,6 @@
 #include "tree_map.h"
 
 #include "MLV_xml.h"
-
 
 ////////////////////////////////////////////////
 //    Animation structures

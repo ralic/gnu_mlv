@@ -18,6 +18,8 @@
  *    along with this Library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <stdio.h>
+
 #include "MLV_text.h"
 #include "MLV_text_va.h"
 

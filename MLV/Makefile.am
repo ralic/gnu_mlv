@@ -57,11 +57,11 @@ libMLVMain_la_SOURCES = \
 	SDLMain.m
 endif
 
-if DEBUG
+if MEMORY_DEBUG
 libMLV_la_SOURCES += memory_debug.c
 endif
 
-if DEBUG
+if MEMORY_DEBUG
 libMLV_la_CFLAGS = ${libxml_CFLAGS} ${glib_CFLAGS} -DDATA_PATH=\"${DATA_PATH}\"
 libMLV_la_LIBADD = ${libxml_LIBS} ${glib_LIBS} 
 else
