@@ -35,7 +35,13 @@ noinst_PROGRAMS = \
 	12_desktop_size
 
 AM_CPPFLAGS = ${MLV_CPPFLAGS}
+AM_LDFLAGS = ${MLV_LDFLAGS} -static
 LIBS +=  ${MLV_LIBADD}
+
+# To profile MLV functions with gprof
+if DEBUG
+AM_LDFLAGS += -static
+endif
 
 docmediumdir = $(docdir)/examples/medium
 

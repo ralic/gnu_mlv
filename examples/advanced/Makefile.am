@@ -55,7 +55,13 @@ noinst_PROGRAMS = \
 	12_paths
 
 AM_CPPFLAGS = ${MLV_CPPFLAGS}
+AM_LDFLAGS = ${MLV_LDFLAGS} -static
 LIBS +=  ${MLV_LIBADD}
+
+# To profile MLV functions with gprof
+if DEBUG
+AM_LDFLAGS += -static
+endif
 
 docadvanceddir = $(docdir)/examples/advanced
 
