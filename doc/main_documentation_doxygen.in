@@ -1422,7 +1422,7 @@ et choisisez une clef RSA de 2048 bits sans temps d'expiration.
 
 Exportez la clé publique pour pouvoir la comuniquer à différents utilisateurs
 \verbatim
-gpg --export --armor > @PACKAGE_TARNAME@-@PACKAGE_VERSION@-packaging-gpg-key-votre_nom 
+gpg2 --export --armor > @PACKAGE_TARNAME@-@PACKAGE_VERSION@-packaging-gpg-key-votre_nom 
 \endverbatim
 
 \section verify_lib Verifiez le bon fonctionnement de la bibliothèque (optionel)
@@ -1818,7 +1818,7 @@ crées et le nom qui a été utilisé lors de la création de la clé :
 Exporter la clé publique afin de la comuniquer aux utilisateurs
 
 \verbatim
-gpg --export --armor > RPM-GPG-KEY-Votre_nom
+gpg2 --export --armor > RPM-GPG-KEY-Votre_nom
 \endverbatim
 
 
@@ -1867,17 +1867,17 @@ rpmbuild -ba @PACKAGE_TARNAME@.spec
 
 Si vous utilisez une fedora 32 bits, le processus a créé quatres paquets rpm :
 
-- RPMS/i686/@MLV_FEDORA_32_BINARY_PACKAGE@
-- RPMS/i686/@MLV_FEDORA_32_DEV_PACKAGE@
-- RPMS/i686/@MLV_FEDORA_32_STATIC_PACKAGE@
-- SRPMS/@MLV_FEDORA_32_SOURCE_PACKAGE@
+- ~/rpmbuild/RPMS/i686/@MLV_FEDORA_32_BINARY_PACKAGE@
+- ~/rpmbuild/RPMS/i686/@MLV_FEDORA_32_DEV_PACKAGE@
+- ~/rpmbuild/RPMS/i686/@MLV_FEDORA_32_STATIC_PACKAGE@
+- ~/rpmbuild/SRPMS/@MLV_FEDORA_32_SOURCE_PACKAGE@
 
 Si vous utilisez une fedora 64 bits, le processus a créé quatres paquets rpm :
 
-- RPMS/x86_64/@MLV_FEDORA_64_BINARY_PACKAGE@
-- RPMS/x86_64/@MLV_FEDORA_64_DEV_PACKAGE@
-- RPMS/x86_64/@MLV_FEDORA_64_STATIC_PACKAGE@
-- SRPMS/@MLV_FEDORA_64_SOURCE_PACKAGE@
+- ~/rpmbuild/RPMS/x86_64/@MLV_FEDORA_64_BINARY_PACKAGE@
+- ~/rpmbuild/RPMS/x86_64/@MLV_FEDORA_64_DEV_PACKAGE@
+- ~/rpmbuild/RPMS/x86_64/@MLV_FEDORA_64_STATIC_PACKAGE@
+- ~/rpmbuild/SRPMS/@MLV_FEDORA_64_SOURCE_PACKAGE@
 
 Il ne vous reste plus qu'à signer les paquets pour garantir leurs intégrités.
 Pour cela, tapez les commandes suivantes (pour une fedora 64 bits):
