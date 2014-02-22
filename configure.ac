@@ -79,7 +79,7 @@ AC_SUBST(MLV_MACOSX_VERSION,[10.9])
 AC_SUBST(MLV_MACOSX_PACKAGE,[${PACKAGE_TARNAME}-${PACKAGE_VERSION}_macos-${MLV_MACOSX_VERSION}.pkg])
 
 AC_SUBST(MLV_FEDORA_VERSION,[20])
-AC_SUBST(MLV_FEDORA_CODE_VERSION,[fc${MLV_FEDORA_VERSION}])i
+AC_SUBST(MLV_FEDORA_CODE_VERSION,[fc${MLV_FEDORA_VERSION}])
 AC_SUBST(MLV_FEDORA_KEY_PACKAGE,[RPM-GPG-KEY-Boussicault])
 
 AC_SUBST(MLV_FEDORA_32_BINARY_PACKAGE,[${PACKAGE_TARNAME}-${PACKAGE_VERSION}-0.${MLV_FEDORA_CODE_VERSION}.i686.rpm])
@@ -117,6 +117,14 @@ AC_ARG_ENABLE([debug],
 	      [debug=no])
 AM_CONDITIONAL([DEBUG],[test x$debug = xyes])
 
+if test x$debug = xyes
+then
+AC_SUBST(COMPILE_DEBUG_VERSION_FOR_WINDOW,['yes'])
+else
+AC_SUBST(COMPILE_DEBUG_VERSION_FOR_WINDOW,['no'])
+fi
+
+
 AC_ARG_ENABLE([memorydebug],
 	      AS_HELP_STRING([--enable-memorydebug], [This option is for developpers. This option permit to help the user to debug problem memory.]),
 	      [memorydebug=$enableval],
@@ -137,8 +145,8 @@ then
 else
 	if test x$dev = xyes
 	then
-		CXXFLAGS="-g ${CXXFLAGS}"
-		CFLAGS="-g ${CFLAGS}"
+		CXXFLAGS="-g -O2 ${CXXFLAGS}"
+		CFLAGS="-g -O2 ${CFLAGS}"
 	fi
 fi
 

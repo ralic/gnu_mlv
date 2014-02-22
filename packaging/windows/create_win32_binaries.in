@@ -61,6 +61,7 @@ mkdir $MAIN_DEV/bin
 cp -r $CROSS_DIRECTORY/include/SDL $MAIN_DEV/include/
 cp -r $CROSS_DIRECTORY/include/MLV $MAIN_DEV/include/ 
 cp $CROSS_DIRECTORY/lib/libSDLmain.a $MAIN_DEV/lib/ 
+cp $CROSS_DIRECTORY/lib/libMLV.a $MAIN_DEV/lib/ 
 cp /usr/i586-mingw32msvc/lib/libmingw32.a $MAIN_DEV/lib/
 cp /usr/i586-mingw32msvc/lib/libmingwex.a $MAIN_DEV/lib/
 

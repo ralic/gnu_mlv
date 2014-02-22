@@ -20,6 +20,19 @@
 
 #include <stdio.h>
 
+#include "platform.h"
+
+#ifdef OS_WINDOWS
+/* Get va_list.  */
+#if __STDC__ || defined __cplusplus || defined _MSC_VER
+# include <stdarg.h>
+#else
+# include <varargs.h>
+#endif
+extern int vasprintf (char **, const char *, va_list);
+extern int asprintf (char **, const char *, ...);
+#endif
+
 #include "MLV_xml.h"
 #include "MLV_xml_va.h"
 

@@ -145,6 +145,7 @@ cp @abs_top_srcdir@/examples/beginner/gpl.txt $MLV_EXAMPLES/sources/beginner
 # Creation des exampes pour la librairie MLV
 MLV_FINAL_PRODUCT=$MLV_EXAMPLES/final_product
 
+cd $TOP_CROSS
 source $TOP_CROSS/definition_of_environement_variables
 
 
@@ -155,13 +156,27 @@ do
 	j=`echo $i | sed -e "s#/#_#" | sed -e "s#\.c##"`;
 	path=`echo $i | sed -e "s#/.*##"`;
 	name=`echo $j | sed -e "s#^[^_]*_##"`;
+
+
+	if test x@COMPILE_DEBUG_VERSION_FOR_WINDOW@ = xyes
+	then
+		DEBUGFLAGS="-g -ggdb -pg -O0"
+		LDFLAGS=$( \
+			PKG_CONFIG_PATH=$CROSS_DIRECTORY/lib/pkgconfig pkg-config --libs MLV \
+			|sed -e "s#-lMLV#/home/boussica/mlv-1.2.1/packaging/windows/cross-compilation/fakeroot-mingw32/lib/libMLV.a#"
+		)
+		LDFLAGS="$LDFLAGS -lSDL_gfx -lSDL_ttf -lSDL_image -lSDL_mixer -lglib-2.0 -lxml2"
+	else
+		DEBUGFLAGS="-g -O2"
+		LDFLAGS=$( \
+			PKG_CONFIG_PATH=$CROSS_DIRECTORY/lib/pkgconfig pkg-config --libs MLV \
+		)
+	fi
 	
 	#compilation des exemples:
-	$CC -g -pg -O2 -Wall $( \
+	$CC $DEBUGFLAGS -Wall $( \
 		PKG_CONFIG_PATH=$CROSS_DIRECTORY/lib/pkgconfig pkg-config --cflags MLV \
-	) $i $( \
-		PKG_CONFIG_PATH=$CROSS_DIRECTORY/lib/pkgconfig pkg-config --libs MLV \
-	) -L$FAKE32/lib -lasprintf -o $MLV_FINAL_PRODUCT/$j.exe
+	) $i -L$FAKE32/lib $LDFLAGS -lasprintf -o $MLV_FINAL_PRODUCT/$j.exe
 done;
 )
 

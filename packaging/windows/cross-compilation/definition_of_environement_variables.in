@@ -59,6 +59,13 @@ then
 	TOP_CROSS=`pwd .`
 fi
 
+if test x@COMPILE_DEBUG_VERSION_FOR_WINDOW@ = xyes
+then
+	DEBUG_OPTION="--enable-debug"
+	GPROFILE_FLAG="-static"
+fi
+
+
 FAKE32="$TOP_CROSS/fakeroot-mingw32"
 FAKE32_SRC="$FAKE32/src"
 

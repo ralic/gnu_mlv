@@ -20,6 +20,12 @@
 
 #include <stdio.h>
 
+#include "platform.h"
+
+#ifdef OS_WINDOWS
+extern int asprintf (char **, const char *, ...);
+#endif
+
 #include "MLV_animation.h"
 #include "MLV_path.h"
 
