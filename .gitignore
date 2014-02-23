@@ -112,3 +112,4 @@ packaging/windows/cross-compilation/mlv_compilation_from_scratch_ubuntu
 packaging/windows/cross-compilation/mlv_compilation_ubuntu
 packaging/windows/my_project.cbp
 packaging/windows/my_project.dev
+config/ar-lib
