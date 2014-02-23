@@ -52,12 +52,16 @@ struct _MLV_Playlist {
     GList* list_music;
 };
 
+#define MLV_AUDIO_BUFFER_SIZE 1024
+#define MLV_AUDIO_STEREO 2
+#define MLV_AUDIO_NUMBER_OF_MIXING_CHANEL 16
+
 int init_audio( int buffer_size ){
 	int result = Mix_OpenAudio( 
-		MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, buffer_size
+		MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MLV_AUDIO_STEREO, buffer_size
 	);
 	if( !result ){
-		Mix_AllocateChannels(16);
+		Mix_AllocateChannels(MLV_AUDIO_NUMBER_OF_MIXING_CHANEL);
 	}
 	return result;
 }
@@ -71,8 +75,8 @@ void MLV_change_number_of_parallel_sounds( unsigned int n ){
 }
 
 int MLV_init_audio(){
-	return init_audio( 1024 ); // If the sound are not well former, increse 
-	                          // this value. 
+	return init_audio( MLV_AUDIO_BUFFER_SIZE ); // If the sound are not well 
+	                                            // former, increse this value. 
 	                          // If the sound have some lags, the you have 
 	                          // to decrease this value.
 }
