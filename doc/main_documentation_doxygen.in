@@ -1445,12 +1445,6 @@ gpg --export --armor IDENTIFIANT_CLE > @PACKAGE_TARNAME@-@PACKAGE_VERSION@-packa
 \endverbatim
 où <code>IDENTIFIANT_CLE</code> est l'identifiant de la clé vu précédement.
 
-Exportez une clé de révoquation que vous pourrez utiliser si votre clé privée 
-se trouve un jour compromise.
-\verbatim
-gpg --output revoke.asc --gen-revoke IDENTIFIANT_cle
-\endverbatim
-
 Exportez votre clé privé pour pouvoir l'importer dans toutes les machines qui
 vont créer les paquets de distribution (notament pour debian et fedora).
 \verbatim
@@ -1459,15 +1453,15 @@ gpg --export-secret-keys --armor E7E1131A > SECRET_@PACKAGE_TARNAME@-@PACKAGE_VE
 Vous ne devez JAMAIS comuniquer cette clé. C'est elle qui sert à crypter les 
 messages et à réaliser les signatures de vos paquets.
 
-Archivez dans vos archives personnelles (et secrète) la clé de révoquation, 
-la clé publique et la clé privée.
+Archivez dans vos archives personnelles (et secrète) la clé publique et la clé 
+privée.
 
 \section verify_lib Verifiez le bon fonctionnement de la bibliothèque (optionel)
 
 Vérifiez maintenant le bon fonctionement de la bibliothèque.
 
-Pour cela, créez tout les paquets de distribution en suivant les procédure
-présente à la page :  \subpage documentation_paquet .
+Pour cela, créez tout les paquets de distribution en suivant les procédures
+présentes à la page :  \subpage documentation_paquet .
 
 Testez ensuite tous les paquets crées et vérifiez le bon fonctionnement des 
 programmes en compilant et testant tous les exemples présents dans le dossier 
