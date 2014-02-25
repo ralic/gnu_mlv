@@ -1566,19 +1566,21 @@ N'oubliez surtout pas de mettre de nouveau le fichier <code>@PACKAGE_TARNAME@-@P
 Il faut maintenant signer tous les fichiers qui n'ont pas encore été signés :
 \verbatim
 cd /tmp/depot
-gpg -b --use-agent @PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz
+gpg -b --use-agent --local-user IDENTIFIANT_CLE @PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz
 cd /tmp/depot/@PACKAGE_TARNAME@-@PACKAGE_VERSION@
-gpg -b --use-agent @MLV_WIN_32_BINARIES@
-gpg -b --use-agent @MLV_CODEBLOCKS_32_PACKAGE@
-gpg -b --use-agent @MLV_DEVCPP_32_PACKAGE@
-gpg -b --use-agent @MLV_MACOSX_PACKAGE@
-gpg -b --use-agent @PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz
+gpg -b --use-agent --local-user IDENTIFIANT_CLE @MLV_WIN_32_BINARIES@
+gpg -b --use-agent --local-user IDENTIFIANT_CLE @MLV_CODEBLOCKS_32_PACKAGE@
+gpg -b --use-agent --local-user IDENTIFIANT_CLE @MLV_DEVCPP_32_PACKAGE@
+gpg -b --use-agent --local-user IDENTIFIANT_CLE @MLV_MACOSX_PACKAGE@
+gpg -b --use-agent --local-user IDENTIFIANT_CLE @PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz
 \endverbatim
+où <code>IDENtiFIANT_CLE</code> est l'identifiant de la clé créé dans la partie 
+"Préparer une clé pour signer ...".
 
 Puis on vérifie les signatures créés :
 \verbatim
 cd /tmp/depot
-gpg -b --use-agent @PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz
+gpg  --verify @PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz.sig
 cd /tmp/depot/@PACKAGE_TARNAME@-@PACKAGE_VERSION@
 gpg --verify @MLV_WIN_32_BINARIES@.sig
 gpg --verify @MLV_CODEBLOCKS_32_PACKAGE@.sig
