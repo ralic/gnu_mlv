@@ -1432,9 +1432,9 @@ Vous devriez obtenir l'affichage suivant :
 \verbatim
 /home/boussica/.gnupg/pubring.gpg
 ---------------------------------
-pub   1024R/E594D293 2014-02-25 [expire : 2014-02-28]
+pub   4096R/E594D293 2014-02-25 [expire : 2014-02-28]
 uid                  Adrien Boussicault (@PACKAGE_TARNAME@-@PACKAGE_VERSION@ key) <boussica@labri.fr>
-sub   1024R/4B3F1834 2014-02-25 [expire : 2014-02-28]
+sub   4096R/4B3F1834 2014-02-25 [expire : 2014-02-28]
 \endverbatim
 
 L'identifiant de la clé est ici <code>E594D293</code>
@@ -1452,7 +1452,7 @@ gpg --output revoke.asc --gen-revoke IDENTIFIANT_cle
 \endverbatim
 
 Exportez votre clé privé pour pouvoir l'importer dans toutes les machines qui
-vont créer les paquet de distributions (notament pour debian et fedora).
+vont créer les paquets de distribution (notament pour debian et fedora).
 \verbatim
 gpg --export-secret-keys --armor E7E1131A > SECRET_@PACKAGE_TARNAME@-@PACKAGE_VERSION@-packaging-gpg-key-votre_nom
 \endverbatim
