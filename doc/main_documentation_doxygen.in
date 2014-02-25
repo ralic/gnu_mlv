@@ -1448,8 +1448,10 @@ où <code>IDENTIFIANT_CLE</code> est l'identifiant de la clé vu précédement.
 Exportez votre clé privé pour pouvoir l'importer dans toutes les machines qui
 vont créer les paquets de distribution (notament pour debian et fedora).
 \verbatim
-gpg --export-secret-keys --armor E7E1131A > SECRET_@PACKAGE_TARNAME@-@PACKAGE_VERSION@-packaging-gpg-key-votre_nom
+gpg --export-secret-keys --armor IDENTIFIANT_CLE > SECRET_@PACKAGE_TARNAME@-@PACKAGE_VERSION@-packaging-gpg-key-votre_nom
 \endverbatim
+où <code>IDENTIFIANT_CLE</code> est l'identifiant de la clé vu précédement.
+
 Vous ne devez JAMAIS comuniquer cette clé. C'est elle qui sert à crypter les 
 messages et à réaliser les signatures de vos paquets.
 
