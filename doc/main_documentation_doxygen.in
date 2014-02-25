@@ -1418,12 +1418,49 @@ Pour cela, tapez la commande suivante :
 \verbatim
 gpg --gen-key
 \endverbatim
-et choisisez une clef RSA de 2048 bits sans temps d'expiration.
+et choisisez une clef RSA de 4096 bits, mettez un temps d'expiration 
+de 3 jours (temps que vous vous donnez pour créer et tester l'ensemble des 
+paquets de distribution) et choisissez comme commentaire: <code>@PACKAGE_TARNAME@-@PACKAGE_VERSION@ key</code>.
+
+
+Vérifier que la clé est dans votre liste de clés en tapant :
+\verbatim
+gpg --list-key
+\endverbatim
+
+Vous devriez obtenir l'affichage suivant :
+\verbatim
+/home/boussica/.gnupg/pubring.gpg
+---------------------------------
+pub   1024R/E594D293 2014-02-25 [expire : 2014-02-28]
+uid                  Adrien Boussicault (@PACKAGE_TARNAME@-@PACKAGE_VERSION@ key) <boussica@labri.fr>
+sub   1024R/4B3F1834 2014-02-25 [expire : 2014-02-28]
+\endverbatim
+
+L'identifiant de la clé est ici <code>E594D293</code>
 
 Exportez la clé publique pour pouvoir la comuniquer à différents utilisateurs
 \verbatim
-gpg2 --export --armor > @PACKAGE_TARNAME@-@PACKAGE_VERSION@-packaging-gpg-key-votre_nom 
+gpg --export --armor KEY IDENTIFIANT_CLE > @PACKAGE_TARNAME@-@PACKAGE_VERSION@-packaging-gpg-key-votre_nom 
 \endverbatim
+où <code>IDENTIFIANT_CLE</code> est l'identifiant de la clé vu précédement.
+
+Exportez une clé de révoquation que vous pourrez utiliser si votre clé privée 
+se trouve un jour compromise.
+\verbatim
+gpg --output revoke.asc --gen-revoke IDENTIFIANT_cle
+\endverbatim
+
+Exportez votre clé privé pour pouvoir l'importer dans toutes les machines qui
+vont créer les paquet de distributions (notament pour debian et fedora).
+\verbatim
+gpg --export-secret-keys --armor E7E1131A > SECRET_@PACKAGE_TARNAME@-@PACKAGE_VERSION@-packaging-gpg-key-votre_nom
+\endverbatim
+Vous ne devez JAMAIS comuniquer cette clé. C'est elle qui sert à crypter les 
+messages et à réaliser les signatures de vos paquets.
+
+Archivez dans vos archives personnelles (et secrète) la clé de révoquation, 
+la clé publique et la clé privée.
 
 \section verify_lib Verifiez le bon fonctionnement de la bibliothèque (optionel)
 
@@ -1549,11 +1586,11 @@ Puis on vérifie les signatures créés :
 cd /tmp/depot
 gpg -b --use-agent @PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz
 cd /tmp/depot/@PACKAGE_TARNAME@-@PACKAGE_VERSION@
-gpg --verifiy @MLV_WIN_32_BINARIES@.sig
-gpg --verifiy @MLV_CODEBLOCKS_32_PACKAGE@.sig
-gpg --verifiy @MLV_DEVCPP_32_PACKAGE@.sig
-gpg --verifiy @MLV_MACOSX_PACKAGE@.sig
-gpg --verifiy @PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz.sig
+gpg --verify @MLV_WIN_32_BINARIES@.sig
+gpg --verify @MLV_CODEBLOCKS_32_PACKAGE@.sig
+gpg --verify @MLV_DEVCPP_32_PACKAGE@.sig
+gpg --verify @MLV_MACOSX_PACKAGE@.sig
+gpg --verify @PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz.sig
 \endverbatim
 
 Copiez le fichier <code>@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz</code> dans 
