@@ -1441,7 +1441,7 @@ L'identifiant de la clé est ici <code>E594D293</code>
 
 Exportez la clé publique pour pouvoir la comuniquer à différents utilisateurs
 \verbatim
-gpg --export --armor KEY IDENTIFIANT_CLE > @PACKAGE_TARNAME@-@PACKAGE_VERSION@-packaging-gpg-key-votre_nom 
+gpg --export --armor IDENTIFIANT_CLE > @PACKAGE_TARNAME@-@PACKAGE_VERSION@-packaging-gpg-key-votre_nom 
 \endverbatim
 où <code>IDENTIFIANT_CLE</code> est l'identifiant de la clé vu précédement.
 
