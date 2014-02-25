@@ -1441,14 +1441,14 @@ L'identifiant de la clé est ici <code>E594D293</code>
 
 Exportez la clé publique pour pouvoir la comuniquer à différents utilisateurs
 \verbatim
-gpg --export --armor IDENTIFIANT_CLE > @PACKAGE_TARNAME@-@PACKAGE_VERSION@-packaging-gpg-key-votre_nom 
+gpg --export --armor IDENTIFIANT_CLE > @PACKAGE_TARNAME@-@PACKAGE_VERSION@-packaging-gpg-key-VOTRE_NOM
 \endverbatim
 où <code>IDENTIFIANT_CLE</code> est l'identifiant de la clé vu précédement.
 
 Exportez votre clé privé pour pouvoir l'importer dans toutes les machines qui
 vont créer les paquets de distribution (notament pour debian et fedora).
 \verbatim
-gpg --export-secret-keys --armor IDENTIFIANT_CLE > SECRET_@PACKAGE_TARNAME@-@PACKAGE_VERSION@-packaging-gpg-key-votre_nom
+gpg --export-secret-keys --armor IDENTIFIANT_CLE > @PACKAGE_TARNAME@-@PACKAGE_VERSION@-packaging-gpg-secretkey-VOTRE_NOM
 \endverbatim
 où <code>IDENTIFIANT_CLE</code> est l'identifiant de la clé vu précédement.
 
@@ -1524,9 +1524,18 @@ Pour cela vous pouvez utiliser l'émulateur <code>virt-manageur</code> pour
 installer localement une debian 32 bit, une debian 64 bit, un fedora 32 bits et 
 64 bits.
 
-Créez ensuite les paquets de distrubtion en suivant les procédures 
-présentes dans la page \subpage documentation_paquet et en utilisant toujours
-la clé publique de signature créé précédement pour les signatures des paquets.
+Pour chaque distribution (debian, fedora, window, MacOSX), créez des paquets 
+d'installation en suivant les instructions suivantes :
+- utilisez les procédure de créations des paquets de la page \subpage documentation_paquet 
+- quand, dans ces procédures, une clée pour signer des fichiers est utilisée, vous 
+  devez toujours utiliser la clé 
+  <code>@PACKAGE_TARNAME@-@PACKAGE_VERSION@-packaging-gpg-secretkey-VOTRE_NOM</code>, 
+  qui a été générée précédement. Pour importer cette clé, il vous suffit de taper
+  la commande suivante :
+  \verbatim
+  gpg --import @PACKAGE_TARNAME@-@PACKAGE_VERSION@-packaging-gpg-secretkey-VOTRE_NOM
+  \endverbatim
+
 
 Vérifiez le bon fonctionnement de ces paquets.
 
