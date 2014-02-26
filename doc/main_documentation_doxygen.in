@@ -2704,21 +2704,16 @@ Si tel est le cas, c'est que le paquet a correctement été généré.
 
 Commencez par désinstaller l'infrastructure de compilation du paquet :
 \verbatim
-cd $FAKEROOT/src/@PACKAGE_TARNAME@-@PACKAGE_VERSION@ && sudo make uninstall
-cd $FAKEROOT/src/SDL_gfx-X.X && sudo make uninstall
+cd $FAKEROOT/src/pkg-config-X.X && sudo make uninstall
+cd $FAKEROOT/src/libffi-X.X/x86_64-apple-darwinX.X.X && sudo make uninstall
+cd $FAKEROOT/src/gettext-X.X.X.X && sudo make uninstall
+cd $FAKEROOT/src/glib-2.X.X && sudo make uninstall
 sudo rm -rf /Library/Frameworks/SDL_ttf.framework
 sudo rm -rf /Library/Frameworks/SDL_mixer.framework
 sudo rm -rf /Library/Frameworks/SDL_image.framework
 sudo rm -rf /Library/Frameworks/SDL.framework
-cd $FAKEROOT/src/glib-2.X.X && sudo make uninstall
-cd $FAKEROOT/src/gettext-X.X.X.X && sudo make uninstall
-cd $FAKEROOT/src/libffi-X.X/x86_64-apple-darwinX.X.X && sudo make uninstall
-cd $FAKEROOT/src/libtool-X.X && sudo make uninstall
-cd $FAKEROOT/src/automake-X.X.X && sudo make uninstall
-cd $FAKEROOT/src/autoconf-archive-X.X && sudo make uninstall
-cd $FAKEROOT/src/autoconf-X.X && sudo make uninstall
-cd $FAKEROOT/src/m4-X.X.X && sudo make uninstall
-cd $FAKEROOT/src/pkg-config-X.X && sudo make uninstall
+cd $FAKEROOT/src/SDL_gfx-X.X && sudo make uninstall
+cd $FAKEROOT/src/@PACKAGE_TARNAME@-@PACKAGE_VERSION@ && sudo make uninstall
 \endverbatim
 
 Supprimez les lignes qui ont été ajoutées dans le fichier .bash_profile au debut du document.
