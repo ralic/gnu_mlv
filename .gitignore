@@ -113,3 +113,4 @@ packaging/windows/cross-compilation/mlv_compilation_ubuntu
 packaging/windows/my_project.cbp
 packaging/windows/my_project.dev
 config/ar-lib
+mlv_rcs_revision
