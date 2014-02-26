@@ -22,7 +22,7 @@ ACLOCAL_AMFLAGS=-Iconfig/m4
 
 include $(top_srcdir)/config/am/aminclude.am
 
-EXTRA_DIST=gpl.txt
+EXTRA_DIST=gpl.txt mlv_rcs_revision
 
 if RELATIVEPATH
 SUBDIRS = MLV data doc packaging

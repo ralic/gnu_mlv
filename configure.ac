@@ -35,12 +35,8 @@ define([mlvage], [1])dnl
 # We deduce other version numbers
 define([mlvmajorversion], m4_eval(mlvcurrent - mlvage))dnl
 define([mlvminorversion], m4_eval(mlvage))dnl
-#define([rcsversion], esyscmd([svnversion -n]))dnl
-define([rcsrevision], esyscmd([git rev-parse HEAD]))dnl
 
 AC_INIT([MLV], [mlvcurrent.mlvrevision.mlvage], [adrien.boussicault@labri.fr], [], [http://www-igm.univ-mlv.fr/~boussica/mlv/index.html])
-
-
 
 AC_SUBST(MLV_MAJOR_VERSION,[mlvmajorversion])
 AC_SUBST(MLV_MINOR_VERSION,[mlvminorversion])
@@ -50,7 +46,16 @@ AC_SUBST(MLV_AGE,[mlvage])
 
 AC_SUBST(MLV_REPOSITORY,["git clone git://git.savannah.nongnu.org/mlv.git"])
 AC_DEFINE_UNQUOTED([MLV_REPOSITORY],["$MLV_REPOSITORY"],[Define the revision control software])
-AC_SUBST(MLV_RCS_REVISION,[rcsrevision])
+
+if test -d .git
+then
+	rcsrevision=$(git rev-parse HEAD)
+	AC_SUBST(MLV_RCS_REVISION,[$rcsrevision])
+	echo $MLV_RCS_REVISION > mlv_rcs_revision
+else
+	rcsrevision=$(cat mlv_rcs_revision)
+	AC_SUBST(MLV_RCS_REVISION,[$rcsrevision])
+fi
 AC_DEFINE_UNQUOTED([MLV_RCS_REVISION],["$MLV_RCS_REVISION"],[Define the revision in the source repository])
 
 AC_SUBST(MLV_SOURCE_REPOSITORY,[http://download.savannah.gnu.org/releases/mlv])
