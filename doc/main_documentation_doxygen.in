@@ -251,12 +251,11 @@ Commencez par télécharger les paquets de la bibliothèque suivants:
 et installez-les en tapant la commande suivante:
 
 \verbatim
-yum update
-rpm --import @MLV_FEDORA_KEY_PACKAGE@
-yum install @MLV_FEDORA_64_BINARY_PACKAGE@
-yum install @MLV_FEDORA_64_DEV_PACKAGE@
-yum install @MLV_FEDORA_64_STATIC_PACKAGE@
-exit
+sudo yum update
+sudo rpm --import @MLV_FEDORA_KEY_PACKAGE@
+sudo yum install @MLV_FEDORA_64_BINARY_PACKAGE@
+sudo yum install @MLV_FEDORA_64_DEV_PACKAGE@
+sudo yum install @MLV_FEDORA_64_STATIC_PACKAGE@
 \endverbatim
 
 La bibliothèque MLV est installée.
@@ -1517,8 +1516,21 @@ git push
 
 \section build_package Créer les nouveaux paquets de distributions
 
-A partir du code source situé dans la branche master uniquement,
-recréez l'ensemble des paquets de distribution.
+Commencez par créer un paquet de distribution pour le code source,
+ à partir de la branche master :
+\verbatim
+./configure
+make dist
+\endverbatim
+
+Normalement le fichier <code>@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz</code>
+a du être créé.
+Il est très important d'exécuter le script <code>./configure</code>, même s'il 
+existait déjà. En effet, son exécution permet de mettre à jour le numéro de 
+révision git situé dans le code source.
+
+Ensuite, à partir de ce dernier fichier, recréez l'ensemble des paquets de 
+distribution.
 
 Pour cela vous pouvez utiliser l'émulateur <code>virt-manageur</code> pour 
 installer localement une debian 32 bit, une debian 64 bit, un fedora 32 bits et 
@@ -1849,6 +1861,21 @@ gpg --gen-key
 Répondez aux questions.
 Si vous ne savez pas quoi répondre, choisissez les réponses par default.
 
+Vérifier que la clé est dans votre liste de clés en tapant :
+\verbatim
+gpg --list-key
+\endverbatim
+
+Vous devriez obtenir l'affichage suivant :
+\verbatim
+/home/boussica/.gnupg/pubring.gpg
+---------------------------------
+pub   4096R/E594D293 2014-02-25 [expire : 2014-02-28]
+uid                  Adrien Boussicault (@PACKAGE_TARNAME@-@PACKAGE_VERSION@ key) <boussica@labri.fr>
+sub   4096R/4B3F1834 2014-02-25 [expire : 2014-02-28]
+\endverbatim
+
+L'identifiant de la clé est ici <code>E594D293</code>
 
 Modifiez le fichier <code>.rpmmacros</code> pour indiquer l'emplacement des clés
 crées et le nom qui a été utilisé lors de la création de la clé : 
@@ -1862,9 +1889,9 @@ crées et le nom qui a été utilisé lors de la création de la clé :
 Exporter la clé publique afin de la comuniquer aux utilisateurs
 
 \verbatim
-gpg2 --export --armor > RPM-GPG-KEY-Votre_nom
+gpg2 --export --armor IDENTIFIANT_CLE > RPM-GPG-KEY-Votre_nom
 \endverbatim
-
+où identifiant clé est l'identifiant précédent.
 
 Commencez par installer tous les programmes et bibliothèques nécessaires pour 
 compiler, installer et créer les paquets rpm de la bibliothèque MLV.
