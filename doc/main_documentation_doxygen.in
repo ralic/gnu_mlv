@@ -1624,6 +1624,10 @@ make
 cp -r doc/api /tmp/depot/@PACKAGE_TARNAME@-@PACKAGE_VERSION@/
 \endverbatim
 
+Enfin, ajouter les programmes d'installation des ide Code-blocks et Dev-cpp en 
+prenant soin de mettre la version de l'installateur correspondant au numéro de 
+version qui se trouve sur la documentation.
+
 Préparons maintenant le code source du site. Pour cela, tapez les commandes
 suivantes
 \verbatim
@@ -1638,7 +1642,8 @@ cd /tmp/depot/
 chmod 644 *
 rsync -av /tmp/depot/. LOGIN@dl.sv.nongnu.org:/releases/mlv/.
 \endverbatim
-où LOGIN est votre login du serveur savannah.
+où LOGIN est votre login de developpeur et le mot de passe celui de votre clé 
+RSA donné pour accéder au dépot git.
 
 Il faut maintenant mettre à jour le site web en tapant les commandes suivantes :
 \verbatim
