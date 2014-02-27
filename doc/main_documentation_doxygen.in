@@ -121,7 +121,7 @@ Windows :
 - Projet Code::Blocks : <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_CODEBLOCKS_32_PACKAGE@">@MLV_CODEBLOCKS_32_PACKAGE@</a>
 - Projet dev-cpp : <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_DEVCPP_32_PACKAGE@">@MLV_DEVCPP_32_PACKAGE@</a>
 
-Paquets MacOS 10.5:
+Paquets MacOS @MLV_MACOSX_VERSION@:
 - Paquet d'installation : <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_MACOSX_PACKAGE@">@MLV_MACOSX_PACKAGE@</a>
 
 Code source : <a href="@MLV_PACKAGE_REPOSITORY@/@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz">@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz</a>
@@ -133,6 +133,56 @@ Anciennes versions: <a href="@MLV_SOURCE_REPOSITORY@">dépôt contenant toutes l
 
 
 */
+
+
+
+
+/*!
+\~english
+\page download Download the MLV livrary
+
+The last stable version of MLV is @PACKAGE_VERSION@.
+
+Debian 32 bits: 
+- binaries: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_DEBIAN_32_BINARY_PACKAGE@">@MLV_DEBIAN_32_BINARY_PACKAGE@</a>
+- developement: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_DEBIAN_32_DEV_PACKAGE@">@MLV_DEBIAN_32_DEV_PACKAGE@</a>
+
+Debian 64 bits: 
+- binaries: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_DEBIAN_64_BINARY_PACKAGE@">@MLV_DEBIAN_64_BINARY_PACKAGE@</a>
+- developement: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_DEBIAN_64_DEV_PACKAGE@">@MLV_DEBIAN_64_DEV_PACKAGE@</a>
+
+Fedor 32 bits:
+- binaries: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_32_BINARY_PACKAGE@">@MLV_FEDORA_32_BINARY_PACKAGE@</a>
+- developement: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_32_DEV_PACKAGE@">@MLV_FEDORA_32_DEV_PACKAGE@</a>
+- static library: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_32_STATIC_PACKAGE@">@MLV_FEDORA_32_STATIC_PACKAGE@</a>
+- source code: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_32_SOURCE_PACKAGE@">@MLV_FEDORA_32_SOURCE_PACKAGE@</a>
+- key: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_KEY_PACKAGE@">@MLV_FEDORA_KEY_PACKAGE@</a>
+
+Paquets RPM pour Fedora 64 bits: 
+- binaries: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_64_BINARY_PACKAGE@">@MLV_FEDORA_64_BINARY_PACKAGE@</a>
+- developement: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_64_DEV_PACKAGE@">@MLV_FEDORA_64_DEV_PACKAGE@</a>
+- static library: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_64_STATIC_PACKAGE@">@MLV_FEDORA_64_STATIC_PACKAGE@</a>
+- source code: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_64_SOURCE_PACKAGE@">@MLV_FEDORA_64_SOURCE_PACKAGE@</a>
+- key: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_KEY_PACKAGE@">@MLV_FEDORA_KEY_PACKAGE@</a>
+
+Windows:
+- binaries: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_WIN_32_BINARIES@">@MLV_WIN_32_BINARIES@</a>
+- Code::Blocks package: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_CODEBLOCKS_32_PACKAGE@">@MLV_CODEBLOCKS_32_PACKAGE@</a>
+- dev-cpp package: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_DEVCPP_32_PACKAGE@">@MLV_DEVCPP_32_PACKAGE@</a>
+
+MacOS @MLV_MACOSX_VERSION@:
+- Installation package: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_MACOSX_PACKAGE@">@MLV_MACOSX_PACKAGE@</a>
+
+Source code: <a href="@MLV_PACKAGE_REPOSITORY@/@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz">@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz</a>
+
+Repository: @MLV_REPOSITORY@<br />
+Repository révision: @MLV_RCS_REVISION@
+
+Old releases: <a href="@MLV_SOURCE_REPOSITORY@">repository containing all the versions of the MLV library</a>.
+
+
+*/
+
 
 
 
