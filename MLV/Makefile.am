@@ -50,6 +50,7 @@ libMLV_la_SOURCES = \
 	key.c \
 	tree_set.c \
 	tree_map.c \
+	net.c \
 	window.c
 
 if OS_IS_APPLE 
@@ -97,6 +98,7 @@ mlv_include_HEADERS = \
 	MLV_time.h \
 	MLV_xml.h \
 	MLV_xml_va.h \
+	MLV_net.h \
 	MLV_window.h
 
 noinst_HEADERS = \

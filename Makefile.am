@@ -53,6 +53,7 @@ man3_MANS = \
 	doc/api/$(INSTALL_LANGUAGE)/man/man3/MLV_xml.h.3 \
 	doc/api/$(INSTALL_LANGUAGE)/man/man3/MLV_xml_va.h.3 \
 	doc/api/$(INSTALL_LANGUAGE)/man/man3/MLV_window.h.3 \
+	doc/api/$(INSTALL_LANGUAGE)/man/man3/MLV_net.h.3 \
 	doc/api/$(INSTALL_LANGUAGE)/man/man3/MLV_path.h.3
 #	doc/api/$(INSTALL_LANGUAGE)/man/man3/MLV_playlist.h.3
 

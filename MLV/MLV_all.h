@@ -195,5 +195,6 @@
 #include "MLV_xml.h"
 #include "MLV_xml_va.h"
 #include "MLV_window.h"
+#include "MLV_net.h"
 
 #endif
