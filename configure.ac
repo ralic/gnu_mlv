@@ -186,11 +186,11 @@ then
 fi
 
 
-AC_SUBST([LANGUAGES],['French English Spanish'])
+AC_SUBST([LANGUAGES],['French English Spanish Occitan'])
 AC_SUBST([DEFAULT_LANGUAGE],['French'])
 
 AC_ARG_ENABLE([language],
-	      AS_HELP_STRING([--enable-language], [The language of the documentation. The possible choose are "French", "English", "Spanish". Default : "French".]),
+	      AS_HELP_STRING([--enable-language], [The language of the documentation. The possible choose are "French", "English", "Spanish", "Occitan". Default : "French".]),
 	      [language=$enableval],
 	      [language=${DEFAULT_LANGUAGE}])
 
@@ -449,6 +449,7 @@ AC_CONFIG_FILES([
 	doc/Doxyheader_English \
 	doc/Doxyheader_French \
 	doc/Doxyheader_Spanish \
+	doc/Doxyheader_Occitan \
 	packaging/Makefile \
 	packaging/debian/script_pkg \
 	packaging/debian/debian/Makefile \

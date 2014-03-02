@@ -77,6 +77,44 @@ extern "C" {
  * \param width La largeur de la fenêtre.
  * \param height La hauteur de la fenêtre.
  */
+
+/** \~spanish
+ * \brief A Hacer !
+ *
+ * A hacer !
+ * \bug  A Hacer !
+ *
+ * \param window_name A hacer !
+ * \param icone_name A hacer !
+ * \param width A hacer !
+ * \param height A hacer !
+ */
+
+/** \~occitan
+ * \brief A Har !
+ *
+ * A har !
+ * \bug  A Har !
+ *
+ * \param window_name A har !
+ * \param icone_name A har !
+ * \param width A har !
+ * \param height A har !
+ */
+
+
+/** \~english
+ * \brief todo
+ *
+ * todo
+ * \bug  todo
+ *
+ * \param window_name todo
+ * \param icone_name todo
+ * \param width todo
+ * \param height todo
+ */
+
 void MLV_create_window(
 	const char* window_name, const char* icone_name, 
 	unsigned int width, unsigned int height

@@ -5,6 +5,7 @@ This file is part of the MLV Library.
 
 Copyright (C) 2012 Adrien Boussicault, Marc Zipstein
 
+
 This Library is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
@@ -29,21 +30,20 @@ along with this Library.  If not, see <http://www.gnu.org/licenses/>.
 <body>
 <div class="header">
 	<div class="headertitle">
-		<h1>Documentación de la biblioteca @PACKAGE_NAME@-@PACKAGE_VERSION@</h1>
+		<h1>Documentacion dera bibliotèca @PACKAGE_NAME@-@PACKAGE_VERSION@</h1>
 	</div>
 </div>
 <div class="tabs2">
 	<ul class="tablist">
-		<li><a href="index.html"><span>Presentación</span></a></li>
+		<li><a href="index.html"><span>Presentacion</span></a></li>
 		<li><a href="download.html"><span>Descargar</span></a></li>
-		<li><a href="installation.html"><span>Instalación</span></a></li>
-		<li><a href="compilation.html"><span>Compilación</span></a></li>
-		<li><a href="examples.html"><span>Ejemplos</span></a></li>
+		<li><a href="installation.html"><span>Installacion</span></a></li>
+		<li><a href="compilation.html"><span>Compilacion</span></a></li>
+		<li><a href="examples.html"><span>Exemples</span></a></li>
 		<li><a href="files.html"><span>API</span></a></li>
-		<li><a href="globals_func.html"><span>Lista de las subrutinas</span></a></li>
-		<li><a href="bug.html"><span>bugs</span></a></li>
+		<li><a href="globals_func.html"><span>Liste des fonctions</span></a></li>
+		<li><a href="bug.html"><span>bogues</span></a></li>
         <li><a href="faq.html"><span>FAQ</span></a></li>
-		<li><a href="contact_auteur.html"><span>Contactos</span></a></li>
+		<li><a href="contact_auteur.html"><span>contacts</span></a></li>
 	</ul>
 </div>
-

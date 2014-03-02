@@ -67,8 +67,53 @@ Sommaire:
 
 */
 
+/*!
+
+\~english
+\mainpage TODO
+
+TODO
+*/
+
+/*!
+
+\~spanish
+\mainpage Presentación de la biblioteca
+
+La biblioteca MLV es una biblioteca multimedia simplificada.
+Esta biblioteca conviene perfectamente a los estudiantes que comienzan la 
+programación en C y quienes desean añadir efectos gráficos y sonoros en sus 
+programas.
 
 
+La biblioteca permite de:
+- Dibujar figuras, fijar textos y cuadros de diálogo,
+- Fijar imágenes,
+- Tocar música,
+- Recuperar y tratar eventos que provienen del teclado y del ratón,
+- Recuperar informaciones con la ayuda de una caja de entrada de texto.
+
+
+*/
+
+/*!
+
+\~occitan
+\mainpage Presentacion dera bibliotèca 
+
+Era bibliotèca MLV ei ua bibliotèca multimèdia simplificada.
+Aguesta bibliotèca conven perfèctaments as estudiants que comencen era 
+Programacion en C e qui desiren ahíger efèctes grafics e sonori enes sòns 
+programes.
+
+Era bibliotèca permet de:
+- Diboishar figures, fixar tèxtes e quadres de dialòg,
+- Fixar imatges,
+- Tocar musica,
+- Recuperar e tractar eveniments que provien deth clavèr e dera soritz,
+- Recuperar informacions damb era ajuda d'ua caisha d'entrada de tèxte.
+
+*/
 
 
 // ============================================================================
@@ -135,8 +180,6 @@ Anciennes versions: <a href="@MLV_SOURCE_REPOSITORY@">dépôt contenant toutes l
 */
 
 
-
-
 /*!
 \~english
 \page download Download the MLV livrary
@@ -184,6 +227,21 @@ Old releases: <a href="@MLV_SOURCE_REPOSITORY@">repository containing all the ve
 */
 
 
+/*!
+\~spanish
+\page download A hacer !
+
+A hacer !
+*/
+
+
+/*!
+\~occitan
+\page download A hèr !
+
+A hèr !
+*/
+
 
 
 // ============================================================================
@@ -202,6 +260,29 @@ Old releases: <a href="@MLV_SOURCE_REPOSITORY@">repository containing all the ve
 - \subpage installation_macos
 
 
+*/
+
+
+/*!
+\~english
+\page installation TODO
+
+TODO
+*/
+
+/*!
+\~spanish
+\page installation A hacer !
+
+A hacer !
+*/
+
+
+/*!
+\~occitan
+\page installation A hèr !
+
+A hèr !
 */
 
 
@@ -1079,6 +1160,27 @@ make install
 */
 
 
+/*!
+\~english
+\page compilation TODO
+
+TODO
+*/
+
+/*!
+\~spanish
+\page compilation A hacer !
+
+A hacer !
+*/
+
+
+/*!
+\~occitan
+\page compilation A hèr !
+
+A hèr !
+*/
 
 
 
@@ -2842,6 +2944,29 @@ Si vous rencontrez un BUG, n'hésitez pas à envoyer un courrier électronique �
 */
 
 
+/*!
+\~english
+\page contact_auteur TODO
+
+TODO
+*/
+
+/*!
+\~spanish
+\page contact_auteur A hacer !
+
+A hacer !
+*/
+
+
+/*!
+\~occitan
+\page contact_auteur A hèr !
+
+A hèr !
+*/
+
+
 // ============================================================================
 
 
@@ -2958,6 +3083,30 @@ peux plus tard, de sorte que la boucle soit éxécutée 100 fois par seconde.
 
 
 */
+
+
+/*!
+\~english
+\page faq TODO
+
+TODO
+*/
+
+/*!
+\~spanish
+\page faq A hacer !
+
+A hacer !
+*/
+
+
+/*!
+\~occitan
+\page faq A hèr !
+
+A hèr !
+*/
+
 
 // ============================================================================
 
@@ -3276,6 +3425,35 @@ configuration au format xml et d'un certain nombre d'image donnée.
 \example advanced/12_paths.c
 Cette dmonstration explique comment l'utilisateur peut faire pour travailler
 avec les chemins d'acces des fichiers.
+
+
+*/
+
+
+/*!
+\~english
+
+\example beginner/01_hello_world.c
+TODO
+
+
+*/
+
+
+/*!
+\~spanish
+
+\example beginner/01_hello_world.c
+A hacer
+
+
+*/
+
+/*!
+\~occitan
+
+\example beginner/01_hello_world.c
+A hèr
 
 
 */
