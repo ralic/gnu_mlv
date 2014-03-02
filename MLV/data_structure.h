@@ -63,6 +63,7 @@ typedef struct _DataMLV {
 	MLV_Font* defaultFont;
 	FPSmanager frame_rate_manager;
 	FPSmanager frame_rate_manager_for_MLV_wait_event;
+	int network_is_initalized;
 } DataMLV;
 
 struct _MLV_Image {

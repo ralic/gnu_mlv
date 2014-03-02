@@ -28,9 +28,9 @@
 # This version follow the libtool version recommendation :
 # http://www.gnu.org/software/libtool/manual/html_node/Updating-version-info.html
 #
-define([mlvcurrent], [1])dnl
-define([mlvrevision], [2])dnl
-define([mlvage], [1])dnl
+define([mlvcurrent], [2])dnl
+define([mlvrevision], [0])dnl
+define([mlvage], [2])dnl
 
 # We deduce other version numbers
 define([mlvmajorversion], m4_eval(mlvcurrent - mlvage))dnl
@@ -273,17 +273,20 @@ case "$host_os" in
 			AC_SUBST([sdlttf_CFLAGS],[''])
 			AC_SUBST([sdlimage_CFLAGS],[''])
 			AC_SUBST([sdlmixer_CFLAGS],[''])
+			AC_SUBST([sdlnet_CFLAGS],[''])
 		fi
 		if test x$sdl_LIBS = x; then
 			AC_SUBST([sdl_LIBS],['-framework SDL -framework Cocoa'])
 			AC_SUBST([sdlttf_LIBS],['-framework SDL_ttf'])
 			AC_SUBST([sdlimage_LIBS],['-framework SDL_image'])
 			AC_SUBST([sdlmixer_LIBS],['-framework SDL_mixer'])
+			AC_SUBST([sdlnet_LIBS],['-framework SDL_net'])
 		fi	
 		AC_SUBST([libsdl_found],[yes])
 		AC_SUBST([libsdlttf_found],[yes])
 		AC_SUBST([libsdlimage_found],[yes])
 		AC_SUBST([libsdlmixer_found],[yes])
+		AC_SUBST([libsdlnet_found],[yes])
 		
 		AC_CHECK_LIB(
 			[SDL_gfx],
@@ -347,6 +350,21 @@ case "$host_os" in
 			AC_MSG_ERROR([The SDL_mixer library is required to compile the MLV library.],1)
 		else
 			echo "Search for SDL_mixer library... ${sdlmixer_LIBS}"
+		fi
+
+		AC_CHECK_LIB(
+			[SDL_net],
+			[SDLNet_Init],
+			AC_SUBST([libsdlnet_found],[yes])
+			AC_SUBST([sdlnet_LIBS],[-lSDL_net]),
+			AC_SUBST([libsdlnet_found],[no])
+		)
+
+		if test x$libsdlnet_found = xno; then
+			echo "Search for SDL_net library... no"
+			AC_MSG_ERROR([The SDL_net library is required to compile the MLV library.],1)
+		else
+			echo "Search for SDL_net library... ${sdlnet_LIBS}"
 		fi
 
 		AC_CHECK_LIB(

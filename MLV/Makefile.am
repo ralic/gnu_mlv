@@ -51,7 +51,8 @@ libMLV_la_SOURCES = \
 	tree_set.c \
 	tree_map.c \
 	net.c \
-	window.c
+	window.c \
+	sdlinitialisation.c
 
 if OS_IS_APPLE 
 libMLVMain_la_SOURCES = \
@@ -66,8 +67,8 @@ if MEMORY_DEBUG
 libMLV_la_CFLAGS = ${libxml_CFLAGS} ${glib_CFLAGS} -DDATA_PATH=\"${DATA_PATH}\"
 libMLV_la_LIBADD = ${libxml_LIBS} ${glib_LIBS} 
 else
-libMLV_la_CFLAGS = ${sdl_CFLAGS} ${sdlttf_CFLAGS} ${sdlimage_CFLAGS} ${sdlmixer_CFLAGS} ${libxml_CFLAGS} ${glib_CFLAGS} -DDATA_PATH=\"${DATA_PATH}\"
-libMLV_la_LIBADD =  ${sdl_LIBS} ${libxml_LIBS} ${glib_LIBS} ${sdlttf_LIBS} ${sdlgfx_LIBS} ${sdlimage_LIBS} ${sdlmixer_LIBS}
+libMLV_la_CFLAGS = ${sdl_CFLAGS} ${sdlttf_CFLAGS} ${sdlimage_CFLAGS} ${sdlmixer_CFLAGS} ${sdlnet_CFLAGS} ${libxml_CFLAGS} ${glib_CFLAGS} -DDATA_PATH=\"${DATA_PATH}\"
+libMLV_la_LIBADD =  ${sdl_LIBS} ${libxml_LIBS} ${glib_LIBS} ${sdlttf_LIBS} ${sdlgfx_LIBS} ${sdlimage_LIBS} ${sdlmixer_LIBS} ${sdlnet_LIBS}
 endif
 libMLV_la_LDFLAGS = -version-info $(MLV_CURRENT):$(MLV_REVISION):$(MLV_AGE) 
 
@@ -116,5 +117,7 @@ noinst_HEADERS = \
 	key.h \
 	tree_set.h \
 	tree_map.h \
+	window.h \
+	sdlinitialisation.h \
 	SDLMain.h
 

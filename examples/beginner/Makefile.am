@@ -55,7 +55,7 @@ uninstall-hook:
 	-rm -rf $(DESTDIR)$(docbeginnerdir)/Makefile
 
 AM_CPPFLAGS = ${MLV_CPPFLAGS}
-AM_LDFLAGS = ${MLV_LDFLAGS} -static
+AM_LDFLAGS = ${MLV_LDFLAGS}
 LIBS += ${MLV_LIBADD}
 
 # To profile MLV functions with gprof

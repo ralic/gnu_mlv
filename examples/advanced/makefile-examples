@@ -1,4 +1,4 @@
-TARGET = 01_texts_and_boxes 02_font 03_music 04_sound 05_playlist 06_image 07_transparency 08_zone_click 09_animation 10_read_xml_file 11_animation_book 12_paths
+TARGET = 01_texts_and_boxes 02_font 03_music 04_sound 05_playlist 06_image 07_transparency 08_zone_click 09_animation 10_read_xml_file 11_animation_book 12_paths 13_network_server 14_network_client
 
 ##########################################################"
 

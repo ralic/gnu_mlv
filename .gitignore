@@ -59,6 +59,8 @@ examples/advanced/09_animation
 examples/advanced/10_read_xml_file
 examples/advanced/11_animation_book
 examples/advanced/12_paths
+examples/advanced/13_network_server
+examples/advanced/14_network_client
 
 examples/beginner/01_hello_world
 examples/beginner/02_shapes
