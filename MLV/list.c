@@ -34,6 +34,7 @@ MLV_List* MLV_prepend_list( MLV_List* list, void* data ){
 
 void MLV_free_list( MLV_List* list ){
 	if( list ){
+		MLV_free_list( list->next );
 		MLV_FREE( list, MLV_List );
 	}
 }
