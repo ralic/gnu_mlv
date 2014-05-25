@@ -28,9 +28,9 @@
 # This version follow the libtool version recommendation :
 # http://www.gnu.org/software/libtool/manual/html_node/Updating-version-info.html
 #
-define([mlvcurrent], [1])dnl
-define([mlvrevision], [2])dnl
-define([mlvage], [1])dnl
+define([mlvcurrent], [2])dnl
+define([mlvrevision], [0])dnl
+define([mlvage], [2])dnl
 
 # We deduce other version numbers
 define([mlvmajorversion], m4_eval(mlvcurrent - mlvage))dnl

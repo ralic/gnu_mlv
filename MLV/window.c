@@ -345,11 +345,18 @@ void MLV_free_window(){
 	quit_input_box_mechanism();
 }
 
-void MLV_actualise_window(){
+void MLV_update_window(){
 	if( (! MLV_data ) || (! MLV_data->screen) ){
 		ERROR("A window can't be displayed whitout being created.");
 	}
 	SDL_Flip(MLV_data->screen);
+}
+
+#ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
+inline
+#endif
+void MLV_actualise_window(){
+	MLV_update_window();
 }
 
 void MLV_execute_at_exit( void (*function)(void*), void* data ){

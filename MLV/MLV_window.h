@@ -246,11 +246,22 @@ void MLV_free_window();
 /** \~french  
  * \brief Actualise l'affichage de la fenêtre.
  *
+ * Vois La fonction MLV_update_window 
+ *
  * Lorsque vous utilisez des fonctions de dessins, les différents changements
  * effectués ne sont pas visibles. Pour les afficher vous devez utiliser cette
  * fonction.
  */
 void MLV_actualise_window();
+
+/** \~french  
+ * \brief Met à jour l'affichage de la fenêtre.
+ *
+ * Lorsque vous utilisez des fonctions de dessins, les différents changements
+ * effectués ne sont pas visibles. Pour les afficher vous devez utiliser cette
+ * fonction.
+ */
+void MLV_update_window();
 
 /** \~french  
  * \brief Exécute la fonction de call back donnée en paramètre lorsque le système

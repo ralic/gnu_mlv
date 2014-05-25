@@ -1,3 +1,8 @@
+mlv-2.0.2
+ * Window :
+   * We Add the funtion MLV_update_window() because MLV_actualise_windows() is
+     not correct english. The function MLV_Actualis_windows() is still present.
+
 mlv-1.2.1
  * Image and text :
    * Wa move MLV_save_screen() and MLV_load_screen() inside MLV_image.h
