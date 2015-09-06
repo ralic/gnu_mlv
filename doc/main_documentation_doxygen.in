@@ -237,9 +237,56 @@ A hacer !
 
 /*!
 \~occitan
-\page download A hèr !
+\page download Telecargament dera bibliotèca MLV
 
-A hèr !
+Era darrèra version dera bibliotèca ei era version @PACKAGE_VERSION@.
+
+Era bibliotèca MLV se troba en mai d'un format et en mai d'un platafòrma:
+
+Paquets debian 32 bits : 
+- binairis: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_DEBIAN_32_BINARY_PACKAGE@">@MLV_DEBIAN_32_BINARY_PACKAGE@</a>
+- desvolopament: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_DEBIAN_32_DEV_PACKAGE@">@MLV_DEBIAN_32_DEV_PACKAGE@</a>
+
+Paquets debian 64 bits : 
+- binaires: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_DEBIAN_64_BINARY_PACKAGE@">@MLV_DEBIAN_64_BINARY_PACKAGE@</a>
+- desvolopament: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_DEBIAN_64_DEV_PACKAGE@">@MLV_DEBIAN_64_DEV_PACKAGE@</a>
+
+Paquets RPM pour Fedora 32 bits : 
+- binairis: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_32_BINARY_PACKAGE@">@MLV_FEDORA_32_BINARY_PACKAGE@</a>
+- desvolopament: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_32_DEV_PACKAGE@">@MLV_FEDORA_32_DEV_PACKAGE@</a>
+- bibliotècas estaticas: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_32_STATIC_PACKAGE@">@MLV_FEDORA_32_STATIC_PACKAGE@</a>
+- còdi hont: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_32_SOURCE_PACKAGE@">@MLV_FEDORA_32_SOURCE_PACKAGE@</a>
+- Clau: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_KEY_PACKAGE@">@MLV_FEDORA_KEY_PACKAGE@</a>
+
+Paquets RPM pour Fedora 64 bits : 
+- binairis: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_64_BINARY_PACKAGE@">@MLV_FEDORA_64_BINARY_PACKAGE@</a>
+- desvolopament: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_64_DEV_PACKAGE@">@MLV_FEDORA_64_DEV_PACKAGE@</a>
+- bibliotècas estaticas: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_64_STATIC_PACKAGE@">@MLV_FEDORA_64_STATIC_PACKAGE@</a>
+- còdi hont: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_64_SOURCE_PACKAGE@">@MLV_FEDORA_64_SOURCE_PACKAGE@</a>
+- Clau: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_FEDORA_KEY_PACKAGE@">@MLV_FEDORA_KEY_PACKAGE@</a>
+
+
+<!--
+Paquets RPM per Mandriva : <a href="@MLV_SOURCE_REPOSITORY@/@PACKAGE_TARNAME@-@PACKAGE_VERSION@/@PACKAGE_TARNAME@-@PACKAGE_VERSION@-mandriva.rpm">@PACKAGE_TARNAME@-@PACKAGE_VERSION@-mandriva.rpm</a>
+
+Paquets gentoo : N'ei pas disponible
+
+-->
+
+Windows :
+- Binairis : <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_WIN_32_BINARIES@">@MLV_WIN_32_BINARIES@</a>
+- Projècte Code::Blocks : <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_CODEBLOCKS_32_PACKAGE@">@MLV_CODEBLOCKS_32_PACKAGE@</a>
+- Projècte dev-cpp : <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_DEVCPP_32_PACKAGE@">@MLV_DEVCPP_32_PACKAGE@</a>
+
+Paquets MacOS @MLV_MACOSX_VERSION@:
+- Paquets de installation : <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_MACOSX_PACKAGE@">@MLV_MACOSX_PACKAGE@</a>
+
+Còdi hont: <a href="@MLV_PACKAGE_REPOSITORY@/@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz">@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz</a>
+
+Depòst : @MLV_REPOSITORY@<br />
+Revision deus depòst : @MLV_RCS_REVISION@
+
+Ancianas versions: <a href="@MLV_SOURCE_REPOSITORY@"> Depòst amb eras versions dera bibliotèce mlv</A>.
 */
 
 

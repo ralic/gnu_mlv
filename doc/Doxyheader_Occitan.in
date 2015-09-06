@@ -36,13 +36,13 @@ along with this Library.  If not, see <http://www.gnu.org/licenses/>.
 <div class="tabs2">
 	<ul class="tablist">
 		<li><a href="index.html"><span>Presentacion</span></a></li>
-		<li><a href="download.html"><span>Descargar</span></a></li>
-		<li><a href="installation.html"><span>Installacion</span></a></li>
+		<li><a href="download.html"><span>Telecargament</span></a></li>
+		<li><a href="installation.html"><span>Installacion (?acasida?)</span></a></li>
 		<li><a href="compilation.html"><span>Compilacion</span></a></li>
 		<li><a href="examples.html"><span>Exemples</span></a></li>
 		<li><a href="files.html"><span>API</span></a></li>
-		<li><a href="globals_func.html"><span>Liste des fonctions</span></a></li>
-		<li><a href="bug.html"><span>bogues</span></a></li>
+		<li><a href="globals_func.html"><span>Lista deus foncions</span></a></li>
+		<li><a href="bug.html"><span>ariçon (bogue)</span></a></li>
         <li><a href="faq.html"><span>FAQ</span></a></li>
 		<li><a href="contact_auteur.html"><span>contacts</span></a></li>
 	</ul>
