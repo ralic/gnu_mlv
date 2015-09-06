@@ -81,7 +81,7 @@ int MLV_init_audio(){
 	                          // to decrease this value.
 }
 
-int MLV_change_audio_buffer_size( buffer_size ){
+int MLV_change_audio_buffer_size( int buffer_size ){
 	MLV_free_audio();
 	return init_audio( buffer_size );
 }
