@@ -44,7 +44,7 @@ doc/Doxyheader_French
 doc/Doxyheader_Spanish
 doc/api/
 doc/index.html
-doc/main_documentation_doxygen
+doc/main_documentation_doxygen.c
 doc/tp5graph.tex
 
 examples/advanced/01_texts_and_boxes

@@ -58,7 +58,7 @@ man3_MANS = \
 
 $(man3_MANS): doc/api/$(INSTALL_LANGUAGE)/html/index.html
 
-doc/api/$(INSTALL_LANGUAGE)/html/index.html: $(top_srcdir)/MLV/MLV_*.h $(top_srcdir)/doc/Doxyfile $(top_builddir)/doc/Doxyfooter $(top_builddir)/doc/Doxyheader_* $(top_builddir)/doc/main_documentation_doxygen
+doc/api/$(INSTALL_LANGUAGE)/html/index.html: $(top_srcdir)/MLV/MLV_*.h $(top_srcdir)/doc/Doxyfile $(top_builddir)/doc/Doxyfooter $(top_builddir)/doc/Doxyheader_* $(top_builddir)/doc/main_documentation_doxygen.c
 	-mkdir -p $(top_builddir)/doc/api
 	make doxygen-doc
 

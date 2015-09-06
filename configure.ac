@@ -445,7 +445,7 @@ AC_CONFIG_FILES([
 	doc/index.html \
 	doc/tp5graph.tex \
 	doc/Doxyfooter \
-	doc/main_documentation_doxygen \
+	doc/main_documentation_doxygen.c \
 	doc/Doxyheader_English \
 	doc/Doxyheader_French \
 	doc/Doxyheader_Spanish \
