@@ -765,7 +765,7 @@ Puis tapez les commandes suivantes:
 \verbatim
 cd $FAKEROOT/src
 tar -xzf autoconf-archive-X.X.X.tar.gz
-cd autoconf-archiv-X.X.X
+cd autoconf-archive-X.X.X
 ./configure --prefix=$FAKEROOT
 make
 make install
@@ -856,21 +856,6 @@ http://www.gnu.org/software/gettext/
 \verbatim
 cd $FAKEROOT/src
 tar -xzf gettext-X.X.X.X.tar.gz
-\endverbatim
-
-Il faut modifier le code source de gettext, car il contient quelques erreurs.
-Pour cela, modifiez le fichier ./gettext-tools/gnulib-lib/stpncpy.c, et remplacez les lignes 
-\verbatim
-#ifndef weak_alias
-# define __stpncpy stpncpy
-#endif
-\endverbatim
-par les lignes
-\verbatim
-#ifndef weak_alias
-# undef stpncpy
-# define __stpncpy stpncpy
-#endif
 \endverbatim
 
 Ensuite, compilez et installez la bibliothèque en tapant les commandes suivantes:
@@ -1014,6 +999,21 @@ make install
 \endverbatim
 
 
+\subsubsection install_cmake_macos Installation de Cmake
+
+Téléchargez le code source de Cmake, contenu dans le fichier cmake-X.X.X.tar.gz situé sur le site :
+http://www.cmake.org/download/
+
+Installez le paquet en tapant les commandes suivantes:
+\verbatim
+cd $FAKEROOT/src
+tar -xzf cmake-X.X.X.src.tar.gz
+cd cmake-X.X.X
+./configure --prefix=$FAKEROOT
+make
+make install
+\endverbatim
+
 \subsubsection install_doxygen_macos Installation de Doxygen
 
 Téléchargez le code source de Doxygen, contenu dans le fichier doxygen-X.X.X.src.tar.gz situé sur le site :
@@ -1024,7 +1024,7 @@ Installez le paquet en tapant les commandes suivantes:
 cd $FAKEROOT/src
 tar -xzf doxygen-X.X.X.src.tar.gz
 cd doxygen-X.X.X
-./configure --prefix $FAKEROOT
+cmake -DCMAKE_INSTALL_PREFIX:PATH=$FAKEROOT -G "Unix Makefiles"
 make
 make install
 \endverbatim
@@ -2363,7 +2363,7 @@ Puis tapez les commandes suivantes:
 \verbatim
 cd $FAKEROOT/src
 tar -xzf autoconf-archive-X.X.X.tar.gz
-cd autoconf-archiv-X.X.X
+cd autoconf-archive-X.X.X
 ./configure --prefix=$FAKEROOT
 make
 make install
@@ -2438,21 +2438,6 @@ http://www.gnu.org/software/gettext/
 \verbatim
 cd $FAKEROOT/src
 tar -xzf gettext-X.X.X.X.tar.gz
-\endverbatim
-
-Il faut modifier le code source de gettext, car il contient quelques erreurs.
-Pour cela, modifiez le fichier ./gettext-tools/gnulib-lib/stpncpy.c, et remplacez les lignes 
-\verbatim
-#ifndef weak_alias
-# define __stpncpy stpncpy
-#endif
-\endverbatim
-par les lignes
-\verbatim
-#ifndef weak_alias
-# undef stpncpy
-# define __stpncpy stpncpy
-#endif
 \endverbatim
 
 Ensuite, compilez et installez la bibliothèque en tapant les commandes suivantes:
@@ -2605,6 +2590,21 @@ make install DESTDIR=$MACOS_PACKAGE
 \endverbatim
 
 
+\subsubsection install_cmake_paquet_macos Installation de Cmake
+
+Téléchargez le code source de Cmake, contenu dans le fichier cmake-X.X.X.tar.gz situé sur le site :
+http://www.cmake.org/download/
+
+Installez le paquet en tapant les commandes suivantes:
+\verbatim
+cd $FAKEROOT/src
+tar -xzf cmake-X.X.X.src.tar.gz
+cd cmake-X.X.X
+./configure --prefix=$FAKEROOT
+make
+make install
+\endverbatim
+
 \subsubsection install_doxygen_paquet_macos Installation de Doxygen
 
 Téléchargez le code source de Doxygen, contenu dans le fichier doxygen-X.X.X.src.tar.gz situé sur le site :
@@ -2615,7 +2615,7 @@ Installez le paquet en tapant les commandes suivantes:
 cd $FAKEROOT/src
 tar -xzf doxygen-X.X.X.src.tar.gz
 cd doxygen-X.X.X
-./configure --prefix $FAKEROOT
+cmake -DCMAKE_INSTALL_PREFIX:PATH=$FAKEROOT -G "Unix Makefiles"
 make
 make install
 \endverbatim
