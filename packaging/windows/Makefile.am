@@ -18,26 +18,7 @@
 #    along with this Library.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-EXTRA_DIST= cross-compilation/external_libraries/freetype-2.3.9.tar.gz \
-	cross-compilation/external_libraries/libpng-1.4.1.tar.gz \
-	cross-compilation/external_libraries/libSDL_mixer.la \
-	cross-compilation/external_libraries/mingw32-gettext-0.17-7.zip \
-	cross-compilation/external_libraries/mingw32-glib2-2.19.5-2.zip \
-	cross-compilation/external_libraries/mingw32-iconv-1.12-7.zip \
-	cross-compilation/external_libraries/SDL-1.2.13.tar.gz \
-	cross-compilation/external_libraries/SDL_gfx-2.0.19.tar.gz \
-	cross-compilation/external_libraries/SDL_image-1.2.10.tar.gz \
-	cross-compilation/external_libraries/SDL_mixer-1.2.12-win32-x64.zip \
-	cross-compilation/external_libraries/SDL_mixer-1.2.12-win32.zip \
-	cross-compilation/external_libraries/SDL_mixer-devel-1.2.12-VC.zip \
-	cross-compilation/external_libraries/libstdc++-6.dll \
-	cross-compilation/external_libraries/libgcc_s_dw2-1.dll \
-	cross-compilation/external_libraries/jpegsrc.v8d.tar.gz \
-	cross-compilation/external_libraries/tiff-4.0.1.tar.gz \
-	cross-compilation/external_libraries/SDL_ttf-2.0.9.tar.gz \
-	cross-compilation/external_libraries/zlib-1.2.3.tar.gz \
-	cross-compilation/external_libraries/libxml2-git-snapshot.tar.gz \
-	cross-compilation/external_libraries/copyright \
+EXTRA_DIST= cross-compilation/cross-compilation-x86.tar.xz \
 	README
 
 clean-local:

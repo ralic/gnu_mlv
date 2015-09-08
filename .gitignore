@@ -106,10 +106,10 @@ packaging/windows/create_canonical_developpement_kit
 packaging/windows/create_code_blocks_package
 packaging/windows/create_dev_cpp_package
 packaging/windows/create_win32_binaries
-packaging/windows/cross-compilation/cross_compilation_ubuntu
+packaging/windows/cross-compilation/cross-compilation-x86
+packaging/windows/cross-compilation/log_*
+packaging/windows/cross-compilation/mingw_compilation_for_mlv
 packaging/windows/cross-compilation/definition_of_environement_variables
-packaging/windows/cross-compilation/mlv_compilation_from_scratch_ubuntu
-packaging/windows/cross-compilation/mlv_compilation_ubuntu
 packaging/windows/my_project.cbp
 packaging/windows/my_project.dev
 config/ar-lib

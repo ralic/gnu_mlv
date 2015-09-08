@@ -468,15 +468,11 @@ AC_CONFIG_FILES([
 	packaging/debian/debian/changelog
 	packaging/windows/Makefile \
 	packaging/windows/cross-compilation/definition_of_environement_variables \
-	packaging/windows/cross-compilation/cross_compilation_ubuntu \
-	packaging/windows/cross-compilation/mlv_compilation_ubuntu \
-	packaging/windows/cross-compilation/mlv_compilation_from_scratch_ubuntu \
+	packaging/windows/cross-compilation/mingw_compilation_for_mlv \
 	packaging/windows/create_win32_binaries \
 	packaging/windows/create_canonical_developpement_kit \
 	packaging/windows/create_dev_cpp_package \
 	packaging/windows/create_code_blocks_package \
-	packaging/windows/cross-compilation/external_libraries/libz.la \
-	packaging/windows/cross-compilation/external_libraries/libSDL_mixer.la \
 	packaging/windows/my_project.cbp \
 	packaging/windows/my_project.dev \
 	Android.mk \
@@ -491,9 +487,7 @@ AC_CONFIG_FILES([
 AC_OUTPUT
 
 chmod +x packaging/debian/script_pkg 
-chmod +x packaging/windows/cross-compilation/cross_compilation_ubuntu
-chmod +x packaging/windows/cross-compilation/mlv_compilation_ubuntu
-chmod +x packaging/windows/cross-compilation/mlv_compilation_from_scratch_ubuntu
+chmod +x packaging/windows/cross-compilation/mingw_compilation_for_mlv
 chmod +x packaging/windows/create_win32_binaries
 chmod +x packaging/windows/create_canonical_developpement_kit
 chmod +x packaging/windows/create_dev_cpp_package

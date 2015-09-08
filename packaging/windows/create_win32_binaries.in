@@ -22,82 +22,51 @@
 #    along with this Library.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-function print_red
-{
-	echo -e "\e[0;31m$1\e[0m\n"
-}
-
-function print_green
-{
-	echo -e "\e[0;32m$1\e[0m\n"
-}
-
-
 CURRENT=`pwd .`
 MAIN_DEV=@PACKAGE_TARNAME@-@PACKAGE_VERSION@-win32
 
-print_red "Cleaning old building."
+TOP_CROSS=$CURRENT/cross-compilation
+
+source $TOP_CROSS/definition_of_environement_variables
+
+print_blue "Cleaning old building."
 rm -rf $MAIN_DEV
 rm -rf $MAIN_DEV.zip
 
-TOP_CROSS=$CURRENT/cross-compilation
-CROSS_DIRECTORY=$TOP_CROSS/fakeroot-mingw32
 (
-if ! test -a $CROSS_DIRECTORY/bin/libMLV-0.dll;
+if ! test -a $FAKEROOT/bin/libMLV-0.dll;
 then
-	echo "Compilation de la librairie MLV avec Mingw32"
-	print_red "Compiling all the Win 32 binary of MLV and his dependencies."
+	print_blue "Compiling all the Win binaries of MLV and his dependencies."
 	cd $TOP_CROSS
-	./mlv_compilation_from_scratch_ubuntu
+	./mingw_compilation_for_mlv
+fi
+if ! test -a $FAKEROOT/bin/libMLV-0.dll;
+then
+	print_blue "MLV compilation Fail, we abort."
+	exit
 fi
 )
 
-print_red "We build the Win 32 package of MLV."
+
+print_blue "We build the Win 32 package of MLV."
 mkdir $MAIN_DEV
 mkdir $MAIN_DEV/include 
 mkdir $MAIN_DEV/lib 
 mkdir $MAIN_DEV/bin 
 
-cp -r $CROSS_DIRECTORY/include/SDL $MAIN_DEV/include/
-cp -r $CROSS_DIRECTORY/include/MLV $MAIN_DEV/include/ 
-cp $CROSS_DIRECTORY/lib/libSDLmain.a $MAIN_DEV/lib/ 
-cp $CROSS_DIRECTORY/lib/libMLV.a $MAIN_DEV/lib/ 
-cp /usr/i586-mingw32msvc/lib/libmingw32.a $MAIN_DEV/lib/
-cp /usr/i586-mingw32msvc/lib/libmingwex.a $MAIN_DEV/lib/
+cp -r $FAKEROOT/include/SDL $MAIN_DEV/include/
+cp -r $FAKEROOT/include/MLV $MAIN_DEV/include/ 
+cp $FAKEROOT/lib/libSDLmain.a $MAIN_DEV/lib/ 
+cp $FAKEROOT/lib/libMLV.a $MAIN_DEV/lib/ 
+cp /usr/${HOST}/lib/libmingw32.a $MAIN_DEV/lib/
+cp /usr/${HOST}/lib/libmingwex.a $MAIN_DEV/lib/
 
-cp $CROSS_DIRECTORY/bin/libintl-8.dll $MAIN_DEV/bin/libintl-8.dll
-cp $CROSS_DIRECTORY/bin/SDL_gfx.dll $MAIN_DEV/bin/SDL_gfx.dll
-cp $CROSS_DIRECTORY/bin/zlib1.dll $MAIN_DEV/bin/zlib1.dll
-cp $CROSS_DIRECTORY/bin/libfreetype-6.dll $MAIN_DEV/bin/libfreetype-6.dll
-cp $CROSS_DIRECTORY/bin/libMLV-0.dll $MAIN_DEV/bin/libMLV-0.dll
-cp $CROSS_DIRECTORY/bin/SDL_image.dll       $MAIN_DEV/bin/SDL_image.dll      
-cp $CROSS_DIRECTORY/bin/libglib-2.0-0.dll $MAIN_DEV/bin/libglib-2.0-0.dll
-cp $CROSS_DIRECTORY/bin/libpng14-14.dll $MAIN_DEV/bin/libpng14-14.dll
-cp $CROSS_DIRECTORY/bin/libiconv-2.dll $MAIN_DEV/bin/libiconv-2.dll
-cp $CROSS_DIRECTORY/bin/SDL.dll $MAIN_DEV/bin/SDL.dll
-cp $CROSS_DIRECTORY/bin/SDL_ttf.dll $MAIN_DEV/bin/SDL_ttf.dll
-cp $CROSS_DIRECTORY/bin/libasprintf-0.dll $MAIN_DEV/bin/libasprintf-0.dll
-cp $CROSS_DIRECTORY/bin/libxml2-2.dll $MAIN_DEV/bin/libxml2-2.dll
-cp $CROSS_DIRECTORY/bin/LICENSE.FLAC.txt $MAIN_DEV/bin/.
-cp $CROSS_DIRECTORY/bin/LICENSE.mikmod.txt $MAIN_DEV/bin/.
-cp $CROSS_DIRECTORY/bin/LICENSE.ogg-vorbis.txt $MAIN_DEV/bin/.
-cp $CROSS_DIRECTORY/bin/LICENSE.smpeg.txt $MAIN_DEV/bin/.
-cp $CROSS_DIRECTORY/bin/SDL_mixer.dll $MAIN_DEV/bin/.
-cp $CROSS_DIRECTORY/bin/libFLAC-8.dll $MAIN_DEV/bin/.
-cp $CROSS_DIRECTORY/bin/libmikmod-2.dll $MAIN_DEV/bin/.
-cp $CROSS_DIRECTORY/bin/libogg-0.dll $MAIN_DEV/bin/.
-cp $CROSS_DIRECTORY/bin/libvorbis-0.dll $MAIN_DEV/bin/.
-cp $CROSS_DIRECTORY/bin/libvorbisfile-3.dll $MAIN_DEV/bin/.
-cp $CROSS_DIRECTORY/bin/smpeg.dll $MAIN_DEV/bin/.
-cp $CROSS_DIRECTORY/bin/libjpeg-8.dll $MAIN_DEV/bin/.
-cp $CROSS_DIRECTORY/bin/libtiff-5.dll $MAIN_DEV/bin/.
-cp $CROSS_DIRECTORY/bin/libtiffxx-5.dll $MAIN_DEV/bin/.
-cp $CROSS_DIRECTORY/bin/libstdc++-6.dll $MAIN_DEV/bin/.
-cp $CROSS_DIRECTORY/bin/libgcc_s_dw2-1.dll $MAIN_DEV/bin/.
+cp $FAKEROOT/bin/*.dll $MAIN_DEV/bin/.
+cp $FAKEROOT/lib/LICENSE* $MAIN_DEV/lib/.
+cp $FAKEROOT/lib/LICENSE* $MAIN_DEV/bin/.
 
-cp -r $CROSS_DIRECTORY/share/MLV/data $MAIN_DEV/bin/
+cp -r $FAKEROOT/share/MLV/data $MAIN_DEV/bin/
 cp @abs_top_srcdir@/gpl.txt $MAIN_DEV/bin/
 cp @abs_top_srcdir@/gpl.txt $MAIN_DEV/
-
 
 zip -q -r $MAIN_DEV.zip $MAIN_DEV

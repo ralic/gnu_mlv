@@ -2069,9 +2069,9 @@ Nous vous conseillons de ne pas utiliser cette dernière partie, sauf cas partic
 Les scripts de compilation pour créer des paquets MLV ont été prévus pour s'exécuter sous Ubuntu.
 Vous devez donc utiliser Ubuntu pour pouvoir continuer.
 
-Vous devez ensuite installer des paquets pour la compilation avec mingw32 en tapant la commande suivante:
+Vous devez ensuite installer des paquets pour la compilation avec mingw en tapant la commande suivante:
 \verbatim
-sudo apt-get install mingw32
+sudo apt-get install mingw-w64
 \endverbatim
 
 Ensuite, vous devez ne pas oublier d'installer les logiciels de compilation et de compression usuels:

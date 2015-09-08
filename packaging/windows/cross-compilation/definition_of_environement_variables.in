@@ -23,22 +23,12 @@
 
 if test "x${HOST}" == 'x'
 then
-	HOST='i586-mingw32msvc'
+	HOST='i686-w64-mingw32'
 fi
 
-
-
-if test "x${TARGET}" == 'x'
-then
-	TARGET='i586-mingw32msvc'
-fi
-if test "x${BUILD}" == 'x'
-then
-	BUILD='i686-linux-gnu'
-fi
 if test "x${CC}" == 'x'
 then
-	CC="${HOST}-cc"
+	CC="${HOST}-gcc"
 fi
 if test "x${RANLIB}" == 'x'
 then
@@ -66,12 +56,17 @@ then
 fi
 
 
-FAKE32="$TOP_CROSS/fakeroot-mingw32"
-FAKE32_SRC="$FAKE32/src"
+FAKEROOT="$TOP_CROSS/cross-compilation-x86"
+FAKEROOT_SRC="$FAKEROOT/src"
 
 function print_red
 {
 	echo -e "\e[0;31m$1\e[0m\n"
+}
+
+function print_blue
+{
+	echo -e "\e[0;34m$1\e[0m\n"
 }
 
 function print_green
