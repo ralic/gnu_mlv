@@ -2131,13 +2131,11 @@ Si tout ce passe bien, vous devez obtenir un fichier @PACKAGE_TARNAME@-@PACKAGE_
 
 \section packaging_windows_from_scratch Créer une infrastructure de Cross-Compilation Linux-Widows pour MLV
 
-En attendant que cette page soit écrite, vous pouvez simplement aller voir le code contenu dans le fichier : packaging/windows/cross-compilation/mlv_compilation_from_scratch_ubuntu .
-Attention, vous devez avoir configuré le code source de la bibliothèque, pour que le script soit présent.
-Si ce n'est pas le cas, il vous suffit de vous placer à la racine du code source de MLV et de taper la commande :
-\verbatim
-./configure
-\endverbatim
+Un platforme de compilation Linux-Windows pour MLV est fournie dans
+le fichier packaging/windows/cross-compilation/cross-compilation-x86.tar.xz.
 
+Une documentation sera bientôt disponnible pour expliquer comment réaliser cette
+platforme.
 
 */
 
