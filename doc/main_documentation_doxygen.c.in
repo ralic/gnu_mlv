@@ -1806,6 +1806,12 @@ Décompressez la bibliothèque en tapant la commande:
 tar -xzf @PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz
 \endverbatim
 
+Il est très important de réaliser les opérations qui vont suivre à partir du 
+dossier @PACKAGE_TARNAME@-@PACKAGE_VERSION@ issu de la décompression du fichier 
+@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz.
+Si vous le faite à partir du dossier du dépot git de MLV, cela ne fonctionnera 
+pas.
+
 Pour créer les paquets debian, vous allez utiliser un script prévu à cet effet.
 Pour utiliser ce script, il faut commencer par le générer en tapant les commandes suivantes:
 \verbatim
