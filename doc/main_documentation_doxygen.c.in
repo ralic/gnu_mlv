@@ -1455,6 +1455,18 @@ define([mlvrevision], [@MLV_REVISION@])dnl
 define([mlvage], [@MLV_AGE@])dnl
 \endverbatim
 
+Mettez à jour, dans le fichier configure.ac de la racine de mlv, les versions 
+pour MacOSX et Fedora:
+\verbatim
+AC_SUBST(MLV_MACOSX_VERSION,[X.X])
+\endverbatim
+où X.X est la version actuelle de MacOSX.
+
+\verbatim
+AC_SUBST(MLV_FEDORA_VERSION,[X])
+\endverbatim
+où X est la version actuelle de Fédora.
+
 \section update_new_todo Mettre a jour les fichiers ChangeLog et todo
 
 Modifiez le fichier <code>ChangeLog</code> situé à la racine de la bibliothèque.
@@ -1833,13 +1845,19 @@ Maintainer: Unknow Maintener <unknown.maintenener@univ-mlv.fr>;
 
 Tous les fichiers et scripts sont prêt.
 Avant de créer les paquets, il faut créer une clé pour signer le paquet.
-Pour sela, tapez la commande suivante:
+Pour cela, tapez la commande suivante:
 \verbatim
 gpg --gen-key
 \endverbatim
 
 Répondez aux questions.
 Si vous ne savez pas quoi répondre, choisissez les réponses par default.
+
+Vous pouvez aussi importer une clé privée que vous avez déjà créé préalablement.
+Il suffit de taper, à la place de la commande, la ligne suivante :
+\verbatim
+gpg --import FICHIER_CLE_PRIVEE
+\endverbatim
 
 Listez les clés que vous possédez en tapant la commande:
 \verbatim
@@ -1857,7 +1875,7 @@ Vous pouvez enfin créer le paquet en tapant:
 \verbatim
 ./script_pkg -k XXX 
 \endverbatim
-où XXXX est l'id de votre clé. Dans mon exemple, XXX=A4812E81.
+où XXX est l'id de votre clé. Dans mon exemple, XXX=A4812E81.
 
 Si tout c'est bien passé, deux paquets ont été créés :
 - @MLV_DEBIAN_X_BINARY_PACKAGE@
@@ -1917,14 +1935,19 @@ son numero de version.
 
 
 Nous allons maintenant préparer les outils pour pouvoir signer les paquets créés.
-Commencez par generez une clé gpg:
-
+Commencez par generer une clé gpg:
 \verbatim
 gpg --gen-key
 \endverbatim
 
 Répondez aux questions.
 Si vous ne savez pas quoi répondre, choisissez les réponses par default.
+
+Vous pouvez aussi importer une clé privée que vous avez déjà créée préalablement.
+Il suffit de taper, à la place de la précédente commande, la ligne suivante :
+\verbatim
+gpg --import FICHIER_CLE_PRIVEE
+\endverbatim
 
 Vérifier que la clé est dans votre liste de clés en tapant :
 \verbatim
