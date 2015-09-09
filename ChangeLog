@@ -2,6 +2,12 @@ mlv-2.0.2
  * Window :
    * We Add the funtion MLV_update_window() because MLV_actualise_windows() is
      not correct english. The function MLV_Actualis_windows() is still present.
+ * Documentation :
+   * Some small changes in the part explaining how to compile and install MLV.
+ * packaging :
+   * We simplify the windows cross-compilation scripts to generate window 
+     packages.
+   * Code-Block IDE doesn't work. Use Dev-c++ instead of Code-BLock.
 
 mlv-1.2.1
  * Image and text :
@@ -29,7 +35,7 @@ mlv-1.2.1
      and unicode of keyboard events.
    * For the example, we choose key compatible with azerty and qwerty.
      This is to help the user to understand how the examples works.
-* packaging :
+ * packaging :
    * We normailze the debian package to follow the Debian Policy.
      Now Lintian do not produce errors.
  * Documentation:
