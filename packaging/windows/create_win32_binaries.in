@@ -34,13 +34,13 @@ rm -rf $MAIN_DEV
 rm -rf $MAIN_DEV.zip
 
 (
-if ! test -a $FAKEROOT/bin/libMLV-0.dll;
+if ! test -a $FAKEROOT/bin/libMLV-@MLV_MAJOR_VERSION@.dll;
 then
 	print_blue "Compiling all the Win binaries of MLV and his dependencies."
 	cd $TOP_CROSS
 	./mingw_compilation_for_mlv
 fi
-if ! test -a $FAKEROOT/bin/libMLV-0.dll;
+if ! test -a $FAKEROOT/bin/libMLV-@MLV_MAJOR_VERSION@.dll;
 then
 	print_blue "MLV compilation Fail, we abort."
 	exit

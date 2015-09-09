@@ -79,7 +79,7 @@ make > log_compile 2>&1
 make install > log_install 2>&1
 )
 
-if test -e $FAKEROOT/bin/libMLV-0.dll
+if test -e $FAKEROOT/bin/libMLV-@MLV_MAJOR_VERSION@.dll
 then
 	print_green "Compilation of MLV is a succes !"
 else

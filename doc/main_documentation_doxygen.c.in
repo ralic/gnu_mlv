@@ -2740,7 +2740,7 @@ usr
 |-- include
 |   `-- MLV
 |-- lib
-|   |-- libMLV.0.dylib
+|   |-- libMLV.@MLV_MAJOR_VERSION@.dylib
 |   |-- libMLV.a
 |   |-- libMLV.dylib
 |   |-- libMLV.la

@@ -45,7 +45,7 @@ along with this Library.  If not, see <http://www.gnu.org/licenses/>.
 			<Add directory="include" />
 		</Compiler>
 		<Linker>
-			<Add library="final_product\libMLV-0.dll" />
+			<Add library="final_product\libMLV-@MLV_MAJOR_VERSION@.dll" />
 			<Add library="final_product\SDL.dll" />
 			<Add library="lib\libmingw32.a" />
 			<Add library="lib\libSDLmain.a" />
