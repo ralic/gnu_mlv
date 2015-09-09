@@ -54,7 +54,7 @@ Description: simplified multimedia library in C for beginners.
 Package: libmlv@MLV_DEBIAN_VERSION@
 Section: libs
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libsdl-gfx1.2-4, libsdl1.2debian, libsdl-mixer1.2, libsdl-ttf2.0-0, libglib2.0-0, libsdl-mixer1.2, libsdl-image1.2, libxml2
+Depends: ${shlibs:Depends}, ${misc:Depends}, libsdl-gfx1.2-5, libsdl1.2debian, libsdl-mixer1.2, libsdl-ttf2.0-0, libglib2.0-0, libsdl-mixer1.2, libsdl-image1.2, libxml2
 Conflicts: libmlv, libmlv-0.2, libmlv-0.4
 Replaces: libmlv, libmlv-0.2, libmlv-0.4
 Description: simplified multimedia library in C for beginners.
