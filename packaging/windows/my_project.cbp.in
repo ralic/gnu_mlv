@@ -47,7 +47,6 @@ along with this Library.  If not, see <http://www.gnu.org/licenses/>.
 		<Linker>
 			<Add library="final_product\libMLV-0.dll" />
 			<Add library="final_product\SDL.dll" />
-			<Add library="final_product\libasprintf-0.dll" />
 			<Add library="lib\libmingw32.a" />
 			<Add library="lib\libSDLmain.a" />
 			<Add library="lib\libmingwex.a" />

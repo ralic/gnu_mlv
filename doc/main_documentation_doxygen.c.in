@@ -386,7 +386,7 @@ environnements de développement.
 Nous vous proposons, au choix l'un des deux environnements suivants :
 
 - \ref windows_dev_cpp
-- \ref windows_code_blocks
+- \ref windows_code_blocks (Ne fonctionne plus, pour l'instant - Utilisez dec-cpp à la place)
 
 Si vous ne savez pas quel environnement choisir, nous vous conseillons 
 d'utiliser Dev-C++ qui est un peu plus simple à utiliser.
@@ -476,6 +476,8 @@ Le programme situé dans ce répertoire est autonome et ne nécessite pas d'avoi
 
 
 \section windows_code_blocks Installer MLV avec Code:Blocks
+
+Actuellement cette partie ne fonctionne plus. Utilisez dec-cpp.
 
 Nous allons expliquer comment installer MLV avec Code:Blocks.
 Commencez par télécharger le programme d'installation <a href="@MLV_SOURCE_REPOSITORY@/@PACKAGE_TARNAME@-@PACKAGE_VERSION@/codeblocks-8.02mingw-setup.exe">codeblocks-8.02mingw-setup.exe</a> et installez-le sur votre ordinateur.
@@ -1168,8 +1170,8 @@ La page \subpage outils_compilation présente deux exemples de makefile permetta
 \page compilation_windows Compiler un programme utilisant MLV sous Windows
 
 Cette page explique comment compiler votre programme de trois façons diférentes:
-- la section \ref compilation_code_blocks explique comment compiler votre programme avec Code:Blocks qui est un IDE.
 - la section \ref compilation_dev_cpp explique comment le faire avec dev-cpp, un autre IDE.
+- la section \ref compilation_code_blocks explique comment compiler votre programme avec Code:Blocks qui est un IDE. (Actuellement cette partie ne fonctionne plus, utilisez dev-cpp à la place)
 - la section \ref compilation_gcc explique quelles sont les options de configurations qu'il faut utiliser pour pouvoir compiler votre programme directement avec gcc.
 
 Si vous ne savez pas quoi choisir, nous vous conseillons de choisir la méthode \ref compilation_dev_cpp qui est la méthode la plus simple à mettre en oeuvre.
@@ -1190,6 +1192,8 @@ Ce répertoire contient toute l'infrastructure nécessaire au bon fonctionnement
 votre application ainsi crée.
 
 \section compilation_code_blocks Compilation à l'aide de Code::Blocks
+
+Actuellement cette partie ne fonctionne plus, utilisez dev-cpp à la place !
 
 Comencez par installer la bibliothèque MLV avec Code::Blocks en allant à la page : \ref windows_code_blocks.
 
