@@ -19,6 +19,7 @@
 #
 
 # Before a public release, do the following version modification :
+# - First, in AC_INIT([MLV], [mlvcurrent.mlvrevision.mlvage-dev] remove the -dev
 # - if only code has changed then increase mlvrevision
 # - if interfaces have been removed or changed then increase mlvcurrent, 
 #   set mlvrevision to 0 and mlvage to 0

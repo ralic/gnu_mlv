@@ -1440,13 +1440,30 @@ git checkout release
 git merge develop
 \endverbatim
 
-\section change_version Changer Le numéro de version
+\section change_version Changer le numéro de version
 
-Modifier les numéros de version <code>mlvcurrent</code>, 
+Commencez par enlever le suffixe -dev du numéro de version.
+Pour cela, cherchez la ligne qui commence par,
+\verbatim
+AC_INIT([@PACKAGE_NAME@], [@PACKAGE_VERSION@], [@PACKAGE_BUGREPORT@], [], [@PACKAGE_URL@])
+\endverbatim
+et remplacez là par
+\verbatim
+AC_INIT([@PACKAGE_NAME@], [@MLV_CURRENT@.@MLV_REVISION@.@MLV_AGE@], [@PACKAGE_BUGREPORT@], [], [@PACKAGE_URL@])
+\endverbatim
+
+Modifiez ensuite les numéros de version <code>mlvcurrent</code>, 
 <code>mlvrevision</code> et <code>mlvage</code> situés dans le fichier 
 <code>configure.ac</code>.
 
-La logique à suivre est expliquée en commentaire dans le fichier. 
+La logique à suivre est expliquée en commentaire dans le fichier.
+Pour cela, vous aurez à conaître les modifications qui ont été réalisé depuis la
+dernière version. POur cela, consultez le fichier <code>ChangeLog</code> situé 
+dans à la racine.
+Regardez les modifications faites dans la version courrente de développement :
+\verbatim
+mlv-@MLV_CURRENT@.@MLV_REVISION@.@MLV_AGE@-dev
+\endverbatim 
 
 Les lignes à modifier sont les suivantes :
 \verbatim
@@ -1455,24 +1472,31 @@ define([mlvrevision], [@MLV_REVISION@])dnl
 define([mlvage], [@MLV_AGE@])dnl
 \endverbatim
 
-Mettez à jour, dans le fichier configure.ac de la racine de mlv, les versions 
+Mettez à jour, dans le fichier <code>configure.ac</code> de la racine de mlv, les versions 
 pour MacOSX et Fedora:
 \verbatim
-AC_SUBST(MLV_MACOSX_VERSION,[X.X])
+AC_SUBST(MLV_MACOSX_VERSION,[@MLV_MACOSX_VERSION@])
 \endverbatim
-où X.X est la version actuelle de MacOSX.
+Mettez à la place la version actuelle de MacOSX.
 
 \verbatim
-AC_SUBST(MLV_FEDORA_VERSION,[X])
+AC_SUBST(MLV_FEDORA_VERSION,[@MLV_FEDORA_VERSION@])
 \endverbatim
-où X est la version actuelle de Fédora.
+Mettez à la place la version actuelle de Fedora.
 
-\section update_new_todo Mettre a jour les fichiers ChangeLog et todo
+\section update_new_todo Mettre à jour les fichiers ChangeLog et todo
 
 Modifiez le fichier <code>ChangeLog</code> situé à la racine de la bibliothèque.
-Pour cela, mettez à jour, si nécessaire, le numéro de version apparaissant dans
-la première ligne de ChangeLog, puis, ajoutez d'éventuels changements qui 
-auraient étés oubliés.
+Pour cela, mettez à jour, le numéro de version apparaissant dans
+la première ligne de ChangeLog. 
+Cette ligne ressemble à :
+\verbatim
+mlv-@MLV_CURRENT@.@MLV_REVISION@.@MLV_AGE@-dev
+\endverbatim
+
+Vous devez mettre le même numéro de version
+que celui que vous avez mis dans la section : \subpage change_version Changer,
+et vous devez enlever le suffixe -dev.
 
 Mettez à jour le fichier <code>todo</code> situé à la racine de la bibliothèque.
 
@@ -1569,18 +1593,65 @@ git tag -a vX -m 'The version X of MLV.'
 où <code>X</code> est le nouveau numéro de version de la bibliothèque.
 Vous pouvez éventuellement, ajoutez des commentaires dans l'opition -m.
 
-On fusionne ensuite release dans develop :
-\verbatim
-git checkout develop
-git merge release
-\endverbatim
-
 Il ne reste plus qu'à envoyer tous les changements sur le dépot git.
 \verbatim
 git push --follow-tags
 \endverbatim
 
+Il ne rest plus qu'à mettre en place une nouvelle version en developpement.
+Commencez par mettre à jour la branche de developpement :
+\verbatim
+git checkout develop
+git merge release
+\endverbatim
+
+Mettez à jour le numéro de version : dans le fichier <code>configure.ac</code> 
+ajoutez le suffixe -dev au numéro de version. Pour cela, cherchez la ligne
+\verbatim
+AC_INIT([@PACKAGE_NAME@], [@MLV_CURRENT@.@MLV_REVISION@.@MLV_AGE@], [@PACKAGE_BUGREPORT@], [], [@PACKAGE_URL@])
+\endverbatim
+
+et remplacez-là par
+\verbatim
+AC_INIT([@PACKAGE_NAME@], [@MLV_CURRENT@.@MLV_REVISION@.@MLV_AGE@-dev], [@PACKAGE_BUGREPORT@], [], [@PACKAGE_URL@])
+\endverbatim
+
+Enfin, créer un nouveau paragraphe dans le fichier <code>ChangeLog</code> 
+situé à la racine de la bibliothèque.
+Ce paragraphe doit commencer par :
+\verbatim
+mlv-X.X.X-dev
+\endverbatim
+où X.X.X est le nouveau numéro de version de la bibliothèque (voir \subpage change_version).
+
+Mettez à jour le fichier <code>todo</code> situé à la racine de la bibliothèque.
+
+Enregistrez dans git les modifications, en mettant le commentaire d'une ligne
+"New developement version of MLV." lorsque cela est demandé :
+\verbatim
+git add configure.ac
+git commit
+\endverbatim
+
+Enfin envoyez les modification sur le serveur git officiel.
+\verbatim
+git push
+\endverbatim
+
+Basculez de nouveau sur la branche master, pour la suite de document.
+\verbatim
+git checkout master
+\endverbatim
+
+
 \section build_package Créer les nouveaux paquets de distributions
+
+Vérifiez que vous êtes bien sur la branche master du depot git de MLV.
+Tapez les commandes :
+\verbatim
+git checkout master   # pour charger la branche master
+git status            # pour vérifier que vous êtes sur la branche master
+\endverbatim
 
 Commencez par créer un paquet de distribution pour le code source,
  à partir de la branche master :
@@ -1711,9 +1782,11 @@ rsync -av /tmp/depot/. LOGIN@dl.sv.nongnu.org:/releases/mlv/.
 où LOGIN est votre login de developpeur et le mot de passe celui de votre clé 
 RSA donné pour accéder au dépot git.
 
-Il faut maintenant mettre à jour le site web en tapant les commandes suivantes :
+Il faut maintenant mettre à jour le site web.
+Commencez par monter le dossier du code source de @PACKAGE_URL@ sur le dossier 
+DOSSIER_SITE_WEB.
+Puis, tapez la commande suivante :
 \verbatim
-TODO : Monter le site web !
 rsync -av --delete /tmp/site/. LE_SITE_WEB
 \endverbatim
 
@@ -1744,7 +1817,7 @@ Procédure pour corriger un bug dans la version courante de MLV
 
 \subsection fix_the_bug Corriger le bug
 
-\subsection change_bug_version Changer Le numéro de version
+\subsection change_bug_version Changer le numéro de version
 
 \subsection update_bug_news_bug_todo Mettre a jour les fichiers NEWS et TODO
 
