@@ -1445,7 +1445,7 @@ git merge develop
 Commencez par enlever le suffixe -dev du numéro de version.
 Pour cela, cherchez la ligne qui commence par,
 \verbatim
-AC_INIT([@PACKAGE_NAME@], [@PACKAGE_VERSION@], [@PACKAGE_BUGREPORT@], [], [@PACKAGE_URL@])
+AC_INIT([@PACKAGE_NAME@], [@MLV_CURRENT@.@MLV_REVISION@.@MLV_AGE@-dev], [@PACKAGE_BUGREPORT@], [], [@PACKAGE_URL@])
 \endverbatim
 et remplacez là par
 \verbatim
@@ -1499,6 +1499,25 @@ que celui que vous avez mis dans la section : \subpage change_version Changer,
 et vous devez enlever le suffixe -dev.
 
 Mettez à jour le fichier <code>todo</code> situé à la racine de la bibliothèque.
+
+Pour la suite du document, pour que les numéros de versions coincident avec les
+nouveaux numéros de version que vous venez de renseigner, nous vous conseillons
+de recompiler la documentation et de continuer avec la nouvelle documentation
+ainsi générée.
+Pour cela tapez les commandes suivantes :
+\verbatim
+make distclean
+./autogen.sh
+./configure
+make
+\endverbatim
+
+La nouvelle version de la page que vous êtes en train de lire se trouve dans 
+le fichier
+\verbatim
+./doc/api/French/html/release_new_version.html
+\endverbatim
+à partir de la racine de la bibliothèque MLV.
 
 \section key_gen Préparer une clé pour signer les différents paquets d'indstallation
 
@@ -1588,9 +1607,13 @@ git merge release
 
 Ajouter un tag pour préciser que ce dernier commit est une nouvelle version.
 \verbatim
-git tag -a vX -m 'The version X of MLV.'
+git tag -a v@MLV_CURRENT@.@MLV_REVISION@.@MLV_AGE@ -m 'The version @MLV_CURRENT@.@MLV_REVISION@.@MLV_AGE@ of MLV.'
 \endverbatim
-où <code>X</code> est le nouveau numéro de version de la bibliothèque.
+où @MLV_CURRENT@.@MLV_REVISION@.@MLV_AGE@ est normalement le nouveau numéro de 
+version de la bibliothèque. Si ce n'est pas le cas, c'est que vous n'avez
+pas recompilé cette documentation après avoir changé les numéros de 
+version.
+
 Vous pouvez éventuellement, ajoutez des commentaires dans l'opition -m.
 
 Il ne reste plus qu'à envoyer tous les changements sur le dépot git.
@@ -1620,9 +1643,11 @@ Enfin, créer un nouveau paragraphe dans le fichier <code>ChangeLog</code>
 situé à la racine de la bibliothèque.
 Ce paragraphe doit commencer par :
 \verbatim
-mlv-X.X.X-dev
+mlv-@MLV_CURRENT@.@MLV_REVISION@.@MLV_AGE@-dev
 \endverbatim
-où X.X.X est le nouveau numéro de version de la bibliothèque (voir \subpage change_version).
+Normalement, ce paragraphe ne doit pas déjà exister. Si c'est le cas, c'est 
+que vous n'avez pas recompilé cette documentation après avoir mis à jour les
+numéros de version.
 
 Mettez à jour le fichier <code>todo</code> situé à la racine de la bibliothèque.
 
