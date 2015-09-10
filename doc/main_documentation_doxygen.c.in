@@ -1577,7 +1577,7 @@ git merge release
 
 Il ne reste plus qu'à envoyer tous les changements sur le dépot git.
 \verbatim
-git push
+git push --follow-tags
 \endverbatim
 
 \section build_package Créer les nouveaux paquets de distributions
