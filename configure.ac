@@ -37,7 +37,7 @@ define([mlvage], [2])dnl
 define([mlvmajorversion], m4_eval(mlvcurrent - mlvage))dnl
 define([mlvminorversion], m4_eval(mlvage))dnl
 
-AC_INIT([MLV], [mlvcurrent.mlvrevision.mlvage], [adrien.boussicault@labri.fr], [], [http://www-igm.univ-mlv.fr/~boussica/mlv/index.html])
+AC_INIT([MLV], [mlvcurrent.mlvrevision.mlvage-dev], [adrien.boussicault@labri.fr], [], [http://www-igm.univ-mlv.fr/~boussica/mlv/index.html])
 
 AC_SUBST(MLV_MAJOR_VERSION,[mlvmajorversion])
 AC_SUBST(MLV_MINOR_VERSION,[mlvminorversion])
