@@ -1,4 +1,7 @@
 mlv-2.0.2-dev
+ * Documentation
+   * Correct documentation for making a MacOSX package (doxygen compilation)
+   * Improve the part explaining how to make a release of MLV.
 
 mlv-2.0.2
  * Window :

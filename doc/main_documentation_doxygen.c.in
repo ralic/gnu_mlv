@@ -1716,10 +1716,15 @@ Vérifiez le bon fonctionnement de ces paquets.
 \section update_web_site Mettre a jour le site web officiel
 
 Commencez par créer deux dossiers : <code>depot</code> et <code>site</code>, 
-dans le répertoire <code>/tmp</code>.
+dans le répertoire <code>/tmp</code>. Puis le dossier <code>depot</code>, 
+créez un dossier <code>@PACKAGE_TARNAME@-@PACKAGE_VERSION@</code> :
+\verbatim
+cd /tmp
+mkdir depot
+mkdir site
+mkdir depot/@PACKAGE_TARNAME@-@PACKAGE_VERSION@
+\endverbatim
 
-Dans le dossier <code>depot</code>, créez un dossier 
-<code>@PACKAGE_TARNAME@-@PACKAGE_VERSION@</code>.
 
 Mettez dans le dossier <code>depot</code> le fichier 
 <code>@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz</code>.
@@ -1795,6 +1800,48 @@ suivantes
 \verbatim
 cd /tmp/@PACKAGE_TARNAME@-@PACKAGE_VERSION@/doc
 cp -r index.html api /tmp/site
+\endverbatim
+
+Normalement, les dossier <code>/tmp/depot</code> et <code></code> doivent 
+ressembler à cela :
+\verbatim
+depot
+├── mlv-2.0.2
+│   ├── api
+│   ├── codeblocks-8.02mingw-setup.exe
+│   ├── devcpp-4.9.9.2_setup.exe
+│   ├── libmlv0_2.0.2-1_amd64.deb
+│   ├── libmlv0_2.0.2-1_i386.deb
+│   ├── libmlv0-dev_2.0.2-1_amd64.deb
+│   ├── libmlv0-dev_2.0.2-1_i386.deb
+│   ├── mlv-2.0.2-0.fc22.src.rpm
+│   ├── mlv-2.0.2-0.fc22.x86_64.rpm
+│   ├── mlv_2.0.2-1_amd64.changes
+│   ├── mlv_2.0.2-1.dsc
+│   ├── mlv_2.0.2-1_i386.changes
+│   ├── mlv_2.0.2-1.tar.gz
+│   ├── mlv-2.0.2-code_blocks.zip
+│   ├── mlv-2.0.2-code_blocks.zip.sig
+│   ├── mlv-2.0.2-dev-cpp.zip
+│   ├── mlv-2.0.2-dev-cpp.zip.sig
+│   ├── mlv-2.0.2_macos-10.10.pkg
+│   ├── mlv-2.0.2_macos-10.10.pkg.sig
+│   ├── mlv-2.0.2.tar.gz
+│   ├── mlv-2.0.2.tar.gz.sig
+│   ├── mlv-2.0.2-win32.zip
+│   ├── mlv-2.0.2-win32.zip.sig
+│   ├── mlv-debuginfo-2.0.2-0.fc22.x86_64.rpm
+│   ├── mlv-devel-2.0.2-0.fc22.x86_64.rpm
+│   ├── mlv-static-2.0.2-0.fc22.x86_64.rpm
+│   └── RPM-GPG-KEY-Boussicault
+├── mlv-2.0.2.tar.gz
+└── mlv-2.0.2.tar.gz.sig
+site
+├── api
+│   ├── English
+│   ├── French
+│   └── Spanish
+└── index.htm
 \endverbatim
 
 Il ne reste plus qu'à télécharger les fichiers de distributions sur le serveur 
@@ -2746,7 +2793,9 @@ Installez le paquet en tapant les commandes suivantes:
 cd $FAKEROOT/src
 tar -xzf doxygen-X.X.X.src.tar.gz
 cd doxygen-X.X.X
-cmake -DCMAKE_INSTALL_PREFIX:PATH=$FAKEROOT -G "Unix Makefiles"
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX:PATH=$FAKEROOT -G "Unix Makefiles" ..
 make
 make install
 \endverbatim
@@ -2901,6 +2950,7 @@ cd $FAKEROOT/src/@PACKAGE_TARNAME@-@PACKAGE_VERSION@ && sudo make uninstall
 \endverbatim
 
 Supprimez les lignes qui ont été ajoutées dans le fichier .bash_profile au debut du document.
+Puis redémarrez le terminal.
 
 Voilà, on peut maintenant tester l'installation du paquet.
 
