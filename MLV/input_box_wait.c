@@ -76,8 +76,8 @@ void MLV_wait_particular_input_box( MLV_Input_box* input_box, char** text){
 }
 
 void wait_input_box_with_font(
-	int sommetHautGaucheX, int sommetHautGaucheY,
-	int sommetBasDroitX, int sommetBasDroitY,
+	int top_left_corner_X, int top_left_corner_Y,
+	int width, int height,
 	MLV_Color borderColor, MLV_Color textColor,
 	MLV_Color backgroundColor,
 	const char* informativeMessage,
@@ -85,8 +85,8 @@ void wait_input_box_with_font(
 	const MLV_Font* font
 ){
 	MLV_Input_box* input_box = MLV_create_input_box_with_font(
-		sommetHautGaucheX, sommetHautGaucheY,
-		sommetBasDroitX, sommetBasDroitY,
+		top_left_corner_X, top_left_corner_Y,
+		width, height,
 		borderColor, textColor,
 		backgroundColor,
 		informativeMessage,
@@ -106,8 +106,8 @@ void wait_input_box_with_font(
 }
 
 void MLV_wait_input_box_with_font_va(
-	int sommetHautGaucheX, int sommetHautGaucheY,
-	int sommetBasDroitX, int sommetBasDroitY,
+	int top_left_corner_X, int top_left_corner_Y,
+	int width, int height,
 	MLV_Color borderColor, MLV_Color textColor,
 	MLV_Color backgroundColor,
 	const char* informativeMessage,
@@ -123,7 +123,7 @@ void MLV_wait_input_box_with_font_va(
 		ERROR("Unexpected Error.");
 	}
 	wait_input_box_with_font(
-		sommetHautGaucheX, sommetHautGaucheY, sommetBasDroitX, sommetBasDroitY,
+		top_left_corner_X, top_left_corner_Y, width, height,
 		borderColor, textColor, backgroundColor, complete_informative_message,
 		text, font
 	);
@@ -131,8 +131,8 @@ void MLV_wait_input_box_with_font_va(
 }
 
 void MLV_wait_input_box_with_font(
-	int sommetHautGaucheX, int sommetHautGaucheY,
-	int sommetBasDroitX, int sommetBasDroitY,
+	int top_left_corner_X, int top_left_corner_Y,
+	int width, int height,
 	MLV_Color borderColor, MLV_Color textColor,
 	MLV_Color backgroundColor,
 	const char* informativeMessage,
@@ -142,7 +142,7 @@ void MLV_wait_input_box_with_font(
 	va_list pile;
 	va_start( pile, font );
 	MLV_wait_input_box_with_font_va(
-		sommetHautGaucheX, sommetHautGaucheY, sommetBasDroitX, sommetBasDroitY,
+		top_left_corner_X, top_left_corner_Y, width, height,
 		borderColor, textColor, backgroundColor, informativeMessage,
 		text, font, pile
 	);
@@ -150,16 +150,16 @@ void MLV_wait_input_box_with_font(
 }
 
 void MLV_wait_input_box_va(
-	int sommetHautGaucheX, int sommetHautGaucheY,
-	int sommetBasDroitX, int sommetBasDroitY,
+	int top_left_corner_X, int top_left_corner_Y,
+	int width, int height,
 	MLV_Color borderColor, MLV_Color textColor,
 	MLV_Color backgroundColor,
 	const char* informativeMessage,
 	char** text, va_list pile
 ){
 	MLV_wait_input_box_with_font_va(
-		sommetHautGaucheX, sommetHautGaucheY,
-		sommetBasDroitX, sommetBasDroitY,
+		top_left_corner_X, top_left_corner_Y,
+		width, height,
 		borderColor, textColor,
 		backgroundColor,
 		informativeMessage,
@@ -168,8 +168,8 @@ void MLV_wait_input_box_va(
 }
 
 void MLV_wait_input_box(
-	int sommetHautGaucheX, int sommetHautGaucheY,
-	int sommetBasDroitX, int sommetBasDroitY,
+	int top_left_corner_X, int top_left_corner_Y,
+	int width, int height,
 	MLV_Color borderColor, MLV_Color textColor,
 	MLV_Color backgroundColor,
 	const char* informativeMessage,
@@ -178,7 +178,7 @@ void MLV_wait_input_box(
 	va_list pile;
 	va_start( pile, text );
 	MLV_wait_input_box_va(
-		sommetHautGaucheX, sommetHautGaucheY, sommetBasDroitX, sommetBasDroitY,
+		top_left_corner_X, top_left_corner_Y, width, height,
 		borderColor, textColor, backgroundColor, informativeMessage, text, pile
 	);
 	va_end( pile );

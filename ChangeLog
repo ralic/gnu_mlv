@@ -2,6 +2,9 @@ mlv-2.0.2-dev
  * Documentation
    * Correct documentation for making a MacOSX package (doxygen compilation)
    * Improve the part explaining how to make a release of MLV.
+   * Correct the document of MLV_wait_input_box. The function take now
+     the top-right corner, the width and the height.
+   * Remove some french word in the code.
  * Example
    * Change MLV_actualise_window by MLV_update_window
 

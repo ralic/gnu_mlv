@@ -61,14 +61,12 @@ extern "C" {
  * Par contre, après utilisation, vous devez libérer l'espace mémoire qui a été 
  * alloué.
  *
- * \param sommetHautGaucheX     La coordonnée en X du coin Nord-Ouest de la 
+ * \param top_left_corner_X     La coordonnée en X du coin Nord-Ouest de la 
  *                              boîte de saisie.
- * \param sommetHautGaucheY     La coordonnée en Y du coin Nord-Ouest de la 
+ * \param top_left_corner_Y     La coordonnée en Y du coin Nord-Ouest de la 
  *                              boîte de saisie.
- * \param sommetBasDroitX       La coordonnée en X du coin Sud-Est de la 
- *                              boîte de saisie.
- * \param sommetBasDroitY       La coordonnée en Y du coin Sud-Est de la 
- *                              boîte de saisie.
+ * \param width La largeur de la boîte de saisie.
+ * \param height La hauteur de la boîte de saisie.
  * \param borderColor           La couleur de la bordure de la boîte de saisie.
  * \param textColor             La couleur du texte de la boîte de saisie.
  * \param backgroundColor       La couleur de fond de la boîte de saisie.
@@ -78,8 +76,8 @@ extern "C" {
  * \param pile La pile des complements de paramètres comme dans vaprintf.
  */
 void MLV_wait_input_box_va(
-	int sommetHautGaucheX, int sommetHautGaucheY,
-	int sommetBasDroitX, int sommetBasDroitY,
+	int top_left_corner_X, int top_left_corner_Y,
+	int width, int height,
 	MLV_Color borderColor, MLV_Color textColor,
 	MLV_Color backgroundColor,
 	const char* informativeMessage,
@@ -97,14 +95,12 @@ void MLV_wait_input_box_va(
  * Par contre, après utilisation, vous devez libérer l'espace mémoire qui a 
  * été alloué.
  *
- * \param sommetHautGaucheX   La coordonnée en X du coin Nord-Ouest de la 
+ * \param top_left_corner_X   La coordonnée en X du coin Nord-Ouest de la 
  *                            boîte de saisie.
- * \param sommetHautGaucheY   La coordonnée en Y du coin Nord-Ouest de la 
+ * \param top_left_corner_Y   La coordonnée en Y du coin Nord-Ouest de la 
  *                            boîte de saisie.
- * \param sommetBasDroitX     La coordonnée en X du coin Sud-Est de la boîte 
- *                            de saisie.
- * \param sommetBasDroitY     La coordonnée en Y du coin Sud-Est de la boîte 
- *                            de saisie.
+ * \param width La largeur de la boîte de saisie.
+ * \param height La hauteur de la boîte de saisie.
  * \param borderColor         La couleur de la bordure de la boîte de saisie.
  * \param textColor           La couleur du texte de la boîte de saisie.
  * \param backgroundColor     La couleur de fond de la boîte de saisie.
@@ -115,8 +111,8 @@ void MLV_wait_input_box_va(
  * \param pile La pile des complements de paramètres comme dans vaprintf.
  */
 void MLV_wait_input_box_with_font_va(
-	int sommetHautGaucheX, int sommetHautGaucheY,
-	int sommetBasDroitX, int sommetBasDroitY,
+	int top_left_corner_X, int top_left_corner_Y,
+	int width, int height,
 	MLV_Color borderColor, MLV_Color textColor,
 	MLV_Color backgroundColor,
 	const char* informativeMessage,
@@ -141,9 +137,9 @@ void MLV_wait_input_box_with_font_va(
  * - MLV_draw_input_box()
  * - MLV_draw_all_input_boxes()
  *
- * \param sommetHautGaucheX La coordonnée en X du sommet Nord-Ouest de la boîte 
+ * \param top_left_corner_X La coordonnée en X du sommet Nord-Ouest de la boîte 
  *                          de saisie.
- * \param sommetHautGaucheY La coordonnée en Y du sommet Nord-Ouest de la boîte 
+ * \param top_left_corner_Y La coordonnée en Y du sommet Nord-Ouest de la boîte 
  *                          de saisie.
  * \param width La largeur de la boîte de saisie.
  * \param height La hauteur de la boîte de saisie.
@@ -154,7 +150,7 @@ void MLV_wait_input_box_with_font_va(
  * \param pile La pile des complements de paramètres comme dans vaprintf.
  */
 MLV_Input_box* MLV_create_input_box_va(
-	int sommetHautGaucheX, int sommetHautGaucheY,
+	int top_left_corner_X, int top_left_corner_Y,
 	int width, int height,
 	MLV_Color borderColor, MLV_Color textColor,
 	MLV_Color backgroundColor,
@@ -165,8 +161,8 @@ MLV_Input_box* MLV_create_input_box_va(
 /** \~french 
  * \brief Cette fonction créé une boîte de saisie avec une font spécifique.
  *
- * \param sommetHautGaucheX La coordonnée en X du sommet Nord-Ouest de la boîte de saisie.
- * \param sommetHautGaucheY La coordonnée en Y du sommet Nord-Ouest de la boîte de saisie.
+ * \param top_left_corner_X La coordonnée en X du sommet Nord-Ouest de la boîte de saisie.
+ * \param top_left_corner_Y La coordonnée en Y du sommet Nord-Ouest de la boîte de saisie.
  * \param width La largeur de la boîte de saisie.
  * \param height La hauteur de la boîte de saisie.
  * \param borderColor La couleur de la bordure de la boîte de saisie.
@@ -177,7 +173,7 @@ MLV_Input_box* MLV_create_input_box_va(
  * \param pile La pile des complements de paramètres comme dans vaprintf.
  */
 MLV_Input_box* MLV_create_input_box_with_font_va(
-	int sommetHautGaucheX, int sommetHautGaucheY,
+	int top_left_corner_X, int top_left_corner_Y,
 	int width, int height,
 	MLV_Color borderColor, MLV_Color textColor,
 	MLV_Color backgroundColor,

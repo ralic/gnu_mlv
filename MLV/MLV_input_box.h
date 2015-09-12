@@ -66,14 +66,12 @@ typedef struct _MLV_Input_box MLV_Input_box;
  * Par contre, après utilisation, vous devez libérer l'espace mémoire qui a été 
  * alloué.
  *
- * \param sommetHautGaucheX     La coordonnée en X du coin Nord-Ouest de la 
+ * \param top_left_corner_X     La coordonnée en X du coin Nord-Ouest de la 
  *                              boîte de saisie.
- * \param sommetHautGaucheY     La coordonnée en Y du coin Nord-Ouest de la 
+ * \param top_left_corner_Y     La coordonnée en Y du coin Nord-Ouest de la 
  *                              boîte de saisie.
- * \param sommetBasDroitX       La coordonnée en X du coin Sud-Est de la 
- *                              boîte de saisie.
- * \param sommetBasDroitY       La coordonnée en Y du coin Sud-Est de la 
- *                              boîte de saisie.
+ * \param width La largeur de la boîte de saisie.
+ * \param height La hauteur de la boîte de saisie.
  * \param borderColor           La couleur de la bordure de la boîte de saisie.
  * \param textColor             La couleur du texte de la boîte de saisie.
  * \param backgroundColor       La couleur de fond de la boîte de saisie.
@@ -82,8 +80,8 @@ typedef struct _MLV_Input_box MLV_Input_box;
  *                              l'utilisateur.
  */
 void MLV_wait_input_box(
-	int sommetHautGaucheX, int sommetHautGaucheY,
-	int sommetBasDroitX, int sommetBasDroitY,
+	int top_left_corner_X, int top_left_corner_Y,
+	int width, int height,
 	MLV_Color borderColor, MLV_Color textColor,
 	MLV_Color backgroundColor,
 	const char* informativeMessage,
@@ -100,14 +98,12 @@ void MLV_wait_input_box(
  * Par contre, après utilisation, vous devez libérer l'espace mémoire qui a 
  * été alloué.
  *
- * \param sommetHautGaucheX   La coordonnée en X du coin Nord-Ouest de la 
+ * \param top_left_corner_X   La coordonnée en X du coin Nord-Ouest de la 
  *                            boîte de saisie.
- * \param sommetHautGaucheY   La coordonnée en Y du coin Nord-Ouest de la 
+ * \param top_left_corner_Y   La coordonnée en Y du coin Nord-Ouest de la 
  *                            boîte de saisie.
- * \param sommetBasDroitX     La coordonnée en X du coin Sud-Est de la boîte 
- *                            de saisie.
- * \param sommetBasDroitY     La coordonnée en Y du coin Sud-Est de la boîte 
- *                            de saisie.
+ * \param width La largeur de la boîte de saisie.
+ * \param height La hauteur de la boîte de saisie.
  * \param borderColor         La couleur de la bordure de la boîte de saisie.
  * \param textColor           La couleur du texte de la boîte de saisie.
  * \param backgroundColor     La couleur de fond de la boîte de saisie.
@@ -117,8 +113,8 @@ void MLV_wait_input_box(
  * \param font                La font du texte à utiliser.
  */
 void MLV_wait_input_box_with_font(
-	int sommetHautGaucheX, int sommetHautGaucheY,
-	int sommetBasDroitX, int sommetBasDroitY,
+	int top_left_corner_X, int top_left_corner_Y,
+	int width, int height,
 	MLV_Color borderColor, MLV_Color textColor,
 	MLV_Color backgroundColor,
 	const char* informativeMessage,
@@ -154,9 +150,9 @@ void MLV_wait_particular_input_box( MLV_Input_box* input_box, char** text);
  * - MLV_draw_input_box()
  * - MLV_draw_all_input_boxes()
  *
- * \param sommetHautGaucheX La coordonnée en X du sommet Nord-Ouest de la boîte 
+ * \param top_left_corner_X La coordonnée en X du sommet Nord-Ouest de la boîte 
  *                          de saisie.
- * \param sommetHautGaucheY La coordonnée en Y du sommet Nord-Ouest de la boîte 
+ * \param top_left_corner_Y La coordonnée en Y du sommet Nord-Ouest de la boîte 
  *                          de saisie.
  * \param width La largeur de la boîte de saisie.
  * \param height La hauteur de la boîte de saisie.
@@ -166,7 +162,7 @@ void MLV_wait_particular_input_box( MLV_Input_box* input_box, char** text);
  * \param informativeMessage La message d'entête de la boîte de saisie.
  */
 MLV_Input_box* MLV_create_input_box(
-	int sommetHautGaucheX, int sommetHautGaucheY,
+	int top_left_corner_X, int top_left_corner_Y,
 	int width, int height,
 	MLV_Color borderColor, MLV_Color textColor,
 	MLV_Color backgroundColor,
@@ -176,8 +172,8 @@ MLV_Input_box* MLV_create_input_box(
 /** \~french 
  * \brief Cette fonction créé une boîte de saisie avec une font spécifique.
  *
- * \param sommetHautGaucheX La coordonnée en X du sommet Nord-Ouest de la boîte de saisie.
- * \param sommetHautGaucheY La coordonnée en Y du sommet Nord-Ouest de la boîte de saisie.
+ * \param top_left_corner_X La coordonnée en X du sommet Nord-Ouest de la boîte de saisie.
+ * \param top_left_corner_Y La coordonnée en Y du sommet Nord-Ouest de la boîte de saisie.
  * \param width La largeur de la boîte de saisie.
  * \param height La hauteur de la boîte de saisie.
  * \param borderColor La couleur de la bordure de la boîte de saisie.
@@ -187,7 +183,7 @@ MLV_Input_box* MLV_create_input_box(
  * \param font La font à utiliser pour le texte.
  */
 MLV_Input_box* MLV_create_input_box_with_font(
-	int sommetHautGaucheX, int sommetHautGaucheY,
+	int top_left_corner_X, int top_left_corner_Y,
 	int width, int height,
 	MLV_Color borderColor, MLV_Color textColor,
 	MLV_Color backgroundColor,
@@ -240,15 +236,15 @@ void MLV_suppress_history( MLV_Input_box* input_box );
  * \brief Cette fonction change la taille et la position d'une boîte de saisie donnée en paramètre.
  *
  * \param input_box La boîte de saisie à modifier.
- * \param sommetHautGaucheX La nouvelle coordonnée en X de la position du sommet
+ * \param top_left_corner_X La nouvelle coordonnée en X de la position du sommet
  *                          Nord-Ouest de la boîte de saisie.
- * \param sommetHautGaucheY La nouvelle coordonnée en Y de la position du sommet
+ * \param top_left_corner_Y La nouvelle coordonnée en Y de la position du sommet
  *                          Nord-Ouest de la boîte de saisie.
  * \param width La nouvelle largeur de la boîte de saisie.
  * \param height La nouvelle hauteur de la boîte de saisie.
  */
 void MLV_change_input_box_geometry(
-	MLV_Input_box* input_box,  int sommetHautGaucheX, int sommetHautGaucheY,
+	MLV_Input_box* input_box,  int top_left_corner_X, int top_left_corner_Y,
 	int width, int height
 );
 
@@ -265,13 +261,13 @@ void MLV_change_input_box_size(MLV_Input_box* input_box, int width, int height);
  * \brief Cette fonction change la position d'une boîte de saisie donnée en paramètre.
  *
  * \param input_box La boîte de saisie à modifier.
- * \param sommetHautGaucheX La nouvelle coordonnée en X de la position du sommet
+ * \param top_left_corner_X La nouvelle coordonnée en X de la position du sommet
  *                          Nord-Ouest de la boîte de saisie.
- * \param sommetHautGaucheY La nouvelle coordonnée en Y de la position du sommet
+ * \param top_left_corner_Y La nouvelle coordonnée en Y de la position du sommet
  *                          Nord-Ouest de la boîte de saisie.
  */
 void MLV_change_input_box_position(
-	MLV_Input_box* input_box, int sommetHautGaucheX, int sommetHautGaucheY
+	MLV_Input_box* input_box, int top_left_corner_X, int top_left_corner_Y
 );
 
 /** \~french 

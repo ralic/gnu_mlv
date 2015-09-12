@@ -81,8 +81,8 @@ extern DataMLV* MLV_data;
 
 struct _MLV_Input_box {
     //Géométrie de la boîte de saisie
-    int sommetHautGauche[2];
-    int sommetBasDroit[2];
+    int top_left_corner_[2];
+    int bottom_right_corner_[2];
     int width;
     int height;
     SDL_Rect rectangle;
@@ -292,25 +292,25 @@ void return_deletion_carac_input_box_NTS( MLV_Input_box* input_box ){
 inline
 #endif
 void recalculateSommetBas_NTS( MLV_Input_box* input_box ){
-    input_box->sommetBasDroit[0] = input_box->sommetHautGauche[0] + input_box->width;
-    input_box->sommetBasDroit[1] = input_box->sommetHautGauche[1] + input_box->height;
+    input_box->bottom_right_corner_[0] = input_box->top_left_corner_[0] + input_box->width;
+    input_box->bottom_right_corner_[1] = input_box->top_left_corner_[1] + input_box->height;
 }
 
 #ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
 inline
 #endif
-void change_position_input_box_NTS(MLV_Input_box* input_box, int sommetHautGaucheX, int sommetHautGaucheY){
-    input_box->sommetHautGauche[0] = sommetHautGaucheX;
-    input_box->sommetHautGauche[1] = sommetHautGaucheY;
-    input_box->rectangle.x = sommetHautGaucheX;
-    input_box->rectangle.y = sommetHautGaucheY;
+void change_position_input_box_NTS(MLV_Input_box* input_box, int top_left_corner_X, int top_left_corner_Y){
+    input_box->top_left_corner_[0] = top_left_corner_X;
+    input_box->top_left_corner_[1] = top_left_corner_Y;
+    input_box->rectangle.x = top_left_corner_X;
+    input_box->rectangle.y = top_left_corner_Y;
     recalculateSommetBas_NTS( input_box );
     recalculateTextPositions_NTS( input_box );
 }
 
-void MLV_change_position_input_box(MLV_Input_box* input_box, int sommetHautGaucheX, int sommetHautGaucheY){
+void MLV_change_position_input_box(MLV_Input_box* input_box, int top_left_corner_X, int top_left_corner_Y){
     lock_input_box( input_box );
-    change_position_input_box_NTS( input_box, sommetHautGaucheX, sommetHautGaucheY );
+    change_position_input_box_NTS( input_box, top_left_corner_X, top_left_corner_Y );
     unlock_input_box( input_box );
 }
 
@@ -344,14 +344,14 @@ void MLV_change_input_box_size(MLV_Input_box* input_box, int width, int height){
 #ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)
 inline
 #endif
-void change_geometry_input_box_NTS(MLV_Input_box* input_box,  int sommetHautGaucheX, int sommetHautGaucheY, int width, int height){
+void change_geometry_input_box_NTS(MLV_Input_box* input_box,  int top_left_corner_X, int top_left_corner_Y, int width, int height){
     change_size_input_box_NTS( input_box, width, height );
-    change_position_input_box_NTS( input_box, sommetHautGaucheX, sommetHautGaucheY);
+    change_position_input_box_NTS( input_box, top_left_corner_X, top_left_corner_Y);
 };
 
-void MLV_change_input_box_geometry(MLV_Input_box* input_box,  int sommetHautGaucheX, int sommetHautGaucheY, int width, int height){
+void MLV_change_input_box_geometry(MLV_Input_box* input_box,  int top_left_corner_X, int top_left_corner_Y, int width, int height){
     lock_input_box( input_box );
-    change_geometry_input_box_NTS( input_box, sommetHautGaucheX, sommetHautGaucheY, width, height);
+    change_geometry_input_box_NTS( input_box, top_left_corner_X, top_left_corner_Y, width, height);
     unlock_input_box( input_box );
 };
 
@@ -411,10 +411,10 @@ inline
 #endif
 int is_in_input_box_NTS( MLV_Input_box* input_box, int x, int y ){
     int result = 0;
-    if( (x >= input_box->sommetHautGauche[0]) &&
-        (x <= input_box->sommetBasDroit[0]) &&
-        (y >= input_box->sommetHautGauche[1]) &&
-        (y <= input_box->sommetBasDroit[1]) 
+    if( (x >= input_box->top_left_corner_[0]) &&
+        (x <= input_box->bottom_right_corner_[0]) &&
+        (y >= input_box->top_left_corner_[1]) &&
+        (y <= input_box->bottom_right_corner_[1]) 
     ) result = 1;
     return result;
 }
@@ -536,7 +536,7 @@ void input_box_unregister_NTS(MLV_Input_box* input_box){
 }
 
 MLV_Input_box* create_input_box_with_font(
-	int sommetHautGaucheX, int sommetHautGaucheY,
+	int top_left_corner_X, int top_left_corner_Y,
 	int width, int height,
 	MLV_Color borderColor, MLV_Color textColor,
 	MLV_Color backgroundColor,
@@ -557,7 +557,7 @@ MLV_Input_box* create_input_box_with_font(
 
     input_box->apparence = NULL;
     input_box->answer = NULL;
-    change_geometry_input_box_NTS(input_box, sommetHautGaucheX, sommetHautGaucheY, width, height);
+    change_geometry_input_box_NTS(input_box, top_left_corner_X, top_left_corner_Y, width, height);
 
     MLV_change_input_box_colors(input_box, borderColor, textColor, backgroundColor );
 
@@ -578,7 +578,7 @@ MLV_Input_box* create_input_box_with_font(
 }
 
 MLV_Input_box* MLV_create_input_box_with_font_va(
-	int sommetHautGaucheX, int sommetHautGaucheY,
+	int top_left_corner_X, int top_left_corner_Y,
 	int width, int height,
 	MLV_Color borderColor, MLV_Color textColor,
 	MLV_Color backgroundColor,
@@ -594,7 +594,7 @@ MLV_Input_box* MLV_create_input_box_with_font_va(
 		ERROR("Unexpected Error.");
 	}
 	MLV_Input_box* result = create_input_box_with_font(
-		sommetHautGaucheX, sommetHautGaucheY, width, height, borderColor, 
+		top_left_corner_X, top_left_corner_Y, width, height, borderColor, 
 		textColor, backgroundColor, complete_informative_message, font
 	);
 	free( complete_informative_message );
@@ -602,7 +602,7 @@ MLV_Input_box* MLV_create_input_box_with_font_va(
 }
 
 MLV_Input_box* MLV_create_input_box_with_font(
-	int sommetHautGaucheX, int sommetHautGaucheY,
+	int top_left_corner_X, int top_left_corner_Y,
 	int width, int height,
 	MLV_Color borderColor, MLV_Color textColor,
 	MLV_Color backgroundColor,
@@ -612,7 +612,7 @@ MLV_Input_box* MLV_create_input_box_with_font(
 	va_list pile;
 	va_start( pile, font );
 	MLV_Input_box* result = MLV_create_input_box_with_font_va(
-		sommetHautGaucheX, sommetHautGaucheY,
+		top_left_corner_X, top_left_corner_Y,
 		width, height,
 		borderColor, textColor,
 		backgroundColor,
@@ -624,7 +624,7 @@ MLV_Input_box* MLV_create_input_box_with_font(
 }
 
 MLV_Input_box* MLV_create_input_box_va(
-	int sommetHautGaucheX, int sommetHautGaucheY,
+	int top_left_corner_X, int top_left_corner_Y,
 	int width, int height,
 	MLV_Color borderColor, MLV_Color textColor,
 	MLV_Color backgroundColor,
@@ -632,7 +632,7 @@ MLV_Input_box* MLV_create_input_box_va(
 	va_list pile
 ){
 	return MLV_create_input_box_with_font_va(
-		sommetHautGaucheX, sommetHautGaucheY,
+		top_left_corner_X, top_left_corner_Y,
 		width, height,
 		borderColor, textColor,
 		backgroundColor,
@@ -642,7 +642,7 @@ MLV_Input_box* MLV_create_input_box_va(
 }
 
 MLV_Input_box* MLV_create_input_box( 
-	int sommetHautGaucheX, int sommetHautGaucheY,
+	int top_left_corner_X, int top_left_corner_Y,
 	int width, int height,
 	MLV_Color borderColor, MLV_Color textColor,
 	MLV_Color backgroundColor,
@@ -651,7 +651,7 @@ MLV_Input_box* MLV_create_input_box(
 	va_list pile;
 	va_start( pile, informativeMessage );
 	MLV_Input_box* result = MLV_create_input_box_va( 
-		sommetHautGaucheX, sommetHautGaucheY,
+		top_left_corner_X, top_left_corner_Y,
 		width, height,
 		borderColor, textColor,
 		backgroundColor,
