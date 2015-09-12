@@ -196,7 +196,7 @@ void draw_foreground(
 
 	draw_text( &cursor_color, graphics, 0 );
 
-	MLV_actualise_window();
+	MLV_update_window();
 }
 
 void draw_background(

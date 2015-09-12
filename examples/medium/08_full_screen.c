@@ -84,7 +84,7 @@ void affichage(){
 		10, height/2+50, "Appuyer sur une touche pour continuer." ,MLV_COLOR_RED
 	);
 
-	MLV_actualise_window();
+	MLV_update_window();
 }
 
 

@@ -201,7 +201,7 @@ void affichage(
 	//
 	// Met à jour la fenêtre
 	//
-	MLV_actualise_window();
+	MLV_update_window();
 }
 
 

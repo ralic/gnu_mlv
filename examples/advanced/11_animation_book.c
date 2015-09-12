@@ -114,7 +114,7 @@ int main( int argc, char *argv[] ){
 		);
 		MLV_draw_image_from_animation_player(	run_animation_player, 0, x_run, y );
 		MLV_draw_image_from_animation_player( walk_animation_player, 0, x_walk, y );
-		MLV_actualise_window();
+		MLV_update_window();
 		MLV_play_sound_from_animation_player( run_animation_player, 0 );
 		MLV_play_sound_from_animation_player( walk_animation_player, 0 );
 

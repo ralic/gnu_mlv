@@ -135,7 +135,7 @@ int main( int argc, char *argv[] ){
 	// Initialisation de l'affichage
 	//
 	MLV_draw_image( map_display, 0, 0 );
-	MLV_actualise_window();
+	MLV_update_window();
 
 	//
 	// Dès que l'utilisateur clique sur l'image, on affiche le nom du pays
@@ -152,7 +152,7 @@ int main( int argc, char *argv[] ){
 					x, y, id_to_country[id_country][0], MLV_COLOR_BLACK
 				);
 			}
-			MLV_actualise_window();
+			MLV_update_window();
 		}
 	}
 

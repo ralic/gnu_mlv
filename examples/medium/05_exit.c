@@ -73,7 +73,7 @@ void affichage( int width, int height ){
 	//
 	// Mise à jour de l'affichage
 	//
-	MLV_actualise_window();
+	MLV_update_window();
 }
 
 
@@ -118,7 +118,7 @@ int main(int argc, char *argv[]){
 		MLV_COLOR_RED, MLV_COLOR_GREEN, MLV_COLOR_BLACK,
 		MLV_TEXT_CENTER
 	);
-	MLV_actualise_window();  // Met à jour l'affichage
+	MLV_update_window();  // Met à jour l'affichage
 
 	//
 	// Attend 2 secondes

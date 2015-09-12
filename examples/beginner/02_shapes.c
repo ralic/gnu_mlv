@@ -214,7 +214,7 @@ int main(int argc, char *argv[]){
 	//
 	// Met à jour l'affichage.
 	//
-	MLV_actualise_window();
+	MLV_update_window();
 
 	//
 	// Attend 10 secondes avant la fin du programme.

@@ -79,7 +79,7 @@ int main(int argc, char *argv[]){
 	//
 	// Met à jour de l'affichage
 	//
-	MLV_actualise_window();
+	MLV_update_window();
 	
 	//
 	// Attends que l'utilisateur appuye sur la touche echap pour quitter.

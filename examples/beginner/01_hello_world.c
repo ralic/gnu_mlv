@@ -23,9 +23,9 @@
  * void MLV_free_window();
  *
  *------------------------------------------------------------------------------
- * MLV_actualise_window : Met à jour l'affichage de la fenêtre courante.
+ * MLV_update_window : Met à jour l'affichage de la fenêtre courante.
  *
- * void MLV_actualise_window();
+ * void MLV_update_window();
  * 
  *------------------------------------------------------------------------------
  * MLV_draw_text : Imprime un texte donne à une position et une couleur données.
@@ -87,7 +87,7 @@ int main( int argc, char *argv[] ){
 	//
 	// Met a jour l'affichage.
 	//
-	MLV_actualise_window();
+	MLV_update_window();
 
 	//
 	// Attend 10 secondes avant la fin du programme.

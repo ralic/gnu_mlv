@@ -121,7 +121,7 @@ int main( int argc, char *argv[] ){
 		//
 		// On met à jour l'affichage
 		//		
-		MLV_actualise_window();
+		MLV_update_window();
 
 	}
 

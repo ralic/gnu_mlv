@@ -118,7 +118,7 @@ int main( int argc, char *argv[] ){
 		}
 		int position_y = 20;
 		MLV_draw_image_from_animation_player( animation_player, layer, avance, position_y );
-		MLV_actualise_window();
+		MLV_update_window();
 		MLV_play_sound_from_animation_player( animation_player, 0 );
 		MLV_delay_according_to_frame_rate();
 	}

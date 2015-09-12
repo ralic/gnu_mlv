@@ -76,7 +76,7 @@ int main(int argc, char *argv[]){
 		"Veuillez entrer un message dans la fenêtre ci-dessous.",
 		MLV_COLOR_GREEN
 	);
-	MLV_actualise_window();
+	MLV_update_window();
 
 	//
 	// Demande la réponse à la question en utilisant une boîte de saisie
@@ -94,7 +94,7 @@ int main(int argc, char *argv[]){
 	// saisie
 	//
 	MLV_draw_text( 10, 80, text, MLV_COLOR_GREEN );
-	MLV_actualise_window();
+	MLV_update_window();
 
 	//
 	// Attend 2 secondes

@@ -64,7 +64,7 @@ int main(int argc, char *argv[]){
 	// Affiche la consigne
 	//
 	MLV_draw_text( 10, 10, "Appuyez sur la touche k", MLV_COLOR_GREEN );
-	MLV_actualise_window();
+	MLV_update_window();
 
 	//
 	// Attendre que l'utilisateur appuie sur une touche du clavier
@@ -83,7 +83,7 @@ int main(int argc, char *argv[]){
 			MLV_COLOR_GREEN
 		);
 	}
-	MLV_actualise_window();
+	MLV_update_window();
 	
 	//
 	// Attend 2 seconde avant la fin du programme.

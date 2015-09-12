@@ -155,7 +155,7 @@ void affichage( int width, int height, char* texte1, char* texte2 ){
 	//
 	// Met à jour l'affichage
 	//
-	MLV_actualise_window();
+	MLV_update_window();
 }
 
 

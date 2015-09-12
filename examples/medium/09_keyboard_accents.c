@@ -59,7 +59,7 @@ int main(int argc, char *argv[]){
 		"Vous pouvez faire apparaitre les caractères accentué !",
 		MLV_COLOR_GREEN
 	);
-	MLV_actualise_window();
+	MLV_update_window();
 
 	//
 	// Attendre que l'utilisateur appuie sur une touche du clavier
@@ -76,7 +76,7 @@ int main(int argc, char *argv[]){
 
 		free( text );
 
-		MLV_actualise_window();
+		MLV_update_window();
 	}
 	
 	//

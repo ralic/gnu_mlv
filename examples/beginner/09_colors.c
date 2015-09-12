@@ -1566,7 +1566,7 @@ int main( int argc, char *argv[] ){
 		//
 		// Met a jour l'affichage.
 		//
-		MLV_actualise_window();
+		MLV_update_window();
 
 		//
 		// Attends que l'utilisateur clique sur le bouton gauche de la souris
@@ -1593,7 +1593,7 @@ int main( int argc, char *argv[] ){
 		//
 		// Met à jour l'affichage.
 		//
-		MLV_actualise_window();
+		MLV_update_window();
 
 		MLV_wait_mouse(&x, &y);
 	}

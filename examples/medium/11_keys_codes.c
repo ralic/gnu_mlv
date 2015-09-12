@@ -36,7 +36,7 @@ int main( int argc, char *argv[] ){
 	MLV_create_window( "beginner - 10 - Le code des touches du clavier", "codes - touches du clavier", width, height );
 
 	draw_sentence( width, height );
-	MLV_actualise_window();
+	MLV_update_window();
 
 	MLV_Keyboard_button sym;
 	const char* sym_string;
@@ -71,7 +71,7 @@ int main( int argc, char *argv[] ){
 			MLV_COLOR_BLACK, MLV_COLOR_GREEN, MLV_COLOR_BLACK,
 			MLV_TEXT_LEFT
 		);
-		MLV_actualise_window();
+		MLV_update_window();
 
 		free( character );
 		free( mod_string );

@@ -99,7 +99,7 @@ correctement initialisé."
 		"Pour quitter, appuyer sur la touche echap.",
 		MLV_COLOR_GREEN
 	);
-	MLV_actualise_window();
+	MLV_update_window();
 
 	//
 	// Des que l'utilisateur appuye sur une touche, on joue de la musique.

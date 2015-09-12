@@ -142,7 +142,7 @@ void afficher_texte( char* texte ){
 		MLV_COLOR_BLACK, MLV_COLOR_GREEN, MLV_COLOR_BLACK,
         MLV_TEXT_LEFT
 	);
-	MLV_actualise_window();
+	MLV_update_window();
 }
 
 

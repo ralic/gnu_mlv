@@ -130,7 +130,7 @@ int main( int argc, char *argv[] ){
 	//
 	//  Met à jour l'affichage de la fenêtre
 	//
-	MLV_actualise_window();
+	MLV_update_window();
 
 	//
 	// Attend 15 secondes

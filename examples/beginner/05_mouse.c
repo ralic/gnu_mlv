@@ -48,7 +48,7 @@ int main(int argc, char *argv[]){
 		"Cliquez sur la fenêtre à l'aide de la souris pour faire apparaître un cercle",
 		MLV_COLOR_GREEN
 	);
-	MLV_actualise_window();
+	MLV_update_window();
 
 	//
 	// Attendre que l'utilisateur clique sur le bouton gauche de la souris
@@ -59,7 +59,7 @@ int main(int argc, char *argv[]){
 	// Dessine un cercle à la position du curseur de la souris
 	//
 	MLV_draw_circle( x, y, 30, MLV_COLOR_RED );
-	MLV_actualise_window();
+	MLV_update_window();
 	
 	//
 	// Attend 1 seconde avant la fin du programme.

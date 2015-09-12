@@ -23,7 +23,7 @@ int main( int argc, char *argv[] ){
 		width, height
 	);
 	
-	MLV_actualise_window();
+	MLV_update_window();
 
 	MLV_wait_seconds( 10 );
 

@@ -127,7 +127,7 @@ void affichage( int nb, int x, int y, int width, int height ){
 		MLV_COLOR_GREEN,
 		x, y
 	);	
-	MLV_actualise_window();
+	MLV_update_window();
 }
 
 
