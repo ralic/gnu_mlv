@@ -1788,7 +1788,6 @@ tar -xzf @PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz
 cd @PACKAGE_TARNAME@-@PACKAGE_VERSION@
 ./configure
 make 
-cp -r doc/api /tmp/depot/@PACKAGE_TARNAME@-@PACKAGE_VERSION@/
 \endverbatim
 
 Enfin, ajouter les programmes d'installation des ide Code-blocks et Dev-cpp en 
@@ -1807,7 +1806,6 @@ ressembler à cela :
 \verbatim
 depot
 ├── mlv-2.0.2
-│   ├── api
 │   ├── codeblocks-8.02mingw-setup.exe
 │   ├── devcpp-4.9.9.2_setup.exe
 │   ├── libmlv0_2.0.2-1_amd64.deb
@@ -1843,6 +1841,9 @@ site
 │   └── Spanish
 └── index.htm
 \endverbatim
+
+Le dossier <code>depot</code> ne doit pas contenir la documentation 
+(dossier <code>api</code>) du site web.
 
 Il ne reste plus qu'à télécharger les fichiers de distributions sur le serveur 
 de Savannah en tapant les commandes suivantes :
