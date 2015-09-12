@@ -340,6 +340,13 @@ Avant de commencer à compiler et installer la bibliothèque MLV,il faut que vou
 - glib2.0
 - xml2
 
+Par exemple, sous debian/ubuntu (uniquement), il suffit de taper les commandes 
+suivantes :
+\verbatim
+sudo apt-get install doxygen build-essential libsdl-gfx1.2-dev libsdl1.2-dev 
+sudo apt-get install libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsdl-image1.2-dev 
+sudo apt-get install libglib2.0-dev libxml2-dev
+\endverbatim
 
 Téléchargez le code source de la bibliothèque MLV : <a href="@MLV_SOURCE_REPOSITORY@/@PACKAGE_TARNAME@-@PACKAGE_VERSION@/@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz">@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz</a>.
 
