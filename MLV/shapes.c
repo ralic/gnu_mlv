@@ -125,6 +125,9 @@ void draw_pixel_on_sdl_surface( SDL_Surface* surface, int x, int y, MLV_Color co
 #if 0  // Je ne me souvient plus pourquoi pexelColor ne fonctionnait pas. Je crois que c'est la composante alpha qui pose problème.
 	pixelColor(MLV_data->screen, x, y, color);
 #else
+	if( !( 0<= x && x<surface->w && 0<=y && y<surface->h ) ){
+		return;
+	}
 	SDL_LockSurface(surface);
 
 	SDL_PixelFormat *fmt;
