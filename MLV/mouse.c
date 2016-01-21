@@ -54,7 +54,8 @@ void MLV_wait_mouse(int *x, int *y){
 	);
 };
 
-int MLV_wait_mouse_or_seconds(int *x, int *y, int seconds){
+
+int MLV_wait_mouse_or_milliseconds(int *x, int *y, int milliseconds){
 	MLV_Button_state state;
 	MLV_Mouse_button mouse_button;
 
@@ -75,13 +76,13 @@ int MLV_wait_mouse_or_seconds(int *x, int *y, int seconds){
 					NULL, NULL,
 					&tmp_x, &tmp_y, &mouse_button,
 					&state,
-					seconds - ( MLV_get_time() - time )/1000
+					milliseconds - ( MLV_get_time() - time )
 				) != MLV_MOUSE_BUTTON
 			) ||
 			( mouse_button != MLV_BUTTON_LEFT ) ||
 			( state != MLV_PRESSED )
 		) && (
-			(MLV_get_time() - time) < seconds*1000
+			(MLV_get_time() - time) < milliseconds
 		)
 	);
 	if( 
@@ -93,6 +94,13 @@ int MLV_wait_mouse_or_seconds(int *x, int *y, int seconds){
 		if( y ) *y = tmp_y;
 	}
 	return !resultat;
+}
+
+
+int MLV_wait_mouse_or_seconds(int *x, int *y, int seconds){
+	return MLV_wait_mouse_or_milliseconds(
+		x, y, seconds*1000
+	);
 }
 
 const char* MLV_convert_mouse_button_to_string( MLV_Mouse_button button_code ){

@@ -10,6 +10,8 @@ mlv-2.0.2-dev
      not toric. 
  * Example
    * Change MLV_actualise_window by MLV_update_window
+ * Event:
+   * Add MLV_wait_mouse_or_millisecond
 
 mlv-2.0.2
  * Window :
