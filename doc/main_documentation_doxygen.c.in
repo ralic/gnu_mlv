@@ -1150,13 +1150,8 @@ gcc -Wall `pkg-config --cflags MLV` `pkg-config --libs-only-other --libs-only-L 
 d'utiliser un Makefile.
 
 La page \subpage outils_compilation présente deux exemples de makefile permettant d'automatiser la compilation.
+
 */
-
-
-
-
-
-
 
 
 
@@ -1263,6 +1258,12 @@ gcc -I./include -Wall -O2 -g -L./lib -L./final_product demo.c -lMLV-0 -lSDL -lmi
 /*!
 \~french
 \page outils_compilation Outils de compilation automatique
+
+Cette page présente trois façon différentes d'écrire un Makefile pour votre projet MLV.
+ - \ref compilation_makefile 
+ - \ref compilation_makefile_avance 
+ - \ref generation_makefile_cmake_pour_mlv 
+
 \section compilation_makefile Compilation simplifiée avec un makefile
 
 Vous pouvez aussi utiliser le makefile suivant, en modifiant le champs TARGET pour mettre le nom de vos différents programmes.
@@ -1338,10 +1339,52 @@ clean:
 	-rm -f $(OBJECTS)
 	-rm -f $(DEPENDS)
 \endverbatim
+
+\section generation_makefile_cmake_pour_mlv Génération d'une Makefile avec CMake
+
+Pour compiler votre programme en utilisant CMake, commencez par créer un 
+répertoire pour votre projet que vous apellerez mlv_example.
+
+Ensuite, dans ce dossier, mettez le code source de votre programme 
+example_mlv.c, puis, ajouter dans ce répertoire, un fichier CMakeLists.txt qui 
+contiendra les instructions suivantes:
+
+\verbatim
+cmake_minimum_required (VERSION 2.6)
+
+project (mlv_example)
+
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(MLV REQUIRED MLV)
+
+add_executable(mlv_program example_mlv.c example_mlv.h)
+
+target_link_libraries(mlv_program ${MLV_LIBRARIES})
+target_include_directories(mlv_program PUBLIC ${MLV_INCLUDE_DIRS})
+target_compile_options(mlv_program PUBLIC ${MLV_CFLAGS_OTHER})
+\endverbatim
+
+Créez maintenant un répertoire de compilation de nom build en tapant la commande :
+
+\verbatim
+mkdir build
+\endverbatim
+
+Une fois prêt, vous pouvez générer votre Makefile en tapant la commande :
+
+\verbatim
+cd build
+cmake ..
+\endverbatim
+
+Vous pouvez compiler votre projet à l'aide de la commande :
+
+\verbatim
+make
+\endverbatim
+
+Dans le répertoire build se trouve normalement le programme mlv_program.
 */
-
-
-
 
 
 // ============================================================================
@@ -3143,8 +3186,17 @@ int main(){
 La fonction va suspendre l'exécution du programme et la reprendre un 
 peux plus tard, de sorte que la boucle soit éxécutée 100 fois par seconde.
 
+<b>
+Comment utiliser MLV avec CMake ? Existe-t-il un projet utilisant MLV et CMake ?
+</b>
+
+Il existe une page qui explique comment utiliser MLV avec Cmake.
+Tu la trouveras à l'adresse : \ref generation_makefile_cmake_pour_mlv.
 
 */
+
+
+
 
 // ============================================================================
 

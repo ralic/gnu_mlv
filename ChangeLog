@@ -5,6 +5,7 @@ mlv-2.0.2-dev
    * Correct the document of MLV_wait_input_box. The function take now
      the top-right corner, the width and the height.
    * Remove some french word in the code.
+   * Add a small tutorial to use MLV with CMake
  * Image :
    * We add MLV_get_screen() that return the image on the screen.
  * Event:
