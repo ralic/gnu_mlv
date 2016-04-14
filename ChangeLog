@@ -5,13 +5,15 @@ mlv-2.0.2-dev
    * Correct the document of MLV_wait_input_box. The function take now
      the top-right corner, the width and the height.
    * Remove some french word in the code.
+ * Image :
+   * We add MLV_get_screen() that return the image on the screen.
+ * Event:
+   * Add MLV_wait_mouse_or_millisecond
  * Bug
    * Remove a bug in MLV_draw_pixel and MLV_draw_pixel_on_image. Now image is 
      not toric. 
  * Example
    * Change MLV_actualise_window by MLV_update_window
- * Event:
-   * Add MLV_wait_mouse_or_millisecond
 
 mlv-2.0.2
  * Window :

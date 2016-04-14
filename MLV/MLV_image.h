@@ -492,6 +492,13 @@ SDL_Surface* MLV_get_image_data( MLV_Image* image );
 void MLV_save_screen();
 
 /** \~french 
+ * \brief Renvoie l'image qui se trouve à l'écran.
+ *
+ * \return L'image qui est affiché à l'écran.
+ */
+MLV_Image* MLV_get_screen();
+
+/** \~french 
  * \brief Charge l'image présent dans le presse papier interne de la bibliothèque
  *        MLV.
  *

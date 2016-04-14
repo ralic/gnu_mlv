@@ -515,6 +515,12 @@ void MLV_save_screen(){
     SDL_BlitSurface( MLV_data->screen, NULL, MLV_data->save_screen, &(MLV_data->rectangle));
 }
 
+MLV_Image* MLV_get_screen(){
+	MLV_Image* image = MLV_create_image( MLV_data->rectangle.w, MLV_data->rectangle.h );
+    SDL_BlitSurface( MLV_data->screen, NULL, image->surface, &(MLV_data->rectangle));
+	return image;
+}
+
 void MLV_load_screen(){
     SDL_BlitSurface( MLV_data->save_screen, NULL, MLV_data->screen, &(MLV_data->rectangle));
 }
