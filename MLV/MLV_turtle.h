@@ -31,6 +31,7 @@
 #define __MLV__MLV_TURTLE_H__
 
 #include "MLV_color.h"
+#include "MLV_Image.h"
 
 #ifdef __cplusplus
 extern "C" {
