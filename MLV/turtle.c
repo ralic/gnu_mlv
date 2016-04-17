@@ -162,6 +162,14 @@ void init_leonardo_turtle(){
 	MLV_turtle_write( MLV_data->leonardo->turtle, 1 );
 }
 
+void leonardo_updates_window(){
+	if( MLV_data->leonardo->update ){
+		MLV_update_window();
+	}
+	if( MLV_data->leonardo->time != 0 ){
+		MLV_wait_milliseconds( MLV_data->turtle->time );
+	}
+}
 
 void MLV_leonardo_radian(){
 	MLV_turtle_radian( MLV_data->leonardo->turtle );
@@ -173,28 +181,27 @@ void MLV_leonardo_degree(){
 
 void MLV_leonardo_forward( float distance ){
 	MLV_turtle_forward( MLV_data->leonardo->turtle, distance );
+	leonardo_updates_window();
 }
 
 void MLV_leonardo_right( double angle ){
 	MLV_leonardo_right( MLV_data->leonardo->turtle, angle ); 
+	leonardo_updates_window();
 }
 
 void MLV_leonardo_left( double angle ){
 	MLV_turtle_left( MLV_data->leonardo->turtle, angle );
+	leonardo_updates_window();
 }
 
 void MLV_leonardo_goto( int x, int y ){
 	MLV_turtle_goto( MLV_data->leonardo->turtle, x, y );
-	if( MLV_data->leonardo->update ){
-		MLV_update_window();
-	}
-	if( MLV_data->leonardo->time != 0 ){
-		MLV_wait_milliseconds( MLV_data->turtle->time );
-	}
+	leonardo_updates_window();
 }
 
 void MLV_leonardo_orient( double angle ){
 	MLV_turtle_orient( MLV_data->leonardo->turtle, angle );
+	leonardo_updates_window();
 }
 
 void MLV_leonardo_color( MLV_Color color ){
@@ -209,6 +216,6 @@ void MLV_leonardo_speed( int time ){
 	MLV_data->leonardo->turtle->time = time;
 }
 
-void MLV_leonardo_update_window( int yes ){
+void MLV_leonardo_should_update_window( int yes ){
 	MLV_data->leonardo->turtle->update = update;
 }

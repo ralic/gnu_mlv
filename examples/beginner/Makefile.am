@@ -30,7 +30,8 @@ noinst_PROGRAMS = \
 	07_input_box \
 	08_mouse_keyboard_timer \
 	09_colors \
-	10_library_informations
+	10_library_informations \
+	11_turtle
 	
 docbeginnerdir = $(docdir)/examples/beginner
 
@@ -45,6 +46,7 @@ docbeginner_DATA = \
 	08_mouse_keyboard_timer.c \
 	09_colors.c \
 	10_library_informations.c \
+	11_turtle.c \
 	gpl.txt \
 	makefile-examples
 
@@ -73,3 +75,4 @@ endif
 08_mouse_keyboard_timer_SOURCES = 08_mouse_keyboard_timer.c
 09_colors_SOURCES = 09_colors.c
 10_library_informations_SOURCES = 10_library_informations.c
+11_turtle_SOURCES = 11_turtle.c

@@ -47,7 +47,7 @@ void MLV_leonardo_orient( double angle );
 void MLV_leonardo_color( MLV_Color color );
 void MLV_leonardo_write( int write );
 void MLV_leonardo_speed( int time );
-void MLV_leonardo_update_window( int yes );
+void MLV_leonardo_should_update_window( int yes );
 
 typedef struct _MLV_Turtle MLV_Turtle;
 
