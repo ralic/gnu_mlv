@@ -235,6 +235,11 @@ void MLV_create_window_with_default_font(
 	init_font();
 	
 	/**************************************************************************/
+	/* Initialisation de tortue Leonardo, la mascotte de MLV                  */
+	/**************************************************************************/
+	init_leonardo_turtle();
+
+	/**************************************************************************/
 	/* Création d'une font par default                                        */
 	/**************************************************************************/
 	initialize_default_font( path_to_font, size_font );
@@ -337,6 +342,7 @@ void MLV_free_window(){
 	}
 	SDL_FreeSurface(MLV_data->screen);
 	SDL_FreeSurface(MLV_data->save_screen);
+	free_leonardo_turtle();
 	free_default_font();
 	quit_font();
 	MLV_FREE( MLV_data, DataMLV );

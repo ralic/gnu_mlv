@@ -44,6 +44,7 @@ libMLV_la_SOURCES = \
 	sdlkeyboardtochar.c \
 	text.c \
 	time.c \
+	turtle.c \
 	xml.c \
 	list.c \
 	mathematics.c \
@@ -95,6 +96,7 @@ mlv_include_HEADERS = \
 	MLV_text.h \
 	MLV_text_va.h \
 	MLV_time.h \
+	MLV_turtle.h \
 	MLV_xml.h \
 	MLV_xml_va.h \
 	MLV_window.h
@@ -114,5 +116,6 @@ noinst_HEADERS = \
 	key.h \
 	tree_set.h \
 	tree_map.h \
+	turtle.h \
 	SDLMain.h
 

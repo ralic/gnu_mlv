@@ -8,6 +8,10 @@ mlv-2.0.2-dev
    * Add a small tutorial to use MLV with CMake
  * Image :
    * We add MLV_get_screen() that return the image on the screen.
+ * Turtle
+   * We implement logo turtles with the MLV_Turtle structure (MLV_turtle.h).
+     The MLV_Turtle can be used as a logo turtle.
+   * We add Leonardo, the MLV mascot. It is the default turtle of MLV.
  * Event:
    * Add MLV_wait_mouse_or_millisecond
  * Bug

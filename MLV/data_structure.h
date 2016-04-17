@@ -47,6 +47,7 @@
 #include "MLV_text.h"
 
 #include "list.h"
+#include "turtle.h"
 
 typedef struct _DataMLV {
 	SDL_Surface *screen;
@@ -63,6 +64,7 @@ typedef struct _DataMLV {
 	MLV_Font* defaultFont;
 	FPSmanager frame_rate_manager;
 	FPSmanager frame_rate_manager_for_MLV_wait_event;
+	MLV_Leonardo_turtle* leonardo; // The turtle mascot of MLV
 } DataMLV;
 
 struct _MLV_Image {
