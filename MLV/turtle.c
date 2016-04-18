@@ -138,9 +138,13 @@ void MLV_turtle_color( MLV_Turtle* turtle, MLV_Color color ){
 void MLV_turtle_write( MLV_Turtle* turtle, int write ){
 	turtle->write = write;
 	if( write ){
+		if( turtle->image ){
 			MLV_draw_point_on_image(
 				turtle->x, turtle->y, turtle->color, turtle->image
 			);
+		}else{
+			MLV_draw_point( turtle->x, turtle->y, turtle->color );
+		}
 	}
 }
 
@@ -163,18 +167,20 @@ void init_leonardo_turtle(){
 	}
 	MLV_data->leonardo = MLV_MALLOC( 1, MLV_Leonardo_turtle );
 
-	MLV_data->leonardo->time = 500;
-	MLV_data->leonardo->update = 1;
-
 	MLV_data->leonardo->turtle = MLV_create_turtle();
 	MLV_turtle_degree( MLV_data->leonardo->turtle );
+	MLV_turtle_orient_to( MLV_data->leonardo->turtle, 0 );
+	MLV_turtle_color( MLV_data->leonardo->turtle, MLV_COLOR_GREEN );
+	MLV_turtle_write( MLV_data->leonardo->turtle, 0 );
+
 	MLV_turtle_go_to(
 		MLV_data->leonardo->turtle,
 		MLV_get_window_width()/2, MLV_get_window_height()/2
 	);
-	MLV_turtle_orient_to( MLV_data->leonardo->turtle, 0 );
-	MLV_turtle_color( MLV_data->leonardo->turtle, MLV_COLOR_GREEN );
-	MLV_turtle_write( MLV_data->leonardo->turtle, 1 );
+
+	MLV_leonardo_speed( 500 );
+	MLV_leonardo_should_update_window( 1 );
+
 }
 
 void leonardo_updates_window(){

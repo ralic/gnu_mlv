@@ -36,7 +36,7 @@ int main( int argc, char *argv[] ){
 	MLV_leonardo_speed(200);
 
 	//
-	// Nous allon faire tracer par la tortue Léonardo un triangle équilatéral.
+	// Nous allons faire tracer par la tortue Léonardo un triangle équilatéral.
 	//
 
 	// On déplace la tortue à la coordonnée (x-20, y-20)
