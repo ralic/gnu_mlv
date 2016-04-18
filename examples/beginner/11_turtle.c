@@ -30,7 +30,7 @@ int main( int argc, char *argv[] ){
 	MLV_leonardo_color( MLV_COLOR_GREEN ); // On change la couleur du pinceau 
 	MLV_leonardo_speed(200); // On change la vitesse de Leonardo.
 	                         // Il s'agit du temps en millisecnde entre chaque 
-	                         // déplacement ( left, right, orient, goto ou 
+	                         // déplacement ( left, right, orient_to, go_to ou 
 	                         // forward)
 
 	//
@@ -38,9 +38,9 @@ int main( int argc, char *argv[] ){
 	//
 
 	// On déplace la tortue à la coordonnée (x-20, y-20)
-	MLV_leonardo_goto( 200, 100 );
+	MLV_leonardo_go_to( 200, 100 );
 	// On oriente Leonardo vers le bas de l'image.
-	MLV_leonardo_orient( 90 );
+	MLV_leonardo_orient_to( 90 );
 
 	// Dessin du premier côté du triangle :
 	// On pose le crayon su l'écran

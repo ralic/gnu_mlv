@@ -41,32 +41,237 @@ extern "C" {
 //  TODO : Ecrire la documentiation des fonctions
 //
 
+/** \~french
+ * \brief La tortue Leonardo utilise désormais les angles en radian.
+ *
+ * Maienant les ordres reçus par la tortue seront en radian.
+ * L'angle courant de la tortue est converti en radian.
+ */
 void MLV_leonardo_radian();
+
+/** \~french
+ * \brief La tortue Leonardo utilise désormais les angles en degrés.
+ *
+ * Maienant les ordres reçus par la tortue seront en degrés.
+ * L'angle courant de la tortue est converti en degrés.
+ */
 void MLV_leonardo_degree();
+
+/** \~french
+ * \brief La tortue Leonardo avance d'un nombre de pixel donnée en paramètre.
+ *
+ * \param distance La distance en pixel à parcourir.
+ */
 void MLV_leonardo_forward( float distance );
+
+/** \~french
+ * \brief La tortue Leonardo tourne à droite d'un angle donné en paramètre.
+ * 
+ * L'angle passé en paramètre doit être en degré par défault.
+ * Vous pouvez donner des radian, si vous avez changé le format des
+ * angles utilisé par la tortue Leonardo en utilsant la fonction :
+ * MLV_lonardo_radian().
+ *
+ * \param angle L'angle de la rotation (en degré par default).
+ */
 void MLV_leonardo_right( double angle );
+
+/** \~french
+ * \brief La tortue Leonardo tourne à gauche d'un angle donné en paramètre.
+ * 
+ * L'angle passé en paramètre doit être en degré par défault.
+ * Vous pouvez donner des radian, si vous avez changé le format des
+ * angles utilisé par la tortue Leonardo en utilsant la fonction :
+ * MLV_lonardo_radian().
+ *
+ * \param angle L'angle de la rotation (en degré par default).
+ */
 void MLV_leonardo_left( double angle );
-void MLV_leonardo_goto( int x, int y );
-void MLV_leonardo_orient( double angle );
+
+/** \~french
+ * \brief La tortue Leonardo se déplace à la position passé en paramètre, 
+ *        sans changer son orientation.
+ *
+ * Nous rapellons que l'origine est situé en haut à gauche de l'écran, que l
+ * m'axe des x est orienté vers la gauche et l'axe des y vers le bas.
+ * 
+ * \param x La position en X.
+ * \param y La position en Y.
+ */
+void MLV_leonardo_go_to( int x, int y );
+
+/** \~french
+ * \brief La tortue Leonardo s'oriente vers la direction donné en parmètre.
+ *
+ * La direction est codé à l'aide d'un angle entre le vecteur des axes des x
+ * et la vecteur directeur de la tortue.
+ *
+ * Nous rapellons que l'origine est situé en haut à gauche de l'écran, que l
+ * m'axe des x est orienté vers la gauche et l'axe des y vers le bas.
+ * Ainsi, un angle positif corresond à une rotation dans le sens des 
+ * aiguilles d'une montre.
+ *
+ * Si le pinceau est posé, un trait apparait.
+ * 
+ * \param angle La direction, codée par un angle entre l'axe des x et la direction.
+ */
+void MLV_leonardo_orient_to( double angle );
+
+/** \~french
+ * \brief Change la couleur du pinceau de la tortue Leonardo.
+ *
+ * \param color La couleur du pinceau.
+ */
 void MLV_leonardo_color( MLV_Color color );
+
+/** \~french
+ * \brief La tortue Leonardo pose le pinceau et écrit.
+ *
+ * Si le booléen write est vrai (!=0), alors le pinceau est posé et la tortue 
+ * écrit.
+ * Sinon le pinceau est relevé et la tortue n'écrit pas.
+ *
+ * Au moment où le pinceau est posée un point apparait.
+ * 
+ * \param write Un booléen.
+ */
 void MLV_leonardo_write( int write );
+
+/** \~french
+ * \brief Modifie la vitesse de la tortue Leonardo.
+ *
+ * Après chaque déplacement (rotation et translation) la tortue attends en 
+ * mettant en attente le programme d'un nombre de milisedonde donné en paramètre
+ * de cette fonction.
+ * 
+ * \param time Le nombre de milisecondes que le programme attends entre chaque
+ *        déplacement.
+ */
 void MLV_leonardo_speed( int time );
+
+/** \~french
+ * \brief Demmande à la tortue Leonardo de mettre à jour l'affichage à chaque 
+ *        déacement.
+ *
+ * Après chaque déplacement (rotation et translation) la tortue met à jour
+ * l'affichage si le paramère de cette donction est positioné à vrai.
+ * 
+ * \param yes Un booléen.
+ */
 void MLV_leonardo_should_update_window( int yes );
 
 typedef struct _MLV_Turtle MLV_Turtle;
 
 MLV_Turtle* MLV_create_turtle();
-
 void MLV_free_turtle( MLV_Turtle* turtle );
+
 void MLV_turtle_attach_on_image( MLV_Turtle* turtle, MLV_Image* image );
+
+/** \~french
+ * \brief La tortue passée en paramètre utilise désormais les angles en radian.
+ *
+ * Maienant les ordres reçus par la tortue seront en radian.
+ * L'angle courant de la tortue est converti en radian.
+ *
+ * \param turtle Une tortue.
+ */
 void MLV_turtle_radian( MLV_Turtle* turtle );
+
+/** \~french
+ * \brief La tortue passée en paramètre utilise désormais les angles en degrés.
+ *
+ * Maienant les ordres reçus par la tortue seront en degrés.
+ * L'angle courant de la tortue est converti en degrés.
+ *
+ * \param turtle Une tortue.
+ */
 void MLV_turtle_degree( MLV_Turtle* turtle );
+
+/** \~french
+ * \brief La tortue avance d'un nombre de pixel donnée en paramètre.
+ *
+ * \param turtle Une tortue.
+ * \param distance La distance en pixel à parcourir.
+ */
 void MLV_turtle_forward( MLV_Turtle* turtle, float distance );
+
+/** \~french
+ * \brief La tortue à droite d'un angle donné en paramètre.
+ * 
+ * L'angle passé en paramètre doit être en degré par défault.
+ * Vous pouvez donner des radian, si vous avez changé le format des
+ * angles utilisé par la tortue en utilsant la fonction :
+ * MLV_lonardo_radian().
+ *
+ * \param turtle Une tortue.
+ * \param angle L'angle de la rotation (en degré par default).
+ */
 void MLV_turtle_right( MLV_Turtle* turtle, double angle );
+
+/** \~french
+ * \brief La tortue tourne à gauche d'un angle donné en paramètre.
+ * 
+ * L'angle passé en paramètre doit être en degré par défault.
+ * Vous pouvez donner des radian, si vous avez changé le format des
+ * angles utilisé par la tortue en utilsant la fonction :
+ * MLV_lonardo_radian().
+ *
+ * \param turtle Une tortue.
+ * \param angle L'angle de la rotation (en degré par default).
+ */
 void MLV_turtle_left( MLV_Turtle* turtle, double angle );
-void MLV_turtle_goto( MLV_Turtle* turtle, int x, int y );
-void MLV_turtle_orient( MLV_Turtle* turtle, double angle );
+
+/** \~french
+ * \brief La tortue se déplace à la position passé en paramètre, sans changer 
+ *        son orientation.
+ *
+ * Nous rapellons que l'origine est situé en haut à gauche de l'écran, que l
+ * m'axe des x est orienté vers la gauche et l'axe des y vers le bas.
+ * 
+ * \param turtle Une tortue.
+ * \param x La position en X.
+ * \param y La position en Y.
+ */
+void MLV_turtle_go_to( MLV_Turtle* turtle, int x, int y );
+
+/** \~french
+ * \brief La tortue s'oriente vers la direction donné en parmètre.
+ *
+ * La direction est codé à l'aide d'un angle entre le vecteur des axes des x
+ * et la vecteur directeur de la tortue.
+ *
+ * Nous rapellons que l'origine est situé en haut à gauche de l'écran, que l
+ * m'axe des x est orienté vers la gauche et l'axe des y vers le bas.
+ * Ainsi, un angle positif corresond à une rotation dans le sens des 
+ * aiguilles d'une montre.
+ *
+ * Si le pinceau est posé, un trait apparait.
+ * 
+ * \param turtle Une tortue.
+ * \param angle La direction, codée par un angle entre l'axe des x et la direction.
+ */
+void MLV_turtle_orient_to( MLV_Turtle* turtle, double angle );
+
+/** \~french
+ * \brief Change la couleur du pinceau de la tortue passée en paramètre.
+ *
+ * \param turtle Une tortue.
+ * \param color La couleur du pinceau.
+ */
 void MLV_turtle_color( MLV_Turtle* turtle, MLV_Color color );
+
+/** \~french
+ * \brief La tortue pose le pinceau et écrit.
+ *
+ * Si le booléen write est vrai (!=0), alors le pinceau est posé et la tortue 
+ * écrit.
+ * Sinon le pinceau est relevé et la tortue n'écrit pas.
+ *
+ * Au moment où le pinceau est posée un point apparait.
+ * 
+ * \param turtle Une tortue.
+ * \param write Un booléen.
+ */
 void MLV_turtle_write( MLV_Turtle* turtle, int write );
 
 #ifdef __cplusplus
