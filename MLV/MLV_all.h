@@ -84,6 +84,9 @@
  * 
  * MLV_time.h : propose des outils pour gérer le temps.
  *
+ * MLV_turtle.h : propose une implémentation de la tortue, inspiré de 
+                  le tortue du langage Lodo.
+ *
  * MLV_xml.h : propose des outils pour lire des fichiers XML.
  * 
  * MLV_xml_va.h : définit les même outils que MLV_xml.h mais en prenant une 
@@ -155,6 +158,8 @@
  * 
  * MLV_time.h : propone herramientas para utilisar el tiempo.
  *
+ * MLV_turtle.h : propone herramientas para utilisar una tortuga como  *                la tortuga de Logo.
+ *
  * MLV_xml.h : TODO
  *
  * MLV_xml_va.h : TODO
@@ -191,6 +196,7 @@
 #include "MLV_random.h"
 #include "MLV_text.h"
 #include "MLV_text_va.h"
+#include "MLV_turtle.h"
 #include "MLV_time.h"
 #include "MLV_xml.h"
 #include "MLV_xml_va.h"
