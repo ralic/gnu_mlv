@@ -113,8 +113,22 @@ void MLV_turtle_left( MLV_Turtle* turtle, double angle ){
 }
 
 void MLV_turtle_go_to( MLV_Turtle* turtle, int x, int y ){
+	int old_x = turtle->x;
+	int old_y = turtle->y;
 	turtle->x = x;
 	turtle->y = y;
+	if( turtle->write ){
+		if( turtle->image ){
+			MLV_draw_line_on_image(
+				old_x, old_y, turtle->x, turtle->y, turtle->color
+				, turtle->image
+			);
+		}else{
+			MLV_draw_line( old_x, old_y, turtle->x, turtle->y, turtle->color );
+		}
+	}
+
+
 }
 
 void MLV_turtle_color( MLV_Turtle* turtle, MLV_Color color ){

@@ -160,11 +160,51 @@ void MLV_leonardo_speed( int time );
  */
 void MLV_leonardo_should_update_window( int yes );
 
+/** \~french 
+ * \brief Définit le type d'une tortue.
+ *
+ * Une tortue est un entité informatique qui permet de dessiner sur une image
+ * en se déplacant, à l'aide d'ordre simple, comme avancer, tourner, etc ...
+ */
 typedef struct _MLV_Turtle MLV_Turtle;
 
+/** \~french
+ * \brief Créer une tortue qui dessine sur la fenêtre d'affichage.
+ *
+ * \param turtle Une tortue.
+ */
 MLV_Turtle* MLV_create_turtle();
+
+/** \~french
+ * \brief Libère la mémoire de la tortue.
+ *
+ * La mémoire associé à l'image sur laquelle la tortue dessine, n'est pas 
+ * libérée.
+ *
+ * \param turtle Une tortue.
+ */
 void MLV_free_turtle( MLV_Turtle* turtle );
 
+/** \~french
+ * \brief Attache la tortue sur une image passé en paramètre.
+ *
+ * Par défault, la tortue est attachée à l'image de la fenêtre d'affichage, 
+ * celle qui est affichée lorsque l'on utilise la fonction MLV_update_window().
+ *
+ * Si vous attachez la tortue à une autre image, alors la tortue dessinera
+ * uniquement sur l'image qui vient d'être attachée et sur aucune autre image.
+ *
+ * Si vous passez NULL au paramètre de cette fonction, alors la tortue 
+ * s'attache de nouveau à l'image par défault, c'est à dira à l'image de la 
+ * fenête d'affichage.
+ *
+ * La tortue ne devient pas propriétaire de l'image passée en paramètre.
+ * Elle ne libère donc pas la mémoire associée à l'image lorsque la mémoire de 
+ * la tortue est libérée en utilisant la fonction MLV_free_turtle().
+ *
+ * \param turtle Une tortue.
+ * \param image Une image.
+ */
 void MLV_turtle_attach_on_image( MLV_Turtle* turtle, MLV_Image* image );
 
 /** \~french

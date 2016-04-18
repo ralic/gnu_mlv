@@ -3286,9 +3286,10 @@ La tortue est un animal virutel qui possède un stylo. On peut donner
 à cette tortue des ordres comme  :
  - poser le stylo
  - avancer
- - tourner à gauche/droite d'un certain angle
+ - tourner à gauche, tourner à droite
  - etc ...
-La tortue est pratique à utilisée pour dessinner des fractales, comme
+
+La tortue est pratique à utiliser pour dessinner des fractales, comme
 Le Flocon de Koch ou la courbe du dragon.
 
 

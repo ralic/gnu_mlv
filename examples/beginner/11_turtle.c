@@ -27,11 +27,13 @@ int main( int argc, char *argv[] ){
 	//
 	MLV_create_window( "beginner - 11 - The turtle", "Th turtle", 640, 480 );
 
-	MLV_leonardo_color( MLV_COLOR_GREEN ); // On change la couleur du pinceau 
-	MLV_leonardo_speed(200); // On change la vitesse de Leonardo.
-	                         // Il s'agit du temps en millisecnde entre chaque 
-	                         // déplacement ( left, right, orient_to, go_to ou 
-	                         // forward)
+	// On change la couleur du pinceau 
+	MLV_leonardo_color( MLV_COLOR_GREEN );
+
+	// On change la vitesse de Leonardo en modifiant le temps en miliseconde
+	// pris par la tortue entre chaque déplacement ( left, right, orient_to, 
+	// go_to ou forward ).
+	MLV_leonardo_speed(200);
 
 	//
 	// Nous allon faire tracer par la tortue Léonardo un triangle équilatéral.
