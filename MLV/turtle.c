@@ -92,18 +92,8 @@ void MLV_turtle_forward( MLV_Turtle* turtle, float distance ){
 				old_x, old_y, turtle->x, turtle->y, turtle->color
 				, turtle->image
 			);
-//			MLV_draw_point_on_image(
-//				old_x, old_y, turtle->color,
-//				turtle->image
-//			);
-//			MLV_draw_point_on_image(
-//				turtle->x, turtle->y, turtle->color,
-//				turtle->image
-//			);
 		}else{
 			MLV_draw_line( old_x, old_y, turtle->x, turtle->y, turtle->color );
-//			MLV_draw_point( old_x, old_y, turtle->color );
-//			MLV_draw_point( turtle->x, turtle->y, turtle->color );
 		}
 	}
 }

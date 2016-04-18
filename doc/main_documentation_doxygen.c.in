@@ -431,6 +431,7 @@ mlv-0.6.692-dev-cpp
 |   |-- beginner_08_mouse_keyboard_timer.dev
 |   |-- beginner_09_colors.dev
 |   |-- beginner_10_library_informations.dev
+|   |-- beginner_11_turtle.dev
 |   |-- medium_01_keyboard_events.dev
 |   |-- medium_02_mouse_events.dev
 |   |-- medium_03_input_box_events.dev
@@ -512,6 +513,7 @@ mlv-0.6.692-code_blocks
 |   |-- beginner_08_mouse_keyboard_timer.cbp
 |   |-- beginner_09_colors.cbp
 |   |-- beginner_10_library_informations.cbp
+|   |-- beginner_11_turtle.cbp
 |   |-- medium_01_keyboard_events.cbp
 |   |-- medium_02_mouse_events.cbp
 |   |-- medium_03_input_box_events.cbp
@@ -3275,6 +3277,19 @@ des informations concernant la bibliothèque.
 
 Ce programme présente aussi rapidement la licence sous laquelle est distribuée
 la bibliothèque MLV.
+
+\example beginner/11_turtle.c
+Ce programme montre comment utiliser une tortue du nom de Leonardo.
+La tortue Leonardo est inspirée du langage Logo et permet de réaliser des 
+dessins.
+La tortue est un animal virutel qui possède un stylo. On peut donner
+à cette tortue des ordres comme  :
+ - poser le stylo
+ - avancer
+ - tourner à gauche/droite d'un certain angle
+ - etc ...
+La tortue est pratique à utilisée pour dessinner des fractales, comme
+Le Flocon de Koch ou la courbe du dragon.
 
 
 \example medium/01_keyboard_events.c

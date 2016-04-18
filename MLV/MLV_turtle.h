@@ -37,6 +37,10 @@
 extern "C" {
 #endif
 
+//
+//  TODO : Ecrire la documentiation des fonctions
+//
+
 void MLV_leonardo_radian();
 void MLV_leonardo_degree();
 void MLV_leonardo_forward( float distance );

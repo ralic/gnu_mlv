@@ -5,6 +5,9 @@
  * Pour cela le programme  utilise les fonctions suivantes : 
  *
  *------------------------------------------------------------------------------
+ * 
+ *   TODO : Ecrire la documentiation des fonctions
+ * 
  *------------------------------------------------------------------------------
  */
 

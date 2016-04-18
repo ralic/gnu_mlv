@@ -1,4 +1,4 @@
-TARGET = 01_hello_world 02_shapes 03_random 04_texts_and_boxes 05_mouse 06_keyboard 07_input_box 08_mouse_keyboard_timer 09_colors 10_library_informations
+TARGET = 01_hello_world 02_shapes 03_random 04_texts_and_boxes 05_mouse 06_keyboard 07_input_box 08_mouse_keyboard_timer 09_colors 10_library_informations 11_turtle
 
 ##########################################################"
 
