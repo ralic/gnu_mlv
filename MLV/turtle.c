@@ -68,17 +68,33 @@ MLV_Turtle* MLV_create_turtle(){
 	return turtle;
 }
 
+void set_angle_in_radian( MLV_Turtle* turtle, double angle ){
+	if( turtle->degree ){
+		turtle->angle = (angle*180.0)/M_PI;
+	}else{
+		turtle->angle = angle;
+	}
+}
+
+void set_angle_in_degree( MLV_Turtle* turtle, double angle ){
+	if( turtle->degree ){
+		turtle->angle = angle;
+	}else{
+		turtle->angle = (angle*M_PI)/180.0;
+	}
+}
+
 void MLV_turtle_radian( MLV_Turtle* turtle ){
 	if( turtle->degree ){
-		turtle->angle = (turtle->angle * M_PI )/180.0;
 		turtle->degree = 0;
+		set_angle_in_degree( turtle, turtle->angle );
 	}
 }
 
 void MLV_turtle_degree( MLV_Turtle* turtle ){
 	if( ! turtle->degree ){
-		turtle->angle = (turtle->angle *180.0)/M_PI;
 		turtle->degree = 1;
+		set_angle_in_radian( turtle, turtle->angle );
 	}
 }
 
@@ -127,8 +143,6 @@ void MLV_turtle_go_to( MLV_Turtle* turtle, int x, int y ){
 			MLV_draw_line( old_x, old_y, turtle->x, turtle->y, turtle->color );
 		}
 	}
-
-
 }
 
 void MLV_turtle_color( MLV_Turtle* turtle, MLV_Color color ){
@@ -145,6 +159,29 @@ void MLV_turtle_write( MLV_Turtle* turtle, int write ){
 		}else{
 			MLV_draw_point( turtle->x, turtle->y, turtle->color );
 		}
+	}
+}
+
+int MLV_turtle_X_coordinate( MLV_Turtle* turtle ){
+	return turtle->x;
+}
+
+int MLV_turtle_Y_coordinate( MLV_Turtle* turtle ){
+	return turtle->y;
+}
+
+double MLV_turtle_orientation( MLV_Turtle* turtle ){
+	return turtle->angle;
+}
+
+void MLV_turtle_point_to( MLV_Turtle* turtle, int x, int y ){
+	double vx = (x - turtle->x);
+	double vy = (y - turtle->y);
+	double vn = sqrt( vx*vx + vy*vy )
+	if( asin(vy/vn) >= 0.0 ){
+		set_angle_in_radian( turtle, acos(vx/vn) );
+	}else{
+		set_angle_in_radian( turtle, - acos(vx/vn) );
 	}
 }
 
@@ -180,7 +217,6 @@ void init_leonardo_turtle(){
 
 	MLV_leonardo_speed( 500 );
 	MLV_leonardo_should_update_window( 1 );
-
 }
 
 void leonardo_updates_window(){
@@ -231,6 +267,22 @@ void MLV_leonardo_color( MLV_Color color ){
 
 void MLV_leonardo_write( int write ){
 	MLV_turtle_write( MLV_data->leonardo->turtle, write );
+}
+
+int MLV_leonardo_X_coordinate(){
+	return MLV_turtle_X_coordinate( MLV_data->leonardo->turtle );
+}
+
+int MLV_leonardo_Y_coordinate(){
+	return MLV_turtle_Y_coordinate( MLV_data->leonardo->turtle );
+}
+
+double MLV_leonardo_orientation(){
+	return MLV_turtle_orientation( MLV_data->leonardo->turtle );
+}
+
+void MLV_leonardo_point_to( int x, int y ){
+	MLV_turtle_point_to( MLV_data->leonardo->turtle, x, y );
 }
 
 void MLV_leonardo_speed( int time ){

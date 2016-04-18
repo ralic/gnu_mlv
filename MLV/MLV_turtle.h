@@ -138,6 +138,39 @@ void MLV_leonardo_color( MLV_Color color );
 void MLV_leonardo_write( int write );
 
 /** \~french
+ * \brief Renvoie la coordonée en X de la tortue Leonardo.
+ *
+ * \return Un coordonée en X
+ */
+int MLV_leonardo_X_coordinate();
+
+/** \~french
+ * \brief Renvoie la coordonée en Y de la tortuei Leonardo.
+ *
+ * \return Un coordonée en Y
+ */
+int MLV_leonardo_Y_coordinate();
+
+/** \~french
+ * \brief Renvoie l'orientation de la tortue Leonardo.
+ *
+ * Par défault l'angle est en degrés à moins que le format de l'angle ait été
+ * moifié à l'aide de la fonction MLV_leonardo_radian().
+ *
+ * \return Un angle
+ */
+double MLV_leonardo_orientation();
+
+/** \~french
+ * \brief Tourne la tortue Leonardo pour qu'elle regarde vers le point passé en 
+ *        paramètre.
+ *
+ * \param x La coordonée X du point
+ * \param y La coordonée Y du point
+ */
+void MLV_leonardo_point_to( int x, int y );
+
+/** \~french
  * \brief Modifie la vitesse de la tortue Leonardo.
  *
  * Après chaque déplacement (rotation et translation) la tortue attends en 
@@ -285,8 +318,6 @@ void MLV_turtle_go_to( MLV_Turtle* turtle, int x, int y );
  * Ainsi, un angle positif corresond à une rotation dans le sens des 
  * aiguilles d'une montre.
  *
- * Si le pinceau est posé, un trait apparait.
- * 
  * \param turtle Une tortue.
  * \param angle La direction, codée par un angle entre l'axe des x et la direction.
  */
@@ -313,6 +344,43 @@ void MLV_turtle_color( MLV_Turtle* turtle, MLV_Color color );
  * \param write Un booléen.
  */
 void MLV_turtle_write( MLV_Turtle* turtle, int write );
+
+/** \~french
+ * \brief Tourne la tortue pour qu'elle regarde vers le point passé en 
+ *        paramètre.
+ *
+ * \param turtle Une tortue.
+ * \param x La coordonée X du point
+ * \param y La coordonée Y du point
+ */
+void MLV_turtle_point_to( MLV_Turtle* turtle, int x, int y );
+
+/** \~french
+ * \brief Renvoie la coordonée en X de la tortue.
+ *
+ * \param turtle Une tortue.
+ * \return Un coordonée en X
+ */
+int MLV_turtle_X_coordinate( MLV_Turtle* turtle );
+
+/** \~french
+ * \brief Renvoie la coordonée en Y de la tortue.
+ *
+ * \param turtle Une tortue.
+ * \return Un coordonée en Y
+ */
+int MLV_turtle_Y_coordinate( MLV_Turtle* turtle );
+
+/** \~french
+ * \brief Renvoie l'orientation de la tortue.
+ *
+ * Par défault l'angle est en degrés à moins que le format de l'angle ait été
+ * moifié à l'aide de la fonction MLV_turtle_radian().
+ *
+ * \param turtle Une tortue.
+ * \return Un angle
+ */
+double MLV_turtle_orientation( MLV_Turtle* turtle );
 
 #ifdef __cplusplus
 }
