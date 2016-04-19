@@ -177,7 +177,7 @@ double MLV_turtle_orientation( MLV_Turtle* turtle ){
 void MLV_turtle_point_to( MLV_Turtle* turtle, int x, int y ){
 	double vx = (x - turtle->x);
 	double vy = (y - turtle->y);
-	double vn = sqrt( vx*vx + vy*vy )
+	double vn = sqrt( vx*vx + vy*vy );
 	if( asin(vy/vn) >= 0.0 ){
 		set_angle_in_radian( turtle, acos(vx/vn) );
 	}else{
