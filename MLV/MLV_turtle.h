@@ -162,6 +162,13 @@ int MLV_leonardo_Y_coordinate();
 double MLV_leonardo_orientation();
 
 /** \~french
+ * \brief Renvoie vrai si la tortue Leonardo est en train d'écrire.
+ *
+ * \return Un booléen
+ */
+int MLV_leonardo_is_writing();
+
+/** \~french
  * \brief Tourne la tortue Leonardo pour qu'elle regarde vers le point passé en 
  *        paramètre.
  *
@@ -381,6 +388,14 @@ int MLV_turtle_Y_coordinate( MLV_Turtle* turtle );
  * \return Un angle
  */
 double MLV_turtle_orientation( MLV_Turtle* turtle );
+
+/** \~french
+ * \brief Renvoie vrai si la tortue est en train d'écrire.
+ *
+ * \param turtle Une tortue.
+ * \return Un booléen
+ */
+int MLV_turtle_is_writing( MLV_Turtle* turtle );
 
 #ifdef __cplusplus
 }

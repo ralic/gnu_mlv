@@ -33,6 +33,7 @@
 
 #include "turtle.h"
 #include <math.h>
+#include <assert.h>
 
 extern DataMLV* MLV_data; 
 
@@ -174,9 +175,14 @@ double MLV_turtle_orientation( MLV_Turtle* turtle ){
 	return turtle->angle;
 }
 
+int MLV_turtle_is_writing( MLV_Turtle* turtle ){
+	return turtle->write;
+}
+
 void MLV_turtle_point_to( MLV_Turtle* turtle, int x, int y ){
 	double vx = (x - turtle->x);
 	double vy = (y - turtle->y);
+	assert( (vx != 0.0) || (vy != 0) );
 	double vn = sqrt( vx*vx + vy*vy );
 	if( asin(vy/vn) >= 0.0 ){
 		set_angle_in_radian( turtle, acos(vx/vn) );
@@ -279,6 +285,10 @@ int MLV_leonardo_Y_coordinate(){
 
 double MLV_leonardo_orientation(){
 	return MLV_turtle_orientation( MLV_data->leonardo->turtle );
+}
+
+int MLV_leonardo_is_writing(){
+	return MLV_turtle_is_writing( MLV_data->leonardo->turtle );
 }
 
 void MLV_leonardo_point_to( int x, int y ){

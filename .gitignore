@@ -9,6 +9,8 @@ Makefile.in
 *.lo
 .libs
 .deps
+*.log
+*.trs
 
 mlv-*.*.*.tar.gz
 
@@ -39,6 +41,7 @@ config/m4/ltsugar.m4
 config/m4/ltversion.m4
 config/m4/lt~obsolete.m4
 config/missing
+config/test-driver
 
 doc/Doxyfooter
 doc/Doxyheader_English
@@ -88,6 +91,8 @@ examples/medium/11_keys_codes
 examples/medium/12_desktop_size
 examples/sandbox/example.c
 
+MLV/test_turtle
+
 packaging/debian/debian/changelog
 packaging/debian/debian/control
 packaging/debian/debian/copyright
@@ -115,5 +120,6 @@ packaging/windows/cross-compilation/mingw_compilation_for_mlv
 packaging/windows/cross-compilation/definition_of_environement_variables
 packaging/windows/my_project.cbp
 packaging/windows/my_project.dev
+
 config/ar-lib
 mlv_rcs_revision

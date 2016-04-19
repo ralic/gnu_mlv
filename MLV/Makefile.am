@@ -119,3 +119,12 @@ noinst_HEADERS = \
 	turtle.h \
 	SDLMain.h
 
+check_PROGRAMS = test_turtle
+
+TESTS = $(check_PROGRAMS)
+
+test_turtle_SOURCES = test_turtle.c
+test_turtle_CPPFLAGS = ${MLV_CPPFLAGS}
+test_turtle_LDFLAGS = ${MLV_LDFLAGS}
+test_turtle_LDADD = ${MLV_LIBADD}
+
