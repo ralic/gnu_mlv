@@ -77,7 +77,7 @@ void MLV_wait_mouse(int *x, int *y);
  *
  * \param x Coordonnée en X de la position de la souris dans la fenêtre.
  * \param y Coordonnée en Y de la position de la souris dans la fenêtre.
- * \param millisecond Le nombre de milliseconde à attendre.
+ * \param milliseconds Le nombre de milliseconde à attendre.
  */
 int MLV_wait_mouse_or_milliseconds(int *x, int *y, int milliseconds);
 

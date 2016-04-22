@@ -2416,7 +2416,7 @@ Commencez par créer les repetroires d'installation en tapant les commandes suiv
 
 
 
-\subsection install_tool_macos Installation des outils de développement de MacOSX
+\subsection install_tool_macos_bis Installation des outils de développement de MacOSX
 
 Commencez par installer l'environnement de programmation d'Apple. 
 Pour cela, au choix, 
@@ -2426,7 +2426,7 @@ votre ordinateur, puis installez XCode Tool.
 
 Cet environnement contient entre autre gcc, et make.
 
-\subsection install_env_macos Mise en place d'un environnement de développement pour MLV
+\subsection install_env_macos_bis Mise en place d'un environnement de développement pour MLV
 
 Nous allons installer la bibliothèque MLV ainsi que ses dépendances dans un 
 répertoire de votre dossier personnel.
