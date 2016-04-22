@@ -255,6 +255,7 @@ void MLV_create_window_with_default_font(
 	MLV_data = MLV_MALLOC( 1, DataMLV );
 	MLV_data->screen = NULL;
 	MLV_data->save_screen = NULL;
+	MLV_data->leonardo = NULL;
 	init_post_producter_infrastructure();
 
 	/**************************************************************************/

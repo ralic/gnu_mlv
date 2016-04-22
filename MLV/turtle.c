@@ -245,6 +245,7 @@ void MLV_draw_turtle_on_image( MLV_Turtle* turtle, MLV_Image* image ){
 }
 
 void free_leonardo_turtle(){
+	MLV_free_turtle( MLV_data->leonardo->turtle );
 	MLV_FREE( MLV_data->leonardo, MLV_Lenoardo_turtle );
 	MLV_data->leonardo = NULL;
 }
