@@ -65,6 +65,11 @@ typedef struct _DataMLV {
 	FPSmanager frame_rate_manager;
 	FPSmanager frame_rate_manager_for_MLV_wait_event;
 	MLV_Leonardo_turtle* leonardo; // The turtle mascot of MLV
+	MLV_Color ground_color;
+
+	SDL_Surface* post_screen; // This screen is used when a post render is needed.
+	MLV_Image* post_production_image;
+	MLV_List* post_producters;
 } DataMLV;
 
 struct _MLV_Image {

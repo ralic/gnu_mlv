@@ -8,6 +8,10 @@ mlv-2.0.2-dev
    * Add a small tutorial to use MLV with CMake
  * Image :
    * We add MLV_get_screen() that return the image on the screen.
+ * Shape :
+   * We implement MLV_draw_triangle(), MLV_draw_filled_triangle(),
+     MLV_draw_triangle_on_image() and MLV_draw_filled_traingle_on_image()
+     that help user to draw som triangles.
  * Turtle
    * We implement logo turtles with the MLV_Turtle structure (MLV_turtle.h).
      The MLV turtle is a graphic component inspired from the Logo programming 

@@ -25,12 +25,14 @@
 #include "config.h"
 
 #include "text.h"
+#include "window.h"
 
 #include "input_box.h"
 #include "MLV_color.h"
 #include "MLV_audio.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 #include "platform.h"
 
@@ -142,10 +144,12 @@ void initialise_graphic_window(
 		exit(1);
 	}
 
+
 	/**************************************************************************/
 	/* Initialisation de la couleur du fond de la fenetre en noir.            */
 	/**************************************************************************/
-	MLV_draw_filled_rectangle(0,0,width,height,MLV_COLOR_BLACK);
+	MLV_data->ground_color = MLV_COLOR_BLACK;
+	MLV_draw_filled_rectangle(0,0,width,height, MLV_data->ground_color);
 	MLV_actualise_window();
 }
 
@@ -188,6 +192,55 @@ void initialise_size_of_desktop(){
 	}
 }
 
+void intialize_post_production_images(){
+	MLV_data->post_screen = MLV_data->screen;
+	MLV_data->post_production_image = MLV_create_image(
+		MLV_data->width, MLV_data->height
+	);
+	MLV_data->screen = create_surface(  MLV_data->width, MLV_data->height );
+}
+
+void MLV_register_a_post_producter( void ( *post_producter )( MLV_Image* ) ){
+	if( ! MLV_data->post_screen ){
+		intialize_post_production_images();
+	}
+	MLV_data->post_producters = MLV_prepend_list(
+		MLV_data->post_producters,
+		(void*) post_producter
+	);
+}
+
+void free_post_production_images(){
+	SDL_FreeSurface( MLV_data->screen );
+	MLV_free_image( MLV_data->post_production_image );
+	MLV_data->post_production_image = NULL;
+	MLV_data->screen = MLV_data->post_screen;
+	MLV_data->post_screen = NULL;
+}
+
+void MLV_unregister_a_post_producter( void ( *post_producter )( MLV_Image* ) ){
+	assert( MLV_data->post_producters );
+	MLV_data->post_producters = MLV_remove_list(
+		MLV_data->post_producters, (void*) post_producter
+	);
+	if( ! MLV_data->post_producters ){
+		free_post_production_images();
+	}
+}
+
+void unregister_all_producters(){
+	if( MLV_data->post_producters ){
+		MLV_free_list( MLV_data->post_producters );
+		free_post_production_images();
+	}
+}
+
+void init_post_producter_infrastructure(){
+	MLV_data->post_screen = NULL;
+	MLV_data->post_producters = NULL;
+	MLV_data->post_production_image = NULL;
+}
+
 void MLV_create_window_with_default_font(
 	const char* window_name, const char* icone_name, 
 	unsigned int width, unsigned int height,
@@ -202,6 +255,7 @@ void MLV_create_window_with_default_font(
 	MLV_data = MLV_MALLOC( 1, DataMLV );
 	MLV_data->screen = NULL;
 	MLV_data->save_screen = NULL;
+	init_post_producter_infrastructure();
 
 	/**************************************************************************/
 	/* Initialisation de la libriaire SDL pour l'uilisation de la video et du */
@@ -340,9 +394,10 @@ void MLV_free_window(){
 	if( ! MLV_data ){
 		ERROR("No window has been created.");
 	}
+	free_leonardo_turtle();
+	unregister_all_producters();
 	SDL_FreeSurface(MLV_data->screen);
 	SDL_FreeSurface(MLV_data->save_screen);
-	free_leonardo_turtle();
 	free_default_font();
 	quit_font();
 	MLV_FREE( MLV_data, DataMLV );
@@ -351,11 +406,51 @@ void MLV_free_window(){
 	quit_input_box_mechanism();
 }
 
+void draw_producter( void* data, void* user_data ){
+	void ( *post_producter )( MLV_Image* ) = (void (*)( MLV_Image* )) data; 
+	MLV_Image* image = (MLV_Image*) user_data;
+	post_producter( image );
+}
+
+void prepare_post_production_image(){
+	MLV_draw_filled_rectangle_on_image(
+		0, 0, MLV_get_window_width( ), MLV_get_window_height( ), 
+		MLV_data->ground_color, 
+		MLV_data->post_production_image
+	);
+
+	MLV_set_alpha_on_image(
+		MLV_ALPHA_TRANSPARENT, MLV_data->post_production_image
+	);
+
+	MLV_foreach_list(
+		MLV_data->post_producters, draw_producter,  
+		MLV_data->post_production_image
+	);
+}
+
+
 void MLV_update_window(){
 	if( (! MLV_data ) || (! MLV_data->screen) ){
 		ERROR("A window can't be displayed whitout being created.");
 	}
-	SDL_Flip(MLV_data->screen);
+	if( ! MLV_data->post_producters ){
+		SDL_Flip(MLV_data->screen);
+	}else{
+		prepare_post_production_image();
+		boxColor(
+			MLV_data->post_screen, 0, 0, MLV_data->width-1, MLV_data->height-1, 
+			MLV_data->ground_color
+		);
+		SDL_BlitSurface(
+			MLV_data->screen, NULL, MLV_data->post_screen, &MLV_data->rectangle
+		);
+		SDL_BlitSurface(
+			MLV_data->post_production_image->surface, NULL, 
+			MLV_data->post_screen, &MLV_data->rectangle
+		);
+		SDL_Flip(MLV_data->post_screen);
+	}
 }
 
 #ifndef OS_APPLE  // Hack to compile with MAC OS 10.9 (maverick)

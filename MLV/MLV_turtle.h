@@ -37,10 +37,6 @@
 extern "C" {
 #endif
 
-//
-//  TODO : Ecrire la documentiation des fonctions
-//
-
 /** \~french
  * \brief La tortue Leonardo utilise désormais les angles en radian.
  *
@@ -162,6 +158,20 @@ int MLV_leonardo_Y_coordinate();
 double MLV_leonardo_orientation();
 
 /** \~french
+ * \brief Renvoie l'orientation de la tortue Leonardo en radians.
+ *
+ * \return Un angle en radian
+ */
+double MLV_leonardo_orientation_in_radian();
+
+/** \~french
+ * \brief Renvoie l'orientation de la tortue Leonardo en degré.
+ *
+ * \return Un angle en degré
+ */
+double MLV_leonardo_orientation_in_degree();
+
+/** \~french
  * \brief Renvoie vrai si la tortue Leonardo est en train d'écrire.
  *
  * \return Un booléen
@@ -199,6 +209,34 @@ void MLV_leonardo_speed( int time );
  * \param yes Un booléen.
  */
 void MLV_leonardo_should_update_window( int yes );
+
+/** \~french
+ * \brief Dessine la tortue Leonardo sur une image passée en paramètre.
+ *
+ * La tortue dessinée est symbolisée par un petit triangle pointant vers la 
+ * direction de la tortue.
+ *
+ * \param image l'image sur laquelle dessiner la tortue.
+ */
+void MLV_draw_leonardo_on_image( MLV_Image* image );
+
+/** \~french
+ * \brief Affiche à l'écran Leonardo
+ *
+ * Leonnardo est toujours présent dans MLV. Pour l'afficher, il suffit 
+ * d'utiliser cette fonction.
+ *
+ */
+void MLV_show_leonardo();
+
+/** \~french
+ * \brief Cache la tortue Leonardo.
+ *
+ * Leonnardo est toujours présent dans MLV et peut toujours être utilisé pour
+ * dessiner même si elle n'est plus visible.
+ *
+ */
+void MLV_hide_leonardo();
 
 /** \~french 
  * \brief Définit le type d'une tortue.
@@ -390,12 +428,40 @@ int MLV_turtle_Y_coordinate( MLV_Turtle* turtle );
 double MLV_turtle_orientation( MLV_Turtle* turtle );
 
 /** \~french
+ * \brief Renvoie l'orientation de la tortue en radians.
+ *
+ * \param turtle Une tortue.
+ * \return Un angle en radian
+ */
+double MLV_turtle_orientation_in_radian( MLV_Turtle* turtle );
+
+/** \~french
+ * \brief Renvoie l'orientation de la tortue en degré.
+ *
+ * \param turtle Une tortue.
+ * \return Un angle en degré.
+ */
+double MLV_turtle_orientation_in_degree( MLV_Turtle* turtle );
+
+/** \~french
  * \brief Renvoie vrai si la tortue est en train d'écrire.
  *
  * \param turtle Une tortue.
  * \return Un booléen
  */
 int MLV_turtle_is_writing( MLV_Turtle* turtle );
+
+
+/** \~french
+ * \brief Dessine la tortue sur une image passée en paramètre.
+ *
+ * La tortue dessinée est symbolisée par un petit triangle pointant vers la 
+ * direction de la tortue.
+ *
+ * \param turtle Une tortue.
+ * \param image l'image sur laquelle dessiner la tortue.
+ */
+void MLV_draw_turtle_on_image( MLV_Turtle* turtle, MLV_Image* image );
 
 #ifdef __cplusplus
 }

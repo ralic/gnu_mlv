@@ -100,6 +100,21 @@ void MLV_draw_polygon(
 );
 
 /** \~french 
+ * \brief Dessine un triangle (vide).
+ *
+ * \param ax La coordonnée en X du premier point du triangle.
+ * \param ay La coordonnée en Y dy premier point du traingle.
+ * \param bx La coordonnée en X du deuxième point du triangle.
+ * \param by La coordonnée en Y dy deuxième point du traingle.
+ * \param cx La coordonnée en X du troisième point du triangle.
+ * \param cy La coordonnée en Y dy troisième point du traingle.
+ * \param color La couleur du triangle.
+ */
+void MLV_draw_triangle(
+	int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color
+);
+
+/** \~french 
  * \brief Dessine un polygone plein à partir d'une liste de sommets.
  *
  * \param vx La liste des coordonnées en X des différents sommets du polygone.
@@ -110,6 +125,22 @@ void MLV_draw_polygon(
 void MLV_draw_filled_polygon(
 	const int* vx, const int* vy, int nb_points, MLV_Color color
 );
+
+/** \~french 
+ * \brief Dessine un triangle plein.
+ *
+ * \param ax La coordonnée en X du premier point du triangle.
+ * \param ay La coordonnée en Y dy premier point du traingle.
+ * \param bx La coordonnée en X du deuxième point du triangle.
+ * \param by La coordonnée en Y dy deuxième point du traingle.
+ * \param cx La coordonnée en X du troisième point du triangle.
+ * \param cy La coordonnée en Y dy troisième point du traingle.
+ * \param color La couleur du triangle.
+ */
+void MLV_draw_filled_triangle(
+	int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color
+);
+
 
 /** \~french 
  * \brief Dessine une courbe de Bézier à partir d'une liste de sommets.
@@ -283,6 +314,23 @@ void MLV_draw_polygon_on_image(
 );
 
 /** \~french 
+ * \brief Dessine un triangle (vide) sur une image passée en paramètre.
+ *
+ * \param ax La coordonnée en X du premier point du triangle.
+ * \param ay La coordonnée en Y dy premier point du traingle.
+ * \param bx La coordonnée en X du deuxième point du triangle.
+ * \param by La coordonnée en Y dy deuxième point du traingle.
+ * \param cx La coordonnée en X du troisième point du triangle.
+ * \param cy La coordonnée en Y dy troisième point du traingle.
+ * \param color La couleur du triangle.
+ * \param image L'image dans laquelle la figure est dessinée.
+ */
+void MLV_draw_triangle_on_image(
+	int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color,
+	MLV_Image* image
+);
+
+/** \~french 
  * \brief Dessine un polygone plein à partir d'une liste de sommets dans une
  *        image.
  *
@@ -294,6 +342,23 @@ void MLV_draw_polygon_on_image(
  */
 void MLV_draw_filled_polygon_on_image(
 	const int* vx, const int* vy, int nb_points, MLV_Color color, MLV_Image* image
+);
+
+/** \~french 
+ * \brief Dessine un triangle plein sur une image passée en paramètre.
+ *
+ * \param ax La coordonnée en X du premier point du triangle.
+ * \param ay La coordonnée en Y dy premier point du traingle.
+ * \param bx La coordonnée en X du deuxième point du triangle.
+ * \param by La coordonnée en Y dy deuxième point du traingle.
+ * \param cx La coordonnée en X du troisième point du triangle.
+ * \param cy La coordonnée en Y dy troisième point du traingle.
+ * \param color La couleur du triangle.
+ * \param image L'image dans laquelle la figure est dessinée.
+ */
+void MLV_draw_filled_triangle_on_image(
+	int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color,
+	MLV_Image* image
 );
 
 /** \~french 

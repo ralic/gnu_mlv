@@ -27,6 +27,10 @@ int main( int argc, char *argv[] ){
 	//
 	MLV_create_window( "beginner - 11 - The turtle", "Th turtle", 640, 480 );
 
+	// On affiche la tortue Léonardo (c'est optionnel, la tortue est plus facile
+    // A diriger lorsqu'on la voit.
+	MLV_show_leonardo();
+
 	// On change la couleur du pinceau 
 	MLV_leonardo_color( MLV_COLOR_GREEN );
 

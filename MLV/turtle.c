@@ -23,6 +23,7 @@
 #include "MLV_shape.h"
 #include "MLV_time.h"
 
+#include "window.h"
 #include "warning_error.h"
 
 #include "memory_management.h"
@@ -50,6 +51,7 @@ struct _MLV_Turtle {
 struct _MLV_Leonardo_turtle {
 	int time;
 	int update;
+	int is_visible;
 	MLV_Turtle* turtle;
 };
 
@@ -175,6 +177,22 @@ double MLV_turtle_orientation( MLV_Turtle* turtle ){
 	return turtle->angle;
 }
 
+double MLV_turtle_orientation_in_radian( MLV_Turtle* turtle ){
+	if( turtle->degree ){
+		return (turtle->angle*M_PI)/180.0;
+	}else{
+		return turtle->angle;
+	}
+}
+
+double MLV_turtle_orientation_in_degree( MLV_Turtle* turtle ){
+	if( turtle->degree ){
+		return turtle->angle;
+	}else{
+		return (turtle->angle*180.0)/M_PI;
+	}
+}
+
 int MLV_turtle_is_writing( MLV_Turtle* turtle ){
 	return turtle->write;
 }
@@ -197,6 +215,33 @@ void MLV_turtle_attach_on_image( MLV_Turtle* turtle, MLV_Image* image ){
 
 void MLV_turtle_orient_to( MLV_Turtle* turtle, double angle ){
 	turtle->angle  = angle;
+}
+
+void MLV_draw_turtle_on_image( MLV_Turtle* turtle, MLV_Image* image ){
+	double size = 8;
+
+	double angle = MLV_leonardo_orientation_in_radian();
+
+	double x = MLV_leonardo_X_coordinate();
+	double y = MLV_leonardo_Y_coordinate();
+
+	double dx = cos( angle ); double dy = sin( angle );
+	double nx = -dy; double ny = dx;
+
+	const double sqrt3_2 = .86603;
+
+	double Ax = x - (sqrt3_2*size/3.0)*dx + (size/2.0)*nx;
+	double Ay = y - (sqrt3_2*size/3.0)*dy + (size/2.0)*ny;
+
+	double Bx = x + (2*sqrt3_2*size/3.0)*dx;
+	double By = y + (2*sqrt3_2*size/3.0)*dy;
+
+	double Cx = x - (.86603*size/3.0)*dx - (size/2.0)*nx;
+	double Cy = y - (.86603*size/3.0)*dy - (size/2.0)*ny;
+
+	MLV_draw_filled_triangle_on_image(
+		Ax, Ay, Bx, By, Cx, Cy, turtle->color, image
+	);
 }
 
 void free_leonardo_turtle(){
@@ -223,6 +268,27 @@ void init_leonardo_turtle(){
 
 	MLV_leonardo_speed( 500 );
 	MLV_leonardo_should_update_window( 1 );
+	MLV_data->leonardo->is_visible = 0;
+}
+
+void MLV_show_leonardo(){
+	if( ! MLV_data->leonardo->is_visible ){
+		MLV_register_a_post_producter( &MLV_draw_leonardo_on_image );
+		MLV_data->leonardo->is_visible = 1;
+	}
+	if( MLV_data->leonardo->update ){
+		MLV_update_window();
+	}
+}
+
+void MLV_hide_leonardo(){
+	if( MLV_data->leonardo->is_visible ){
+		MLV_unregister_a_post_producter( &MLV_draw_leonardo_on_image );
+		MLV_data->leonardo->is_visible = 0;
+	}
+	if( MLV_data->leonardo->update ){
+		MLV_update_window();
+	}
 }
 
 void leonardo_updates_window(){
@@ -287,6 +353,14 @@ double MLV_leonardo_orientation(){
 	return MLV_turtle_orientation( MLV_data->leonardo->turtle );
 }
 
+double MLV_leonardo_orientation_in_radian(){
+	return MLV_turtle_orientation_in_radian( MLV_data->leonardo->turtle );
+}
+
+double MLV_leonardo_orientation_in_degree(){
+	return MLV_turtle_orientation_in_degree( MLV_data->leonardo->turtle );
+}
+
 int MLV_leonardo_is_writing(){
 	return MLV_turtle_is_writing( MLV_data->leonardo->turtle );
 }
@@ -301,4 +375,8 @@ void MLV_leonardo_speed( int time ){
 
 void MLV_leonardo_should_update_window( int yes ){
 	MLV_data->leonardo->update = yes;
+}
+
+void MLV_draw_leonardo_on_image( MLV_Image* image ){
+	MLV_draw_turtle_on_image( MLV_data->leonardo->turtle, image );
 }

@@ -117,7 +117,8 @@ noinst_HEADERS = \
 	tree_set.h \
 	tree_map.h \
 	turtle.h \
-	SDLMain.h
+	SDLMain.h \
+	window.h
 
 check_PROGRAMS = test_turtle
 

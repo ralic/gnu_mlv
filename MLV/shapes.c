@@ -81,7 +81,19 @@ void MLV_draw_polygon_on_image( const int* vx, const int* vy, int nb_points, MLV
 	MLV_FREE( tmp_vy, Sint16 );
 }
 
-void MLV_draw_filled_polygon_on_image( const int* vx, const int* vy, int nb_points, MLV_Color color, MLV_Image* image){
+void MLV_draw_triangle_on_image(
+	int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color,
+	MLV_Image* image
+){
+	int coordonne_x[3] = { ax, bx, cx };
+	int coordonne_y[3] = { ay, by, cy };
+	MLV_draw_polygon_on_image( coordonne_x, coordonne_y, 3, color, image );
+}
+
+void MLV_draw_filled_polygon_on_image(
+	const int* vx, const int* vy, int nb_points, MLV_Color color, 
+	MLV_Image* image
+){
 	Sint16* tmp_vx = MLV_MALLOC( nb_points, Sint16 );
 	Sint16* tmp_vy = MLV_MALLOC( nb_points, Sint16 );
 	int i;
@@ -94,6 +106,16 @@ void MLV_draw_filled_polygon_on_image( const int* vx, const int* vy, int nb_poin
 	MLV_FREE( tmp_vy, Sint16 );
 }
 
+void MLV_draw_filled_triangle_on_image(
+	int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color,
+	MLV_Image* image
+){
+	int coordonne_x[3] = { ax, bx, cx };
+	int coordonne_y[3] = { ay, by, cy };
+	MLV_draw_filled_polygon_on_image(
+		coordonne_x, coordonne_y, 3, color, image
+	);
+}
 
 void MLV_draw_bezier_curve_on_image( const int* vx, const int* vy, int nb_points, MLV_Color color, MLV_Image* image){
 	Sint16* tmp_vx = MLV_MALLOC( nb_points, Sint16 );
@@ -222,6 +244,14 @@ void MLV_draw_polygon( const int* vx, const int* vy, int nb_points, MLV_Color co
 	MLV_FREE( tmp_vy, Sint16 );
 }
 
+void MLV_draw_triangle(
+	int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color
+){
+	int coordonne_x[3] = { ax, bx, cx };
+	int coordonne_y[3] = { ay, by, cy };
+	MLV_draw_polygon( coordonne_x, coordonne_y, 3, color );
+}
+
 void MLV_draw_filled_polygon( const int* vx, const int* vy, int nb_points, MLV_Color color){
 	Sint16* tmp_vx = MLV_MALLOC( nb_points, Sint16 );
 	Sint16* tmp_vy = MLV_MALLOC( nb_points, Sint16 );
@@ -233,6 +263,14 @@ void MLV_draw_filled_polygon( const int* vx, const int* vy, int nb_points, MLV_C
 	filledPolygonColor( MLV_data->screen, tmp_vx, tmp_vy, nb_points, color);
 	MLV_FREE( tmp_vx, Sint16 );
 	MLV_FREE( tmp_vy, Sint16 );
+}
+
+void MLV_draw_filled_triangle(
+	int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color
+){
+	int coordonne_x[3] = { ax, bx, cx };
+	int coordonne_y[3] = { ay, by, cy };
+	MLV_draw_filled_polygon( coordonne_x, coordonne_y, 3, color );
 }
 
 void MLV_draw_bezier_curve( const int* vx, const int* vy, int nb_points, MLV_Color color){

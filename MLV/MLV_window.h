@@ -33,6 +33,7 @@
 #define __MLV__MLV_WINDOW_H__
 
 #include "MLV_color.h"
+#include "MLV_image.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -297,7 +298,6 @@ int MLV_get_desktop_height( );
  * \brief Renvoie la largeur de l'environement de bureau de l'ordinateur.
  */
 int MLV_get_desktop_width( );
-
 
 #ifdef __cplusplus
 }
