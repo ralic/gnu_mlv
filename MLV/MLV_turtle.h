@@ -249,7 +249,6 @@ typedef struct _MLV_Turtle MLV_Turtle;
 /** \~french
  * \brief Créer une tortue qui dessine sur la fenêtre d'affichage.
  *
- * \param turtle Une tortue.
  */
 MLV_Turtle* MLV_create_turtle();
 
