@@ -103,7 +103,21 @@ MLV Library, create a new window with the MLV_create_window function."
 	MLV_free_font( MLV_data->defaultFont );
 }
 
+void intialize_post_production_images(){
+	MLV_data->post_screen = MLV_data->screen;
+	MLV_data->post_production_image = MLV_create_image(
+		MLV_data->width, MLV_data->height
+	);
+	MLV_data->screen = create_surface(  MLV_data->width, MLV_data->height );
+}
 
+void free_post_production_images(){
+	SDL_FreeSurface( MLV_data->screen );
+	MLV_free_image( MLV_data->post_production_image );
+	MLV_data->post_production_image = NULL;
+	MLV_data->screen = MLV_data->post_screen;
+	MLV_data->post_screen = NULL;
+}
 
 /**************************************************************************/
 /* Creation d'un fenetre graphique                                        */
@@ -111,6 +125,11 @@ MLV Library, create a new window with the MLV_create_window function."
 void initialise_graphic_window(
 	unsigned int width, unsigned int height, int full_screen_is_required
 ){
+	int we_need_to_reinitialize_post_screen = 0;
+	if( MLV_data->post_screen ){
+		free_post_production_images();
+		we_need_to_reinitialize_post_screen = 1;
+	}
 	#if defined( OS_ANDROID )
 		Uint32 video_mode_flags = SDL_SWSURFACE | SDL_SRCALPHA;
 	#else
@@ -136,7 +155,7 @@ void initialise_graphic_window(
 	MLV_data->rectangle.w = width;
 	MLV_data->rectangle.h = height;
 	if( MLV_data->save_screen ){
-		SDL_FreeSurface( MLV_data->screen );
+		SDL_FreeSurface( MLV_data->save_screen );
 	}
 	MLV_data->save_screen = create_surface( width, height ); // do we have to use SDL_ALPHA_OPAQUE here ?
 	if ( MLV_data->screen == NULL ){
@@ -151,6 +170,10 @@ void initialise_graphic_window(
 	MLV_data->ground_color = MLV_COLOR_BLACK;
 	MLV_draw_filled_rectangle(0,0,width,height, MLV_data->ground_color);
 	MLV_actualise_window();
+
+	if( we_need_to_reinitialize_post_screen ){
+		intialize_post_production_images();
+	}
 }
 
 
@@ -192,14 +215,6 @@ void initialise_size_of_desktop(){
 	}
 }
 
-void intialize_post_production_images(){
-	MLV_data->post_screen = MLV_data->screen;
-	MLV_data->post_production_image = MLV_create_image(
-		MLV_data->width, MLV_data->height
-	);
-	MLV_data->screen = create_surface(  MLV_data->width, MLV_data->height );
-}
-
 void MLV_register_a_post_producter( void ( *post_producter )( MLV_Image* ) ){
 	if( ! MLV_data->post_screen ){
 		intialize_post_production_images();
@@ -208,14 +223,6 @@ void MLV_register_a_post_producter( void ( *post_producter )( MLV_Image* ) ){
 		MLV_data->post_producters,
 		(void*) post_producter
 	);
-}
-
-void free_post_production_images(){
-	SDL_FreeSurface( MLV_data->screen );
-	MLV_free_image( MLV_data->post_production_image );
-	MLV_data->post_production_image = NULL;
-	MLV_data->screen = MLV_data->post_screen;
-	MLV_data->post_screen = NULL;
 }
 
 void MLV_unregister_a_post_producter( void ( *post_producter )( MLV_Image* ) ){

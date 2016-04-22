@@ -74,6 +74,7 @@ MLV_List* MLV_remove_list( MLV_List* list, void* data ){
 	}else{
 		result = list;
 	}
+	MLV_FREE( elem, MLV_List );
 	return result;
 }
 

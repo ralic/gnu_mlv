@@ -19,6 +19,10 @@ mlv-2.0.2-dev
    * We add Leonardo, the MLV mascot. It is the default turtle of MLV.
  * Event:
    * Add MLV_wait_mouse_or_millisecond
+ * Memory leak
+   * We remove memory leak on MLV_remove_list, when we use MLV_wait_input_box(). 
+   * We remove memory leak on MLV_data->save_screen when we change the size of 
+     the window.
  * Bug
    * Remove a bug in MLV_draw_pixel and MLV_draw_pixel_on_image. Now image is 
      not toric. 
