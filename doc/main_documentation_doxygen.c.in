@@ -126,6 +126,8 @@ Paquets MacOS @MLV_MACOSX_VERSION@:
 
 Code source : <a href="@MLV_PACKAGE_REPOSITORY@/@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz">@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz</a>
 
+Site web du dépôt : @MLV_WEB_REPOSITORY@<br />
+
 Dépôt : @MLV_REPOSITORY@<br />
 Révision du dépôt : @MLV_RCS_REVISION@
 
@@ -174,6 +176,8 @@ MacOS @MLV_MACOSX_VERSION@:
 - Installation package: <a href="@MLV_PACKAGE_REPOSITORY@/@MLV_MACOSX_PACKAGE@">@MLV_MACOSX_PACKAGE@</a>
 
 Source code: <a href="@MLV_PACKAGE_REPOSITORY@/@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz">@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz</a>
+
+Repository website : @MLV_WEB_REPOSITORY@<br />
 
 Repository: @MLV_REPOSITORY@<br />
 Repository révision: @MLV_RCS_REVISION@

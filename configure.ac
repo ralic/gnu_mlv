@@ -45,6 +45,7 @@ AC_SUBST(MLV_CURRENT,[mlvcurrent])
 AC_SUBST(MLV_REVISION,[mlvrevision])
 AC_SUBST(MLV_AGE,[mlvage])
 
+AC_SUBST(MLV_WEB_REPOSITORY,[http://savannah.nongnu.org/projects/mlv])
 AC_SUBST(MLV_REPOSITORY,["git clone git://git.savannah.nongnu.org/mlv.git"])
 AC_DEFINE_UNQUOTED([MLV_REPOSITORY],["$MLV_REPOSITORY"],[Define the revision control software])
 
