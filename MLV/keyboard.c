@@ -53,10 +53,11 @@ void MLV_wait_keyboard( MLV_Keyboard_button* sym, MLV_Keyboard_modifier* mod, in
 	);
 }
 
-int MLV_wait_keyboard_or_milliseconds(
+MLV_Event MLV_wait_keyboard_or_milliseconds(
 	MLV_Keyboard_button* sym, MLV_Keyboard_modifier* mod, int* unicode, 
 	int milliseconds 
 ){
+	MLV_Event resultat = MLV_NONE;
 	MLV_Button_state state;
 
 	// We remove all existing event from the queue
@@ -69,19 +70,18 @@ int MLV_wait_keyboard_or_milliseconds(
 	int tmp_unicode;
 
 	//We wait for a new keyboard event
-	int resultat = 0;
 	while(
 		(
 			(
-				resultat = (
-					MLV_wait_event_or_milliseconds(
+				(
+					resultat = MLV_wait_event_or_milliseconds(
 						&tmp_sym, &tmp_mod, &tmp_unicode,
 						NULL, NULL,
 						NULL, NULL, NULL,
 						&state,
 						milliseconds - (MLV_get_time() - time)
-					) != MLV_KEY
-				)
+					)
+				) != MLV_KEY
 			) ||
 			( state != MLV_PRESSED )
 		) && (
@@ -89,16 +89,18 @@ int MLV_wait_keyboard_or_milliseconds(
 		)
 	);
 
-	if( ! resultat && state == MLV_PRESSED ){
+	if( resultat == MLV_KEY && state == MLV_PRESSED ){
 		if( sym ) *sym = tmp_sym;
 		if( mod ) *mod = tmp_mod;
 		if( unicode ) *unicode = tmp_unicode;
+	}else{
+		resultat = MLV_NONE;
 	}
 
 	return resultat;
 }
 
-int MLV_wait_keyboard_or_seconds(
+MLV_Event MLV_wait_keyboard_or_seconds(
 	MLV_Keyboard_button* sym, MLV_Keyboard_modifier* mod, int* unicode, 
 	int seconds 
 ){

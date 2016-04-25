@@ -79,9 +79,10 @@ void MLV_wait_particular_input_box( MLV_Input_box* input_box, char** text){
 	}
 }
 
-int MLV_wait_particular_input_box_or_milliseconds(
+MLV_Event MLV_wait_particular_input_box_or_milliseconds(
 	int milliseconds, MLV_Input_box* input_box, char** text
 ){
+	MLV_Event resultat = MLV_NONE;
 	MLV_Input_box* tmp_input_box = NULL;
 	(*text) = NULL;
 
@@ -93,20 +94,17 @@ int MLV_wait_particular_input_box_or_milliseconds(
 
 	int time = MLV_get_time();
 
-	int resultat = 0;
 	while( !(*text) && ((MLV_get_time() - time) < milliseconds) ){
-		MLV_Event event_type = MLV_get_event( 
+		resultat = MLV_get_event( 
 			NULL, NULL, NULL,
 			text, &tmp_input_box, 
 			NULL, NULL, NULL,
 			NULL
 		);
-		if( (event_type==MLV_INPUT_BOX )  && input_box != tmp_input_box ){
+		if( (resultat==MLV_INPUT_BOX)  && input_box != tmp_input_box ){
 			MLV_FREE( (*text), char );
 			(*text) = NULL;
-			resultat = 0;
-		}else{
-			resultat = 1;
+			resultat = MLV_NONE;
 		}
 		MLV_draw_all_input_boxes();
 		MLV_actualise_window();
@@ -117,7 +115,7 @@ int MLV_wait_particular_input_box_or_milliseconds(
 	return resultat;
 }
 
-int MLV_wait_particular_input_box_or_seconds(
+MLV_Event MLV_wait_particular_input_box_or_seconds(
 	MLV_Input_box* input_box, char** text, int seconds
 ){
 	return MLV_wait_particular_input_box_or_seconds(
@@ -155,7 +153,7 @@ void wait_input_box_with_font(
 	MLV_actualise_window();
 }
 
-int wait_input_box_with_font_or_milliseconds(
+MLV_Event wait_input_box_with_font_or_milliseconds(
 	int milliseconds,
 	int top_left_corner_X, int top_left_corner_Y,
 	int width, int height,
@@ -165,7 +163,7 @@ int wait_input_box_with_font_or_milliseconds(
 	char** text,
 	const MLV_Font* font
 ){
-	int resultat;
+	MLV_Event resultat;
 	MLV_Input_box* input_box = MLV_create_input_box_with_font(
 		top_left_corner_X, top_left_corner_Y,
 		width, height,
@@ -215,7 +213,7 @@ void MLV_wait_input_box_with_font_va(
 	free( complete_informative_message );
 }
 
-int MLV_wait_input_box_with_font_or_milliseconds_va(
+MLV_Event MLV_wait_input_box_with_font_or_milliseconds_va(
 	int milliseconds,
 	int top_left_corner_X, int top_left_corner_Y,
 	int width, int height,
@@ -225,7 +223,7 @@ int MLV_wait_input_box_with_font_or_milliseconds_va(
 	char** text,
 	const MLV_Font* font, va_list pile
 ){
-	int resultat;
+	MLV_Event resultat;
 	char* complete_informative_message;
 	if(
 		vasprintf( 
@@ -263,7 +261,7 @@ void MLV_wait_input_box_with_font(
 	va_end( pile );
 }
 
-int MLV_wait_input_box_with_font_or_milliseconds(
+MLV_Event MLV_wait_input_box_with_font_or_milliseconds(
 	int milliseconds,
 	int top_left_corner_X, int top_left_corner_Y,
 	int width, int height,
@@ -273,7 +271,7 @@ int MLV_wait_input_box_with_font_or_milliseconds(
 	char** text,
 	const MLV_Font* font, ...
 ){
-	int resultat;
+	MLV_Event resultat;
 	va_list pile;
 	va_start( pile, font );
 	resultat = MLV_wait_input_box_with_font_or_milliseconds_va(
@@ -304,7 +302,7 @@ void MLV_wait_input_box_va(
 	);
 }
 
-int MLV_wait_input_box_or_milliseconds_va(
+MLV_Event MLV_wait_input_box_or_milliseconds_va(
 	int milliseconds,
 	int top_left_corner_X, int top_left_corner_Y,
 	int width, int height,
@@ -342,7 +340,7 @@ void MLV_wait_input_box(
 }
 
 
-int MLV_wait_input_box_or_milliseconds(
+MLV_Event MLV_wait_input_box_or_milliseconds(
 	int milliseconds,
 	int top_left_corner_X, int top_left_corner_Y,
 	int width, int height,
@@ -351,7 +349,7 @@ int MLV_wait_input_box_or_milliseconds(
 	const char* informativeMessage,
 	char** text, ...
 ){
-	int resultat;
+	MLV_Event resultat = MLV_NONE;
 	va_list pile;
 	va_start( pile, text );
 	resultat = MLV_wait_input_box_or_milliseconds_va(

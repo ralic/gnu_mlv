@@ -374,6 +374,93 @@ MLV_Event MLV_wait_keyboard_or_mouse_or_seconds(
 );
 
 /** \~french 
+ *
+ * \brief Suspend l'exécution jusqu'à ce que l'utilisateur clique sur le bouton
+ *        gauche de la souris.
+ *
+ * Au moment où l'utilisateur clique, la fonction retourne les
+ * coordonnées de la position de la souris dans la fenêtre.
+ *
+ * \param x Coordonnée en X de la position de la souris dans la fenêtre.
+ * \param y Coordonnée en Y de la position de la souris dans la fenêtre.
+ * \param milliseconds Le nombre de milliseconde à attendre.
+ * \return un entier codant le type de l'évènement qui a été récupéré ( 
+ *         MLV_MOUSE_BUTTON ), ou MLV_NONE si le temps s'est écoulé.
+ */
+MLV_Event MLV_wait_mouse_or_milliseconds(int *x, int *y, int milliseconds);
+
+/** \~french 
+ *
+ * \brief Suspend l'exécution jusqu'à ce que l'utilisateur clique sur le bouton
+ *        gauche de la souris où jusqu'à ce qu'un nombre de secondes, passé en 
+ *        paramètres, se soient écoulées.
+ *
+ * Au moment où l'utilisateur clique, la fonction retourne les
+ * coordonnées de la position de la souris dans la fenêtre.
+ *
+ * \param x Coordonnée en X de la position de la souris dans la fenêtre.
+ * \param y Coordonnée en Y de la position de la souris dans la fenêtre.
+ * \param seconds Le nombre de second à attendre avant de quitter la fonction.
+ * \return un entier codant le type de l'évènement qui a été récupéré ( 
+ *         MLV_MOUSE_BUTTON ), ou MLV_NONE si le temps s'est écoulé.
+ */
+MLV_Event MLV_wait_mouse_or_seconds(int *x, int *y, int seconds);
+
+/** \~french 
+ * \brief Suspend l'exécution jusqu'à ce que l'utilisateur appuie sur une touche
+ *        du  clavier ou jusq'à ce q'un nombre de secondes passées en paramètres
+ *        soient écoulées.
+ * 
+ * Pour plus d'informations sur le fonctionnement de cette fonction, veuillez 
+ * vous reporter à la documentation de MLV_wait_keyboard().
+ *
+ * La fonction accepte des valeurs nulles pour les pointeurs sym, mod et 
+ * unicode.
+ * Dans ce cas la fonction ignore les champs en questions.
+ *
+ * \bug Voir les bugs de la fonction MLV_get_event().
+ *
+ * \param sym        Le code de la touche. 
+ * \param mod        Le mode dans lequel se trouve le clavier.
+ * \param unicode    Le caractère codé en unicode de la lettre obtenue en combinant
+ *                   le code et le mode précédent.
+ * \param seconds    Le nombre de secondes à attendre.
+ * \return un entier codant le type de l'évènement qui a été récupéré ( MLV_KEY 
+ *         ), ou MLV_NONE si le temps s'est écoulé.
+ */
+MLV_Event MLV_wait_keyboard_or_seconds(
+	MLV_Keyboard_button* sym, MLV_Keyboard_modifier* mod, int* unicode, 
+	int seconds
+);
+
+/** \~french 
+ * \brief Suspend l'exécution jusqu'à ce que l'utilisateur appuie sur une touche
+ *        du  clavier ou jusq'à ce q'un nombre de millisecondes passées en 
+ *        paramètres soient écoulées.
+ * 
+ * Pour plus d'informations sur le fonctionnement de cette fonction, veuillez 
+ * vous reporter à la documentation de MLV_wait_keyboard().
+ *
+ * La fonction accepte des valeurs nulles pour les pointeurs sym, mod et 
+ * unicode.
+ * Dans ce cas la fonction ignore les champs en questions.
+ *
+ * \bug Voir les bugs de la fonction MLV_get_event().
+ *
+ * \param sym        Le code de la touche. 
+ * \param mod        Le mode dans lequel se trouve le clavier.
+ * \param unicode    Le caractère codé en unicode de la lettre obtenue en combinant
+ *                   le code et le mode précédent.
+ * \param milliseconds    Le nombre de millisecondes à attendre.
+ * \return un entier codant le type de l'évènement qui a été récupéré ( MLV_KEY 
+ *         ), ou MLV_NONE si le temps s'est écoulé.
+ */
+MLV_Event MLV_wait_keyboard_or_milliseconds(
+	MLV_Keyboard_button* sym, MLV_Keyboard_modifier* mod, int* unicode, 
+	int milliseconds
+);
+
+/** \~french 
  * \brief Suspend l'exécution jusqu'à ce que l'utilisateur appuie sur une touche
  *        du clavier, sur le bouton gauche de la souris ou qu'un certain nombre
  *        de millisecondes passées en paramètres se soient écoulées.
@@ -437,6 +524,125 @@ const char* MLV_convert_button_state_to_string( MLV_Button_state state_code );
  * \return Le code de l'état associé à la chaîne de caractères.
  */
 MLV_Button_state MLV_convert_string_to_button_state( const char* state_string );
+
+/** \~french 
+ *
+ * \brief Cette fonction suspend l'exécution du programme, affiche une boîte 
+ *        de saisie et attends que l'utilisateur rentre une phrase dans le 
+ *        champs de la boîte ou qu'une temps (en millisecondes) donné en 
+ *        paramètre s'écoule.
+ *
+ * La boîte de saisie contient deux zones de textes. 
+ * La première zone ne peut pas être éditée par l'utilisateur et sert à 
+ * afficher un message d'information. 
+ * La deuxième est vide et peut être éditée par l'utilisateur.
+ * Lorsque l'utilisateur appuie sur la touche entrée, le texte qui 
+ * se trouve dans la zone de texte est renvoyé par la fonction
+ * grâce au paramètre text.
+ * Le texte, la taille et les couleurs de la boîte de saisie sont
+ * paramétrables.
+ * Si le temps sécoule complètement, alors text est mis à NULL.
+ * 
+ * MLV_wait_input_box() alloue lui même la mémoire associée au paramètre "text".
+ * Par contre, après utilisation, vous devez libérer l'espace mémoire qui a été 
+ * alloué.
+ *
+ * \param milliseconds Le temps à attendre en millisecondes.
+ * \param top_left_corner_X     La coordonnée en X du coin Nord-Ouest de la 
+ *                              boîte de saisie.
+ * \param top_left_corner_Y     La coordonnée en Y du coin Nord-Ouest de la 
+ *                              boîte de saisie.
+ * \param width La largeur de la boîte de saisie.
+ * \param height La hauteur de la boîte de saisie.
+ * \param borderColor           La couleur de la bordure de la boîte de saisie.
+ * \param textColor             La couleur du texte de la boîte de saisie.
+ * \param backgroundColor       La couleur de fond de la boîte de saisie.
+ * \param informativeMessage    Le message à afficher devant la boîte de saisie.
+ * \param text                  L'addresse où sera placé la réponse donnée par 
+ * \return un entier codant le type de l'évènement qui a été récupéré ( 
+ *         MLV_INPUT_BOX ) ou MLV_NONE si le temps s'est écoulé.
+ */
+MLV_Event MLV_wait_input_box_or_milliseconds(
+	int milliseconds,
+	int top_left_corner_X, int top_left_corner_Y,
+	int width, int height,
+	MLV_Color borderColor, MLV_Color textColor,
+	MLV_Color backgroundColor,
+	const char* informativeMessage,
+	char** text, ...
+);
+
+/** \~french 
+ *
+ * \brief Même chose que MLV_wait_input_box_or_milliseconds(), mais il est 
+ *        possible de changer la fonte du du texte.
+ * 
+ * MLV_wait_input_box_with_font_or_milliseconds() alloue lui même la mémoire 
+ * associée au paramètre "text".
+ * Par contre, après utilisation, vous devez libérer l'espace mémoire qui a 
+ * été alloué. Si le temps est écoulé, alot text est mis à NULL.
+ *
+ * \param top_left_corner_X   La coordonnée en X du coin Nord-Ouest de la 
+ *                            boîte de saisie.
+ * \param top_left_corner_Y   La coordonnée en Y du coin Nord-Ouest de la 
+ *                            boîte de saisie.
+ * \param width La largeur de la boîte de saisie.
+ * \param height La hauteur de la boîte de saisie.
+ * \param borderColor         La couleur de la bordure de la boîte de saisie.
+ * \param textColor           La couleur du texte de la boîte de saisie.
+ * \param backgroundColor     La couleur de fond de la boîte de saisie.
+ * \param informativeMessage  Le message à afficher devant la boîte de saisie.
+ * \param text                L'addresse où sera placé la réponse donnée par 
+ *                            l'utilisateur.
+ * \param font                La font du texte à utiliser.
+ * \param milliseconds Le temps à attendre en millisecondes.
+ * \return un entier codant le type de l'évènement qui a été récupéré ( 
+ *         MLV_INPUT_BOX ) ou MLV_NONE si le temps s'est écoulé.
+ */
+MLV_Event MLV_wait_input_box_with_font_or_milliseconds(
+	int milliseconds,
+	int top_left_corner_X, int top_left_corner_Y,
+	int width, int height,
+	MLV_Color borderColor, MLV_Color textColor,
+	MLV_Color backgroundColor,
+	const char* informativeMessage,
+	char** text,
+	const MLV_Font* font, ...
+);
+
+/** \~french 
+ * \brief Cette fonction suspend l'exécution du programme jusqu'à ce que 
+ *        l'utilisateur écrive une phrase dans le champs de la boîte de 
+ *        saisie passée en paramètre de la fonction ou qu'un nombre 
+ *        de millisecondes fixées soient écoulée.
+ *
+ * \param input_box La boîte de saisie qui doit être observée.
+ * \param text Le texte récupéré par la boîte de saisie.
+ * \param milliseconds Le nombre de millisecondes à attendre.
+ * \return un entier codant le type de l'évènement qui a été récupéré ( 
+ *         MLV_INPUT_BOX ) ou MLV_NONE si le temps s'est écoulé.
+ * \
+ */
+MLV_Event MLV_wait_particular_input_box_or_milliseconds(
+	int milliseconds, MLV_Input_box* input_box, char** text
+);
+
+/** \~french 
+ * \brief Cette fonction suspend l'exécution du programme jusqu'à ce que 
+ *        l'utilisateur écrive une phrase dans le champs de la boîte de 
+ *        saisie passée en paramètre de la fonction ou qu'un nombre 
+ *        de secondes fixées soient écoulée.
+ *
+ * \param input_box La boîte de saisie qui doit être observée.
+ * \param text Le texte récupéré par la boîte de saisie.
+ * \param seconds Le nombre de secondes à attendre.
+ * \return un entier codant le type de l'évènement qui a été récupéré ( 
+ *         MLV_INPUT_BOX ) ou MLV_NONE si le temps s'est écoulé.
+ * \
+ */
+MLV_Event MLV_wait_particular_input_box_or_seconds(
+	MLV_Input_box* input_box, char** text, int seconds
+);
 
 #ifdef __cplusplus
 }

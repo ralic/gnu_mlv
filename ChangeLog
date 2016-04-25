@@ -1,5 +1,14 @@
 mlv-2.0.2-dev
- * Documentation
+ * API changement : 
+   * The functions that are waiting an event or the end of a timer has been 
+     changed. Now, they return an event type according to the caught event.
+     If the time is over, they return MLV_NONE.
+     The list of functions that are affected is :
+     * MLV_wait_keyboard_or_mouse()
+     * MLV_wait_keyboard_or_mouse_or_seconds()
+     * MLV_wait_mouse_or_seconds()
+     * MLV_wait_keyboard_or_seconds()
+ * Documentation :
    * Correct documentation for making a MacOSX package (doxygen compilation)
    * Improve the part explaining how to make a release of MLV.
    * Correct the document of MLV_wait_input_box. The function take now
@@ -12,12 +21,12 @@ mlv-2.0.2-dev
    * We implement MLV_draw_triangle(), MLV_draw_filled_triangle(),
      MLV_draw_triangle_on_image() and MLV_draw_filled_traingle_on_image()
      that help user to draw som triangles.
- * Turtle
+ * Turtle :
    * We implement logo turtles with the MLV_Turtle structure (MLV_turtle.h).
      The MLV turtle is a graphic component inspired from the Logo programming 
      language.
    * We add Leonardo, the MLV mascot. It is the default turtle of MLV.
- * Event:
+ * Event :
    * Add MLV_wait_mouse_or_milliseconds()
    * Add MLV_wait_keyboard_or_milliseconds()
    * Add MLV_wait_mouse_or_keyboard_or_milliseconds()
@@ -26,14 +35,14 @@ mlv-2.0.2-dev
    * Add MLV_wait_input_box_with_font_or_milliseconds()
    * Add MLV_wait_particular_input_box_or_milliseconds()
    * Add MLV_wait_particular_input_box_or_seconds()
- * Memory leak
+ * Memory leak :
    * We remove memory leak on MLV_remove_list, when we use MLV_wait_input_box(). 
    * We remove memory leak on MLV_data->save_screen when we change the size of 
      the window.
- * Bug
+ * Bug :
    * Remove a bug in MLV_draw_pixel and MLV_draw_pixel_on_image. Now image is 
      not toric. 
- * Example
+ * Example :
    * Change MLV_actualise_window by MLV_update_window
 
 mlv-2.0.2

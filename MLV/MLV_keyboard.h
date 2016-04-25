@@ -335,60 +335,6 @@ typedef enum {
  */
 void MLV_wait_keyboard( MLV_Keyboard_button* sym, MLV_Keyboard_modifier* mod, int* unicode );
 
-/** \~french 
- * \brief Suspend l'exécution jusqu'à ce que l'utilisateur appuie sur une touche
- *        du  clavier ou jusq'à ce q'un nombre de secondes passées en paramètres
- *        soient écoulées.
- * 
- * Pour plus d'informations sur le fonctionnement de cette fonction, veuillez 
- * vous reporter à la documentation de MLV_wait_keyboard().
- *
- * La fonction accepte des valeurs nulles pour les pointeurs sym, mod et 
- * unicode.
- * Dans ce cas la fonction ignore les champs en questions.
- *
- * \bug Voir les bugs de la fonction MLV_get_event().
- *
- * \param sym        Le code de la touche. 
- * \param mod        Le mode dans lequel se trouve le clavier.
- * \param unicode    Le caractère codé en unicode de la lettre obtenue en combinant
- *                   le code et le mode précédent.
- * \param seconds    Le nombre de secondes à attendre.
- * \return Renvoie 1 si l'utilisateur a utilisé le calvier, 0 si le temps s'est
- *         écoulé.
- */
-int MLV_wait_keyboard_or_seconds(
-	MLV_Keyboard_button* sym, MLV_Keyboard_modifier* mod, int* unicode, 
-	int seconds
-);
-
-/** \~french 
- * \brief Suspend l'exécution jusqu'à ce que l'utilisateur appuie sur une touche
- *        du  clavier ou jusq'à ce q'un nombre de millisecondes passées en 
- *        paramètres soient écoulées.
- * 
- * Pour plus d'informations sur le fonctionnement de cette fonction, veuillez 
- * vous reporter à la documentation de MLV_wait_keyboard().
- *
- * La fonction accepte des valeurs nulles pour les pointeurs sym, mod et 
- * unicode.
- * Dans ce cas la fonction ignore les champs en questions.
- *
- * \bug Voir les bugs de la fonction MLV_get_event().
- *
- * \param sym        Le code de la touche. 
- * \param mod        Le mode dans lequel se trouve le clavier.
- * \param unicode    Le caractère codé en unicode de la lettre obtenue en combinant
- *                   le code et le mode précédent.
- * \param milliseconds    Le nombre de millisecondes à attendre.
- * \return Renvoie 1 si l'utilisateur a utilisé le calvier, 0 si le temps s'est
- *         écoulé.
- */
-int MLV_wait_keyboard_or_milliseconds(
-	MLV_Keyboard_button* sym, MLV_Keyboard_modifier* mod, int* unicode, 
-	int milliseconds
-);
-
 /** \~french
  * \brief Renvoie le code de la touche clavier correspondant au type clavier
  *        passé en paramètre.

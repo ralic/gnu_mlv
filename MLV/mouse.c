@@ -55,7 +55,8 @@ void MLV_wait_mouse(int *x, int *y){
 };
 
 
-int MLV_wait_mouse_or_milliseconds(int *x, int *y, int milliseconds){
+MLV_Event MLV_wait_mouse_or_milliseconds(int *x, int *y, int milliseconds){
+	MLV_Event resultat = MLV_NONE;
 	MLV_Button_state state;
 	MLV_Mouse_button mouse_button;
 
@@ -65,18 +66,18 @@ int MLV_wait_mouse_or_milliseconds(int *x, int *y, int milliseconds){
 	int time = MLV_get_time();
 
 	//We wait for a new mouse event
-	int resultat = 0;
 	int tmp_x, tmp_y;
 	while(
 		(	
-			resultat = 
 			(
-				MLV_wait_event_or_milliseconds(
-					NULL, NULL, NULL,
-					NULL, NULL,
-					&tmp_x, &tmp_y, &mouse_button,
-					&state,
-					milliseconds - ( MLV_get_time() - time )
+				(
+					resultat = MLV_wait_event_or_milliseconds(
+						NULL, NULL, NULL,
+						NULL, NULL,
+						&tmp_x, &tmp_y, &mouse_button,
+						&state,
+						milliseconds - ( MLV_get_time() - time )
+					)
 				) != MLV_MOUSE_BUTTON
 			) ||
 			( mouse_button != MLV_BUTTON_LEFT ) ||
@@ -86,18 +87,20 @@ int MLV_wait_mouse_or_milliseconds(int *x, int *y, int milliseconds){
 		)
 	);
 	if( 
-		! resultat &&
+		resultat == MLV_MOUSE_BUTTON &&
 		mouse_button == MLV_BUTTON_LEFT &&
 		state == MLV_PRESSED
 	){
 		if( x ) *x = tmp_x;
 		if( y ) *y = tmp_y;
+	}else{
+		resultat = MLV_NONE;
 	}
-	return !resultat;
+	return resultat;
 }
 
 
-int MLV_wait_mouse_or_seconds(int *x, int *y, int seconds){
+MLV_Event MLV_wait_mouse_or_seconds(int *x, int *y, int seconds){
 	return MLV_wait_mouse_or_milliseconds(
 		x, y, seconds*1000
 	);

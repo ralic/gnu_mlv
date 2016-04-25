@@ -67,37 +67,6 @@ typedef enum{
  */
 void MLV_wait_mouse(int *x, int *y);
 
-/** \~french 
- *
- * \brief Suspend l'exécution jusqu'à ce que l'utilisateur clique sur le bouton
- *        gauche de la souris.
- *
- * Au moment où l'utilisateur clique, la fonction retourne les
- * coordonnées de la position de la souris dans la fenêtre.
- *
- * \param x Coordonnée en X de la position de la souris dans la fenêtre.
- * \param y Coordonnée en Y de la position de la souris dans la fenêtre.
- * \param milliseconds Le nombre de milliseconde à attendre.
- */
-int MLV_wait_mouse_or_milliseconds(int *x, int *y, int milliseconds);
-
-/** \~french 
- *
- * \brief Suspend l'exécution jusqu'à ce que l'utilisateur clique sur le bouton
- *        gauche de la souris où jusqu'à ce qu'un nombre de secondes, passé en 
- *        paramètres, se soient écoulées.
- *
- * Au moment où l'utilisateur clique, la fonction retourne les
- * coordonnées de la position de la souris dans la fenêtre.
- *
- * \param x Coordonnée en X de la position de la souris dans la fenêtre.
- * \param y Coordonnée en Y de la position de la souris dans la fenêtre.
- * \param seconds Le nombre de second à attendre avant de quitter la fonction.
- * \return Renvoie 1 si l'utilisateur a cliqué avec le bouton gauche de la souris,
- *         et 0 si le temps s'est écoulé.
- */
-int MLV_wait_mouse_or_seconds(int *x, int *y, int seconds);
-
 /** \~french
  * \brief Convertit le code associé à un boutton de la souris (MLV_Mouse_button) en 
  *        chaîne de caratères.

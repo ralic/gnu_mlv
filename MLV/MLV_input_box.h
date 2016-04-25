@@ -90,54 +90,6 @@ void MLV_wait_input_box(
 
 /** \~french 
  *
- * \brief Cette fonction suspend l'exécution du programme, affiche une boîte 
- *        de saisie et attends que l'utilisateur rentre une phrase dans le 
- *        champs de la boîte ou qu'une temps (en millisecondes) donné en 
- *        paramètre s'écoule.
- *
- * La boîte de saisie contient deux zones de textes. 
- * La première zone ne peut pas être éditée par l'utilisateur et sert à 
- * afficher un message d'information. 
- * La deuxième est vide et peut être éditée par l'utilisateur.
- * Lorsque l'utilisateur appuie sur la touche entrée, le texte qui 
- * se trouve dans la zone de texte est renvoyé par la fonction
- * grâce au paramètre text.
- * Le texte, la taille et les couleurs de la boîte de saisie sont
- * paramétrables.
- * Si le temps sécoule complètement, alors text est mis à NULL.
- * 
- * MLV_wait_input_box() alloue lui même la mémoire associée au paramètre "text".
- * Par contre, après utilisation, vous devez libérer l'espace mémoire qui a été 
- * alloué.
- *
- * \param milliseconds Le temps à attendre en millisecondes.
- * \param top_left_corner_X     La coordonnée en X du coin Nord-Ouest de la 
- *                              boîte de saisie.
- * \param top_left_corner_Y     La coordonnée en Y du coin Nord-Ouest de la 
- *                              boîte de saisie.
- * \param width La largeur de la boîte de saisie.
- * \param height La hauteur de la boîte de saisie.
- * \param borderColor           La couleur de la bordure de la boîte de saisie.
- * \param textColor             La couleur du texte de la boîte de saisie.
- * \param backgroundColor       La couleur de fond de la boîte de saisie.
- * \param informativeMessage    Le message à afficher devant la boîte de saisie.
- * \param text                  L'addresse où sera placé la réponse donnée par 
- * \return Renvoie vraie si l'utilisateur à utiliser la boîte de saisie.
- *                              l'utilisateur.
- */
-int MLV_wait_input_box_or_milliseconds(
-	int milliseconds,
-	int top_left_corner_X, int top_left_corner_Y,
-	int width, int height,
-	MLV_Color borderColor, MLV_Color textColor,
-	MLV_Color backgroundColor,
-	const char* informativeMessage,
-	char** text, ...
-);
-
-
-/** \~french 
- *
  * \brief Même chose que MLV_wait_input_box(), mais il est possible de 
  *        changer la fonte du du texte.
  * 
@@ -171,44 +123,6 @@ void MLV_wait_input_box_with_font(
 );
 
 /** \~french 
- *
- * \brief Même chose que MLV_wait_input_box_or_milliseconds(), mais il est 
- *        possible de changer la fonte du du texte.
- * 
- * MLV_wait_input_box_with_font_or_milliseconds() alloue lui même la mémoire 
- * associée au paramètre "text".
- * Par contre, après utilisation, vous devez libérer l'espace mémoire qui a 
- * été alloué. Si le temps est écoulé, alot text est mis à NULL.
- *
- * \param top_left_corner_X   La coordonnée en X du coin Nord-Ouest de la 
- *                            boîte de saisie.
- * \param top_left_corner_Y   La coordonnée en Y du coin Nord-Ouest de la 
- *                            boîte de saisie.
- * \param width La largeur de la boîte de saisie.
- * \param height La hauteur de la boîte de saisie.
- * \param borderColor         La couleur de la bordure de la boîte de saisie.
- * \param textColor           La couleur du texte de la boîte de saisie.
- * \param backgroundColor     La couleur de fond de la boîte de saisie.
- * \param informativeMessage  Le message à afficher devant la boîte de saisie.
- * \param text                L'addresse où sera placé la réponse donnée par 
- *                            l'utilisateur.
- * \param font                La font du texte à utiliser.
- * \param milliseconds Le temps à attendre en millisecondes.
- * \return Renvoie vraie si l'utilisateur à utiliser la boîte de saisie.
- */
-int MLV_wait_input_box_with_font_or_milliseconds(
-	int milliseconds,
-	int top_left_corner_X, int top_left_corner_Y,
-	int width, int height,
-	MLV_Color borderColor, MLV_Color textColor,
-	MLV_Color backgroundColor,
-	const char* informativeMessage,
-	char** text,
-	const MLV_Font* font, ...
-);
-
-
-/** \~french 
  * \brief Cette fonction suspend l'exécution du programme jusqu'à ce que 
  *        l'utilisateur écrive une phrase dans le champs de la boîte de 
  *        saisie passée en paramètre de la fonction.
@@ -217,42 +131,6 @@ int MLV_wait_input_box_with_font_or_milliseconds(
  * \param text Le texte récupéré par la boîte de saisie.
  */
 void MLV_wait_particular_input_box( MLV_Input_box* input_box, char** text);
-
-/** \~french 
- * \brief Cette fonction suspend l'exécution du programme jusqu'à ce que 
- *        l'utilisateur écrive une phrase dans le champs de la boîte de 
- *        saisie passée en paramètre de la fonction ou qu'un nombre 
- *        de millisecondes fixées soient écoulée.
- *
- * \param input_box La boîte de saisie qui doit être observée.
- * \param text Le texte récupéré par la boîte de saisie.
- * \param milliseconds Le nombre de millisecondes à attendre.
- * \return Renvoie 1 si l'utilisateur a utilisé le calvier, 0 si le temps s'est
- *         écoulé.
- * \
- */
-int MLV_wait_particular_input_box_or_milliseconds(
-	int milliseconds, MLV_Input_box* input_box, char** text
-);
-
-/** \~french 
- * \brief Cette fonction suspend l'exécution du programme jusqu'à ce que 
- *        l'utilisateur écrive une phrase dans le champs de la boîte de 
- *        saisie passée en paramètre de la fonction ou qu'un nombre 
- *        de secondes fixées soient écoulée.
- *
- * \param input_box La boîte de saisie qui doit être observée.
- * \param text Le texte récupéré par la boîte de saisie.
- * \param seconds Le nombre de secondes à attendre.
- * \return Renvoie 1 si l'utilisateur a utilisé le calvier, 0 si le temps s'est
- *         écoulé.
- * \
- */
-int MLV_wait_particular_input_box_or_seconds(
-	MLV_Input_box* input_box, char** text, int seconds
-);
-
-
 
 /** \~french 
  * \brief Cette fonction créé une boîte de saisie.
