@@ -244,6 +244,58 @@ MLV_Event MLV_wait_event_or_seconds(
 	MLV_Button_state* state, int seconds
 );
 
+ /** \~french
+ * \brief Cette fonction suspends l'éxecution du programme jusqu'à ce qu'un 
+ *        évènement apparaît dans la file d'attente ou jusqu'à ce qu'un certain 
+ *        nombre de milisecondes se soient écoulées. 
+ *        Si le temps s'est complètement écoulé, la fonction renvoie MLV_NONE.
+ *        Si un nouvel évènement apparaît et que les paramètres passés en arguments 
+ *        sont en rapport avec l'évènement récupéré, alors la fonction 
+ *        remplit les paramètres et renvoie un entier codant le type de 
+ *        l'évènement qui a été récupéré.
+ *        Si un nouvel évènement apparaît et qu'il n'est pas en rapport 
+ *        avec les paramètres de la fonction, alors il se rendort dans 
+ *        l'attente d'un nouvel évènement ou de la fin du temps.
+ *
+ * Pour plus d'informations sur les différents types d'évènements et leurs 
+ * liens avec les paramètres de la fonction, veuillez consulter la 
+ * documentation de la fonction MLV_get_event().
+ *
+ * L'utilisateur n'est pas obligé d'utiliser un champs s'il
+ * n'en a pas l'utilité. Dans ce cas, il peut mettre la valeur
+ * NULL. Le champs est alors ignoré.
+ *
+ * \bug Voir les bugs de la fonction MLV_get_event().
+ *
+ * \param key_sym Code de la touche qui a été appuyée ou relachée. La valeur de 
+ *                ce champs est définie par l'énumération : MLV_Keyboard_button.
+ * \param key_mod Mode dans lequel se trouve le clavier lorsqu'une touche est 
+ *                appuyée ou relachée. La valeur de ce champs est définie par 
+ *                l'énumération : MLV_Keyboard_modifier.
+ * \param unicode Caractère codé en unicode de la lettre obtenue en combinant 
+ *                le code et le mode précédent
+ * \param texte Texte récupéré par la boîte de saisie. L'allocation est affecté par la
+ *                    la fonction elle même. La désallocation est à la charge de
+ *                    l'utilisateur.
+ * \param input_box La boîte de saisie qui a récupérée le texte
+ * \param mouse_x Coordonnée en X de la position de la souris
+ * \param mouse_y Coordonnée en Y de la position de la souris
+ * \param mouse_button Bouton de la souris qui a été appuyé ou relaché. 
+ *                     Ce champs est défini par l'énumération MLV_Mouse_button.
+ * \param state Etat de la touche concernée par l'évènement. La valeur de ce 
+ *              champs est défini par l'énumération: MLV_Button_state.
+ * \param miliseconds Nombre de milisecondes à attendre avant de terminer l'execution de
+ *                la fonction en renvoyant MLV_NONE.
+ * \return La fonction renvoie un entier codant le type de l'évènement qui 
+ *         a été récupéré ou MLV_NONE si le temps s'est écoulé.
+ */
+MLV_Event MLV_wait_event_or_miliseconds( 
+	MLV_Keyboard_button* key_sym, MLV_Keyboard_modifier* key_mod, int* unicode,
+	char** texte, MLV_Input_box** input_box,
+	int* mouse_x, int* mouse_y, MLV_Mouse_button* mouse_button,
+	MLV_Button_state* state, int miliseconds
+);
+
 
 
 /** \~french 
@@ -319,6 +371,39 @@ MLV_Event MLV_wait_keyboard_or_mouse_or_seconds(
 	MLV_Keyboard_button* sym, MLV_Keyboard_modifier* mod, int* unicode,
 	int* mouse_x, int* mouse_y,
 	int seconds
+);
+
+/** \~french 
+ * \brief Suspend l'exécution jusqu'à ce que l'utilisateur appuie sur une touche
+ *        du clavier, sur le bouton gauche de la souris ou qu'un certain nombre
+ *        de milisecondes passées en paramètres se soient écoulées.
+ *
+ * Cette fonction renvoie un entier codant le type de l'évènement qui a été 
+ * récupéré ( clavier, souris ou aucun des deux ).
+ *
+ * Voir les fonctions MLV_wait_keyboard_miliseconds() et 
+ * MLV_wait_mouse_miliseconds() pour plus d'informations.
+ *
+ * \bug Voir les bugs de la fonction MLV_get_event().
+ *
+ * \param sym Code de la touche qui a été appuyée ou relachée. La valeur de ce 
+ *        champs est définie par l'énumération : MLV_Keyboard_button.
+ * \param mod Mode dans lequel se trouve le clavier lorsqu'une touche est 
+ *            appuyée ou relachée. La valeur de ce champs est définie par 
+ *            l'énumération : MLV_Keyboard_modifier.
+ * \param unicode Caractère codé en unicode de la lettre obtenue en combinant le
+ *                code et le mode précédent
+ * \param mouse_x Coordonnée en X de la position de la souris
+ * \param mouse_y Coordonnée en Y de la position de la souris
+ * \param miliseconds Le nombre de miliseconde à attendre avant d'arrêter la 
+ *        fonction
+ * \return un entier codant le type de l'évènement qui a été récupéré ( MLV_KEY 
+ *         ou MLV_MOUSE_BUTTON ), ou MLV_NONE si le temps s'est écoulé.
+ */
+MLV_Event MLV_wait_keyboard_or_mouse_or_miliseconds(
+	MLV_Keyboard_button* sym, MLV_Keyboard_modifier* mod, int* unicode,
+	int* mouse_x, int* mouse_y,
+	int miliseconds
 );
 
 /** \~french

@@ -18,7 +18,10 @@ mlv-2.0.2-dev
      language.
    * We add Leonardo, the MLV mascot. It is the default turtle of MLV.
  * Event:
-   * Add MLV_wait_mouse_or_millisecond
+   * Add MLV_wait_mouse_or_milliseconds()
+   * Add MLV_wait_keyboard_or_milliseconds()
+   * Add MLV_wait_mouse_or_keyboard_or_milliseconds()
+   * Add MLV_wait_event_or_milliseconds()
  * Memory leak
    * We remove memory leak on MLV_remove_list, when we use MLV_wait_input_box(). 
    * We remove memory leak on MLV_data->save_screen when we change the size of 
