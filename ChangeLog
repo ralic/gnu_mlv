@@ -22,6 +22,10 @@ mlv-2.0.2-dev
    * Add MLV_wait_keyboard_or_milliseconds()
    * Add MLV_wait_mouse_or_keyboard_or_milliseconds()
    * Add MLV_wait_event_or_milliseconds()
+   * Add MLV_wait_input_box_or_milliseconds()
+   * Add MLV_wait_input_box_with_font_or_milliseconds()
+   * Add MLV_wait_particular_input_box_or_milliseconds()
+   * Add MLV_wait_particular_input_box_or_seconds()
  * Memory leak
    * We remove memory leak on MLV_remove_list, when we use MLV_wait_input_box(). 
    * We remove memory leak on MLV_data->save_screen when we change the size of 

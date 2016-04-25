@@ -21,6 +21,7 @@
 #include <stdio.h>
 
 #include "platform.h"
+#include "MLV_time.h"
 
 #ifdef OS_WINDOWS
 /* Get va_list.  */
@@ -72,7 +73,56 @@ void MLV_wait_particular_input_box( MLV_Input_box* input_box, char** text){
 		}
 		MLV_draw_all_input_boxes();
 		MLV_actualise_window();
+		SDL_framerateDelay(
+			&(MLV_data->frame_rate_manager_for_MLV_wait_event)
+		);
 	}
+}
+
+int MLV_wait_particular_input_box_or_milliseconds(
+	int milliseconds, MLV_Input_box* input_box, char** text
+){
+	MLV_Input_box* tmp_input_box = NULL;
+	(*text) = NULL;
+
+	//We activate the input_box
+	MLV_activate_input_box( input_box );
+	
+	// We first flush the event queue
+	MLV_flush_event_queue();
+
+	int time = MLV_get_time();
+
+	int resultat = 0;
+	while( !(*text) && ((MLV_get_time() - time) < milliseconds) ){
+		MLV_Event event_type = MLV_get_event( 
+			NULL, NULL, NULL,
+			text, &tmp_input_box, 
+			NULL, NULL, NULL,
+			NULL
+		);
+		if( (event_type==MLV_INPUT_BOX )  && input_box != tmp_input_box ){
+			MLV_FREE( (*text), char );
+			(*text) = NULL;
+			resultat = 0;
+		}else{
+			resultat = 1;
+		}
+		MLV_draw_all_input_boxes();
+		MLV_actualise_window();
+		SDL_framerateDelay(
+			&(MLV_data->frame_rate_manager_for_MLV_wait_event)
+		);
+	}
+	return resultat;
+}
+
+int MLV_wait_particular_input_box_or_seconds(
+	MLV_Input_box* input_box, char** text, int seconds
+){
+	return MLV_wait_particular_input_box_or_seconds(
+		input_box, text, seconds*1000
+	);
 }
 
 void wait_input_box_with_font(
@@ -105,6 +155,41 @@ void wait_input_box_with_font(
 	MLV_actualise_window();
 }
 
+int wait_input_box_with_font_or_milliseconds(
+	int milliseconds,
+	int top_left_corner_X, int top_left_corner_Y,
+	int width, int height,
+	MLV_Color borderColor, MLV_Color textColor,
+	MLV_Color backgroundColor,
+	const char* informativeMessage,
+	char** text,
+	const MLV_Font* font
+){
+	int resultat;
+	MLV_Input_box* input_box = MLV_create_input_box_with_font(
+		top_left_corner_X, top_left_corner_Y,
+		width, height,
+		borderColor, textColor,
+		backgroundColor,
+		informativeMessage,
+		font
+	);
+
+	SDL_Surface *save_screen = create_surface( MLV_data->width, MLV_data->height );
+	SDL_BlitSurface( MLV_data->screen, NULL, save_screen, &(MLV_data->rectangle));
+
+	resultat = MLV_wait_particular_input_box_or_milliseconds(
+		milliseconds, input_box, text
+	);
+	MLV_free_input_box( input_box );
+
+	SDL_BlitSurface( save_screen, NULL, MLV_data->screen, &(MLV_data->rectangle));
+	SDL_FreeSurface( save_screen );
+
+	MLV_actualise_window();
+	return resultat;
+}
+
 void MLV_wait_input_box_with_font_va(
 	int top_left_corner_X, int top_left_corner_Y,
 	int width, int height,
@@ -130,6 +215,35 @@ void MLV_wait_input_box_with_font_va(
 	free( complete_informative_message );
 }
 
+int MLV_wait_input_box_with_font_or_milliseconds_va(
+	int milliseconds,
+	int top_left_corner_X, int top_left_corner_Y,
+	int width, int height,
+	MLV_Color borderColor, MLV_Color textColor,
+	MLV_Color backgroundColor,
+	const char* informativeMessage,
+	char** text,
+	const MLV_Font* font, va_list pile
+){
+	int resultat;
+	char* complete_informative_message;
+	if(
+		vasprintf( 
+			&complete_informative_message, informativeMessage, pile 
+		)==-1 
+	){
+		ERROR("Unexpected Error.");
+	}
+	resultat = wait_input_box_with_font_or_milliseconds(
+		milliseconds,
+		top_left_corner_X, top_left_corner_Y, width, height,
+		borderColor, textColor, backgroundColor, complete_informative_message,
+		text, font
+	);
+	free( complete_informative_message );
+	return resultat;
+}
+
 void MLV_wait_input_box_with_font(
 	int top_left_corner_X, int top_left_corner_Y,
 	int width, int height,
@@ -149,6 +263,29 @@ void MLV_wait_input_box_with_font(
 	va_end( pile );
 }
 
+int MLV_wait_input_box_with_font_or_milliseconds(
+	int milliseconds,
+	int top_left_corner_X, int top_left_corner_Y,
+	int width, int height,
+	MLV_Color borderColor, MLV_Color textColor,
+	MLV_Color backgroundColor,
+	const char* informativeMessage,
+	char** text,
+	const MLV_Font* font, ...
+){
+	int resultat;
+	va_list pile;
+	va_start( pile, font );
+	resultat = MLV_wait_input_box_with_font_or_milliseconds_va(
+		milliseconds,
+		top_left_corner_X, top_left_corner_Y, width, height,
+		borderColor, textColor, backgroundColor, informativeMessage,
+		text, font, pile
+	);
+	va_end( pile );
+	return resultat;
+}
+
 void MLV_wait_input_box_va(
 	int top_left_corner_X, int top_left_corner_Y,
 	int width, int height,
@@ -158,6 +295,26 @@ void MLV_wait_input_box_va(
 	char** text, va_list pile
 ){
 	MLV_wait_input_box_with_font_va(
+		top_left_corner_X, top_left_corner_Y,
+		width, height,
+		borderColor, textColor,
+		backgroundColor,
+		informativeMessage,
+		text, MLV_data->defaultFont, pile
+	);
+}
+
+int MLV_wait_input_box_or_milliseconds_va(
+	int milliseconds,
+	int top_left_corner_X, int top_left_corner_Y,
+	int width, int height,
+	MLV_Color borderColor, MLV_Color textColor,
+	MLV_Color backgroundColor,
+	const char* informativeMessage,
+	char** text, va_list pile
+){
+	return MLV_wait_input_box_with_font_or_milliseconds_va(
+		milliseconds,
 		top_left_corner_X, top_left_corner_Y,
 		width, height,
 		borderColor, textColor,
@@ -185,3 +342,23 @@ void MLV_wait_input_box(
 }
 
 
+int MLV_wait_input_box_or_milliseconds(
+	int milliseconds,
+	int top_left_corner_X, int top_left_corner_Y,
+	int width, int height,
+	MLV_Color borderColor, MLV_Color textColor,
+	MLV_Color backgroundColor,
+	const char* informativeMessage,
+	char** text, ...
+){
+	int resultat;
+	va_list pile;
+	va_start( pile, text );
+	resultat = MLV_wait_input_box_or_milliseconds_va(
+		milliseconds,
+		top_left_corner_X, top_left_corner_Y, width, height,
+		borderColor, textColor, backgroundColor, informativeMessage, text, pile
+	);
+	va_end( pile );
+	return resultat;
+}

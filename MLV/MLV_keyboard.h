@@ -364,7 +364,7 @@ int MLV_wait_keyboard_or_seconds(
 
 /** \~french 
  * \brief Suspend l'exécution jusqu'à ce que l'utilisateur appuie sur une touche
- *        du  clavier ou jusq'à ce q'un nombre de milisecondes passées en 
+ *        du  clavier ou jusq'à ce q'un nombre de millisecondes passées en 
  *        paramètres soient écoulées.
  * 
  * Pour plus d'informations sur le fonctionnement de cette fonction, veuillez 
@@ -380,13 +380,13 @@ int MLV_wait_keyboard_or_seconds(
  * \param mod        Le mode dans lequel se trouve le clavier.
  * \param unicode    Le caractère codé en unicode de la lettre obtenue en combinant
  *                   le code et le mode précédent.
- * \param miliseconds    Le nombre de milisecondes à attendre.
+ * \param milliseconds    Le nombre de millisecondes à attendre.
  * \return Renvoie 1 si l'utilisateur a utilisé le calvier, 0 si le temps s'est
  *         écoulé.
  */
-int MLV_wait_keyboard_or_miliseconds(
+int MLV_wait_keyboard_or_milliseconds(
 	MLV_Keyboard_button* sym, MLV_Keyboard_modifier* mod, int* unicode, 
-	int miliseconds
+	int milliseconds
 );
 
 /** \~french

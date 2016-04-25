@@ -428,7 +428,7 @@ mlv-0.6.692-dev-cpp
 |   |-- beginner_05_mouse.dev
 |   |-- beginner_06_keyboard.dev
 |   |-- beginner_07_input_box.dev
-|   |-- beginner_08_mouse_keyboard_timer.dev
+|   |-- beginner_08_mouse_keyboard_input_box_timer.dev
 |   |-- beginner_09_colors.dev
 |   |-- beginner_10_library_informations.dev
 |   |-- beginner_11_turtle.dev
@@ -510,7 +510,7 @@ mlv-0.6.692-code_blocks
 |   |-- beginner_05_mouse.cbp
 |   |-- beginner_06_keyboard.cbp
 |   |-- beginner_07_input_box.cbp
-|   |-- beginner_08_mouse_keyboard_timer.cbp
+|   |-- beginner_08_mouse_keyboard_input_box_timer.cbp
 |   |-- beginner_09_colors.cbp
 |   |-- beginner_10_library_informations.cbp
 |   |-- beginner_11_turtle.cbp
@@ -3259,7 +3259,7 @@ Ce programme montre comment il est possible de récupérer du texte demandé
 à l'utilisateur à l'aide d'une boîte de saisie.
 
 
-\example beginner/08_mouse_keyboard_timer.c
+\example beginner/08_mouse_keyboard_input_box_timer.c
 Ce programme montre comment il est possible d'ajouter un minuteur lorsque 
 l'utilisateur est invité à cliquer ou appuyer sur une touche du clavier
 

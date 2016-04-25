@@ -53,9 +53,9 @@ void MLV_wait_keyboard( MLV_Keyboard_button* sym, MLV_Keyboard_modifier* mod, in
 	);
 }
 
-int MLV_wait_keyboard_or_miliseconds(
+int MLV_wait_keyboard_or_milliseconds(
 	MLV_Keyboard_button* sym, MLV_Keyboard_modifier* mod, int* unicode, 
-	int miliseconds 
+	int milliseconds 
 ){
 	MLV_Button_state state;
 
@@ -74,18 +74,18 @@ int MLV_wait_keyboard_or_miliseconds(
 		(
 			(
 				resultat = (
-					MLV_wait_event_or_miliseconds(
+					MLV_wait_event_or_milliseconds(
 						&tmp_sym, &tmp_mod, &tmp_unicode,
 						NULL, NULL,
 						NULL, NULL, NULL,
 						&state,
-						miliseconds - (MLV_get_time() - time)
+						milliseconds - (MLV_get_time() - time)
 					) != MLV_KEY
 				)
 			) ||
 			( state != MLV_PRESSED )
 		) && (
-			(MLV_get_time() - time) < miliseconds
+			(MLV_get_time() - time) < milliseconds
 		)
 	);
 
@@ -102,7 +102,7 @@ int MLV_wait_keyboard_or_seconds(
 	MLV_Keyboard_button* sym, MLV_Keyboard_modifier* mod, int* unicode, 
 	int seconds 
 ){
-	return MLV_wait_keyboard_or_miliseconds( sym, mod, unicode, seconds*1000 );
+	return MLV_wait_keyboard_or_milliseconds( sym, mod, unicode, seconds*1000 );
 }
 
 MLV_Keyboard_button MLV_convert_string_to_keyboard_button( const char* key_string ){

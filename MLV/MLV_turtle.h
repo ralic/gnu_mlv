@@ -191,10 +191,10 @@ void MLV_leonardo_point_to( int x, int y );
  * \brief Modifie la vitesse de la tortue Leonardo.
  *
  * Après chaque déplacement (rotation et translation) la tortue attends en 
- * mettant en attente le programme d'un nombre de milisedonde donné en paramètre
+ * mettant en attente le programme d'un nombre de millisedonde donné en paramètre
  * de cette fonction.
  * 
- * \param time Le nombre de milisecondes que le programme attends entre chaque
+ * \param time Le nombre de millisecondes que le programme attends entre chaque
  *        déplacement.
  */
 void MLV_leonardo_speed( int time );

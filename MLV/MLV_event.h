@@ -247,7 +247,7 @@ MLV_Event MLV_wait_event_or_seconds(
  /** \~french
  * \brief Cette fonction suspends l'éxecution du programme jusqu'à ce qu'un 
  *        évènement apparaît dans la file d'attente ou jusqu'à ce qu'un certain 
- *        nombre de milisecondes se soient écoulées. 
+ *        nombre de millisecondes se soient écoulées. 
  *        Si le temps s'est complètement écoulé, la fonction renvoie MLV_NONE.
  *        Si un nouvel évènement apparaît et que les paramètres passés en arguments 
  *        sont en rapport avec l'évènement récupéré, alors la fonction 
@@ -284,16 +284,16 @@ MLV_Event MLV_wait_event_or_seconds(
  *                     Ce champs est défini par l'énumération MLV_Mouse_button.
  * \param state Etat de la touche concernée par l'évènement. La valeur de ce 
  *              champs est défini par l'énumération: MLV_Button_state.
- * \param miliseconds Nombre de milisecondes à attendre avant de terminer l'execution de
+ * \param milliseconds Nombre de millisecondes à attendre avant de terminer l'execution de
  *                la fonction en renvoyant MLV_NONE.
  * \return La fonction renvoie un entier codant le type de l'évènement qui 
  *         a été récupéré ou MLV_NONE si le temps s'est écoulé.
  */
-MLV_Event MLV_wait_event_or_miliseconds( 
+MLV_Event MLV_wait_event_or_milliseconds( 
 	MLV_Keyboard_button* key_sym, MLV_Keyboard_modifier* key_mod, int* unicode,
 	char** texte, MLV_Input_box** input_box,
 	int* mouse_x, int* mouse_y, MLV_Mouse_button* mouse_button,
-	MLV_Button_state* state, int miliseconds
+	MLV_Button_state* state, int milliseconds
 );
 
 
@@ -376,13 +376,13 @@ MLV_Event MLV_wait_keyboard_or_mouse_or_seconds(
 /** \~french 
  * \brief Suspend l'exécution jusqu'à ce que l'utilisateur appuie sur une touche
  *        du clavier, sur le bouton gauche de la souris ou qu'un certain nombre
- *        de milisecondes passées en paramètres se soient écoulées.
+ *        de millisecondes passées en paramètres se soient écoulées.
  *
  * Cette fonction renvoie un entier codant le type de l'évènement qui a été 
  * récupéré ( clavier, souris ou aucun des deux ).
  *
- * Voir les fonctions MLV_wait_keyboard_miliseconds() et 
- * MLV_wait_mouse_miliseconds() pour plus d'informations.
+ * Voir les fonctions MLV_wait_keyboard_milliseconds() et 
+ * MLV_wait_mouse_milliseconds() pour plus d'informations.
  *
  * \bug Voir les bugs de la fonction MLV_get_event().
  *
@@ -395,15 +395,15 @@ MLV_Event MLV_wait_keyboard_or_mouse_or_seconds(
  *                code et le mode précédent
  * \param mouse_x Coordonnée en X de la position de la souris
  * \param mouse_y Coordonnée en Y de la position de la souris
- * \param miliseconds Le nombre de miliseconde à attendre avant d'arrêter la 
+ * \param milliseconds Le nombre de milliseconde à attendre avant d'arrêter la 
  *        fonction
  * \return un entier codant le type de l'évènement qui a été récupéré ( MLV_KEY 
  *         ou MLV_MOUSE_BUTTON ), ou MLV_NONE si le temps s'est écoulé.
  */
-MLV_Event MLV_wait_keyboard_or_mouse_or_miliseconds(
+MLV_Event MLV_wait_keyboard_or_mouse_or_milliseconds(
 	MLV_Keyboard_button* sym, MLV_Keyboard_modifier* mod, int* unicode,
 	int* mouse_x, int* mouse_y,
-	int miliseconds
+	int milliseconds
 );
 
 /** \~french

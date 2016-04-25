@@ -198,7 +198,7 @@ int main( int argc, char *argv[] ){
 	MLV_wait_keyboard_or_mouse( &sym, &mod, &unicode, &mouse_x, &mouse_y );
 	
 	//
-	// Tant que le temps impart n'est pas écoulé, l'utilisateur est invité à 
+	// Tant que le temps imparti n'est pas écoulé, l'utilisateur est invité à 
     // appuyer sur une touche du clavier ou à cliquer sur le bouton gauche de 
 	// la souris.
 	//
@@ -208,6 +208,24 @@ int main( int argc, char *argv[] ){
 	MLV_wait_keyboard_or_mouse_or_seconds(
 		&sym, &mod, &unicode, &mouse_x, &mouse_y, temps_attente
 	);
+
+	//
+	// Tant que le temps imparti n'est pas écoulé, l'utilisateur est invité à 
+    // écrire un mot dans la boîte de saisi. 
+	//
+	afficher_texte(
+		"Vous passerez à l'écran suivant en:\n    - entrant un mot dans la boîte de dialogue;\n    - attendant quelques secondes."
+	);
+	char* text;
+	MLV_wait_input_box_or_milliseconds(                                         
+    	3000,                                                           
+    	10, 100, 100, 30,
+    	MLV_COLOR_RED, MLV_COLOR_GREEN, MLV_COLOR_BLACK,
+    	"Mot : ", &text
+	);
+	if( text ){
+		free( text ); 
+	}
 
 	//
 	// Ferme la fenêtre
@@ -220,7 +238,7 @@ int main( int argc, char *argv[] ){
 /*
  *   This file is part of the MLV Library.
  *
- *   Copyright (C) 2010,2011,2012,2013 Adrien Boussicault, Marc Zipstein
+ *   Copyright (C) 2010,2011,2012,2013, 2016 Adrien Boussicault, Marc Zipstein
  *
  *
  *    This Library is free software: you can redistribute it and/or modify

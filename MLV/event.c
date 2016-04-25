@@ -205,11 +205,11 @@ MLV_Event MLV_wait_event(
 	return resultat;
 }
 
-MLV_Event MLV_wait_event_or_miliseconds( 
+MLV_Event MLV_wait_event_or_milliseconds( 
 	MLV_Keyboard_button* key_sym, MLV_Keyboard_modifier* key_mod, int* unicode, 
 	char** texte, MLV_Input_box** input_box,
 	int* mouse_x, int* mouse_y, MLV_Mouse_button* mouse_button,
-	MLV_Button_state* state, int miliseconds
+	MLV_Button_state* state, int milliseconds
 ){
 	MLV_Event resultat;
 	int time = MLV_get_time();
@@ -224,7 +224,7 @@ MLV_Event MLV_wait_event_or_miliseconds(
 				)
 			) == MLV_NONE
 		) && (
-			MLV_get_time() - time < miliseconds
+			MLV_get_time() - time < milliseconds
 		)
 	) SDL_framerateDelay( &(MLV_data->frame_rate_manager_for_MLV_wait_event) );
 	return resultat;
@@ -236,7 +236,7 @@ MLV_Event MLV_wait_event_or_seconds(
 	int* mouse_x, int* mouse_y, MLV_Mouse_button* mouse_button,
 	MLV_Button_state* state, int seconds
 ){
-	return MLV_wait_event_or_miliseconds( 
+	return MLV_wait_event_or_milliseconds( 
 		key_sym, key_mod, unicode, texte, input_box, mouse_x, mouse_y, 
 		mouse_button, state, seconds*1000
 	);
@@ -307,10 +307,10 @@ MLV_Event MLV_wait_keyboard_or_mouse(
 }
 
 
-MLV_Event MLV_wait_keyboard_or_mouse_or_miliseconds(
+MLV_Event MLV_wait_keyboard_or_mouse_or_milliseconds(
 	MLV_Keyboard_button* sym, MLV_Keyboard_modifier* mod, int* unicode,
 	int* mouse_x, int* mouse_y,
-	int miliseconds
+	int milliseconds
 ){
 	MLV_Event resultat;
 	MLV_Button_state state;
@@ -334,12 +334,12 @@ MLV_Event MLV_wait_keyboard_or_mouse_or_miliseconds(
 			event_is_not_valid = (
 				(
 					(
-						resultat = MLV_wait_event_or_miliseconds( 
+						resultat = MLV_wait_event_or_milliseconds( 
 							&tmp_sym, &tmp_mod, &tmp_unicode,
 							NULL, NULL,
 							&tmp_mouse_x, &tmp_mouse_y, &mouse_button,
 							&state,
-							miliseconds - (MLV_get_time() - time)
+							milliseconds - (MLV_get_time() - time)
 						)
 					) != MLV_KEY
 				) && ( 
@@ -350,7 +350,7 @@ MLV_Event MLV_wait_keyboard_or_mouse_or_miliseconds(
 				state != MLV_PRESSED 
 			)
 		) && (
-			(MLV_get_time() - time) < miliseconds
+			(MLV_get_time() - time) < milliseconds
 		)
 	);
 	if(event_is_not_valid) return MLV_NONE;
@@ -377,7 +377,7 @@ MLV_Event MLV_wait_keyboard_or_mouse_or_seconds(
 	int* mouse_x, int* mouse_y,
 	int seconds
 ){
-	return MLV_wait_keyboard_or_mouse_or_miliseconds(
+	return MLV_wait_keyboard_or_mouse_or_milliseconds(
 		sym, mod, unicode, mouse_x, mouse_y, seconds*1000
 	);
 }

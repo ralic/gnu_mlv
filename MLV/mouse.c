@@ -71,7 +71,7 @@ int MLV_wait_mouse_or_milliseconds(int *x, int *y, int milliseconds){
 		(	
 			resultat = 
 			(
-				MLV_wait_event_or_seconds(
+				MLV_wait_event_or_milliseconds(
 					NULL, NULL, NULL,
 					NULL, NULL,
 					&tmp_x, &tmp_y, &mouse_button,

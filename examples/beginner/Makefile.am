@@ -28,7 +28,7 @@ noinst_PROGRAMS = \
 	05_mouse \
 	06_keyboard \
 	07_input_box \
-	08_mouse_keyboard_timer \
+	08_mouse_keyboard_input_box_timer \
 	09_colors \
 	10_library_informations \
 	11_turtle
@@ -43,7 +43,7 @@ docbeginner_DATA = \
 	05_mouse.c \
 	06_keyboard.c \
 	07_input_box.c \
-	08_mouse_keyboard_timer.c \
+	08_mouse_keyboard_input_box_timer.c \
 	09_colors.c \
 	10_library_informations.c \
 	11_turtle.c \
@@ -72,7 +72,7 @@ endif
 05_mouse_SOURCES = 05_mouse.c
 06_keyboard_SOURCES = 06_keyboard.c
 07_input_box_SOURCES = 07_input_box.c
-08_mouse_keyboard_timer_SOURCES = 08_mouse_keyboard_timer.c
+08_mouse_keyboard_input_box_timer_SOURCES = 08_mouse_keyboard_input_box_timer.c
 09_colors_SOURCES = 09_colors.c
 10_library_informations_SOURCES = 10_library_informations.c
 11_turtle_SOURCES = 11_turtle.c
