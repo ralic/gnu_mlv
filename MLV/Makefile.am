@@ -120,7 +120,9 @@ noinst_HEADERS = \
 	SDLMain.h \
 	window.h
 
-check_PROGRAMS = test_turtle
+check_PROGRAMS = \
+	test_list \
+	test_turtle
 
 TESTS = $(check_PROGRAMS)
 
@@ -129,3 +131,7 @@ test_turtle_CPPFLAGS = ${MLV_CPPFLAGS}
 test_turtle_LDFLAGS = ${MLV_LDFLAGS}
 test_turtle_LDADD = ${MLV_LIBADD}
 
+test_list_SOURCES = test_list.c
+test_list_CPPFLAGS = ${MLV_CPPFLAGS}
+test_list_LDFLAGS = ${MLV_LDFLAGS}
+test_list_LDADD = ${MLV_LIBADD}
