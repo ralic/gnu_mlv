@@ -25,6 +25,11 @@
 
 typedef struct _MLV_TreeMap MLV_TreeMap;
 
+typedef struct {
+	MLV_Key* key;
+	void* data;
+} MLV_Pair_key_data;
+
 MLV_TreeMap* MLV_create_tree_map();
 
 void MLV_free_tree_map( MLV_TreeMap* tree_map );
@@ -40,6 +45,9 @@ void MLV_add_data_in_tree_map(
 void MLV_init_tree_map( MLV_TreeMap* tree_map );
 
 void MLV_clear_tree_map( MLV_TreeMap* tree_map );
+
+
+MLV_Pair_key_data MLV_find_tree_map( MLV_Key* key, MLV_TreeMap* tree_map );
 
 void* MLV_get_data_from_tree_map( MLV_Key* key, MLV_TreeMap* tree_map );
 

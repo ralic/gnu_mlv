@@ -53,28 +53,62 @@ void MLV_free_network();
 typedef struct _MLV_Server MLV_Server;
 
 
-MLV_Server* MLV_start_server( unsigned int port, int max_conection );
+MLV_Server* MLV_start_server(
+	unsigned int port, int max_conection, int (*fct)(void*), void* data
+);
 void MLV_free_server();
 unsigned int MLV_get_port_of_server( MLV_Server* );
 
 
-typedef struct _MLV_Server_conection MLV_Server_conection;
+typedef struct _MLV_Server_connection MLV_Server_connection;
 
-MLV_Server_conection* MLV_conect_to_server( 
-	const char* server_address, unsigned int port,  const char* nickname 
+int MLV_get_network_message( char* nickname, char* text );
+
+MLV_Server_connection* MLV_connect_to_server( 
+	const char* server_address, unsigned int port,  const char* nickname
 );
-void MLV_disconect( MLV_Server_conection* conection );
+int MLV_connection_is_up( MLV_Server_connection* connection );
+
+void MLV_disconect( MLV_Server_connection* conection );
 int MLV_get_conected_computers(
-	MLV_Server_conection* server_conection, char** const * array_of_nicknames
+	MLV_Server_connection* server_conection, char** const * array_of_nicknames
 );
-int MLV_send_message(
-	MLV_Server_conection*, const char* destination_nickname, 
+
+int MLV_send_message_to_network(
+	MLV_Server_connection*, const char* destination_nickname, 
 	const char* message
 );
-int MLV_send_message_to_everybody(
-	MLV_Server_conection*, const char* message
+int MLV_send_integer_to_network(
+	MLV_Server_connection* server_connection,
+	const char* destination_nickname, int integer
+);
+int MLV_send_real_to_network(
+	MLV_Server_connection* server_connection,
+	const char* destination_nickname, float real
 );
 
+int MLV_send_message_over_network_to_everybody(
+	MLV_Server_connection* server_connection, const char* message
+);
+int MLV_send_integer_over_network_to_everybody(
+	MLV_Server_connection* server_connection, int integer
+);
+int MLV_send_real_over_network_to_everybody(
+	MLV_Server_connection* server_connection, float real
+);
+
+
+typedef enum {
+	MLV_NET_NONE = 0, /**< \~french Aucune donnée récupérée */
+	MLV_NET_TEXT = 1, /**< \~french La donnée récupérée est du texte.*/
+	MLV_NET_INTEGER = 2, /**< \~french La donnée récupérée est un entier. */
+	MLV_NET_REAL = 3 /**< \~french  La donnée récupérée est un réel. */
+} MLV_Network_data_type;
+
+MLV_Network_data_type MLV_get_network_data(
+	MLV_Server_connection* connection,
+	char** message, int* integer, float* real, char const ** nickname
+);
 
 #ifdef __cplusplus
 }

@@ -12,7 +12,10 @@ int main(int argc, char *argv[]){
 
 	MLV_init_network();
 
-	MLV_start_server(10000, 3);
+	int port = 10000;
+	int nb_max_connections = 5;
+
+	MLV_start_server( port, nb_max_connections, NULL, NULL );
 
 	MLV_free_network();
 

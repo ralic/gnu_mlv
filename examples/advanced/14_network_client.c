@@ -12,13 +12,74 @@ int main(int argc, char *argv[]){
 
 	MLV_init_network();
 
-	MLV_Server_conection * conection = MLV_conect_to_server(
-		"localhost", 10000, "spectre"
+	int port = 10000;
+	const char* ip_address = "localhost";
+
+	// L'utilisateur Toto se connecte au serveur
+	MLV_Server_connection * connection_toto = MLV_connect_to_server(
+		ip_address, port, "Toto"
 	);
+//	if( ! MLV_connection_is_up( connection_toto) ){
+//		fprintf( stderr, "Conection to server was a failure.");
+//		exit(1);
+//	}
 
-	MLV_wait_seconds(5);	
+	// L'utilisateur Tutu se connecte au serveur
+	MLV_Server_connection * connection_tutu = MLV_connect_to_server(
+		ip_address, port, "Tutu"
+	);
+//	if( ! MLV_connection_is_up( connection_tutu ) ){
+//		fprintf( stderr, "Conection to server was a failure.");
+//		exit(1);
+//	}
 
-	MLV_disconect( conection );
+	while(1){
+		MLV_wait_seconds(1);
+		// Toto envoie un message à Tutu
+		const char* tutu = "Tutu";
+		const char* message = "Message interessant !";
+		int success = MLV_send_message_to_network(
+			connection_toto, tutu, message
+		);
+		if( success ){
+			printf(
+				"Le message envoyé %s a bien été envoyé à %s.", tutu, message
+			);	
+		}
+
+		char* text;
+		int integer;
+		float real;
+		const char* expeditor;
+		MLV_Network_data_type type = MLV_get_network_data(
+			connection_tutu, &text, &integer, &real, &expeditor
+		);
+		if( type == MLV_NET_NONE ){
+			printf("%s Aucun message reçu.\n", tutu);
+		}
+		if( type == MLV_NET_TEXT ){
+			printf(
+				"%s a reçu le message de %s suivant : %s.\n", 
+				tutu, expeditor, text
+			);
+			free( text );
+		}
+		if( type == MLV_NET_INTEGER ){
+			printf(
+				"%s a reçu l'entier de %s suivant : %d.\n", 
+				tutu, expeditor, integer
+			);
+		}
+		if( type == MLV_NET_REAL ){
+			printf(
+				"%s a reçu le réel de %s suivant : %f.", 
+				tutu, expeditor, real
+			);
+		}
+	}
+
+	MLV_disconect( connection_tutu );
+	MLV_disconect( connection_toto );
 
 	MLV_free_network();
 

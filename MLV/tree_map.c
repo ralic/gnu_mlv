@@ -98,6 +98,21 @@ void* MLV_get_data_from_tree_map( MLV_Key* key, MLV_TreeMap* tree_map ){
 	return founded_key_data->data;
 }
 
+MLV_Pair_key_data MLV_find_tree_map( MLV_Key* key, MLV_TreeMap* tree_map ){
+	MLV_Pair_key_data result;
+	PairKeyData* key_data = create_pair_key_data( key, NULL, NULL );
+	MLV_TreeSet* elem = MLV_find_tree_set( key_data, tree_map->set );
+	if( !elem ){
+		result.key = NULL;
+	}else{
+		PairKeyData* founded_key_data = (PairKeyData*) elem->data;
+		result.key = founded_key_data->key;
+		result.data = founded_key_data->data;
+	}
+	free_pair_key_data_without_key( key_data );
+	return result;
+}
+
 void free_key_of_pair_key_data( PairKeyData* pair ){
 	MLV_free_key( pair->key );
 }

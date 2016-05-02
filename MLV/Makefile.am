@@ -64,10 +64,10 @@ libMLV_la_SOURCES += memory_debug.c
 endif
 
 if MEMORY_DEBUG
-libMLV_la_CFLAGS = ${libxml_CFLAGS} ${glib_CFLAGS} -DDATA_PATH=\"${DATA_PATH}\"
+libMLV_la_CFLAGS = -fno-strict-aliasing ${libxml_CFLAGS} ${glib_CFLAGS} -DDATA_PATH=\"${DATA_PATH}\"
 libMLV_la_LIBADD = ${libxml_LIBS} ${glib_LIBS} 
 else
-libMLV_la_CFLAGS = ${sdl_CFLAGS} ${sdlttf_CFLAGS} ${sdlimage_CFLAGS} ${sdlmixer_CFLAGS} ${sdlnet_CFLAGS} ${libxml_CFLAGS} ${glib_CFLAGS} -DDATA_PATH=\"${DATA_PATH}\"
+libMLV_la_CFLAGS = -fno-strict-aliasing ${sdl_CFLAGS} ${sdlttf_CFLAGS} ${sdlimage_CFLAGS} ${sdlmixer_CFLAGS} ${sdlnet_CFLAGS} ${libxml_CFLAGS} ${glib_CFLAGS} -DDATA_PATH=\"${DATA_PATH}\"
 libMLV_la_LIBADD =  ${sdl_LIBS} ${libxml_LIBS} ${glib_LIBS} ${sdlttf_LIBS} ${sdlgfx_LIBS} ${sdlimage_LIBS} ${sdlmixer_LIBS} ${sdlnet_LIBS}
 endif
 libMLV_la_LDFLAGS = -version-info $(MLV_CURRENT):$(MLV_REVISION):$(MLV_AGE) 
