@@ -137,7 +137,7 @@ int main(int argc, char *argv[]){
 	// Dans MLV, ce mécanisme existe dans toute les fonctions qui travaille 
 	// avec une une chaîne de caractère. :)
 	// Il suffit d'ajouter les variables à insérer dans le texte à la fin de la
-    // fonction.
+	// fonction.
 	//
 	int entier = 42;
 	double reel = 3.14;
