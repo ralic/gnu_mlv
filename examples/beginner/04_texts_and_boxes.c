@@ -127,13 +127,30 @@ int main(int argc, char *argv[]){
 		MLV_COLOR_MAGENTA
 	);
 
+	//
+	// Affiche le contenu des variables. 
+	//
+	// Le format utilisé par la chaîne de 
+	// caractère est le même que celui de printf de stdio.h.
+	// On rapelle que le .2 du %f signifie que l'on affiche que les 2 premiers
+	// chiffres après la virgurle du réel 'reel'.
+	//
+	int entier = 42;
+	double reel = 3.14;
+	const char* texte = "Combinatoire";
+	MLV_draw_text(
+		10, 50, 
+		"entier = %d, reel = %.2f, texte = %s",
+		MLV_COLOR_MAGENTA,
+		entier, reel, texte
+	);
 
 	//
 	// Affiche du texte dans une boîte dont la taille s'adapte au texte
 	// Le texte est justifié au centre dans la boîte
 	//
 	MLV_draw_adapted_text_box(
-		10,50,
+		10,100,
 		"Exemple de boîte dont le contour\ns'adapte\nà la taille du texte.",
 		taille_interlinge,
 		MLV_COLOR_RED, MLV_COLOR_GREEN, MLV_COLOR_BLACK,
@@ -145,7 +162,7 @@ int main(int argc, char *argv[]){
 	// Le texte est justifié à gauche dans la boîte
 	//
 	MLV_draw_adapted_text_box(
-		10,150,
+		10,190,
 		"Même chose,\nmais le texte\nest justifié à gauche\nde la fenêtre.",
 		taille_interlinge,
 		MLV_COLOR_RED, MLV_COLOR_GREEN, MLV_COLOR_BLACK,
@@ -158,7 +175,7 @@ int main(int argc, char *argv[]){
 	// centré.
 	//
 	MLV_draw_text_box(
-		10,280,
+		10,310,
 		600,150,
 		"Cette fois-ci,\nla taille de la boîte ne correspond pas à l'espace couvert par le texte.\nLa boîte est ici plus grande.",
 		taille_interlinge,
