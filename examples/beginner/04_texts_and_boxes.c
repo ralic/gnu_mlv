@@ -136,6 +136,8 @@ int main(int argc, char *argv[]){
 	// chiffres après la virgurle du réel 'reel'.
 	// Dans MLV, ce mécanisme existe dans toute les fonctions qui travaille 
 	// avec une une chaîne de caractère. :)
+	// Il suffit d'ajouter les variables à insérer dans le texte à la fin de la
+    // fonction.
 	//
 	int entier = 42;
 	double reel = 3.14;
