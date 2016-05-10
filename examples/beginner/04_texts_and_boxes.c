@@ -134,6 +134,8 @@ int main(int argc, char *argv[]){
 	// caractère est le même que celui de printf de stdio.h.
 	// On rapelle que le .2 du %f signifie que l'on affiche que les 2 premiers
 	// chiffres après la virgurle du réel 'reel'.
+	// Dans MLV, ce mécanisme existe dans toute les fonctions qui travaille 
+	// avec une une chaîne de caractère. :)
 	//
 	int entier = 42;
 	double reel = 3.14;
