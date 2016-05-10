@@ -28,7 +28,7 @@ int main( int argc, char *argv[] ){
 	MLV_create_window( "beginner - 11 - The turtle", "Th turtle", 640, 480 );
 
 	// On affiche la tortue Léonardo (c'est optionnel, la tortue est plus facile
-    // A diriger lorsqu'on la voit.
+	// A diriger lorsqu'on la voit.
 	MLV_show_leonardo();
 
 	// On change la couleur du pinceau 
@@ -43,7 +43,7 @@ int main( int argc, char *argv[] ){
 	// Nous allons faire tracer par la tortue Léonardo un triangle équilatéral.
 	//
 
-	// On déplace la tortue à la coordonnée (x-20, y-20)
+	// On déplace la tortue à la coordonnée (x=200, y=100)
 	MLV_leonardo_go_to( 200, 100 );
 	// On oriente Leonardo vers le bas de l'image.
 	MLV_leonardo_orient_to( 90 );
@@ -51,7 +51,7 @@ int main( int argc, char *argv[] ){
 	// Dessin du premier côté du triangle :
 	// On pose le crayon su l'écran
 	MLV_leonardo_write(1); 
-	// on demande à la tortue d'avancer de 20 pixel
+	// on demande à la tortue d'avancer de 300 pixel
 	MLV_leonardo_forward(300);
 	
 	// Dessin du deuxième côté du triangle
