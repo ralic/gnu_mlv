@@ -1,7 +1,7 @@
 /*
  *   This file is part of the MLV Library.
  *
- *   Copyright (C) 2016 Adrien Boussicault, Marc Zipstein
+ *   Copyright (C) 2016 Adrien Boussicault
  *
  *
  *    This Library is free software: you can redistribute it and/or modify
@@ -18,14 +18,11 @@
  *    along with this Library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __MLV__WINDOW_H__
-#define __MLV__WINDOW_H__
+#ifndef __MLV__SDL_INITIALISATION_H__
+#define __MLV__SDL_INITIALISATION_H__
 
-#include "MLV_image.h"
+void initialise_sdl();
 
-void MLV_register_a_post_producter( void ( *post_producter )( MLV_Image* ) );
-void MLV_unregister_a_post_producter( void ( *post_producter )( MLV_Image* ) );
-
-int window_is_open();
+void free_sdl();
 
 #endif

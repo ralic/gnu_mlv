@@ -52,7 +52,9 @@ noinst_PROGRAMS = \
 	09_animation \
 	10_read_xml_file \
 	11_animation_book\
-	12_paths
+	12_paths \
+	13_network_server \
+	14_network_client
 
 AM_CPPFLAGS = ${MLV_CPPFLAGS}
 AM_LDFLAGS = ${MLV_LDFLAGS} -static
@@ -78,6 +80,8 @@ docadvanced_DATA = \
 	10_read_xml_file.c \
 	11_animation_book.c \
 	12_paths.c \
+	13_network_server.c \
+	14_network_client.c \
 	animation_book.xml \
 	informations.xml \
 	Garuda-Oblique.ttf \
@@ -116,3 +120,5 @@ uninstall-hook:
 10_read_xml_file_SOURCES = 10_read_xml_file.c
 11_animation_book_SOURCES = 11_animation_book.c
 12_paths_SOURCES = 12_paths.c
+13_network_server_SOURCES = 13_network_server.c
+14_network_client_SOURCES = 14_network_client.c

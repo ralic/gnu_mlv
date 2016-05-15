@@ -1,7 +1,7 @@
 #
 #   This file is part of the MLV Library.
 #
-#   Copyright (C) 2010 Adrien Boussicault, Marc Zipstein
+#   Copyright (C) 2010-2016 Adrien Boussicault, Marc Zipstein
 #
 #
 #    This library is free software: you can redistribute it and/or modify
@@ -51,7 +51,9 @@ libMLV_la_SOURCES = \
 	key.c \
 	tree_set.c \
 	tree_map.c \
-	window.c
+	window.c \
+	sdlinitialisation.c \
+	net.c
 
 if OS_IS_APPLE 
 libMLVMain_la_SOURCES = \
@@ -66,8 +68,8 @@ if MEMORY_DEBUG
 libMLV_la_CFLAGS = ${libxml_CFLAGS} ${glib_CFLAGS} -DDATA_PATH=\"${DATA_PATH}\"
 libMLV_la_LIBADD = ${libxml_LIBS} ${glib_LIBS} 
 else
-libMLV_la_CFLAGS = ${sdl_CFLAGS} ${sdlttf_CFLAGS} ${sdlimage_CFLAGS} ${sdlmixer_CFLAGS} ${libxml_CFLAGS} ${glib_CFLAGS} -DDATA_PATH=\"${DATA_PATH}\"
-libMLV_la_LIBADD =  ${sdl_LIBS} ${libxml_LIBS} ${glib_LIBS} ${sdlttf_LIBS} ${sdlgfx_LIBS} ${sdlimage_LIBS} ${sdlmixer_LIBS}
+libMLV_la_CFLAGS = ${sdl_CFLAGS} ${sdlttf_CFLAGS} ${sdlimage_CFLAGS} ${sdlmixer_CFLAGS} ${sdlnet_CFLAGS} ${libxml_CFLAGS} ${glib_CFLAGS} -DDATA_PATH=\"${DATA_PATH}\"
+libMLV_la_LIBADD =  ${sdl_LIBS} ${libxml_LIBS} ${glib_LIBS} ${sdlttf_LIBS} ${sdlgfx_LIBS} ${sdlimage_LIBS} ${sdlmixer_LIBS} ${sdlnet_LIBS}
 endif
 libMLV_la_LDFLAGS = -version-info $(MLV_CURRENT):$(MLV_REVISION):$(MLV_AGE) 
 
@@ -99,6 +101,7 @@ mlv_include_HEADERS = \
 	MLV_turtle.h \
 	MLV_xml.h \
 	MLV_xml_va.h \
+	MLV_net.h \
 	MLV_window.h
 
 noinst_HEADERS = \
@@ -118,6 +121,7 @@ noinst_HEADERS = \
 	tree_map.h \
 	turtle.h \
 	SDLMain.h \
+	sdlinitialisation.h \
 	window.h
 
 check_PROGRAMS = \

@@ -64,6 +64,7 @@
  *               MLV_mouse_wait pour récuperer des évènements provenant de la 
  *               souris.
  * 
+ * MLV_net.h : propose des outils pour manipuler des connexions réseaux.
  * 
  * MLV_path.h : définit différents outils pour utiliser des chemins d'accès aux
  *              fichiers.
@@ -147,7 +148,8 @@
  * MLV_mouse.h : define los tipos de dato por el ratón y la subrutina 
  *               MLV_mouse_wait para obtener eventos des ratón.
  * 
- * 
+ * MLV_net.h : propone herramientas para utilisar networks.
+ *
  * MLV_input_box.h : define algunas herramientas para creer y utilisar caja de 
  *                texto
  * 
@@ -193,6 +195,7 @@
 #include "MLV_path.h"
 #include "MLV_playlist.h"
 #include "MLV_input_box.h"
+#include "MLV_net.h"
 #include "MLV_random.h"
 #include "MLV_text.h"
 #include "MLV_text_va.h"

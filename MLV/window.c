@@ -52,6 +52,7 @@
 #endif
 
 #include "warning_error.h"
+#include "sdlinitialisation.h"
 
 #include "data_structure.h"
 #include "image.h"
@@ -59,13 +60,17 @@
 
 #define SIZE_DEFAULT_FONT 12
 
-int mlv_sdl_is_initialised = 0;
+int window_is_on = 0;
 Uint32 mlv_width_of_desktop = 0;
 Uint32 mlv_height_of_desktop = 0;
 
 DataMLV *MLV_data = NULL;
 void (*MLV_call_back_function_for_exit)(void*) = NULL;
 void *MLV_call_back_data = NULL;
+
+int window_is_open(){
+	return window_is_on;
+}
 
 int events_filter(const SDL_Event *event){
 	if( event->type == SDL_QUIT ){
@@ -173,36 +178,6 @@ void initialise_graphic_window(
 
 	if( we_need_to_reinitialize_post_screen ){
 		intialize_post_production_images();
-	}
-}
-
-
-void initialise_sdl(){
-	if( ! mlv_sdl_is_initialised ){
-		if(
-			SDL_Init(
-				SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_AUDIO 
-	#if defined( OS_LINUX ) // SDL thread is not supported on Windows and MacOSX
-				| SDL_INIT_EVENTTHREAD  // Cette option est importante !
-									  // Elle permet de faire en sorte 
-					  // que le filtrage des évenements soit fait dés 
-					  // réception d'un evenement de la part de l'OS
-					  // Si cette option n'est pas activée, le filtre 
-					  // d'evenement est applique seulement après un 
-					  // appel à poll_event. Dans ce cas la gestion
-					  // de l'arret automatique du programme après 
-					  // utilisation de la croix des fenetre ne 
-					  // fonctione plus correctement. En effet, si 
-					  // l'utilisateur n'utilise pas de fonction mettant
-					  // en jeu des évènement, le filtre n'est jamais
-					  // appelé et le mécanisme d'arret automatique 
-					  // non plus.
-	#endif
-			) <0 
-		){
-			printf("Unable to init SDL: %s\n", SDL_GetError());
-			exit(1);
-		}
 	}
 }
 
@@ -319,6 +294,8 @@ void MLV_create_window_with_default_font(
 	SDL_setFramerate( &(MLV_data->frame_rate_manager_for_MLV_wait_event), 24 );
 
 	SDL_SetEventFilter(events_filter);
+
+	window_is_on = 1;
 }
 
 void MLV_create_window(
@@ -399,6 +376,8 @@ void MLV_clear_window( MLV_Color color ){
 }
 
 void MLV_free_window(){
+	window_is_on = 0;
+
 	if( ! MLV_data ){
 		ERROR("No window has been created.");
 	}
@@ -410,7 +389,7 @@ void MLV_free_window(){
 	quit_font();
 	MLV_FREE( MLV_data, DataMLV );
 	MLV_data = NULL;
-	SDL_Quit();
+	free_sdl();
 	quit_input_box_mechanism();
 }
 
