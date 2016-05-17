@@ -55,7 +55,7 @@ int get_data_from_server( MLV_Connection* connection ){
 			connection, &message, &integers, &reals, &size
 	);
 
-	if( type ==  MLV_NET_CONNECTION_DROPED ){
+	if( type ==  MLV_NET_CONNECTION_CLOSED ){
 		printf( "Connection perdu avec le serveur." );
 		end = 1;
 	}else{

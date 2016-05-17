@@ -40,9 +40,10 @@ typedef enum {
 	MLV_NET_INTEGERS = 2, /**< \~french La donnée récupérée est un entier. */
 	MLV_NET_REALS = 3, /**< \~french  La donnée récupérée est un réel. */
 
+	MLV_NET_CONNECTION_ACCEPTED = 4, 
 	MLV_NET_SERVER_IS_FULL = -1,
 	MLV_NET_CONNECTION_REFUSED = -2, 
-	MLV_NET_CONNECTION_DROPED = -3 
+	MLV_NET_CONNECTION_CLOSED = -3 
 } MLV_Network_msg;
 
 int MLV_init_network();
@@ -51,7 +52,7 @@ void MLV_free_network();
 typedef struct _MLV_Server MLV_Server;
 
 MLV_Server* MLV_start_server( unsigned int port, int max_connection );
-void MLV_free_server();
+void MLV_free_server( MLV_Server* server );
 
 unsigned int MLV_get_port_of_server( MLV_Server* server );
 void MLV_collect_server_informations(

@@ -99,7 +99,7 @@ void treat_incoming_datas(
 					connections[i], &message, &integers, &reals, &size
 			);
 
-			if( type ==  MLV_NET_CONNECTION_DROPED ){
+			if( type ==  MLV_NET_CONNECTION_CLOSED ){
 				printf(
 					"Connection perdu avec %p. We remove the connection. \n", 
 					connections[i]
@@ -171,8 +171,9 @@ int main(int argc, char *argv[]){
 	}
 
 	free_connections( connections, nb_max_connections );
+	MLV_free_server( server );
 	MLV_free_network();
-
+	
 	return 0;
 }
 
