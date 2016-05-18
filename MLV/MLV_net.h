@@ -79,15 +79,15 @@ MLV_Network_msg MLV_send_text(
 	MLV_Connection* connection, const char* text, int size
 );
 MLV_Network_msg MLV_send_integer_array(
-	MLV_Connection* connection, int * array, int size
+	MLV_Connection* connection, const int* array, int size
 );
 MLV_Network_msg MLV_send_real_array(
-	MLV_Connection* connection, float* array, int size
+	MLV_Connection* connection, const float* array, int size
 );
 
 MLV_Network_msg MLV_get_network_data(
-	MLV_Connection* connection, char** message, int** integers, float** reals,
-	int* size
+	MLV_Connection* connection, char** message, int** integers, 
+	float** reals, int* size
 );
 
 #ifdef __cplusplus

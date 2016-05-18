@@ -347,9 +347,79 @@ void MLV_refuse_connection( MLV_Connection* connection ){
 	TODO
 }
 
+MLV_Network_msg get_fixed_array_message(
+	TCPsocket clients, 
+	char* message, int* integers, float* reals, int size
+){
+	MLV_Net_header data;  // be sure that -fno_anti_aliasing is used with gcc.
+	int result = SDLNet_TCP_Recv( clients, &data, sizeof(MLV_Net_header) );
+	if( result == 0 ){
+		fprintf( stderr, "The connexion was closed !\n" );
+		return MLV_NET_CONNECTION_CLOSED;
+	}
+	if( result != sizeof(MLV_Net_header) ){
+		fprintf( stderr, "Nb reveived : %d \n", result );
+		ERROR("error when reading a message.");
+	}
+	Uint32 value = SDLNet_Read32(&data.value);
+	MLV_Network_msg type = (MLV_Network_msg) SDLNet_Read16( &data.type );
+
+	switch( type ){
+		case MLV_NET_TEXT: ; 
+		case MLV_NET_INTEGERS: ;
+		case MLV_NET_REALS: ;
+			if( size && size != value ){
+				fprintf( stderr,
+					"Invalid parameter. The size of the data is %d. "
+					"Excpected data is : %d.\n",
+					value, size
+				);
+				exit(1);
+			} 
+			break; 
+		default: ;
+	}
+
+	switch( type ){
+		case MLV_NET_TEXT: if( message ){
+				int result = SDLNet_TCP_Recv( clients, message, size );
+				if( result != size ){
+					ERROR( "error when reading a message." );
+				}
+			}
+			
+		case MLV_NET_INTEGERS: if( integers ){
+				Uint32 values[size];
+				int result = SDLNet_TCP_Recv(
+					clients, values, sizeof(values)
+				);
+				if( result != sizeof(values) ){
+					ERROR( "error when reading a message." );
+				}
+				for( int i=0; i<size; i++ ){
+					integers[i] = SDLNet_Read32( values[i] );
+				}
+			}
+		case MLV_NET_CONNECTION_ACCEPTED:; 
+		case MLV_NET_SERVER_IS_FULL:;
+		case MLV_NET_CONNECTION_REFUSED:;
+		case MLV_NET_CONNECTION_CLOSED:;
+			if( integers ) *integers = value;
+			break;
+		case MLV_NET_REALS:
+			TODO
+			break; 
+		default:
+			ERROR("MLV NET: Unexpectd value.");
+	}
+	return type;
+}
+
+
+
 
 MLV_Network_msg get_message(
-	TCPsocket clients, char** message, int* integer, float* real, int* size
+	TCPsocket clients, char** message, int** integers, float** reals, int* size
 ){
 	MLV_Net_header data;  // be sure that -fno_anti_aliasing is used with gcc.
 	int result = SDLNet_TCP_Recv( clients, &data, sizeof(MLV_Net_header) );
@@ -365,21 +435,18 @@ MLV_Network_msg get_message(
 	MLV_Network_msg type = (MLV_Network_msg) SDLNet_Read16( &data.type );
 	switch( type ){
 		case MLV_NET_TEXT:{
+				size_t len = value;
 				if( message ){
-					size_t len = value;
 					*message = MLV_MALLOC( value, char );
 					int result = SDLNet_TCP_Recv( clients, *message, len );
 					if( result != len ){
 						ERROR( "error when reading a message." );
 					}
 				}
+				if( size ){
+					*size = len;
+				}
 			}
-		case MLV_NET_CONNECTION_ACCEPTED:; 
-		case MLV_NET_SERVER_IS_FULL:;
-		case MLV_NET_CONNECTION_REFUSED:;
-		case MLV_NET_CONNECTION_CLOSED:;
-			if( integer ) *integer = value;
-			break;
 		case MLV_NET_INTEGERS:;
 		case MLV_NET_REALS:
 			TODO
@@ -404,15 +471,19 @@ MLV_Connection * MLV_start_new_connection(
 
 	/* Resolve the argument into an IPaddress type */
 	if(SDLNet_ResolveHost( &(connection->ip), server_address, port )==-1){
-		fprintf( stderr, SDLNet_GetError() );
-		ERROR( "Unable to resolve the web address." );
+		fprintf( stderr, "%s\n", SDLNet_GetError() );
+		fprintf( stderr, "Unable to resolve the web address.\n" );
+		MLV_free_connection( connection );
+		return 0;
 	}
 
 	/* open the server socket */
 	connection->socket= SDLNet_TCP_Open( &(connection->ip) );
 	if( ! connection->socket ){
-		fprintf( stderr, SDLNet_GetError() );
-		ERROR("Unable to open the TCP socket." );
+		fprintf( stderr, "%s\n", SDLNet_GetError() );
+		fprintf( stderr, "Unable to open the TCP socket.\n" );
+		MLV_free_connection( connection );
+		return 0;
 	}
 
 	fprintf( stdout, "Connection to :" );
@@ -421,15 +492,16 @@ MLV_Connection * MLV_start_new_connection(
 
 	if( SDLNet_TCP_AddSocket( connection->set, connection->socket )==-1 ) {
 		fprintf(
-			stderr, "Unable to add the socket in the pool : %s", 
+			stderr, "%s", 
 			SDLNet_GetError()
 		);
+	    ERROR( "Unable to add the socket in the pool" );
 	}
 
 	int value;
 
-	MLV_Network_msg type = get_message(
-		connection->socket, NULL, &value, NULL, NULL
+	MLV_Network_msg type = get_fixed_array_message(
+		connection->socket, NULL, &value, NULL, 0
 	);
 	switch( type ){
 		case  MLV_NET_CONNECTION_ACCEPTED: {
@@ -460,35 +532,140 @@ MLV_Connection * MLV_start_new_connection(
 }
 
 void MLV_free_connection( MLV_Connection* connection ){
-	TODO
+	if( connection->socket ){
+		SDLNet_TCP_DelSocket(connection->set, connection->socket);
+		SDLNet_TCP_Close(connection->socket);
+	}
+	if( connection->set ){
+		SDLNet_FreeSocketSet(connection->set);
+	}
+	MLV_FREE( connection, MLV_Connection );
+}
+
+MLV_Network_msg send_text_hwd(
+	TCPsocket socket, MLV_Network_msg type_msg, const char* message
+){
+	size_t len = strlen( message ) + 1;
+	if( len > UINT32_MAX  ){
+		fprintf( 
+			stderr, "Message too long. We keep just %d characters.",
+			UINT32_MAX - 1
+		);
+		len = UINT32_MAX;
+	};
+	if( send_header_hwd( socket, type_msg, len ) ){
+		fprintf( stderr, "MLV Net : Fail to send the header.");
+		return MLV_NET_CONNECTION_CLOSED;
+	}
+
+	int result = SDLNet_TCP_Send( socket, message, len );
+	if( result!=len ){ 
+		fprintf( stderr, "SDLNet_TCP_Send: %s\n",SDLNet_GetError());
+		return MLV_NET_CONNECTION_CLOSED;
+	}
+	return type_msg;
 }
 
 MLV_Network_msg MLV_send_text(
 	MLV_Connection* connection, const char* text, int size
 ){
-	TODO
-	return MLV_NET_NONE;
+	return send_text_hwd( connection->socket, MLV_NET_TEXT, text );
 }
+
+
+MLV_Network_msg send_integers_hwd(
+	TCPsocket socket, MLV_Network_msg type_msg, const int* integers,
+	int size
+){
+	size_t len = size;
+	if( size > UINT32_MAX  ){
+		fprintf( 
+			stderr, "Message too long. We keep just %d characters.",
+			UINT32_MAX - 1
+		);
+		len = UINT32_MAX;
+	};
+	if( send_header_hwd( socket, type_msg, len ) ){
+		fprintf( stderr, "MLV Net : Fail to send the header.");
+		return MLV_NET_CONNECTION_CLOSED;
+	}
+
+	Uint32 data[len];
+	for( int i=0; i<len; i++ ){
+		data[i] = integers[i];
+	}
+	int result = SDLNet_TCP_Send( socket, data, sizeof(data) );
+	if( result!=sizeof(data) ){ 
+		fprintf( stderr, "SDLNet_TCP_Send: %s\n",SDLNet_GetError());
+		return MLV_NET_CONNECTION_CLOSED;
+	}
+	return type_msg;
+}
+
 
 MLV_Network_msg MLV_send_integer_array(
-	MLV_Connection* connection, int * array, int size
+	MLV_Connection* connection, const int* array, int size
 ){
-	TODO
-	return MLV_NET_NONE;
+	return send_integers_hwd( 
+		connection->socket, MLV_NET_INTEGERS, array, size
+	);
 }
 
-MLV_Network_msg MLV_send_real_array(
-	MLV_Connection* connection, float* array, int size
+
+MLV_Network_msg send_reals_hwd(
+	TCPsocket socket, MLV_Network_msg type_msg, const float* reals,
+	int size
 ){
-	TODO
-	return MLV_NET_NONE;
+	size_t len = size;
+	if( size > UINT32_MAX  ){
+		fprintf( 
+			stderr, "Message too long. We keep just %d characters.",
+			UINT32_MAX - 1
+		);
+		len = UINT32_MAX;
+	};
+	if( send_header_hwd( socket, type_msg, len ) ){
+		fprintf( stderr, "MLV Net : Fail to send the header.");
+		return MLV_NET_CONNECTION_CLOSED;
+	}
+
+	Uint32 data[len];
+	for( int i=0; i<len; i++ ){
+		data[i] = (Uint32) reals[i];
+	}
+	int result = SDLNet_TCP_Send( socket, data, sizeof(data) );
+	if( result!=sizeof(data) ){ 
+		fprintf( stderr, "SDLNet_TCP_Send: %s\n",SDLNet_GetError());
+		return MLV_NET_CONNECTION_CLOSED;
+	}
+	return type_msg;
+}
+
+
+MLV_Network_msg MLV_send_real_array(
+	MLV_Connection* connection, const float* array, int size
+){
+	return send_reals_hwd( 
+		connection->socket, MLV_NET_REALS, array, size
+	);
 }
 
 MLV_Network_msg MLV_get_network_data(
-	MLV_Connection* connection, char** message, int** integers, float** reals,
-	int* size
+	MLV_Connection* connection, char** message, int** integers, 
+	float** reals, int* size
 ){
-	TODO
-	return MLV_NET_NONE;
+
+	MLV_Network_msg result = MLV_NET_NONE;
+	int numready = SDLNet_CheckSockets(connection->set, 0);
+	if( numready == -1 ){
+		fprintf( stderr, "Net problem : %s \n", SDLNet_GetError() );
+		ERROR( "Unable to check sockets." );
+	}else if( numready ){
+		DEBUG("Activity !")
+		result = get_message(
+			connection->socket, message, integers, reals, size
+		);
+	}
+	return result;
 }
 

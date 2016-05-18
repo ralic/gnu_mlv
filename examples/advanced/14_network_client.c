@@ -81,6 +81,10 @@ int main(int argc, char *argv[]){
 
 	// On se connecte au serveur
 	MLV_Connection * connection= MLV_start_new_connection( ip_address, port );
+	if( ! connection ){
+		printf("Connexion au serveur impossible. Le serveur n'est pas ouvert ou le réseau ne fonctionne pas.\n");
+		exit(1);
+	}
 
 	int end = 0;
 	while( ! end ){
