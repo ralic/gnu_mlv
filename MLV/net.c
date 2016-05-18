@@ -390,9 +390,7 @@ MLV_Network_msg get_fixed_array_message(
 			
 		case MLV_NET_INTEGERS: if( integers ){
 				Uint32 values[size];
-				int result = SDLNet_TCP_Recv(
-					clients, values, sizeof(values)
-				);
+				int result = SDLNet_TCP_Recv( clients, values, sizeof(values) );
 				if( result != sizeof(values) ){
 					ERROR( "error when reading a message." );
 				}
@@ -406,8 +404,16 @@ MLV_Network_msg get_fixed_array_message(
 		case MLV_NET_CONNECTION_CLOSED:;
 			if( integers ) *integers = value;
 			break;
-		case MLV_NET_REALS:
-			TODO
+		case MLV_NET_REALS: if( reals ){
+				Uint32 values[size];
+				int result = SDLNet_TCP_Recv( clients, values, sizeof(values) );
+				if( result != sizeof(values) ){
+					ERROR( "error when reading a message." );
+				}
+				for( int i=0; i<size; i++ ){
+					reals[i] = (float) SDLNet_Read32( values[i] );
+				}
+			}
 			break; 
 		default:
 			ERROR("MLV NET: Unexpectd value.");
@@ -432,24 +438,44 @@ MLV_Network_msg get_message(
 		ERROR("error when reading a message.");
 	}
 	Uint32 value = SDLNet_Read32(&data.value);
+	size_t len = value;
+	if( size ){
+		*size = len;
+	}
+
 	MLV_Network_msg type = (MLV_Network_msg) SDLNet_Read16( &data.type );
 	switch( type ){
-		case MLV_NET_TEXT:{
-				size_t len = value;
-				if( message ){
-					*message = MLV_MALLOC( value, char );
-					int result = SDLNet_TCP_Recv( clients, *message, len );
-					if( result != len ){
-						ERROR( "error when reading a message." );
-					}
-				}
-				if( size ){
-					*size = len;
+		case MLV_NET_TEXT: if( message ){
+				*message = MLV_MALLOC( value, char );
+				int result = SDLNet_TCP_Recv( clients, *message, len );
+				if( result != len ){
+					ERROR( "error when reading a message." );
 				}
 			}
-		case MLV_NET_INTEGERS:;
-		case MLV_NET_REALS:
-			TODO
+			break;
+		case MLV_NET_INTEGERS: if( integers ){
+				Uint32 values[len];
+				int result = SDLNet_TCP_Recv( clients, values, sizeof(values) );
+				if( result != len ){
+					ERROR( "error when reading a message." );
+				}
+				*integers = MLV_MALLOC( value, int );
+				for( int i=0; i<len; i++ ){
+					integers[i] = SDLNet_Read32( values[i] );
+				}
+			}
+			break;
+		case MLV_NET_REALS: if( reals ){
+				Uint32 values[len];
+				int result = SDLNet_TCP_Recv( clients, values, sizeof(values) );
+				if( result != len ){
+					ERROR( "error when reading a message." );
+				}
+				*reals = MLV_MALLOC( value, float );
+				for( int i=0; i<len; i++ ){
+					reals[i] = (float) SDLNet_Read32( values[i] );
+				}
+			}
 			break; 
 		default:
 			ERROR("Invalid value");
