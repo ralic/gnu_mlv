@@ -56,7 +56,7 @@ void MLV_free_server( MLV_Server* server );
 
 unsigned int MLV_get_port_of_server( MLV_Server* server );
 void MLV_collect_server_informations(
-	MLV_Server* server, const char ** ip, int* port
+	MLV_Server* server, char ** ip, int* port
 );
 
 typedef struct _MLV_Connection MLV_Connection;
@@ -64,7 +64,7 @@ typedef struct _MLV_Connection MLV_Connection;
 MLV_Connection* MLV_get_new_connection( MLV_Server* server );
 
 void MLV_collect_connection_informations(
-	MLV_Connection* connection, const char ** ip, int* port
+	MLV_Connection* connection, char ** ip, int* port
 );
 void MLV_accept_connection( MLV_Connection* connection );
 void MLV_refuse_connection( MLV_Connection* connection );

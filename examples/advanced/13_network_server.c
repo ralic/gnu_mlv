@@ -20,7 +20,7 @@ void add_connection(
 void treat_incoming_connection(
 	MLV_Server* server, MLV_Connection** connections, int nb_max_connections
 ){
-	const char* ip;
+	char* ip;
 	int port;	
 
 	// On regard si il y a de nouvelles connexions/

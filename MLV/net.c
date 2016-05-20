@@ -80,11 +80,12 @@ void init_human_ip( Human_ip * ip ){
 
 void free_human_ip( Human_ip * ip ){
 	free( ip->host );
-	init_human_ip( ip );
+	MLV_FREE( ip, Human_ip );
 }
 
 void fprint_ip( FILE* stream, IPaddress * ip ){
 	Human_ip human_ip;
+	init_human_ip( &human_ip );
 	convert_sdl_ip_to_human_ip( ip, &human_ip );
 	fprintf(
 		stream, "ip=%d.%d.%d.%d (%s), port=%d", 
@@ -93,6 +94,7 @@ void fprint_ip( FILE* stream, IPaddress * ip ){
 		human_ip.host ? human_ip.host : "?",
 		human_ip.port 
 	);
+	free( human_ip.host );
 }
 
 
@@ -236,10 +238,25 @@ unsigned int MLV_get_port_of_server( MLV_Server* server ){
 	return server->port;
 }
 
-void MLV_collect_server_informations(
-	MLV_Server* server, const char ** ip, int * port
+void MLV_collect_ip_informations(
+	const IPaddress* ip_add, char ** ip, int * port
 ){
-	TODO
+	Human_ip human_ip;
+	convert_sdl_ip_to_human_ip( ip_add, &human_ip );
+	if( port ){
+		*port = human_ip.port;
+	}
+	if( ip ){
+		*ip = human_ip.host;
+	}else{
+		free(human_ip.host);
+	}
+}
+
+void MLV_collect_server_informations(
+	MLV_Server* server, char ** ip, int * port
+){
+	MLV_collect_ip_informations( &(server->ip), ip, port );
 }
 
 typedef struct {
@@ -334,9 +351,9 @@ MLV_Connection * MLV_get_new_connection( MLV_Server* server ){
 }
 
 void MLV_collect_connection_informations(
-	MLV_Connection* server, const char ** ip, int* port
+	MLV_Connection* connection, char ** ip, int* port
 ){
-	TODO
+	MLV_collect_ip_informations( &(connection->ip), ip, port );
 }
 
 void MLV_accept_connection( MLV_Connection* connection ){
@@ -395,7 +412,7 @@ MLV_Network_msg get_fixed_array_message(
 					ERROR( "error when reading a message." );
 				}
 				for( int i=0; i<size; i++ ){
-					integers[i] = SDLNet_Read32( values[i] );
+					integers[i] = SDLNet_Read32( values + i );
 				}
 			}
 		case MLV_NET_CONNECTION_ACCEPTED:; 
@@ -411,7 +428,7 @@ MLV_Network_msg get_fixed_array_message(
 					ERROR( "error when reading a message." );
 				}
 				for( int i=0; i<size; i++ ){
-					reals[i] = (float) SDLNet_Read32( values[i] );
+					reals[i] = (float) SDLNet_Read32( values + i );
 				}
 			}
 			break; 
@@ -461,7 +478,7 @@ MLV_Network_msg get_message(
 				}
 				*integers = MLV_MALLOC( value, int );
 				for( int i=0; i<len; i++ ){
-					integers[i] = SDLNet_Read32( values[i] );
+					(*integers)[i] = SDLNet_Read32( values + i );
 				}
 			}
 			break;
@@ -473,7 +490,7 @@ MLV_Network_msg get_message(
 				}
 				*reals = MLV_MALLOC( value, float );
 				for( int i=0; i<len; i++ ){
-					reals[i] = (float) SDLNet_Read32( values[i] );
+					(*reals)[i] = (float) SDLNet_Read32( values + i );
 				}
 			}
 			break; 
