@@ -7,16 +7,18 @@
 void send_datas_to_server( MLV_Connection* connection ){
 	const char* text_msg = "Hi !";
 	MLV_send_text( connection, text_msg, strlen(text_msg) );
-	int integers_msg[3] = {42, 42, 42};
-	MLV_send_integer_array( connection, integers_msg, 3 );
-	float reals_msg[3] = {3.14, 3.14, 3.14};
-	MLV_send_real_array( connection, reals_msg, 3 );
+//	int integers_msg[3] = {42, 42, 42};
+//	MLV_send_integer_array( connection, integers_msg, 3 );
+//	float reals_msg[3] = {3.14, 3.14, 3.14};
+//	MLV_send_real_array( connection, reals_msg, 3 );
 }
 
 void print_network_data( 
 	MLV_Network_msg type, char* message, int* integers, float* reals, int size
 ){
 	switch( type ){
+		case MLV_NET_NONE :
+			break;
 		case MLV_NET_TEXT :
 			printf(
 				"Message reçu du serveur : %s \n", message
@@ -54,9 +56,10 @@ int get_data_from_server( MLV_Connection* connection ){
 	MLV_Network_msg type = MLV_get_network_data(
 			connection, &message, &integers, &reals, &size
 	);
-
+	DEBUG("");
+	printf("type : %d\n", type);
 	if( type ==  MLV_NET_CONNECTION_CLOSED ){
-		printf( "Connection perdu avec le serveur." );
+		printf( "Connection perdu avec le serveur.\n" );
 		end = 1;
 	}else{
 		print_network_data( type, message, integers, reals, size );
@@ -88,7 +91,7 @@ int main(int argc, char *argv[]){
 
 	int end = 0;
 	while( ! end ){
-		MLV_wait_seconds(1);
+		MLV_wait_milliseconds(1000);
 
 		// On récupére les données envoyées par le serveurs
 		end = get_data_from_server( connection );

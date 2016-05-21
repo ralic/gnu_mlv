@@ -127,12 +127,13 @@ struct _MLV_Server {
 	int (*connection_filter)(
 		MLV_Server* server, const char* ip, int port, void* data
 	);
+	void* filter_data;
 
 	int nb_client;
 	IPaddress ip;
 	TCPsocket incoming_observer;
 	SDLNet_SocketSet incoming_observer_set;
-	SDLNet_SocketSet connection_set;
+//	SDLNet_SocketSet connection_set;
 };
 
 
@@ -163,6 +164,7 @@ MLV_Server * allocate_mlv_server( unsigned int port, int max_connections ){
 	server->incoming_observer = NULL;
 	server->nb_client = 0;
 	server->connection_filter = NULL;
+	server->filter_data = NULL;
 
 //	server->mutex = SDL_CreateMutex();
 
@@ -173,12 +175,12 @@ MLV_Server * allocate_mlv_server( unsigned int port, int max_connections ){
 		exit(1);
 	}
 
-	server->connection_set = SDLNet_AllocSocketSet( max_connections );
-	if( !server->connection_set ) {
-		ERROR( "Unable to allocate a the set of connection sockets." );
-	    ERROR( SDLNet_GetError() );
-		exit(1);
-	}
+//	server->connection_set = SDLNet_AllocSocketSet( max_connections );
+//	if( !server->connection_set ) {
+//		ERROR( "Unable to allocate a the set of connection sockets." );
+//	    ERROR( SDLNet_GetError() );
+//		exit(1);
+//	}
 
 	server->port = port;
 	server->max_connections = max_connections;
@@ -187,7 +189,7 @@ MLV_Server * allocate_mlv_server( unsigned int port, int max_connections ){
 
 void free_mlv_server( MLV_Server * server ){
 	SDLNet_FreeSocketSet( server->incoming_observer_set );
-	SDLNet_FreeSocketSet( server->connection_set );
+//	SDLNet_FreeSocketSet( server->connection_set );
 //	SDL_DestroyMutex( server->mutex );
 
 	free( server );
@@ -268,9 +270,11 @@ void MLV_set_connection_filter(
 	MLV_Server* server,
 	int (*connection_filter)( 
 		MLV_Server* server, const char* ip, int port, void* data 
-	)
+	),
+	void* data
 ){
-	
+	server->connection_filter = connection_filter;
+	server->filter_data = data;
 }
 
 typedef struct {
@@ -288,20 +292,24 @@ int send_header_hwd(
 	return t != sizeof(MLV_Net_header);
 }
 
-
-MLV_Connection* add_a_new_client( MLV_Server * server,  TCPsocket new_client ){
-}
-
-MLV_Connection* prepare_conection(
-	MLV_Server * server,  TCPsocket new_client
-){
+MLV_Connection* prepare_conection( TCPsocket new_client ){
 	MLV_Connection* connection = create_empty_connextion();
 
 	IPaddress* ip=SDLNet_TCP_GetPeerAddress(new_client);
 	connection->socket = new_client;
-	connection->client = 0;
+	connection->client = 1;
 	connection->ip = *ip;
 
+	connection->set = SDLNet_AllocSocketSet( 1 );
+	if( !connection->set ) {
+		fprintf( stderr, "Unable to allocate a set of sockets.\n" );
+		ERROR( SDLNet_GetError() );
+	}
+
+	if( SDLNet_TCP_AddSocket( connection->set, connection->socket )==-1 ) {
+		fprintf( stderr, "%s\n", SDLNet_GetError() );
+		ERROR( "Unable to add the socket in the pool" );
+	}
 	return connection;
 }
 
@@ -328,7 +336,9 @@ MLV_Connection * get_new_connection( MLV_Server* server ){
 				IPaddress* ip_add = SDLNet_TCP_GetPeerAddress(new_client);
 				char* ip; int port;
 				collect_ip_informations( ip_add, &ip, &port );
-				accepted = server->connection_filter( server, , server->filter_data );
+				accepted = server->connection_filter(
+					server, ip, port, server->filter_data
+				);
 				free( ip );
 			}
 			if( ! accepted ){
@@ -342,21 +352,12 @@ MLV_Connection * get_new_connection( MLV_Server* server ){
 					ERROR("MLV_Net error : Connexion problem.");
 				}
 			}else{
-				result = create_empty_connextion();
-
-				if( SDLNet_TCP_AddSocket( server->connection_set, new_client )==-1 ) {
-					fprintf(
-						stderr, "Unable to add the socket in the pool : %s\n", 
-						SDLNet_GetError()
-					);
-				}
-
+				result = prepare_conection( new_client );
 				if( send_header_hwd( new_client, MLV_NET_CONNECTION_ACCEPTED, 0 ) ){
 					fprintf(stderr, "MLV_Net error : Connexion problem.\n");
 					return 0;
 				}
 				server->nb_client++;
-				return connection;
 			}
 		}
 	}
@@ -462,6 +463,7 @@ MLV_Network_msg get_fixed_array_message(
 MLV_Network_msg get_message(
 	TCPsocket clients, char** message, int** integers, float** reals, int* size
 ){
+	if( ! SDLNet_SocketReady( clients ) ) return MLV_NET_NONE;
 	MLV_Net_header data;  // be sure that -fno_anti_aliasing is used with gcc.
 	int result = SDLNet_TCP_Recv( clients, &data, sizeof(MLV_Net_header) );
 	if( result == 0 ){
@@ -480,7 +482,8 @@ MLV_Network_msg get_message(
 
 	MLV_Network_msg type = (MLV_Network_msg) SDLNet_Read16( &data.type );
 	switch( type ){
-		case MLV_NET_TEXT: if( message ){
+		case MLV_NET_TEXT: 
+			if( message ){
 				*message = MLV_MALLOC( value, char );
 				int result = SDLNet_TCP_Recv( clients, *message, len );
 				if( result != len ){
@@ -488,7 +491,8 @@ MLV_Network_msg get_message(
 				}
 			}
 			break;
-		case MLV_NET_INTEGERS: if( integers ){
+		case MLV_NET_INTEGERS: 
+			if( integers ){
 				Uint32 values[len];
 				int result = SDLNet_TCP_Recv( clients, values, sizeof(values) );
 				if( result != len ){
@@ -500,7 +504,8 @@ MLV_Network_msg get_message(
 				}
 			}
 			break;
-		case MLV_NET_REALS: if( reals ){
+		case MLV_NET_REALS: 
+			if( reals ){
 				Uint32 values[len];
 				int result = SDLNet_TCP_Recv( clients, values, sizeof(values) );
 				if( result != len ){
@@ -522,45 +527,29 @@ MLV_Network_msg get_message(
 MLV_Connection * MLV_start_new_connection( 
 	const char* server_address, unsigned int port
 ){
-	MLV_Connection* connection = create_empty_connextion();
-
-	connection->set = SDLNet_AllocSocketSet( 1 );
-	if( !connection->set ) {
-		fprintf( stderr, "Unable to allocate a set of sockets.\n" );
-	    ERROR( SDLNet_GetError() );
-	}
-
+	IPaddress ip;
 	/* Resolve the argument into an IPaddress type */
-	if(SDLNet_ResolveHost( &(connection->ip), server_address, port )==-1){
+	if(SDLNet_ResolveHost( &ip, server_address, port )==-1){
 		fprintf( stderr, "%s\n", SDLNet_GetError() );
 		fprintf( stderr, "Unable to resolve the web address.\n" );
-		MLV_free_connection( connection );
 		return 0;
 	}
 
 	/* open the server socket */
-	connection->socket= SDLNet_TCP_Open( &(connection->ip) );
-	if( ! connection->socket ){
+	TCPsocket socket= SDLNet_TCP_Open( &ip );
+	if( ! socket ){
 		fprintf( stderr, "%s\n", SDLNet_GetError() );
 		fprintf( stderr, "Unable to open the TCP socket.\n" );
-		MLV_free_connection( connection );
 		return 0;
 	}
+
+	MLV_Connection* connection = prepare_conection( socket );
 
 	fprintf( stdout, "Connection to :" );
 	fprint_ip( stdout, SDLNet_TCP_GetPeerAddress( connection->socket ) );
 	fprintf( stdout, "\n" );
 
-	if( SDLNet_TCP_AddSocket( connection->set, connection->socket )==-1 ) {
-		fprintf(
-			stderr, "%s\n", 
-			SDLNet_GetError()
-		);
-	    ERROR( "Unable to add the socket in the pool" );
-	}
-
 	int value;
-
 	MLV_Network_msg type = get_fixed_array_message(
 		connection->socket, NULL, &value, NULL, 0
 	);
@@ -614,6 +603,7 @@ MLV_Network_msg send_text_hwd(
 		);
 		len = UINT32_MAX;
 	};
+
 	if( send_header_hwd( socket, type_msg, len ) ){
 		fprintf( stderr, "MLV Net : Fail to send the header.\n");
 		return MLV_NET_CONNECTION_CLOSED;
@@ -715,14 +705,22 @@ MLV_Network_msg MLV_get_network_data(
 	MLV_Connection* connection, char** message, int** integers, 
 	float** reals, int* size
 ){
-
 	MLV_Network_msg result = MLV_NET_NONE;
-	int numready = SDLNet_CheckSockets(connection->set, 0);
+	if( message ){
+		*message = NULL;
+	}
+	if( integers ){
+		*integers=NULL;
+	}
+	if( reals ){
+		*reals = NULL;
+	}
+	int numready = (connection->client)? 
+			SDLNet_CheckSockets(connection->set, 0):0;
 	if( numready == -1 ){
 		fprintf( stderr, "Net problem : %s \n", SDLNet_GetError() );
 		ERROR( "Unable to check sockets." );
-	}else if( numready ){
-		DEBUG("Activity !")
+	}else if( ( !connection->client ) || numready ){
 		result = get_message(
 			connection->socket, message, integers, reals, size
 		);

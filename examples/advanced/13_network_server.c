@@ -21,9 +21,6 @@ int connection_filter(
 void treat_incoming_connection(
 	MLV_Server* server, MLV_Connection** connections, int nb_max_connections
 ){
-	char* ip;
-	int port;	
-
 	// On regard si il y a de nouvelles connexions/
 	MLV_Connection* connection = MLV_get_new_connection( server );
 	if( ! connection ) return;  // Il n'y a pas de connexions entrantes
@@ -41,6 +38,8 @@ void print_network_data(
 	MLV_Connection* connection 
 ){
 	switch( type ){
+		case MLV_NET_NONE:
+			break;
 		case MLV_NET_TEXT :
 			printf(
 				"Message reçu de %p : %s \n", connection, message
@@ -92,6 +91,8 @@ void treat_incoming_datas(
 			type = MLV_get_network_data(
 					connections[i], &message, &integers, &reals, &size
 			);
+			DEBUG("");
+			printf("type : %d\n", type);
 
 			if( type ==  MLV_NET_CONNECTION_CLOSED ){
 				printf(
@@ -118,11 +119,12 @@ void send_datas_to_clients(
 	for( i=0; i< nb_max_connections; i++ ){
 		if( connections[i] ){
 			const char* text_msg = "Coucou";
+			//MLV_Network_msg val = 
 			MLV_send_text( connections[i], text_msg, strlen(text_msg) );
-			int integers_msg[3] = {i, i, i};
-			MLV_send_integer_array( connections[i], integers_msg, 3 );
-			float reals_msg[3] = {i, i, i};
-			MLV_send_real_array( connections[i], reals_msg, 3 );
+//			int integers_msg[3] = {i, i, i};
+//			MLV_send_integer_array( connections[i], integers_msg, 3 );
+//			float reals_msg[3] = {i, i, i};
+//			MLV_send_real_array( connections[i], reals_msg, 3 );
 		}
 	}
 }
@@ -158,6 +160,7 @@ int main(int argc, char *argv[]){
 
 	int end = 0;
 	while( ! end  ){
+		MLV_wait_milliseconds(1000);
 		// On traite les connexion entrantes
 		treat_incoming_connection( server, connections, nb_max_connections );
 

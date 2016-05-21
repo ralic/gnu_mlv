@@ -63,7 +63,8 @@ void MLV_set_connection_filter(
 	MLV_Server* server,
 	int (*connection_filter)(
 		MLV_Server* server, const char* ip, int port, void* data
-	)
+	),
+	void* data
 );
 
 typedef struct _MLV_Connection MLV_Connection;
