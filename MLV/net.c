@@ -124,6 +124,10 @@ struct _MLV_Server {
 	int max_connections;
 	int port;
 
+	int (*connection_filter)(
+		MLV_Server* server, const char* ip, int port, void* data
+	);
+
 	int nb_client;
 	IPaddress ip;
 	TCPsocket incoming_observer;
@@ -158,6 +162,7 @@ MLV_Server * allocate_mlv_server( unsigned int port, int max_connections ){
 	server->ip.port = 0;
 	server->incoming_observer = NULL;
 	server->nb_client = 0;
+	server->connection_filter = NULL;
 
 //	server->mutex = SDL_CreateMutex();
 
@@ -194,7 +199,7 @@ MLV_Server* MLV_start_server( unsigned int port, int max_connections ){
 	// We prepare IP adress
 	if( SDLNet_ResolveHost( &server->ip, NULL, port )==-1 ) {
 		fprintf(
-			stderr, "Unable to initialise the SDL_Net ip structure : %s", 
+			stderr, "Unable to initialise the SDL_Net ip structure : %s\n", 
 			SDLNet_GetError()
 		);
 		exit(1);
@@ -206,7 +211,7 @@ MLV_Server* MLV_start_server( unsigned int port, int max_connections ){
 	server->incoming_observer = SDLNet_TCP_Open(&server->ip);
 	if( !(server->incoming_observer) ) {
 		fprintf(
-			stderr, "Unable to open a listening socket for the server : %s", 
+			stderr, "Unable to open a listening socket for the server : %s\n", 
 			SDLNet_GetError()
 		);
 		free_mlv_server( server );
@@ -220,7 +225,7 @@ MLV_Server* MLV_start_server( unsigned int port, int max_connections ){
 		)==-1 
 	) {
 		fprintf(
-			stderr, "Unable to add the socket in the pool : %s", 
+			stderr, "Unable to add the socket in the pool : %s\n", 
 			SDLNet_GetError()
 		);
 		free_mlv_server( server );
@@ -238,7 +243,7 @@ unsigned int MLV_get_port_of_server( MLV_Server* server ){
 	return server->port;
 }
 
-void MLV_collect_ip_informations(
+void collect_ip_informations(
 	const IPaddress* ip_add, char ** ip, int * port
 ){
 	Human_ip human_ip;
@@ -256,7 +261,16 @@ void MLV_collect_ip_informations(
 void MLV_collect_server_informations(
 	MLV_Server* server, char ** ip, int * port
 ){
-	MLV_collect_ip_informations( &(server->ip), ip, port );
+	collect_ip_informations( &(server->ip), ip, port );
+}
+
+void MLV_set_connection_filter(
+	MLV_Server* server,
+	int (*connection_filter)( 
+		MLV_Server* server, const char* ip, int port, void* data 
+	)
+){
+	
 }
 
 typedef struct {
@@ -275,16 +289,10 @@ int send_header_hwd(
 }
 
 
-void mlv_protocol__server_is_full( TCPsocket new_client ){
-	if( send_header_hwd( new_client, MLV_NET_SERVER_IS_FULL, 0 ) ){
-		ERROR("MLV_Net error : Connexion problem.");
-		return;
-	}
+MLV_Connection* add_a_new_client( MLV_Server * server,  TCPsocket new_client ){
 }
 
-
-
-MLV_Connection* add_a_new_client(
+MLV_Connection* prepare_conection(
 	MLV_Server * server,  TCPsocket new_client
 ){
 	MLV_Connection* connection = create_empty_connextion();
@@ -294,20 +302,9 @@ MLV_Connection* add_a_new_client(
 	connection->client = 0;
 	connection->ip = *ip;
 
-	if( SDLNet_TCP_AddSocket( server->connection_set, new_client )==-1 ) {
-		fprintf(
-			stderr, "Unable to add the socket in the pool : %s", 
-			SDLNet_GetError()
-		);
-	}
-
-	if( send_header_hwd( new_client, MLV_NET_CONNECTION_ACCEPTED, 0 ) ){
-		fprintf(stderr, "MLV_Net error : Connexion problem.");
-		return 0;
-	}
-	server->nb_client++;
 	return connection;
 }
+
 
 
 MLV_Connection * get_new_connection( MLV_Server* server ){
@@ -315,23 +312,52 @@ MLV_Connection * get_new_connection( MLV_Server* server ){
 	if( SDLNet_SocketReady( server->incoming_observer ) ){
 		TCPsocket new_client = SDLNet_TCP_Accept( server->incoming_observer );
 
-		fprintf( stdout, "New incoming client :" );
-		fprint_ip( stdout, SDLNet_TCP_GetPeerAddress( new_client ) );
-		fprintf( stdout, "\n" );
+		fprintf( stderr, "New incoming client :" );
+		fprint_ip( stderr, SDLNet_TCP_GetPeerAddress( new_client ) );
+		fprintf( stderr, "\n" );
 
 		if( ! new_client ){
 			// The conection fails. This could be a client problem.
 			fprintf(
-				stdout, "Unable to open the conection : %s", 
+				stderr, "Unable to open the conection : %s\n", 
 				SDLNet_GetError()
 			);
-		}
-
-		if( server->nb_client < server->max_connections ){
-			result = add_a_new_client( server,  new_client );
 		}else{
-			fprintf(stdout, "Server is full and can't accept new client.\n");
-			mlv_protocol__server_is_full( new_client );
+			int accepted = 1;
+			if( server->connection_filter ){
+				IPaddress* ip_add = SDLNet_TCP_GetPeerAddress(new_client);
+				char* ip; int port;
+				collect_ip_informations( ip_add, &ip, &port );
+				accepted = server->connection_filter( server, , server->filter_data );
+				free( ip );
+			}
+			if( ! accepted ){
+				fprintf(stdout, "Server is full and can't accept new client.\n");
+				if( send_header_hwd( new_client, MLV_NET_CONNECTION_REFUSED, 0 ) ){
+					ERROR("MLV_Net error : Connexion problem.");
+				}
+			}else if( server->nb_client >= server->max_connections ){
+				fprintf(stdout, "Server is full and can't accept new client.\n");
+				if( send_header_hwd( new_client, MLV_NET_SERVER_IS_FULL, 0 ) ){
+					ERROR("MLV_Net error : Connexion problem.");
+				}
+			}else{
+				result = create_empty_connextion();
+
+				if( SDLNet_TCP_AddSocket( server->connection_set, new_client )==-1 ) {
+					fprintf(
+						stderr, "Unable to add the socket in the pool : %s\n", 
+						SDLNet_GetError()
+					);
+				}
+
+				if( send_header_hwd( new_client, MLV_NET_CONNECTION_ACCEPTED, 0 ) ){
+					fprintf(stderr, "MLV_Net error : Connexion problem.\n");
+					return 0;
+				}
+				server->nb_client++;
+				return connection;
+			}
 		}
 	}
 	return result;
@@ -342,7 +368,7 @@ MLV_Connection * MLV_get_new_connection( MLV_Server* server ){
 	MLV_Connection * result = NULL;
 	int numready = SDLNet_CheckSockets(server->incoming_observer_set, 0);
 	if( numready == -1 ){
-		fprintf( stderr, "Unable to check incoming socket." );
+		fprintf( stderr, "Unable to check incoming socket.\n" );
 		ERROR( SDLNet_GetError() );
 	}else if( numready ){
 		result = get_new_connection( server );
@@ -353,15 +379,7 @@ MLV_Connection * MLV_get_new_connection( MLV_Server* server ){
 void MLV_collect_connection_informations(
 	MLV_Connection* connection, char ** ip, int* port
 ){
-	MLV_collect_ip_informations( &(connection->ip), ip, port );
-}
-
-void MLV_accept_connection( MLV_Connection* connection ){
-	TODO
-}
-
-void MLV_refuse_connection( MLV_Connection* connection ){
-	TODO
+	collect_ip_informations( &(connection->ip), ip, port );
 }
 
 MLV_Network_msg get_fixed_array_message(
@@ -387,7 +405,7 @@ MLV_Network_msg get_fixed_array_message(
 		case MLV_NET_REALS: ;
 			if( size && size != value ){
 				fprintf( stderr,
-					"Invalid parameter. The size of the data is %d. "
+					"Invalid parameter. The size of the data is %d.\n"
 					"Excpected data is : %d.\n",
 					value, size
 				);
@@ -508,7 +526,7 @@ MLV_Connection * MLV_start_new_connection(
 
 	connection->set = SDLNet_AllocSocketSet( 1 );
 	if( !connection->set ) {
-		fprintf( stderr, "Unable to allocate a set of sockets." );
+		fprintf( stderr, "Unable to allocate a set of sockets.\n" );
 	    ERROR( SDLNet_GetError() );
 	}
 
@@ -535,7 +553,7 @@ MLV_Connection * MLV_start_new_connection(
 
 	if( SDLNet_TCP_AddSocket( connection->set, connection->socket )==-1 ) {
 		fprintf(
-			stderr, "%s", 
+			stderr, "%s\n", 
 			SDLNet_GetError()
 		);
 	    ERROR( "Unable to add the socket in the pool" );
@@ -591,13 +609,13 @@ MLV_Network_msg send_text_hwd(
 	size_t len = strlen( message ) + 1;
 	if( len > UINT32_MAX  ){
 		fprintf( 
-			stderr, "Message too long. We keep just %d characters.",
+			stderr, "Message too long. We keep just %d characters.\n",
 			UINT32_MAX - 1
 		);
 		len = UINT32_MAX;
 	};
 	if( send_header_hwd( socket, type_msg, len ) ){
-		fprintf( stderr, "MLV Net : Fail to send the header.");
+		fprintf( stderr, "MLV Net : Fail to send the header.\n");
 		return MLV_NET_CONNECTION_CLOSED;
 	}
 
@@ -623,13 +641,13 @@ MLV_Network_msg send_integers_hwd(
 	size_t len = size;
 	if( size > UINT32_MAX  ){
 		fprintf( 
-			stderr, "Message too long. We keep just %d characters.",
+			stderr, "Message too long. We keep just %d characters.\n",
 			UINT32_MAX - 1
 		);
 		len = UINT32_MAX;
 	};
 	if( send_header_hwd( socket, type_msg, len ) ){
-		fprintf( stderr, "MLV Net : Fail to send the header.");
+		fprintf( stderr, "MLV Net : Fail to send the header.\n");
 		return MLV_NET_CONNECTION_CLOSED;
 	}
 
@@ -662,13 +680,13 @@ MLV_Network_msg send_reals_hwd(
 	size_t len = size;
 	if( size > UINT32_MAX  ){
 		fprintf( 
-			stderr, "Message too long. We keep just %d characters.",
+			stderr, "Message too long. We keep just %d characters.\n",
 			UINT32_MAX - 1
 		);
 		len = UINT32_MAX;
 	};
 	if( send_header_hwd( socket, type_msg, len ) ){
-		fprintf( stderr, "MLV Net : Fail to send the header.");
+		fprintf( stderr, "MLV Net : Fail to send the header.\n");
 		return MLV_NET_CONNECTION_CLOSED;
 	}
 

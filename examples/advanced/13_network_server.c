@@ -4,16 +4,17 @@
 
 #define DEBUG(x) { fprintf( stderr, "DEBUG : %s - line : %i, file : %s\n", (x), __LINE__, __FILE__ ); }
 
-
-void add_connection(
-	MLV_Connection** connections, int nb_max_connections,
-	MLV_Connection* connection
+int connection_filter(
+	MLV_Server* server, const char* ip, int port, void* data
 ){
-	for( int i=0; i< nb_max_connections; i++ ){
-		if( connections[i] == NULL ){
-			connections[i] = connection;
-			break;
-		}
+	// Cette fonction est un filtre que l'on enregistre auprès du serveur 
+	// pour accpeter ou refuser les connexions.
+	// Cette fonction doit renvoyer Vrai si vous voulez que la connection 
+	// soit acceptée.
+	if( strcmp( ip, "100.64.0.1" ) == 0 ){
+		return 0;  // Connection refusée ! On ne fait pas confiance à 100.64.0.1.
+	}else{
+		return 1; // Connection acceptée !
 	}
 }
 
@@ -26,19 +27,12 @@ void treat_incoming_connection(
 	// On regard si il y a de nouvelles connexions/
 	MLV_Connection* connection = MLV_get_new_connection( server );
 	if( ! connection ) return;  // Il n'y a pas de connexions entrantes
-	
-	// On récpère des informations sur la connexion entrantes 
-	// pour accepter ou refuser la conexion
-	MLV_collect_connection_informations( connection, &ip, &port );
-	if( strcmp( ip, "100.64.0.1" ) == 0 ){
-		// On rejette cette conneexion car on a décidé de bannir l'ip 100.64.0.1.
-		MLV_refuse_connection( connection );
-		MLV_free_connection( connection );
-	}else{
-		// On accepte la connection
-		MLV_accept_connection( connection );
-		// On l'ajoute dans nos structures de donées.
-		add_connection( connections, nb_max_connections, connection );
+
+	for( int i=0; i< nb_max_connections; i++ ){
+		if( connections[i] == NULL ){
+			connections[i] = connection;
+			break;
+		}
 	}
 }
 
@@ -157,6 +151,10 @@ int main(int argc, char *argv[]){
 
 	MLV_init_network();
 	MLV_Server* server = MLV_start_server( port, nb_max_connections );
+
+	// On enregiste un filtre de connections pour refuser les connections
+	// provenant d'adresses ip indésirables.
+	MLV_set_connection_filter( server, connection_filter, NULL );
 
 	int end = 0;
 	while( ! end  ){
