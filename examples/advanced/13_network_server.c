@@ -98,21 +98,27 @@ void treat_incoming_datas(
 	for( i=0; i< nb_max_connections; i++ ){
 		if( connections[i] ){
 			// We get datas from clients
-			type = MLV_get_network_data(
-					connections[i], &message, &integers, &reals, &size
-			);
-			if( type ==  MLV_NET_CONNECTION_CLOSED ){
-				printf(
-					"Connection perdu avec %p. We remove the connection. \n", 
-					connections[i]
-				);
-				MLV_free_connection( connections[i] );
-				connections[i] = NULL;
-			}else{
-				print_network_data(
-					type, message, integers, reals, size, connections[i]
-				);
-				free( message ); free( integers ); free( reals );
+			while(
+				(
+					type = MLV_get_network_data(
+						connections[i], &message, &integers, &reals, &size
+					) 
+				) != MLV_NET_NONE
+			){
+				if( type ==  MLV_NET_CONNECTION_CLOSED ){
+					printf(
+						"Connection perdu avec %p. We remove the connection. \n", 
+						connections[i]
+					);
+					MLV_free_connection( connections[i] );
+					connections[i] = NULL;
+					break;
+				}else{
+					print_network_data(
+						type, message, integers, reals, size, connections[i]
+					);
+					free( message ); free( integers ); free( reals );
+				}
 			}
 		}
 	}

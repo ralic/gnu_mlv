@@ -55,18 +55,25 @@ int get_data_from_server( MLV_Connection* connection ){
 	int* integers;
 	float* reals;
 	char* message;
+	MLV_Network_msg type; 
 
-	// We get datas from clients
-	MLV_Network_msg type = MLV_get_network_data(
-			connection, &message, &integers, &reals, &size
-	);
-	if( type ==  MLV_NET_CONNECTION_CLOSED ){
-		printf( "Connection perdu avec le serveur.\n" );
-		end = 1;
-	}else{
-		print_network_data( type, message, integers, reals, size );
-		free( message ); free( integers ); free( reals );
-		end = 0;
+	end = 0;
+	// We get datas from server
+	while(
+		(
+			type =	MLV_get_network_data(
+				connection, &message, &integers, &reals, &size
+			)
+		) != MLV_NET_NONE 
+	){
+		if( type ==  MLV_NET_CONNECTION_CLOSED ){
+			printf( "Connection perdu avec le serveur.\n" );
+			end = 1;
+			break;
+		}else{
+			print_network_data( type, message, integers, reals, size );
+			free( message ); free( integers ); free( reals );
+		}
 	}
 	return end;
 }
