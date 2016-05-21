@@ -37,17 +37,22 @@ void print_network_data(
 	MLV_Network_msg type, char* message, int* integers, float* reals, int size,
 	MLV_Connection* connection 
 ){
+	
+	char* ip;
+	int port;
+	MLV_collect_connection_informations( connection, &ip, &port );                           
+	
 	switch( type ){
 		case MLV_NET_NONE:
 			break;
 		case MLV_NET_TEXT :
 			printf(
-				"Message reçu de %p : %s \n", connection, message
+				"Message reçu de %s:%d = %s \n", ip, port, message
 			);
 			break;
 		case MLV_NET_INTEGERS :
 			printf(
-				"%d Entiers reçus de %p : \n", size, connection
+				"%d Entiers reçus de %s:%d = ", size, ip, port
 			);
 			printf( "[" );
 			for( int j= 0 ; j< size; j++ ) {
@@ -57,7 +62,7 @@ void print_network_data(
 			break;
 		case MLV_NET_REALS :
 			printf(
-				"%d Réels reçus de %p : \n", size, connection
+				"%d Réels reçus de %s:%d = ", size, ip, port
 			);
 			printf( "[" );
 			for( int j= 0 ; j< size; j++) {
@@ -69,6 +74,7 @@ void print_network_data(
 			fprintf(stderr, "This case is not possible\n");
 			assert(0);
 	}
+	free(ip);
 }
 
 void init_connections_array( 
@@ -95,9 +101,6 @@ void treat_incoming_datas(
 			type = MLV_get_network_data(
 					connections[i], &message, &integers, &reals, &size
 			);
-			DEBUG("");
-			printf("type : %d\n", type);
-
 			if( type ==  MLV_NET_CONNECTION_CLOSED ){
 				printf(
 					"Connection perdu avec %p. We remove the connection. \n", 

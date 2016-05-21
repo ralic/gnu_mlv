@@ -21,14 +21,13 @@ void print_network_data(
 			break;
 		case MLV_NET_TEXT :
 			printf(
-				"Message reçu du serveur : %s \n", message
+				"Message reçu du serveur = %s \n", message
 			);
 			break;
 		case MLV_NET_INTEGERS :
 			printf(
-				"%d Entiers reçus du serveur : \n", size
+				"%d Entiers reçus du serveur = ", size
 			);
-			printf("size : %d\n", size);
 			printf( "[" );
 			for( int j= 0 ; j< size; j++) {
 				printf( "%d, ", integers[j] );
@@ -37,9 +36,8 @@ void print_network_data(
 			break;
 		case MLV_NET_REALS :
 			printf(
-				"%d Réels reçus du serveur : \n", size
+				"%d Réels reçus du serveur = ", size
 			);
-			printf("size : %d\n", size);
 			printf( "[" );
 			for( int j= 0 ; j< size; j++ ) {
 				printf( "%.2f, ", reals[j] );
@@ -62,8 +60,6 @@ int get_data_from_server( MLV_Connection* connection ){
 	MLV_Network_msg type = MLV_get_network_data(
 			connection, &message, &integers, &reals, &size
 	);
-	DEBUG("");
-	printf("type : %d\n", type);
 	if( type ==  MLV_NET_CONNECTION_CLOSED ){
 		printf( "Connection perdu avec le serveur.\n" );
 		end = 1;

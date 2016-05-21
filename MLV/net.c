@@ -510,7 +510,8 @@ MLV_Network_msg get_message(
 				}
 				*reals = MLV_MALLOC( len, float );
 				for( int i=0; i<len; i++ ){
-					(*reals)[i] = (float) SDLNet_Read32( values + i );
+					const Uint32 v = SDLNet_Read32( values + i );
+					memcpy( (*reals) +i , &v, sizeof v);
 				}
 			}
 			break; 
@@ -679,7 +680,11 @@ MLV_Network_msg send_reals_hwd(
 
 	Uint32 data[len];
 	for( int i=0; i<len; i++ ){
-		SDLNet_Write32( (Uint32) (reals[i]), data+i );
+		//SDLNet_Write32( *( (Uint32*) (reals+i) ), data+i );
+		//SDLNet_Write32( reals[i], data+i );
+		Uint32 v;
+		memcpy( &v , reals+i, sizeof(reals[i]));
+		SDLNet_Write32( v, data+i );
 	}
 	int result = SDLNet_TCP_Send( socket, data, sizeof(data) );
 	if( result!=sizeof(data) ){ 
