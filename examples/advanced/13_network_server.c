@@ -49,17 +49,21 @@ void print_network_data(
 			printf(
 				"%d Entiers reçus de %p : \n", size, connection
 			);
-			for( int j= 0 ; j< size; ) {
+			printf( "[" );
+			for( int j= 0 ; j< size; j++ ) {
 				printf( "%d, ", integers[j] );
 			}
+			printf( "]\n" );
 			break;
 		case MLV_NET_REALS :
 			printf(
 				"%d Réels reçus de %p : \n", size, connection
 			);
-			for( int j= 0 ; j< size; ) {
-				printf( "%f, ", reals[j] );
+			printf( "[" );
+			for( int j= 0 ; j< size; j++) {
+				printf( "%.2f, ", reals[j] );
 			}
+			printf( "]\n" );
 			break;
 		default:;
 			fprintf(stderr, "This case is not possible\n");
@@ -121,10 +125,10 @@ void send_datas_to_clients(
 			const char* text_msg = "Coucou";
 			//MLV_Network_msg val = 
 			MLV_send_text( connections[i], text_msg, strlen(text_msg) );
-//			int integers_msg[3] = {i, i, i};
-//			MLV_send_integer_array( connections[i], integers_msg, 3 );
-//			float reals_msg[3] = {i, i, i};
-//			MLV_send_real_array( connections[i], reals_msg, 3 );
+			int integers_msg[3] = {i, i, i};
+			MLV_send_integer_array( connections[i], integers_msg, 3 );
+			float reals_msg[3] = {i, i, i};
+			MLV_send_real_array( connections[i], reals_msg, 3 );
 		}
 	}
 }

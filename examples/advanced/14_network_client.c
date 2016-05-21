@@ -7,10 +7,10 @@
 void send_datas_to_server( MLV_Connection* connection ){
 	const char* text_msg = "Hi !";
 	MLV_send_text( connection, text_msg, strlen(text_msg) );
-//	int integers_msg[3] = {42, 42, 42};
-//	MLV_send_integer_array( connection, integers_msg, 3 );
-//	float reals_msg[3] = {3.14, 3.14, 3.14};
-//	MLV_send_real_array( connection, reals_msg, 3 );
+	int integers_msg[3] = {42, 42, 42};
+	MLV_send_integer_array( connection, integers_msg, 3 );
+	float reals_msg[3] = {3.14f, 3.14f, 3.14f};
+	MLV_send_real_array( connection, reals_msg, 3 );
 }
 
 void print_network_data( 
@@ -28,17 +28,23 @@ void print_network_data(
 			printf(
 				"%d Entiers reçus du serveur : \n", size
 			);
-			for( int j= 0 ; j< size; ) {
+			printf("size : %d\n", size);
+			printf( "[" );
+			for( int j= 0 ; j< size; j++) {
 				printf( "%d, ", integers[j] );
 			}
+			printf( "]\n" );
 			break;
 		case MLV_NET_REALS :
 			printf(
 				"%d Réels reçus du serveur : \n", size
 			);
-			for( int j= 0 ; j< size; ) {
-				printf( "%f, ", reals[j] );
+			printf("size : %d\n", size);
+			printf( "[" );
+			for( int j= 0 ; j< size; j++ ) {
+				printf( "%.2f, ", reals[j] );
 			}
+			printf( "]\n" );
 			break;
 		default:;
 			fprintf(stderr, "This case is not possible\n");

@@ -103,7 +103,6 @@ struct _MLV_Connection {
 	TCPsocket socket;
 
 	SDLNet_SocketSet set;
-	int client;
 };
 
 MLV_Connection* create_empty_connextion(){
@@ -112,7 +111,6 @@ MLV_Connection* create_empty_connextion(){
 	connection->ip.port = 0;
 	connection->socket = NULL;
 	connection->set = NULL;
-	connection->client = 0;
 	return connection;
 }
 
@@ -297,7 +295,6 @@ MLV_Connection* prepare_conection( TCPsocket new_client ){
 
 	IPaddress* ip=SDLNet_TCP_GetPeerAddress(new_client);
 	connection->socket = new_client;
-	connection->client = 1;
 	connection->ip = *ip;
 
 	connection->set = SDLNet_AllocSocketSet( 1 );
@@ -394,7 +391,7 @@ MLV_Network_msg get_fixed_array_message(
 		return MLV_NET_CONNECTION_CLOSED;
 	}
 	if( result != sizeof(MLV_Net_header) ){
-		fprintf( stderr, "Nb reveived : %d \n", result );
+		fprintf( stderr, "Nb received : %d \n", result );
 		ERROR("error when reading a message.");
 	}
 	Uint32 value = SDLNet_Read32(&data.value);
@@ -471,7 +468,7 @@ MLV_Network_msg get_message(
 		return MLV_NET_CONNECTION_CLOSED;
 	}
 	if( result != sizeof(MLV_Net_header) ){
-		fprintf( stderr, "Nb reveived : %d \n", result );
+		fprintf( stderr, "Nb received : %d \n", result );
 		ERROR("error when reading a message.");
 	}
 	Uint32 value = SDLNet_Read32(&data.value);
@@ -495,10 +492,10 @@ MLV_Network_msg get_message(
 			if( integers ){
 				Uint32 values[len];
 				int result = SDLNet_TCP_Recv( clients, values, sizeof(values) );
-				if( result != len ){
+				if( result != sizeof(values) ){
 					ERROR( "error when reading a message." );
 				}
-				*integers = MLV_MALLOC( value, int );
+				*integers = MLV_MALLOC( len, int );
 				for( int i=0; i<len; i++ ){
 					(*integers)[i] = SDLNet_Read32( values + i );
 				}
@@ -508,10 +505,10 @@ MLV_Network_msg get_message(
 			if( reals ){
 				Uint32 values[len];
 				int result = SDLNet_TCP_Recv( clients, values, sizeof(values) );
-				if( result != len ){
+				if( result != sizeof(values) ){
 					ERROR( "error when reading a message." );
 				}
-				*reals = MLV_MALLOC( value, float );
+				*reals = MLV_MALLOC( len, float );
 				for( int i=0; i<len; i++ ){
 					(*reals)[i] = (float) SDLNet_Read32( values + i );
 				}
@@ -643,7 +640,7 @@ MLV_Network_msg send_integers_hwd(
 
 	Uint32 data[len];
 	for( int i=0; i<len; i++ ){
-		data[i] = integers[i];
+		SDLNet_Write32( integers[i], data+i );
 	}
 	int result = SDLNet_TCP_Send( socket, data, sizeof(data) );
 	if( result!=sizeof(data) ){ 
@@ -682,7 +679,7 @@ MLV_Network_msg send_reals_hwd(
 
 	Uint32 data[len];
 	for( int i=0; i<len; i++ ){
-		data[i] = (Uint32) reals[i];
+		SDLNet_Write32( (Uint32) (reals[i]), data+i );
 	}
 	int result = SDLNet_TCP_Send( socket, data, sizeof(data) );
 	if( result!=sizeof(data) ){ 
@@ -715,12 +712,11 @@ MLV_Network_msg MLV_get_network_data(
 	if( reals ){
 		*reals = NULL;
 	}
-	int numready = (connection->client)? 
-			SDLNet_CheckSockets(connection->set, 0):0;
+	int numready = SDLNet_CheckSockets(connection->set, 0);
 	if( numready == -1 ){
 		fprintf( stderr, "Net problem : %s \n", SDLNet_GetError() );
 		ERROR( "Unable to check sockets." );
-	}else if( ( !connection->client ) || numready ){
+	}else if( numready ){
 		result = get_message(
 			connection->socket, message, integers, reals, size
 		);
