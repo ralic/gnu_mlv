@@ -38,84 +38,69 @@ void treat_incoming_connection(
 	}
 }
 
-void print_network_data( 
-	MLV_Network_msg type, char* message, int* integers, float* reals, int size,
-	MLV_Connection* connection 
+void treat_lost_connection(
+	MLV_Connection** connections, int nb_max_connections
 ){
-	
+	for( int i=0; i< nb_max_connections; i++ ){
+		if( connections[i] && MLV_connection_is_lost( connections[i] ) ){
+			MLV_free_connection( connections[i] );
+			connections[i] = NULL;
+			break;
+		}
+	}
+}
+
+void print_network_data(
+	MLV_Connection*	connection, const char* message, int size_message,
+	const int* integers, int size_integers, const float* reals, int size_reals
+){
 	char* ip;
 	int port;
 	MLV_collect_connection_informations( connection, &ip, &port );                           
-	
-	switch( type ){
-		case MLV_NET_NONE:
-			break;
-		case MLV_NET_TEXT :
-			printf(
-				"Message reçu de %s:%d = %s \n", ip, port, message
-			);
-			break;
-		case MLV_NET_INTEGERS :
-			printf(
-				"%d Entiers reçus de %s:%d = ", size, ip, port
-			);
-			printf( "[" );
-			for( int j= 0 ; j< size; j++ ) {
-				printf( "%d, ", integers[j] );
-			}
-			printf( "]\n" );
-			break;
-		case MLV_NET_REALS :
-			printf(
-				"%d Réels reçus de %s:%d = ", size, ip, port
-			);
-			printf( "[" );
-			for( int j= 0 ; j< size; j++) {
-				printf( "%.2f, ", reals[j] );
-			}
-			printf( "]\n" );
-			break;
-		default:;
-			fprintf(stderr, "This case is not possible\n");
-			assert(0);
-	}
-	free(ip);
+
+	printf( "Données reçue de %s:%d = \n", ip, port );
+	printf( "   - Message : %s\n", size, ip, port );
+	printf( "   - Entiers : " );
+	printf( "[" );
+		for( int j= 0 ; j< size; j++ ) { printf( "%d, ", integers[j] ); }
+	printf( "]\n" );
+	printf( "   - Réels : " );
+	printf( "[" );
+		for( int j= 0 ; j< size; j++) { printf( "%.2f, ", reals[j] ); }
+	printf( "]\n" );
 }
 
 void treat_incoming_datas(
 	MLV_Connection** connections, int nb_max_connections
 ){
-	int i, size;
-	int* integers;
-	float* reals;
 	char* message;
-	MLV_Network_msg type;
+	int size_message;
+
+	int* integers;
+	int size_integers;
+
+	float* reals;
+	int size_reals;
 
 	for( i=0; i< nb_max_connections; i++ ){
 		if( connections[i] ){
 			// On récupère et affiche toutes les données envoyées par le client 
 			// numéro 'i'
 			while(
-				(
-					type = MLV_get_network_data(
-						connections[i], &message, &integers, &reals, &size
-					) 
-				) != MLV_NET_NONE
+				MLV_get_network_data(
+					connections[i], 
+					&message, &size_message,
+					&integers, &size_integers,
+					&reals, &size_reals
+				) 
 			){
-				if( type ==  MLV_NET_CONNECTION_CLOSED ){
-					printf(
-						"Connection perdu avec %p. We remove the connection. \n", 
-						connections[i]
-					);
-					MLV_free_connection( connections[i] );
-					connections[i] = NULL;
-					break;
-				}else{
-					print_network_data(
-						type, message, integers, reals, size, connections[i]
-					);
-					free( message ); free( integers ); free( reals );
-				}
+				print_network_data(
+					connections[i],
+					message, size_message,
+					integers, size_integers,
+					reals, size_reals
+				);
+				free( message ); free( integers ); free( reals );
 			}
 		}
 	}
@@ -128,12 +113,16 @@ void send_datas_to_clients(
 	int i;
 	for( i=0; i< nb_max_connections; i++ ){
 		if( connections[i] ){
-			const char* text_msg = "Coucou";
-			MLV_send_text( connections[i], text_msg, strlen(text_msg) );
-			int integers_msg[3] = {i, i, i};
-			MLV_send_integer_array( connections[i], integers_msg, 3 );
-			float reals_msg[3] = {i, i, i};
-			MLV_send_real_array( connections[i], reals_msg, 3 );
+			const char* text = "Hello from the server !";
+			int integers[3] = {i, i, i};
+			float reals[3] = {i*1.11, i*1.11, i*1.11};
+			if(
+				MLV_send_data(
+					connections[i], text, strlen(text), integers, 3, reals, 3
+				); // TODO strlen ou strlen+1 ?
+			){
+				pritnf("Data can't be sent.");
+			}
 		}
 	}
 }
@@ -198,6 +187,9 @@ int main(int argc, char *argv[]){
 	while( ! end  ){
 		// On décide que le serveur traitera les connections toutes les secondes.
 		MLV_wait_milliseconds(1000);
+
+		// On traite les connexion qui ont étés coupées
+		treat_lost_connection( connections, nb_max_connections );
 
 		// On traite les connexion entrantes
 		treat_incoming_connection( server, connections, nb_max_connections );

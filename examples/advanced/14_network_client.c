@@ -5,75 +5,65 @@
 #define DEBUG(x) { fprintf( stderr, "DEBUG : %s - line : %i, file : %s\n", (x), __LINE__, __FILE__ ); }
 
 void send_datas_to_server( MLV_Connection* connection ){
-	const char* text_msg = "Hi !";
-	MLV_send_text( connection, text_msg, strlen(text_msg) );
-	int integers_msg[3] = {42, 42, 42};
-	MLV_send_integer_array( connection, integers_msg, 3 );
-	float reals_msg[3] = {3.14f, 3.14f, 3.14f};
-	MLV_send_real_array( connection, reals_msg, 3 );
-}
-
-void print_network_data( 
-	MLV_Network_msg type, char* message, int* integers, float* reals, int size
-){
-	switch( type ){
-		case MLV_NET_NONE :
-			break;
-		case MLV_NET_TEXT :
-			printf(
-				"Message reçu du serveur = %s \n", message
-			);
-			break;
-		case MLV_NET_INTEGERS :
-			printf(
-				"%d Entiers reçus du serveur = ", size
-			);
-			printf( "[" );
-			for( int j= 0 ; j< size; j++) {
-				printf( "%d, ", integers[j] );
-			}
-			printf( "]\n" );
-			break;
-		case MLV_NET_REALS :
-			printf(
-				"%d Réels reçus du serveur = ", size
-			);
-			printf( "[" );
-			for( int j= 0 ; j< size; j++ ) {
-				printf( "%.2f, ", reals[j] );
-			}
-			printf( "]\n" );
-			break;
-		default:;
-			fprintf(stderr, "This case is not possible\n");
-			assert(0);
+	const char* text = "Hello from the client !";
+	int integers[3] = {42, 42, 42};
+	float reals[3] = {3.14, 3.14, 3.14};
+	if(
+		MLV_send_data(
+			connections[i], text, strlen(text), integers, 3, reals, 3
+		); // TODO strlen ou strlen+1 ?
+	){
+		pritnf("Data can't be sent.");
 	}
 }
 
-int get_data_from_server( MLV_Connection* connection ){
-	int end, size;
-	int* integers;
-	float* reals;
-	char* message;
-	MLV_Network_msg type; 
+void print_network_data(
+	MLV_Connection*	connection, const char* message, int size_message,
+	const int* integers, int size_integers, const float* reals, int size_reals
+){
+	char* ip;
+	int port;
+	MLV_collect_connection_informations( connection, &ip, &port );                           
 
-	end = 0;
+	printf( "Données reçue du serveur %s:%d = \n", ip, port );
+	printf( "   - Message : %s\n", size, ip, port );
+	printf( "   - Entiers : " );
+	printf( "[" );
+		for( int j= 0 ; j< size; j++ ) { printf( "%d, ", integers[j] ); }
+	printf( "]\n" );
+	printf( "   - Réels : " );
+	printf( "[" );
+		for( int j= 0 ; j< size; j++) { printf( "%.2f, ", reals[j] ); }
+	printf( "]\n" );
+}
+
+int get_data_from_server( MLV_Connection* connection ){
+	char* message;
+	int size_message;
+
+	int* integers;
+	int size_integers;
+
+	float* reals;
+	int size_reals;
+
+	int end = 0;
 	// We get datas from server
 	while(
-		(
-			type =	MLV_get_network_data(
-				connection, &message, &integers, &reals, &size
-			)
-		) != MLV_NET_NONE 
+		MLV_get_network_data(
+			connection, 
+			&message, &size_message,
+			&integers, &size_integers,
+			&reals, &size_reals
+		) 
 	){
-		if( type ==  MLV_NET_CONNECTION_CLOSED ){
-			printf( "Connection perdu avec le serveur.\n" );
-			end = 1;
-			break;
-		}else{
-			print_network_data( type, message, integers, reals, size );
-			free( message ); free( integers ); free( reals );
-		}
+		print_network_data(
+			connection,
+			message, size_message,
+			integers, size_integers,
+			reals, size_reals
+		);
+		free( message ); free( integers ); free( reals );
 	}
 	return end;
 }
@@ -94,16 +84,19 @@ int main(int argc, char *argv[]){
 	// On se connecte au serveur
 	MLV_Connection * connection= MLV_start_new_connection( ip_address, port );
 	if( ! connection ){
-		printf("Connexion au serveur impossible. Le serveur n'est pas ouvert ou le réseau ne fonctionne pas.\n");
+		printf(
+			"Connexion au serveur impossible."
+			" Le serveur n'est pas ouvert ou le réseau ne fonctionne pas.\n"
+		);
 		exit(1);
 	}
 
 	int end = 0;
-	while( ! end ){
+	while( ! MLV_connection_is_lost() ){
 		MLV_wait_milliseconds(1000);
 
 		// On récupére les données envoyées par le serveurs
-		end = get_data_from_server( connection );
+		get_data_from_server( connection );
 
 		// On envoie des messages au serveur
 		send_datas_to_server( connection );
@@ -118,7 +111,7 @@ int main(int argc, char *argv[]){
 /*
  *   This file is part of the MLV Library.
  *
- *   Copyright (C) 2014 Adrien Boussicault, Marc Zipstein
+ *   Copyright (C) 2016 Adrien Boussicault
  *
  *
  *    This Library is free software: you can redistribute it and/or modify
