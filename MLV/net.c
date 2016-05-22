@@ -580,6 +580,9 @@ MLV_Connection * MLV_start_new_connection(
 }
 
 void MLV_free_connection( MLV_Connection* connection ){
+	if( connection == NULL ){
+		return;
+	}
 	if( connection->socket ){
 		SDLNet_TCP_DelSocket(connection->set, connection->socket);
 		SDLNet_TCP_Close(connection->socket);

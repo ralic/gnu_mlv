@@ -21,14 +21,19 @@ int connection_filter(
 void treat_incoming_connection(
 	MLV_Server* server, MLV_Connection** connections, int nb_max_connections
 ){
-	// On regard si il y a de nouvelles connexions/
-	MLV_Connection* connection = MLV_get_new_connection( server );
-	if( ! connection ) return;  // Il n'y a pas de connexions entrantes
-
-	for( int i=0; i< nb_max_connections; i++ ){
-		if( connections[i] == NULL ){
-			connections[i] = connection;
-			break;
+	// On récupère toutes les nouvelles connexions entrantes et on les 
+	// enregistre dans nos structures de données.
+	MLV_Connection* connection;
+	while( connexion = MLV_get_new_connection( server ) ){
+		// On enregiste la connexion dans nos structures de données.
+		//     Comme le serveur est configuré pour n'accepter que 
+		//     nb_max_connecions, nous somms sur que la table connections 
+		//     contients un champs vide (un champs à NULL).
+		for( int i=0; i< nb_max_connections; i++ ){
+			if( connections[i] == NULL ){
+				connections[i] = connection;
+				break;
+			}
 		}
 	}
 }
@@ -77,15 +82,6 @@ void print_network_data(
 	free(ip);
 }
 
-void init_connections_array( 
-	MLV_Connection** connections, int nb_max_connections
-){
-	for( int i=0; i<nb_max_connections; i++ ){
-		connections[i] = NULL;
-	}
-}
-
-
 void treat_incoming_datas(
 	MLV_Connection** connections, int nb_max_connections
 ){
@@ -97,7 +93,8 @@ void treat_incoming_datas(
 
 	for( i=0; i< nb_max_connections; i++ ){
 		if( connections[i] ){
-			// We get datas from clients
+			// On récupère et affiche toutes les données envoyées par le client 
+			// numéro 'i'
 			while(
 				(
 					type = MLV_get_network_data(
@@ -132,20 +129,11 @@ void send_datas_to_clients(
 	for( i=0; i< nb_max_connections; i++ ){
 		if( connections[i] ){
 			const char* text_msg = "Coucou";
-			//MLV_Network_msg val = 
 			MLV_send_text( connections[i], text_msg, strlen(text_msg) );
 			int integers_msg[3] = {i, i, i};
 			MLV_send_integer_array( connections[i], integers_msg, 3 );
 			float reals_msg[3] = {i, i, i};
 			MLV_send_real_array( connections[i], reals_msg, 3 );
-		}
-	}
-}
-
-void free_connections( MLV_Connection** connections, int nb_max_connections ){
-	for( int i=0; i< nb_max_connections; i++ ){
-		if( connections[i] == NULL ){
-			MLV_free_connection( connections[i] );
 		}
 	}
 }
@@ -157,23 +145,60 @@ void free_connections( MLV_Connection** connections, int nb_max_connections ){
 // suivante :
 //
 int main(int argc, char *argv[]){
-	int port = 10000;
 	int nb_max_connections = 5;
 
-	// We define the data structure od the conections.
+	// On définit le tableau qui contiendra toutes les connexions entre le 
+	// serveur et les clients.
 	MLV_Connection* connections[nb_max_connections] ;
-	init_connections_array( connections, nb_max_connections );
+	for( int i=0; i<nb_max_connections; i++ ) connections[i] = NULL;
 
+	// On initialise et demmare un serveur qui écoutera sur le port 10000.
+	//     Quand on veut envoyer un message à un ordinateur, on a besoin de 
+	//     1) dire à quel ordinateur
+	//     2) dire quelle application doit lire le message
+	//
+	//     Pour désinger un ordinateur sur le réseau on utilise l'adresse IP.
+	//     Il s'agit de 4 chiffres comme 147.210.215.26. Cette addresse ip 
+	//     identifie un ordinateur sur le réseau. Ce code n'est pas
+	//     très lisble pour un homme. Elle est souvent remplacé par une
+	//     chaîne de caractère plus explicite. Par exemple www.u-bordeaux.fr
+	// 
+	//     Pour désigner une application, on utilise un entier appellé port.
+	//     Quand une application ouvre une connection, elle définit un port
+	//     qui permettra au système d'exploitation de rediriger tous les 
+	//     messages sur ce port.
+	//     Par exemple, pour envoyer les requêttes http aux sites que vous 
+	//     consultez sur internet, firefox utilise le port 80, car les 
+	//     application web utilisent généralement le port 80.
+	//     Cependant, il est possible de dire à firefox d'envoyer les requêtes
+	//     sur un autre port, il vous suffit de taper l'adress web suivit de 
+	//     :PORT où PORT est le nouveau port.
+	//     Par exemple, vous pouvez essayer de taper http://www.u-bordeau.fr:324
+	//     Comme il n'y a pas d'application WEB qui écoute sur le port 324, 
+	//     votre navigateur web devrait ne pas trouver de pages.
+	//     Par exemple, si vous êtes sous Linux ou MacOSX, il est fotement 
+	//     probable que le serveur Web CUPS est en train de tourner. C'est
+	//     le serveur qui s'occupe de gérer les impressions.
+	//     Vous pouvez y acceder en utilisant :
+	//     - l'addresse "localhost" qui est le nom que l'on donne à la machone
+	//       courante.
+	//     - le port 632.
+	//     Essayer de taper dans votre navigateur web : localhost:631 .
+	int port = 10000;
 	MLV_init_network();
 	MLV_Server* server = MLV_start_server( port, nb_max_connections );
 
 	// On enregiste un filtre de connections pour refuser les connections
 	// provenant d'adresses ip indésirables.
+	// Cette ligne est optionnelle et peut être enlevée si vous n'avez pas 
+	// besoin de filtrer les connections entrantes.
 	MLV_set_connection_filter( server, connection_filter, NULL );
 
 	int end = 0;
 	while( ! end  ){
+		// On décide que le serveur traitera les connections toutes les secondes.
 		MLV_wait_milliseconds(1000);
+
 		// On traite les connexion entrantes
 		treat_incoming_connection( server, connections, nb_max_connections );
 
@@ -184,7 +209,9 @@ int main(int argc, char *argv[]){
 		send_datas_to_clients( connections, nb_max_connections );
 	}
 
-	free_connections( connections, nb_max_connections );
+	for( int i=0; i< nb_max_connections; i++ ){
+		MLV_free_connection( connections[i] ); // connecitons[i] can be 0.
+	}
 	MLV_free_server( server );
 	MLV_free_network();
 	
@@ -194,7 +221,7 @@ int main(int argc, char *argv[]){
 /*
  *   This file is part of the MLV Library.
  *
- *   Copyright (C) 2014 Adrien Boussicault, Marc Zipstein
+ *   Copyright (C) 2016 Adrien Boussicault
  *
  *
  *    This Library is free software: you can redistribute it and/or modify

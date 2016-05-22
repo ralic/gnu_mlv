@@ -79,6 +79,7 @@ MLV_Connection* MLV_start_new_connection(
 	const char* server_address, unsigned int port
 );
 
+// If connection is NULL, the function do nothing.
 void MLV_free_connection( MLV_Connection* connection );
 
 MLV_Network_msg MLV_send_text(
