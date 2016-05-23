@@ -12,7 +12,8 @@ int connection_filter(
 	// Cette fonction doit renvoyer Vrai si vous voulez que la connection 
 	// soit acceptée.
 	if( strcmp( ip, "100.64.0.1" ) == 0 ){
-		return 0;  // Connection refusée ! On ne fait pas confiance à 100.64.0.1.
+		return 0;  // Connection refusée !
+		           // On ne fait pas confiance à 100.64.0.1.
 	}else{
 		return 1; // Connection acceptée !
 	}
@@ -189,7 +190,7 @@ int main(int argc, char *argv[]){
 
 	int end = 0;
 	while( ! end  ){
-		// On décide que le serveur traitera les connections toutes les secondes.
+		// Le serveur traitera les connections toutes les secondes.
 		MLV_wait_milliseconds(1000);
 
 		// On traite les connexion qui ont étés coupées
@@ -201,7 +202,7 @@ int main(int argc, char *argv[]){
 		// On traite les données envoyées par les clients
 		treat_incoming_data( connections, nb_max_connections );
 
-		// On envoies des données aux clients
+		// On envoie des données aux clients
 		send_data_to_clients( connections, nb_max_connections );
 	}
 
