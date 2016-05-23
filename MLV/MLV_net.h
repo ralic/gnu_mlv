@@ -69,7 +69,7 @@ void MLV_set_connection_filter(
 
 typedef struct _MLV_Connection MLV_Connection;
 
-MLV_Connection* MLV_get_new_connection( MLV_Server* server );
+MLV_Connection* MLV_accept_new_connection( MLV_Server* server );
 
 void MLV_collect_connection_informations(
 	MLV_Connection* connection, char ** ip, int* port
@@ -92,7 +92,7 @@ MLV_Network_msg MLV_send_real_array(
 	MLV_Connection* connection, const float* array, int size
 );
 
-MLV_Network_msg MLV_get_network_data(
+MLV_Network_msg MLV_receive_network_data(
 	MLV_Connection* connection, char** message, int** integers, 
 	float** reals, int* size
 );

@@ -362,7 +362,7 @@ MLV_Connection * get_new_connection( MLV_Server* server ){
 }
 
 
-MLV_Connection * MLV_get_new_connection( MLV_Server* server ){
+MLV_Connection * MLV_accept_new_connection( MLV_Server* server ){
 	MLV_Connection * result = NULL;
 	int numready = SDLNet_CheckSockets(server->incoming_observer_set, 0);
 	if( numready == -1 ){
@@ -706,7 +706,7 @@ MLV_Network_msg MLV_send_real_array(
 	);
 }
 
-MLV_Network_msg MLV_get_network_data(
+MLV_Network_msg MLV_receive_network_data(
 	MLV_Connection* connection, char** message, int** integers, 
 	float** reals, int* size
 ){

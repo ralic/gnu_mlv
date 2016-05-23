@@ -24,7 +24,7 @@ void treat_incoming_connection(
 	// On récupère toutes les nouvelles connexions entrantes et on les 
 	// enregistre dans nos structures de données.
 	MLV_Connection* connection;
-	while( connexion = MLV_get_new_connection( server ) ){
+	while( connexion = MLV_accept_new_connection( server ) ){
 		// On enregiste la connexion dans nos structures de données.
 		//     Comme le serveur est configuré pour n'accepter que 
 		//     nb_max_connecions, nous somms sur que la table connections 
@@ -70,7 +70,7 @@ void print_network_data(
 	printf( "]\n" );
 }
 
-void treat_incoming_datas(
+void treat_incoming_data(
 	MLV_Connection** connections, int nb_max_connections
 ){
 	char* message;
@@ -87,7 +87,7 @@ void treat_incoming_datas(
 			// On récupère et affiche toutes les données envoyées par le client 
 			// numéro 'i'
 			while(
-				MLV_get_network_data(
+				MLV_receive_network_data(
 					connections[i], 
 					&message, &size_message,
 					&integers, &size_integers,
@@ -107,7 +107,7 @@ void treat_incoming_datas(
 }
 
 
-void send_datas_to_clients(
+void send_data_to_clients(
 	MLV_Connection** connections, int nb_max_connections
 ){
 	int i;
@@ -117,7 +117,7 @@ void send_datas_to_clients(
 			int integers[3] = {i, i, i};
 			float reals[3] = {i*1.11, i*1.11, i*1.11};
 			if(
-				MLV_send_data(
+				MLV_send_network_data(
 					connections[i], text, strlen(text), integers, 3, reals, 3
 				); // TODO strlen ou strlen+1 ?
 			){
@@ -176,6 +176,10 @@ int main(int argc, char *argv[]){
 	int port = 10000;
 	MLV_init_network();
 	MLV_Server* server = MLV_start_server( port, nb_max_connections );
+	if( ! server ){
+		fprintf( stderr, "Impossible to launch the server.\n" );
+		exit(1);
+	}
 
 	// On enregiste un filtre de connections pour refuser les connections
 	// provenant d'adresses ip indésirables.
@@ -195,10 +199,10 @@ int main(int argc, char *argv[]){
 		treat_incoming_connection( server, connections, nb_max_connections );
 
 		// On traite les données envoyées par les clients
-		treat_incoming_datas( connections, nb_max_connections );
+		treat_incoming_data( connections, nb_max_connections );
 
 		// On envoies des données aux clients
-		send_datas_to_clients( connections, nb_max_connections );
+		send_data_to_clients( connections, nb_max_connections );
 	}
 
 	for( int i=0; i< nb_max_connections; i++ ){

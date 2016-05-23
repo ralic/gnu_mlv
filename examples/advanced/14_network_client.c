@@ -4,12 +4,12 @@
 
 #define DEBUG(x) { fprintf( stderr, "DEBUG : %s - line : %i, file : %s\n", (x), __LINE__, __FILE__ ); }
 
-void send_datas_to_server( MLV_Connection* connection ){
+void send_data_to_server( MLV_Connection* connection ){
 	const char* text = "Hello from the client !";
 	int integers[3] = {42, 42, 42};
 	float reals[3] = {3.14, 3.14, 3.14};
 	if(
-		MLV_send_data(
+		MLV_send_network_data(
 			connections[i], text, strlen(text), integers, 3, reals, 3
 		); // TODO strlen ou strlen+1 ?
 	){
@@ -37,7 +37,7 @@ void print_network_data(
 	printf( "]\n" );
 }
 
-int get_data_from_server( MLV_Connection* connection ){
+void receive_data_from_server( MLV_Connection* connection ){
 	char* message;
 	int size_message;
 
@@ -47,10 +47,9 @@ int get_data_from_server( MLV_Connection* connection ){
 	float* reals;
 	int size_reals;
 
-	int end = 0;
-	// We get datas from server
+	// We get data from server
 	while(
-		MLV_get_network_data(
+		MLV_receive_network_data(
 			connection, 
 			&message, &size_message,
 			&integers, &size_integers,
@@ -65,7 +64,6 @@ int get_data_from_server( MLV_Connection* connection ){
 		);
 		free( message ); free( integers ); free( reals );
 	}
-	return end;
 }
 
 //
@@ -75,31 +73,28 @@ int get_data_from_server( MLV_Connection* connection ){
 // suivante :
 //
 int main(int argc, char *argv[]){
-
-	MLV_init_network();
-
 	int port = 10000;
 	const char* ip_address = "localhost";
 
 	// On se connecte au serveur
+	MLV_init_network();
 	MLV_Connection * connection= MLV_start_new_connection( ip_address, port );
 	if( ! connection ){
-		printf(
-			"Connexion au serveur impossible."
-			" Le serveur n'est pas ouvert ou le réseau ne fonctionne pas.\n"
+		fprintf(
+			stderr, "The connection to the server is not possible."
+			" The server is not open or the network doesn't work.\n"
 		);
 		exit(1);
 	}
 
-	int end = 0;
-	while( ! MLV_connection_is_lost() ){
+	while( ! MLV_connection_is_lost( connection ) ){
 		MLV_wait_milliseconds(1000);
 
 		// On récupére les données envoyées par le serveurs
-		get_data_from_server( connection );
+		receive_data_from_server( connection );
 
 		// On envoie des messages au serveur
-		send_datas_to_server( connection );
+		send_data_to_server( connection );
 	}
 
 	MLV_free_connection( connection );
