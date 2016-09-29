@@ -89,6 +89,32 @@
  * );
  *
  * -----------------------------------------------------------------------------
+ * MLV_draw_triangle : Dessine un triangle vide.
+ *
+ * void MLV_draw_triangle(
+ *     int       ax,       coordonnée en x du premier sommet du triangle
+ *     int       ay,       coordonnée en y du premier sommet du triangle
+ *     int       bx,       coordonnée en x du premier sommet du triangle
+ *     int       by,       coordonnée en y du premier sommet du triangle
+ *     int       cx,       coordonnée en x du premier sommet du triangle
+ *     int       cy,       coordonnée en y du premier sommet du triangle
+ *     MLV_Color color    Couleur du tracé
+ * );
+ *
+ * -----------------------------------------------------------------------------
+ * MLV_draw_triangle : Dessine un triangle plein.
+ *
+ * void MLV_draw_filled_triangle(
+ *     int       ax,       coordonnée en x du premier sommet du triangle
+ *     int       ay,       coordonnée en y du premier sommet du triangle
+ *     int       bx,       coordonnée en x du premier sommet du triangle
+ *     int       by,       coordonnée en y du premier sommet du triangle
+ *     int       cx,       coordonnée en x du premier sommet du triangle
+ *     int       cy,       coordonnée en y du premier sommet du triangle
+ *     MLV_Color color    Couleur du tracé
+ * );
+ *
+ * -----------------------------------------------------------------------------
  * MLV_draw_line : Dessine une ligne dont les coordonnées des deux extrémités
  *                 sont passées en paramètres. 
  * void MLV_draw_line(
@@ -180,6 +206,8 @@ int main(int argc, char *argv[]){
 	MLV_draw_filled_rectangle( 70, 50, 40, 20, MLV_COLOR_GREEN );
 	MLV_draw_line( 120, 50, 160, 90 , MLV_COLOR_WHITE );
 	MLV_draw_point( 10, 110, MLV_COLOR_RED );
+	MLV_draw_triangle( 180, 50, 200, 50, 190, 70, MLV_COLOR_YELLOW );
+	MLV_draw_filled_triangle( 220, 50, 240, 50, 230, 70, MLV_COLOR_YELLOW );
 
 	//
 	// Dessine une courbe de Bézier avec ses sommets

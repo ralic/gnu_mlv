@@ -43,6 +43,7 @@ mlv-2.0.2-dev
    * Remove a bug in MLV_draw_pixel and MLV_draw_pixel_on_image. Now image is 
      not toric. 
  * Example :
+   * Add example on MLV_draw_triangle()
    * Change MLV_actualise_window by MLV_update_window
 
 mlv-2.0.2
