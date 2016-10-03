@@ -156,30 +156,6 @@ void MLV_draw_bezier_curve(
 );
 
 /** \~french 
- * \brief Dessine un polygone plein à partir d'une liste de sommets.
- *
- * \param vx La liste des coordonnées en X des différents sommets du polygone.
- * \param vy La liste des coordonnées en Y des différents sommets du polygone.
- * \param nb_points Le nombre de sommets du polygone.
- * \param color La couleur du tracé.
- */
-void MLV_draw_filled_polygon(
-	const int* vx, const int* vy, int nb_points, MLV_Color color
-);
-
-/** \~french 
- * \brief Dessine un rectangle dont la taille, la couleur et la position du 
- *        sommet Nord-Ouest sont données en paramètres.
- *
- * \param x La coordonnée en X du sommet Nord-Ouest du rectangle.
- * \param y La coordonnée en Y du sommet Nord-Ouest du rectangle.
- * \param width La largeur du rectangle.
- * \param height La hauteur du rectangle.
- * \param color La couleur du tracé.
- */
-void MLV_draw_rectangle(int x, int y, int width, int height, MLV_Color color);
-
-/** \~french 
  * \brief Dessine un rectangle dont la taille, la couleur et la position du 
  *        sommet Nord-Ouest sont données en paramètres.
  *
