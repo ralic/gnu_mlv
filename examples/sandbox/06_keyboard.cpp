@@ -1,4 +1,4 @@
-#include <MLV/MLV_all.h>
+#include <MLV/experimental/window.hpp>
 
 
 //
@@ -23,12 +23,12 @@ int main(int argc, char *argv[]){
 	// Affiche la consigne
 	//
 	window.draw_text( 10, 10, "Appuyez sur la touche k", MLV_COLOR_GREEN );
-	windwow.update();
+	window.update();
 
 	//
 	// Attendre que l'utilisateur appuie sur une touche du clavier
 	//
-	window.wait_keyboard( toche );
+	window.wait_keyboard( touche );
 
 	//
 	// Affiche "Bien !" si l'utilisateur a appuyer sur la touche k sinon
