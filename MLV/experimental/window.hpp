@@ -1521,8 +1521,24 @@ class window_t {
 		 * \param x Coordonnée en X de la position de la souris dans la fenêtre.
 		 * \param y Coordonnée en Y de la position de la souris dans la fenêtre.
 		 */
-		void wait_mouse(int & x, int & y){
-			MLV_wait_mouse(&x, &y);
+		void wait_mouse( mlv::point_t & point ){
+			MLV_wait_mouse(&point.x, &point.y);
+		}
+
+		/** \~french 
+		 *
+		 * \brief Suspend l'exécution jusqu'à ce que l'utilisateur clique sur le bouton
+		 *        gauche de la souris.
+		 *
+		 * Au moment où l'utilisateur clique, la fonction retourne les
+		 * coordonnées de la position de la souris dans la fenêtre.
+		 *
+		 * \return Le point où se situe la souris
+		 */
+		point_t wait_mouse(){
+			point_t point;
+			wait_mouse( point );
+			return point;
 		}
 
 		/** \~french 

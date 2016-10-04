@@ -9,12 +9,6 @@
 //
 int main(int argc, char *argv[]){
 	//
-	// Décalaration des variables qui contiendront les positions
-	// de la souris.
-	//
-	int x,y;
-
-	//
 	// Créé et affiche la fenêtre
 	//
 	mlv::window_t window( "beginner - 5 - mouse", "mouse", 640, 480 );
@@ -32,12 +26,12 @@ int main(int argc, char *argv[]){
 	//
 	// Attendre que l'utilisateur clique sur le bouton gauche de la souris
 	//
-	window.wait_mouse(x, y);
+	mlv::point_t point = window.wait_mouse();
 
 	//
 	// Dessine un cercle à la position du curseur de la souris
 	//
-	window.draw_circle( mlv::point_t(x, y), 30, mlv::color::red );
+	window.draw_circle( point, 30, mlv::color::red );
 	window.update();
 	
 	//
