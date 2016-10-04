@@ -853,6 +853,7 @@ int desktop_width(){
 struct point_t {
 	point_t(): x(0), y(0) {}
 	point_t(int x, int y): x(x), y(y) {}
+	point_t(const point_t & point): x(point.x), y(point.y) {}
 
 	int x;
 	int y;
@@ -1024,8 +1025,8 @@ class image_t {
 		 * \param radius Le rayon du cercle.
 		 * \param color La couleur du tracé.
 		 */
-		void draw_circle(int x, int y, int radius, color_t color){
-			MLV_draw_circle_on_image(x, y, radius, color, image);
+		void draw_circle(const point_t & point, int radius, color_t color){
+			MLV_draw_circle_on_image(point.x, point.y, radius, color, image);
 		}
 
 		/** \~french 
@@ -1037,8 +1038,8 @@ class image_t {
 		 * \param radius Le rayon du cercle.
 		 * \param color La couleur du tracé.
 		 */
-		void draw_filled_circle(int x, int y, int radius, color_t color){
-			MLV_draw_filled_circle_on_image(x, y, radius, color, image);
+		void draw_filled_circle(const point_t & point, int radius, color_t color){
+			MLV_draw_filled_circle_on_image(point.x, point.y, radius, color, image);
 		}
 
 		/** \~french 
@@ -1050,8 +1051,8 @@ class image_t {
 		 * \param radius_y Le rayon en Y de l'ellipse.
 		 * \param color La couleur du tracé.
 		 */
-		void draw_ellipse(int x, int y, int radius_x, int radius_y, color_t color){
-			MLV_draw_ellipse_on_image(x, y, radius_x, radius_y, color, image);
+		void draw_ellipse(const point_t & point, int radius_x, int radius_y, color_t color){
+			MLV_draw_ellipse_on_image(point.x, point.y, radius_x, radius_y, color, image);
 		}
 
 		/** \~french 
@@ -1063,8 +1064,8 @@ class image_t {
 		 * \param radius_y Le rayon en Y de l'ellipse.
 		 * \param color La couleur du tracé.
 		 */
-		void draw_filled_ellipse(int x, int y, int radius_x, int radius_y, color_t color){
-			MLV_draw_filled_ellipse_on_image(x, y, radius_x, radius_y, color, image);
+		void draw_filled_ellipse(const point_t & point, int radius_x, int radius_y, color_t color){
+			MLV_draw_filled_ellipse_on_image(point.x, point.y, radius_x, radius_y, color, image);
 		}
 
 		/** \~french 
@@ -1154,8 +1155,8 @@ class image_t {
 		 * \param height La hauteur du rectangle.
 		 * \param color La couleur du tracé.
 		 */
-		void draw_rectangle(int x, int y, int width, int height, color_t color){
-			MLV_draw_rectangle_on_image(x, y, width, height, color, image);
+		void draw_rectangle(const point_t & point, int width, int height, color_t color){
+			MLV_draw_rectangle_on_image(point.x, point.y, width, height, color, image);
 		}
 
 		/** \~french 
@@ -1168,8 +1169,8 @@ class image_t {
 		 * \param height La hauteur du rectangle.
 		 * \param color La couleur du tracé.
 		 */
-		void draw_filled_rectangle(int x, int y, int width, int height, color_t color){
-			MLV_draw_filled_rectangle_on_image(x, y, width, height, color, image);
+		void draw_filled_rectangle(const point_t & point, int width, int height, color_t color){
+			MLV_draw_filled_rectangle_on_image(point.x, point.y, width, height, color, image);
 		}
 
 		/** \~french 
@@ -1181,8 +1182,8 @@ class image_t {
 		 * \param y2 La coordonnée en Y de la deuxième extrémité de la ligne.
 		 * \param color La couleur du tracé.
 		 */
-		void draw_line(int x1, int y1, int x2, int y2, color_t color){
-			MLV_draw_line_on_image(x1, y1, x2, y2, color, image);
+		void draw_line(const point_t & point_1, const point_t & point_2, color_t color){
+			MLV_draw_line_on_image(point_1.x, point_1.y, point_2.x, point_2.y, color, image);
 		}
 
 		/** \~french 
@@ -1192,8 +1193,8 @@ class image_t {
 		 * \param y La coordonnée en Y du pixel.
 		 * \param color La couleur du tracé.
 		 */
-		void draw_pixel(int x, int y, color_t color){
-			MLV_draw_pixel_on_image(x, y, color, image);
+		void draw_pixel(const point_t & point, color_t color){
+			MLV_draw_pixel_on_image(point.x, point.y, color, image);
 		}
 
 		/** \~french 
@@ -1204,8 +1205,8 @@ class image_t {
 		 * \param y La coordonnée en Y du point.
 		 * \param color La couleur du tracé.
 		 */
-		void draw_point(int x, int y, color_t color){
-			MLV_draw_point_on_image(x, y, color, image);
+		void draw_point(const point_t & point, color_t color){
+			MLV_draw_point_on_image(point.x, point.y, color, image);
 		}
 };
 
@@ -1268,15 +1269,16 @@ class window_t {
 			MLV_clear_window( color );
 		}
 
-		void draw( const image_t& image, int x, int y ){
-			MLV_draw_image( image.image, x, y );
+		void draw( const image_t& image, const point_t & point){
+			MLV_draw_image( image.image, point.x, point.y );
 		}
 		void partial_draw( 
-			const image_t& image, int x, int y,
-			int top_left, int top_right, int width, int height 
+			const image_t& image, const point_t & position,
+			const point_t & top_left, int width, int height 
 		){
 			MLV_draw_partial_image(
-				image.image, top_left, top_right, width, height, x, y 
+				image.image, top_left.x, top_left.y, width, height, 
+				position.x, position.y 
 			);
 		}
 
@@ -1289,8 +1291,8 @@ class window_t {
 		 * \param radius Le rayon du cercle.
 		 * \param color La couleur du tracé.
 		 */
-		void draw_circle(int x, int y, int radius, MLV_Color color){
-			MLV_draw_circle( x, y, radius, color);
+		void draw_circle( const point_t & point, int radius, MLV_Color color){
+			MLV_draw_circle( point.x, point.y, radius, color);
 		}
 
 		/** \~french 
@@ -1302,8 +1304,8 @@ class window_t {
 		 * \param radius Le rayon du cercle.
 		 * \param color La couleur du tracé.
 		 */
-		void draw_filled_circle(int x, int y, int radius, MLV_Color color){
-			MLV_draw_filled_circle( x, y, radius, color);
+		void draw_filled_circle( const point_t & point, int radius, MLV_Color color){
+			MLV_draw_filled_circle( point.x, point.y, radius, color);
 		}
 
 		/** \~french 
@@ -1315,8 +1317,8 @@ class window_t {
 		 * \param radius_y Le rayon en Y de l'ellipse.
 		 * \param color La couleur du tracé.
 		 */
-		void draw_ellipse(int x, int y, int radius_x, int radius_y, MLV_Color color){
-			MLV_draw_ellipse( x, y, radius_x, radius_y, color);
+		void draw_ellipse(const point_t & point, int radius_x, int radius_y, MLV_Color color){
+			MLV_draw_ellipse( point.x, point.y, radius_x, radius_y, color);
 		}
 
 		/** \~french 
@@ -1328,8 +1330,8 @@ class window_t {
 		 * \param radius_y Le rayon en Y de l'ellipse.
 		 * \param color La couleur du tracé.
 		 */
-		void draw_filled_ellipse(int x, int y, int radius_x, int radius_y, MLV_Color color){
-			MLV_draw_filled_ellipse( x, y, radius_x, radius_y, color);
+		void draw_filled_ellipse(const point_t & point, int radius_x, int radius_y, MLV_Color color){
+			MLV_draw_filled_ellipse( point.x, point.y, radius_x, radius_y, color);
 		}
 
 		/** \~french 
@@ -1419,8 +1421,8 @@ class window_t {
 		 * \param height La hauteur du rectangle.
 		 * \param color La couleur du tracé.
 		 */
-		void draw_rectangle(int x, int y, int width, int height, MLV_Color color){
-			MLV_draw_rectangle( x, y, width, height, color);
+		void draw_rectangle(const point_t & point, int width, int height, MLV_Color color){
+			MLV_draw_rectangle( point.x, point.y, width, height, color);
 		}
 
 		/** \~french 
@@ -1433,8 +1435,8 @@ class window_t {
 		 * \param height La hauteur du rectangle.
 		 * \param color La couleur du tracé.
 		 */
-		void draw_filled_rectangle(int x, int y, int width, int height, MLV_Color color){
-			MLV_draw_filled_rectangle( x, y, width, height, color);
+		void draw_filled_rectangle(const point_t & point, int width, int height, MLV_Color color){
+			MLV_draw_filled_rectangle( point.x, point.y, width, height, color);
 		}
 
 		/** \~french 
@@ -1446,8 +1448,8 @@ class window_t {
 		 * \param y2 La coordonnée en Y de la deuxième extrémité de la ligne.
 		 * \param color La couleur du tracé.
 		 */
-		void draw_line(int x1, int y1, int x2, int y2, MLV_Color color){
-			MLV_draw_line( x1, y1, x2, y2, color);
+		void draw_line(const point_t & point_1, const point_t & point_2, MLV_Color color){
+			MLV_draw_line( point_1.x, point_1.y, point_2.x, point_2.y, color);
 		}
 
 		/** \~french 
@@ -1457,8 +1459,8 @@ class window_t {
 		 * \param y La coordonnée en Y du pixel.
 		 * \param color La couleur du tracé.
 		 */
-		void draw_pixel(int x, int y, MLV_Color color){
-			MLV_draw_pixel( x, y, color);
+		void draw_pixel(const point_t & point, MLV_Color color){
+			MLV_draw_pixel( point.x, point.y, color);
 		}
 
 		/** \~french 
@@ -1469,8 +1471,8 @@ class window_t {
 		 * \param y La coordonnée en Y du point.
 		 * \param color La couleur du tracé.
 		 */
-		void draw_point(int x, int y, MLV_Color color){
-			MLV_draw_point( x, y, color);
+		void draw_point(const point_t & point, MLV_Color color){
+			MLV_draw_point( point.x, point.y, color);
 		}
 
 
@@ -1485,8 +1487,8 @@ class window_t {
 		 * \param text texte à afficher
 		 * \param color couleur du tracé
 		 */
-		void draw_text( int x, int y, const std::string & text, MLV_Color color ){
-			MLV_draw_text( x, y, text.c_str(), color );
+		void draw_text( const point_t & point, const std::string & text, MLV_Color color ){
+			MLV_draw_text( point.x, point.y, text.c_str(), color );
 		}
 
 		/** \~french 

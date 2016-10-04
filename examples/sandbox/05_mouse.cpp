@@ -23,7 +23,7 @@ int main(int argc, char *argv[]){
 	// Affiche la consigne
 	//
 	window.draw_text(
-		10, 10,
+		mlv::point_t(10, 10),
 		"Cliquez sur la fenêtre à l'aide de la souris pour faire apparaître un cercle",
 		mlv::color::green
 	);
@@ -37,7 +37,7 @@ int main(int argc, char *argv[]){
 	//
 	// Dessine un cercle à la position du curseur de la souris
 	//
-	window.draw_circle( x, y, 30, mlv::color::red );
+	window.draw_circle( mlv::point_t(x, y), 30, mlv::color::red );
 	window.update();
 	
 	//

@@ -22,7 +22,7 @@ int main(int argc, char *argv[]){
 	//
 	// Affiche la consigne
 	//
-	window.draw_text( 10, 10, "Appuyez sur la touche k", mlv::color::green );
+	window.draw_text( mlv::point_t(10, 10), "Appuyez sur la touche k", mlv::color::green );
 	window.update();
 
 	//
@@ -35,10 +35,10 @@ int main(int argc, char *argv[]){
 	// affiche un message d'erreur.
 	//
 	if( touche.sym == MLV_KEYBOARD_k ){
-		window.draw_text( 10, 30, "Bien !", mlv::color::green );
+		window.draw_text( mlv::point_t(10, 30), "Bien !", mlv::color::green );
 	}else{
 		window.draw_text( 
-			10, 30, "Vous n'avez pas appuyé sur la touche k",
+			mlv::point_t(10, 30), "Vous n'avez pas appuyé sur la touche k",
 			mlv::color::green
 		);
 	}
