@@ -28,6 +28,12 @@ int main(int argc, char *argv[]){
 	//
 	mlv::point_t point = window.wait_mouse();
 
+	// Une autre façon de proceder : 
+	//
+	// mlv::point_t point;
+	// window.wait_mouse(point);
+	//
+
 	//
 	// Dessine un cercle à la position du curseur de la souris
 	//
