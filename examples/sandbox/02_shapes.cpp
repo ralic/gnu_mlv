@@ -16,14 +16,14 @@ int main(int argc, char *argv[]){
 	//
 	// Dessine des cercles, ellipses, rectangles, lignes et points
 	//
-	window.draw_circle( 20, 20, 10, MLV_COLOR_PURPLE );
-	window.draw_filled_circle( 50, 20, 10, MLV_COLOR_BROWN );
-	window.draw_ellipse( 100, 20, 30, 10, MLV_COLOR_CYAN );
-	window.draw_filled_ellipse( 170, 20, 30, 10, MLV_COLOR_PINK );
-	window.draw_rectangle( 10, 50, 40, 20, MLV_COLOR_BLUE );
-	window.draw_filled_rectangle( 70, 50, 40, 20, MLV_COLOR_GREEN );
-	window.draw_line( 120, 50, 160, 90 , MLV_COLOR_WHITE );
-	window.draw_point( 10, 110, MLV_COLOR_RED );
+	window.draw_circle( 20, 20, 10, mlv::color::purple );
+	window.draw_filled_circle( 50, 20, 10, mlv::color::brown );
+	window.draw_ellipse( 100, 20, 30, 10, mlv::color::cyan );
+	window.draw_filled_ellipse( 170, 20, 30, 10, mlv::color::pink );
+	window.draw_rectangle( 10, 50, 40, 20, mlv::color::blue );
+	window.draw_filled_rectangle( 70, 50, 40, 20, mlv::color::green );
+	window.draw_line( 120, 50, 160, 90 , mlv::color::white );
+	window.draw_point( 10, 110, mlv::color::red );
 
 	//
 	// Dessine une courbe de Bézier avec ses sommets
@@ -32,23 +32,23 @@ int main(int argc, char *argv[]){
 		mlv::point_t(10, 150), mlv::point_t(50, 190), 
 		mlv::point_t(90, 150), mlv::point_t(130, 190)
 	};
-	window.draw_bezier_curve( points, 4, MLV_COLOR_RED );
-	window.draw_circle( points[0].x, points[0].y, 3, MLV_COLOR_GREEN );
-	window.draw_circle( points[1].x, points[1].y, 3, MLV_COLOR_GREEN );
-	window.draw_circle( points[2].x, points[2].y, 3, MLV_COLOR_GREEN );
-	window.draw_circle( points[3].x, points[3].y, 3, MLV_COLOR_GREEN );
+	window.draw_bezier_curve( points, 4, mlv::color::red );
+	window.draw_circle( points[0].x, points[0].y, 3, mlv::color::green );
+	window.draw_circle( points[1].x, points[1].y, 3, mlv::color::green );
+	window.draw_circle( points[2].x, points[2].y, 3, mlv::color::green );
+	window.draw_circle( points[3].x, points[3].y, 3, mlv::color::green );
 
 	//Dessine un polygone avec ses sommets
 	mlv::point_t points1[4] = { 
 		mlv::point_t(200, 150), mlv::point_t(240, 190), 
 		mlv::point_t(320, 190), mlv::point_t(280, 150)
 	};
-	window.draw_filled_polygon( points1, 4, MLV_COLOR_BLUE );
-	window.draw_polygon( points1, 4, MLV_COLOR_RED );
-	window.draw_circle( points1[0].x, points1[0].y, 3, MLV_COLOR_GREEN );
-	window.draw_circle( points1[1].x, points1[1].y, 3, MLV_COLOR_GREEN );
-	window.draw_circle( points1[2].x, points1[2].y, 3, MLV_COLOR_GREEN );
-	window.draw_circle( points1[3].x, points1[3].y, 3, MLV_COLOR_GREEN );
+	window.draw_filled_polygon( points1, 4, mlv::color::blue );
+	window.draw_polygon( points1, 4, mlv::color::red );
+	window.draw_circle( points1[0].x, points1[0].y, 3, mlv::color::green );
+	window.draw_circle( points1[1].x, points1[1].y, 3, mlv::color::green );
+	window.draw_circle( points1[2].x, points1[2].y, 3, mlv::color::green );
+	window.draw_circle( points1[3].x, points1[3].y, 3, mlv::color::green );
 
 	//
 	// Affiche du texte
@@ -56,7 +56,7 @@ int main(int argc, char *argv[]){
 	window.draw_text(
 		10, 120, 
 		"Juste au dessus de cette ligne, il y a un pixel rouge.",
-		MLV_COLOR_MAGENTA
+		mlv::color::magenta
 	);
 
 	//

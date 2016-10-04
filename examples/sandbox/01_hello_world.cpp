@@ -17,7 +17,7 @@ int main( int argc, char *argv[] ){
 	window.draw_text(
 		10, 120, 
 		"Bonjour !",
-		MLV_COLOR_MAGENTA
+		mlv::color::magenta
 	);
 
 	//

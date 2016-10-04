@@ -1,4 +1,4 @@
-#include "window.hpp"
+#include <MLV/experimental/window.hpp>
 
 void f( mlv::image_t & img ){
 	int x =0, y=0, radius = 0;
@@ -6,7 +6,7 @@ void f( mlv::image_t & img ){
 	int radius_x = 0, radius_y=0;
 	int cx=0, cy=0;
 	int y1 = 0, y2 = 0;
-	mlv::color_t color = MLV_COLOR_GREEN;
+	mlv::color_t color = mlv::color::green;
 	img.draw_circle(x, y, radius, color);
 	img.draw_filled_circle(x, y, radius, color);
 	img.draw_ellipse(x, y, radius_x, radius_y, color);
@@ -33,7 +33,7 @@ void draw( mlv::window_t& window ){
 	int radius_x = 0, radius_y=0;
 	int cx=0, cy=0;
 	int y1 = 0, y2 = 0;
-	mlv::color_t color = MLV_COLOR_GREEN;
+	mlv::color_t color = mlv::color::green;
 	window.draw_circle(x, y, radius, color);
 	window.draw_filled_circle(x, y, radius, color);
 	window.draw_ellipse(x, y, radius_x, radius_y, color);
@@ -56,7 +56,7 @@ void draw( mlv::window_t& window ){
 
 #if __cplusplus >= 201100
 void g( mlv::image_t && img ){
-	img.draw_line(3,3,5,5,MLV_COLOR_GREEN);
+	img.draw_line(3,3,5,5,mlv::color::green);
 }
 #endif
 

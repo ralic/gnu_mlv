@@ -25,7 +25,7 @@ int main(int argc, char *argv[]){
 	window.draw_text(
 		10, 10,
 		"Cliquez sur la fenêtre à l'aide de la souris pour faire apparaître un cercle",
-		MLV_COLOR_GREEN
+		mlv::color::green
 	);
 	window.update();
 
@@ -37,7 +37,7 @@ int main(int argc, char *argv[]){
 	//
 	// Dessine un cercle à la position du curseur de la souris
 	//
-	window.draw_circle( x, y, 30, MLV_COLOR_RED );
+	window.draw_circle( x, y, 30, mlv::color::red );
 	window.update();
 	
 	//
