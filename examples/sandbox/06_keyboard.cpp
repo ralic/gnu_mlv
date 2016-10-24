@@ -12,7 +12,7 @@ int main(int argc, char *argv[]){
 	// Déclaration de la variable qui représentera le code de la touche qui
 	// sera appuyée par l'utilisateur.
 	//
-	mlv::key_t touche;
+	mlv::event::key_t touche;
 
 	//
 	// Créé et affiche la fenêtre

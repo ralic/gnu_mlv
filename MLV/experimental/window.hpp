@@ -20,17 +20,176 @@
 
 #include <string>
 #include <cassert>
-#include <MLV/MLV_window.h>
-#include <MLV/MLV_shape.h>
-#include <MLV/MLV_text.h>
-#include <MLV/MLV_time.h>
-#include <MLV/MLV_random.h>
-#include <MLV/MLV_mouse.h>
-#include <MLV/MLV_keyboard.h>
+#include <MLV/MLV_all.h>
+#include <sstream>
+#include <iostream>
 
 namespace mlv {
 
 typedef MLV_Color color_t;
+
+template <typename TYPE>
+std::string to_string( const TYPE & value ){
+	std::ostringstream s;
+	s << value;
+	return std::string(s.str());	
+}
+
+namespace text {
+
+typedef enum {
+	center = MLV_TEXT_CENTER, /**< \~french Le texte est justifié au centre. */
+	left = MLV_TEXT_LEFT, /**< \~french Le texte est justifié sur la gauche. */
+	right = MLV_TEXT_RIGHT /**< \~french Le texte est justifié sur la doite. */
+} justification_t;
+
+
+typedef enum {
+	horizontal_center = MLV_HORIZONTAL_CENTER, /**< \~french Le texte est centrée horizontalement 
+	                        * dans la boîte. */
+	horizonatl_left = MLV_HORIZONTAL_LEFT, /**< \~french Le texte est positioné sur la droite de 
+	                      * la boîte. */
+	horizontal_right = MLV_HORIZONTAL_RIGHT /**< \~french Le texte est positioné sur la gauche de
+	                      * la boîte. */
+} horizontal_position_t;
+
+/** \~french 
+ * \brief Énumère les différents types de positions verticales du texte dans une boîte.
+ */
+typedef enum {
+	vertical_center = MLV_VERTICAL_CENTER, /**< \~french Le texte est centré horizonatalement 
+	                      * dans la boîte. */
+	vertical_top = MLV_VERTICAL_TOP, /**< \~french Le texte est positionné en haut de la
+	                   * boîte. */
+	vertical_bottom = MLV_VERTICAL_BOTTOM /**< \~french Le texte est positionné en bas de la 
+	                     * boîte. */
+} vertical_position_t;
+
+};
+
+struct point_t {
+	point_t(): x(0), y(0) {}
+	point_t(int x, int y): x(x), y(y) {}
+	point_t(const point_t & point): x(point.x), y(point.y) {}
+
+	int x;
+	int y;
+};
+
+
+namespace box {
+
+	struct adapted_text_t {
+		point_t position;
+		std::string message;
+		int sizeInterligne;
+		color_t borderColor;
+		color_t textColor;
+		color_t backgroundColor;
+		text::justification_t text_justification;
+
+		adapted_text_t(
+			const point_t & position, const std::string & message,
+			int sizeInterligne,
+			color_t borderColor, color_t textColor, color_t backgroundColor,
+			text::justification_t text_justification
+		):
+			position(position),
+			message(message),
+			sizeInterligne(sizeInterligne),
+			borderColor(borderColor),
+			textColor(textColor),
+			backgroundColor(backgroundColor),
+			text_justification(text_justification)
+		{}
+	};
+
+	struct fixed_text_t {
+		point_t position;
+		int width;
+		int height;
+		std::string message;
+		int sizeInterligne;
+		color_t borderColor;
+		color_t textColor;
+		color_t backgroundColor;
+		text::justification_t text_justification;
+		text::horizontal_position_t horizontal_position;
+		text::vertical_position_t vertical_position;
+
+
+		fixed_text_t(
+			const point_t & position, int width, int height, 
+			const std::string & message, int sizeInterligne,
+			color_t borderColor, color_t textColor, color_t backgroundColor,
+			text::justification_t text_justification,
+			text::horizontal_position_t horizontal_position,
+			text::vertical_position_t vertical_position
+		):
+			position(position),
+			width(width),
+			height(height),
+			message(message),
+			sizeInterligne(sizeInterligne),
+			borderColor(borderColor),
+			textColor(textColor),
+			backgroundColor(backgroundColor),
+			text_justification(text_justification),
+			horizontal_position(horizontal_position),
+			vertical_position(vertical_position)
+		{}
+	};
+
+
+	struct text_t {
+
+		fixed_text_t* fixed_text;
+		adapted_text_t* adapted_text;
+
+		text_t(
+			const point_t & position, const std::string & message,
+			int sizeInterligne,
+			color_t borderColor, color_t textColor, color_t backgroundColor,
+			text::justification_t text_justification
+		) : fixed_text(0), adapted_text(0) {
+			adapted_text = new adapted_text_t(
+				position, message, sizeInterligne, borderColor, textColor, 
+				backgroundColor, text_justification
+			);
+		}
+
+		text_t(
+			const point_t & position, int width, int height, 
+			const std::string & message, int sizeInterligne,
+			color_t borderColor, color_t textColor, color_t backgroundColor,
+			text::justification_t text_justification,
+			text::horizontal_position_t horizontal_position,
+			text::vertical_position_t vertical_position
+		) : fixed_text(0), adapted_text(0) {
+			fixed_text = new fixed_text_t(
+				position, width, height, 
+				message, sizeInterligne, borderColor, 
+				textColor, backgroundColor, text_justification,
+				horizontal_position, vertical_position
+			);
+		}
+
+		~text_t(){
+			delete( fixed_text );
+			delete( adapted_text );
+		}
+
+	};
+
+	class input_t {
+		input_t(
+			const point_t & top_left_corner,
+			int width, int height,
+			color_t borderColor, color_t textColor, color_t backgroundColor,
+			const std::string & informativeMessage
+		){ }
+	};
+};
 
 namespace color {
 	color_t rgba( Uint8 red, Uint8 green, Uint8  blue, Uint8 alpha ){
@@ -795,13 +954,47 @@ namespace color {
 
 
 
+namespace event {
+
+	typedef enum {
+		pressed = MLV_PRESSED, /**< \~french Le bouton est en position appuyée */
+		released = MLV_RELEASED /**< \~french Le bouton est en position relachée */
+	} button_state_t;
+
+	typedef enum {
+		none = MLV_NONE, /**< \~french Aucun évènement */
+		key = MLV_KEY, /**< \~french  Evnènement provenant du clavier */
+		input_box = MLV_INPUT_BOX, /**< \~french Évènement provenant de la validation d'un texte dans 
+						 *   une boîte de saisie. */
+		mouse_button = MLV_MOUSE_BUTTON, /**< \~french  Évènement provenant d'un clique de souris. */
+		mouse_motion = MLV_MOUSE_MOTION /**< \~french  Évènement provenant du déplacement de la souris.*/
+	} event_t;
+
+	typedef struct {
+		point_t position;
+		button_state_t button;
+	} mouse_t;
+
+	typedef struct {
+		MLV_Keyboard_button sym;
+		MLV_Keyboard_modifier mod;
+		int unicode;
+	} key_t;
+
+	typedef struct {
+		std::string text;
+		box::input_t* input_box;
+	} input_box_t;
+
+	typedef struct {
+		mouse_t mouse;
+		key_t key;
+		button_state_t button_state;
+	} event_data_t;
+};
 
 
-typedef struct {
-	MLV_Keyboard_button sym;
-	MLV_Keyboard_modifier mod;
-	int unicode;
-} key_t;
+
 
 /** \~french 
  * \brief Renvoie 0 ou 1 aléatoirement.
@@ -849,15 +1042,6 @@ int desktop_width(){
 }
 
 } // namesapce system
-
-struct point_t {
-	point_t(): x(0), y(0) {}
-	point_t(int x, int y): x(x), y(y) {}
-	point_t(const point_t & point): x(point.x), y(point.y) {}
-
-	int x;
-	int y;
-};
 
 void _copy_array( int ** vx, int **vy, const point_t* array, int nb_points ){
 	*vx = new int[ nb_points ];
@@ -1208,6 +1392,7 @@ class image_t {
 		void draw_point(const point_t & point, color_t color){
 			MLV_draw_point_on_image(point.x, point.y, color, image);
 		}
+
 };
 
 class window_t {
@@ -1562,8 +1747,41 @@ class window_t {
 		 * \param unicode    Le caractère codé en unicode de la lettre obtenue en combinant
 		 *                   le code et le mode précédent.
 		 */
-		void wait_keyboard( key_t & key ){
-			MLV_wait_keyboard( &key.sym, &key.mod, &key.unicode );
+		void wait_keyboard( event::key_t & key ){
+			MLV_wait_keyboard( &(key.sym), &(key.mod), &(key.unicode) );
+		}
+
+		void draw_text_box( const mlv::box::text_t & text_box ){
+			if( text_box.adapted_text ){
+				MLV_draw_adapted_text_box(
+					text_box.adapted_text->position.x,
+					text_box.adapted_text->position.y,
+					text_box.adapted_text->message.c_str(),
+					text_box.adapted_text->sizeInterligne,
+					text_box.adapted_text->borderColor,
+					text_box.adapted_text->textColor,
+					text_box.adapted_text->backgroundColor,
+					(MLV_Text_justification) text_box.adapted_text->text_justification
+				);
+			}else if(text_box.fixed_text ){
+				MLV_draw_text_box(
+					text_box.fixed_text->position.x,
+					text_box.fixed_text->position.y,
+					text_box.fixed_text->width,
+					text_box.fixed_text->height,
+					text_box.fixed_text->message.c_str(),
+					text_box.fixed_text->sizeInterligne,
+					text_box.fixed_text->borderColor,
+					text_box.fixed_text->textColor,
+					text_box.fixed_text->backgroundColor,
+					(MLV_Text_justification) text_box.fixed_text->text_justification,
+					(MLV_Horizontal_position) text_box.fixed_text->horizontal_position,
+					(MLV_Vertical_position) text_box.fixed_text->vertical_position
+				);
+			}else{
+				std::cerr << "Error : text_box is empty." << std::endl;
+				assert( true );
+			}
 		}
 
 	};

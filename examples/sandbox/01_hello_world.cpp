@@ -15,7 +15,7 @@ int main( int argc, char *argv[] ){
 	// Affiche "Bonjour !" a l'écran 
 	//
 	window.draw_text(
-		mlv::point_t(10, 120),
+		{ 10, 120 },
 		"Bonjour !",
 		mlv::color::magenta
 	);
