@@ -28,7 +28,7 @@ int main(int argc, char *argv[]){
 		mlv::point_t(10, 10), 
 		"Simple texte. Avec draw_text() vous ne devez pas utiliser de retour "
 		"à la ligne.",
-		MLV_COLOR_MAGENTA
+		mlv::color::magenta
 	);
 
 	//
@@ -99,17 +99,13 @@ int main(int argc, char *argv[]){
 	//
 	// Met à jour l'affichage de la fenêtre.
 	//
-	MLV_update_window();
+	window.update();
 
 	//
 	// Attend 15 seconde avant la fin du programme.
 	//
-	MLV_wait_seconds( 15 );
+	window.wait_seconds( 15 );
 
-	//
-	// Ferme la fenêtre
-	//
-	MLV_free_window();
 	return 0;
 }
 

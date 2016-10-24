@@ -181,13 +181,31 @@ namespace box {
 
 	};
 
-	class input_t {
+	struct input_t {
+		MLV_Input_box* mlv_input_box;
+		point_t top_left_corner;
+		int width;
+		int height;
+		color_t borderColor;
+		color_t textColor;
+		color_t backgroundColor;
+		std::string informativeMessage;
+
 		input_t(
 			const point_t & top_left_corner,
 			int width, int height,
 			color_t borderColor, color_t textColor, color_t backgroundColor,
 			const std::string & informativeMessage
-		){ }
+		):
+			mlv_input_box(0),
+			top_left_corner(top_left_corner),
+			width(width),
+			height(height),
+			borderColor(borderColor),
+			textColor(textColor),
+			backgroundColor(backgroundColor),
+			informativeMessage(informativeMessage)
+		{ }
 	};
 };
 
@@ -1750,6 +1768,34 @@ class window_t {
 		void wait_keyboard( event::key_t & key ){
 			MLV_wait_keyboard( &(key.sym), &(key.mod), &(key.unicode) );
 		}
+
+		event::key_t wait_keyboard(){
+			event::key_t key;
+			wait_keyboard( key );
+			return key;
+		}
+
+		std::string wait_input_box( const mlv::box::input_t & input_box ){
+			std::string text;
+
+			char* tmp_text;
+			MLV_wait_input_box(
+				input_box.top_left_corner.x,
+				input_box.top_left_corner.y,
+				input_box.width,
+				input_box.height,
+				input_box.borderColor,
+				input_box.textColor,
+				input_box.backgroundColor,
+				input_box.informativeMessage.c_str(),
+				&tmp_text
+			);
+			text = tmp_text;
+			free(tmp_text);
+
+			return text;
+		}
+
 
 		void draw_text_box( const mlv::box::text_t & text_box ){
 			if( text_box.adapted_text ){
