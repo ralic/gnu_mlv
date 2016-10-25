@@ -24,6 +24,12 @@
 #include <sstream>
 #include <iostream>
 
+
+// Comment this line if you use MLV_2.0.2
+// For older version, please update you MLV library.
+#define MLV_3XX_OR_GREATER
+
+
 namespace mlv {
 
 typedef MLV_Color color_t;
@@ -1306,6 +1312,7 @@ class image_t {
 			_free_array( vx, vy );
 		}
 
+#ifdef MLV_3XX_OR_GREATER
 		/** \~french 
 		 * \brief Dessine un triangle (vide).
 		 *
@@ -1320,6 +1327,7 @@ class image_t {
 		void draw_triangle(int ax, int ay, int bx, int by, int cx, int cy, color_t color){
 			MLV_draw_triangle_on_image(ax, ay, bx, by, cx, cy, color, image);
 		}
+#endif 
 
 		/** \~french 
 		 * \brief Dessine un polygone plein à partir d'une liste de sommets.
@@ -1336,6 +1344,7 @@ class image_t {
 			_free_array( vx, vy );
 		}
 
+#ifdef MLV_3XX_OR_GREATER
 		/** \~french 
 		 * \brief Dessine un triangle plein.
 		 *
@@ -1350,6 +1359,7 @@ class image_t {
 		void draw_filled_triangle(int ax, int ay, int bx, int by, int cx, int cy, color_t color){
 			MLV_draw_filled_triangle_on_image(ax, ay, bx, by, cx, cy, color, image);
 		}
+#endif 
 
 
 		/** \~french 
@@ -1573,6 +1583,7 @@ class window_t {
 			_free_array( vx, vy );
 		}
 
+#ifdef MLV_3XX_OR_GREATER
 		/** \~french 
 		 * \brief Dessine un triangle (vide).
 		 *
@@ -1587,6 +1598,7 @@ class window_t {
 		void draw_triangle(int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color){
 			MLV_draw_triangle( ax, ay, bx, by, cx, cy, color);
 		}
+#endif
 
 		/** \~french 
 		 * \brief Dessine un polygone plein à partir d'une liste de sommets.
@@ -1603,6 +1615,7 @@ class window_t {
 			_free_array( vx, vy );
 		}
 
+#ifdef MLV_3XX_OR_GREATER
 		/** \~french 
 		 * \brief Dessine un triangle plein.
 		 *
@@ -1617,7 +1630,7 @@ class window_t {
 		void draw_filled_triangle(int ax, int ay, int bx, int by, int cx, int cy, MLV_Color color){
 			MLV_draw_filled_triangle( ax, ay, bx, by, cx, cy, color);
 		}
-
+#endif
 
 		/** \~french 
 		 * \brief Dessine une courbe de Bézier à partir d'une liste de sommets.
@@ -1809,6 +1822,7 @@ class window_t {
 			);
 		}
 
+#ifdef MLV_3XX_OR_GREATER
 		mlv::event::event_t wait_keyboard_or_mouse_or_milliseconds(
 			event::key_t & key, point_t & mouse_position, int time
 		){
@@ -1818,7 +1832,6 @@ class window_t {
 				time
 			);
 		}
-
 
 		mlv::event::event_t wait_input_box_or_milliseconds(
 			const mlv::box::input_t & input_box,
@@ -1853,6 +1866,7 @@ class window_t {
 				input_box, text, time*1000
 			);
 		}
+#endif
 
 
 

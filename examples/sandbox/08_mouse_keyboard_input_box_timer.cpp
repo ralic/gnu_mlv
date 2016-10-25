@@ -122,6 +122,7 @@ int main( int argc, char *argv[] ){
 	}
 	window.wait_milliseconds( 1500 );
 
+#ifdef MLV_3XX_OR_GREATER
 	//
 	// Tant que le temps imparti n'est pas écoulé, l'utilisateur est invité à 
     // écrire un mot dans la boîte de saisi. 
@@ -151,6 +152,7 @@ int main( int argc, char *argv[] ){
 		afficher_texte( "Le temps est écoulé.", window );
 	}
 	window.wait_milliseconds( 1500 );
+#endif
 
 	return 0;
 }
