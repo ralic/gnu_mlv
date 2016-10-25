@@ -988,27 +988,36 @@ namespace event {
 		mouse_motion = MLV_MOUSE_MOTION /**< \~french  Évènement provenant du déplacement de la souris.*/
 	} event_t;
 
-	typedef struct {
+	struct mouse_t {
 		point_t position;
 		button_state_t button;
-	} mouse_t;
+	};
 
-	typedef struct {
+	struct key_t {
 		MLV_Keyboard_button sym;
 		MLV_Keyboard_modifier mod;
 		int unicode;
-	} key_t;
+		key_t(): 
+			sym(MLV_KEYBOARD_NONE), mod(MLV_KEYBOARD_KMOD_NONE), unicode(0)
+		{ }
 
-	typedef struct {
+		key_t(
+			MLV_Keyboard_button sym, MLV_Keyboard_modifier mod, int unicode
+		): 
+			sym(sym), mod(mod), unicode(unicode)
+		{ }
+	};
+
+	struct input_box_t {
 		std::string text;
 		box::input_t* input_box;
-	} input_box_t;
+	};
 
-	typedef struct {
+	struct event_data_t {
 		mouse_t mouse;
 		key_t key;
 		button_state_t button_state;
-	} event_data_t;
+	};
 };
 
 
@@ -1769,10 +1778,88 @@ class window_t {
 			MLV_wait_keyboard( &(key.sym), &(key.mod), &(key.unicode) );
 		}
 
+		mlv::event::event_t wait_keyboard_or_mouse(
+			event::key_t & key, point_t & mouse_position
+		){
+			return (mlv::event::event_t) MLV_wait_keyboard_or_mouse(
+				&(key.sym), &(key.mod), &(key.unicode),
+				&(mouse_position.x), &(mouse_position.y)
+			);
+		}
+
+		mlv::event::event_t wait_keyboard_or_mouse_or_seconds(
+			event::key_t & key, point_t & mouse_position, int time
+		){
+			return (mlv::event::event_t) MLV_wait_keyboard_or_mouse_or_seconds(
+				&(key.sym), &(key.mod), &(key.unicode),
+				&(mouse_position.x), &(mouse_position.y),
+				time
+			);
+		}
+
+		mlv::event::event_t wait_keyboard_or_mouse_or_milliseconds(
+			event::key_t & key, point_t & mouse_position, int time
+		){
+			return (mlv::event::event_t) MLV_wait_keyboard_or_mouse_or_milliseconds(
+				&(key.sym), &(key.mod), &(key.unicode),
+				&(mouse_position.x), &(mouse_position.y),
+				time
+			);
+		}
+
+
+		mlv::event::event_t wait_input_box_or_milliseconds(
+			const mlv::box::input_t & input_box,
+			std::string & text, int time
+		){
+			char* tmp_text = 0;
+			MLV_Event event = MLV_wait_input_box_or_milliseconds(
+				time,
+				input_box.top_left_corner.x,
+				input_box.top_left_corner.y,
+				input_box.width,
+				input_box.height,
+				input_box.borderColor,
+				input_box.textColor,
+				input_box.backgroundColor,
+				input_box.informativeMessage.c_str(),
+				&tmp_text
+			);
+			if( event == MLV_INPUT_BOX ){
+				text = tmp_text;
+				free(tmp_text);
+			}
+
+			return (mlv::event::event_t) event;
+		}
+
+		mlv::event::event_t wait_input_box_or_seconds(
+			const mlv::box::input_t & input_box,
+			std::string & text, int time
+		){
+			return wait_input_box_or_milliseconds(
+				input_box, text, time*1000
+			);
+		}
+
+
+
 		event::key_t wait_keyboard(){
 			event::key_t key;
 			wait_keyboard( key );
 			return key;
+		}
+
+		event::event_t wait_keyboard_or_seconds( event::key_t & key, int time ){
+			return (event::event_t) MLV_wait_keyboard_or_seconds(
+				&(key.sym), &(key.mod), &(key.unicode), time 
+			);
+		}
+
+		event::event_t wait_mouse_or_seconds( point_t& mouse_position, int time ){
+			return (event::event_t) MLV_wait_mouse_or_seconds(
+				&(mouse_position.x), &(mouse_position.y), time 
+			);
 		}
 
 		std::string wait_input_box( const mlv::box::input_t & input_box ){
