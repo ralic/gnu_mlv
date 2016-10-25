@@ -12,7 +12,7 @@ int main(int argc, char *argv[]){
 	// Déclaration de la variable qui représentera le code de la touche qui
 	// sera appuyée par l'utilisateur.
 	//
-	mlv::event::key_t touche;
+	mlv::event::keyboard_t keyboard;
 
 	//
 	// Créé et affiche la fenêtre
@@ -28,13 +28,13 @@ int main(int argc, char *argv[]){
 	//
 	// Attendre que l'utilisateur appuie sur une touche du clavier
 	//
-	window.wait_keyboard( touche );
+	window.wait_keyboard( keyboard );
 
 	//
 	// Affiche "Bien !" si l'utilisateur a appuyer sur la touche k sinon
 	// affiche un message d'erreur.
 	//
-	if( touche.sym == MLV_KEYBOARD_k ){
+	if( keyboard.key == mlv::keyboard::k ){
 		window.draw_text( mlv::point_t(10, 30), "Bien !", mlv::color::green );
 	}else{
 		window.draw_text( 

@@ -44,9 +44,9 @@ int main( int argc, char *argv[] ){
 	// Tant que l'utilisateur n'appuye pas sur echap, le programe continue 
 	// à tourner
 	//
-	mlv::event::key_t key;
-	while( key.sym != MLV_KEYBOARD_ESCAPE ){
-		key = window.wait_keyboard();
+	mlv::event::keyboard_t keyboard;
+	while( keyboard.key != mlv::keyboard::escape ){
+		keyboard = window.wait_keyboard();
 		audio_center.play_sound( sound, 1.0 );
 	}
 

@@ -26,7 +26,7 @@ void afficher_texte( const std::string & texte, mlv::window_t & window ){
 //
 int main( int argc, char *argv[] ){
 
-	mlv::event::key_t key;
+	mlv::event::keyboard_t keyboard;
 	mlv::point_t mouse_position;
 	int temps_attente = 5;
 
@@ -53,7 +53,7 @@ int main( int argc, char *argv[] ){
 		"    - attendant quelques secondes.",
 		window
 	);
-	event = window.wait_keyboard_or_seconds( key, temps_attente );
+	event = window.wait_keyboard_or_seconds( keyboard, temps_attente );
 	if( event == mlv::event::key ){
 		afficher_texte( "Vous avez choisi le clavier.", window );
 	}else{
@@ -90,7 +90,7 @@ int main( int argc, char *argv[] ){
 		"    - cliquant sur la souris.",
 		window
 	);
-	event = window.wait_keyboard_or_mouse( key, mouse_position );
+	event = window.wait_keyboard_or_mouse( keyboard, mouse_position );
 	if( event == mlv::event::mouse_button ){
 		afficher_texte( "Vous avez choisi la souris.", window );
 	}else{
@@ -111,7 +111,7 @@ int main( int argc, char *argv[] ){
 		window
 	);
 	event = window.wait_keyboard_or_mouse_or_seconds(
-		key, mouse_position, temps_attente
+		keyboard, mouse_position, temps_attente
 	);
 	if( event == mlv::event::mouse_button ){
 		afficher_texte( "Vous avez choisi la souris.", window );

@@ -222,6 +222,269 @@ namespace box {
 	};
 };
 
+namespace keyboard {
+	typedef enum {
+		none = MLV_KEYBOARD_NONE,
+		first = MLV_KEYBOARD_FIRST,
+		backspace = MLV_KEYBOARD_BACKSPACE,
+		tab = MLV_KEYBOARD_TAB,
+		clear = MLV_KEYBOARD_CLEAR,
+		return_ = MLV_KEYBOARD_RETURN,
+		pause = MLV_KEYBOARD_PAUSE,
+		escape = MLV_KEYBOARD_ESCAPE,
+		space = MLV_KEYBOARD_SPACE,
+		exclaim = MLV_KEYBOARD_EXCLAIM,
+		quotedbl = MLV_KEYBOARD_QUOTEDBL,
+		hash = MLV_KEYBOARD_HASH,
+		dollar = MLV_KEYBOARD_DOLLAR,
+		ampersand = MLV_KEYBOARD_AMPERSAND,
+		quote = MLV_KEYBOARD_QUOTE,
+		leftparen = MLV_KEYBOARD_LEFTPAREN,
+		rightparen = MLV_KEYBOARD_RIGHTPAREN,
+		asterisk = MLV_KEYBOARD_ASTERISK,
+		plus = MLV_KEYBOARD_PLUS,
+		comma = MLV_KEYBOARD_COMMA,
+		minus = MLV_KEYBOARD_MINUS,
+		period = MLV_KEYBOARD_PERIOD,
+		slash = MLV_KEYBOARD_SLASH,
+		k0 = MLV_KEYBOARD_0,
+		k1 = MLV_KEYBOARD_1,
+		k2 = MLV_KEYBOARD_2,
+		k3 = MLV_KEYBOARD_3,
+		k4 = MLV_KEYBOARD_4,
+		k5 = MLV_KEYBOARD_5,
+		k6 = MLV_KEYBOARD_6,
+		k7 = MLV_KEYBOARD_7,
+		k8 = MLV_KEYBOARD_8,
+		k9 = MLV_KEYBOARD_9,
+		colon = MLV_KEYBOARD_COLON,
+		semicolon = MLV_KEYBOARD_SEMICOLON,
+		less = MLV_KEYBOARD_LESS,
+		equals = MLV_KEYBOARD_EQUALS,
+		greater = MLV_KEYBOARD_GREATER,
+		question = MLV_KEYBOARD_QUESTION,
+		at = MLV_KEYBOARD_AT,
+
+		leftbracket = MLV_KEYBOARD_LEFTBRACKET,
+		backslash = MLV_KEYBOARD_BACKSLASH,
+		rightbracket = MLV_KEYBOARD_RIGHTBRACKET,
+		caret = MLV_KEYBOARD_CARET,
+		underscore = MLV_KEYBOARD_UNDERSCORE,
+		backquote = MLV_KEYBOARD_BACKQUOTE,
+		a = MLV_KEYBOARD_a,
+		b = MLV_KEYBOARD_b,
+		c = MLV_KEYBOARD_c,
+		d = MLV_KEYBOARD_d,
+		e = MLV_KEYBOARD_e,
+		f = MLV_KEYBOARD_f,
+		g = MLV_KEYBOARD_g,
+		h = MLV_KEYBOARD_h,
+		i = MLV_KEYBOARD_i,
+		j = MLV_KEYBOARD_j,
+		k = MLV_KEYBOARD_k,
+		l = MLV_KEYBOARD_l,
+		m = MLV_KEYBOARD_m,
+		n = MLV_KEYBOARD_n,
+		o = MLV_KEYBOARD_o,
+		p = MLV_KEYBOARD_p,
+		q = MLV_KEYBOARD_q,
+		r = MLV_KEYBOARD_r,
+		s = MLV_KEYBOARD_s,
+		t = MLV_KEYBOARD_t,
+		u = MLV_KEYBOARD_u,
+		v = MLV_KEYBOARD_v,
+		w = MLV_KEYBOARD_w,
+		x = MLV_KEYBOARD_x,
+		y = MLV_KEYBOARD_y,
+		z = MLV_KEYBOARD_z,
+		delete_ = MLV_KEYBOARD_DELETE,
+
+		world_0 = MLV_KEYBOARD_WORLD_0,
+		world_1 = MLV_KEYBOARD_WORLD_1,
+		world_2 = MLV_KEYBOARD_WORLD_2,
+		world_3 = MLV_KEYBOARD_WORLD_3,
+		world_4 = MLV_KEYBOARD_WORLD_4,
+		world_5 = MLV_KEYBOARD_WORLD_5,
+		world_6 = MLV_KEYBOARD_WORLD_6,
+		world_7 = MLV_KEYBOARD_WORLD_7,
+		world_8 = MLV_KEYBOARD_WORLD_8,
+		world_9 = MLV_KEYBOARD_WORLD_9,
+		world_10 = MLV_KEYBOARD_WORLD_10,
+		world_11 = MLV_KEYBOARD_WORLD_11,
+		world_12 = MLV_KEYBOARD_WORLD_12,
+		world_13 = MLV_KEYBOARD_WORLD_13,
+		world_14 = MLV_KEYBOARD_WORLD_14,
+		world_15 = MLV_KEYBOARD_WORLD_15,
+		world_16 = MLV_KEYBOARD_WORLD_16,
+		world_17 = MLV_KEYBOARD_WORLD_17,
+		world_18 = MLV_KEYBOARD_WORLD_18,
+		world_19 = MLV_KEYBOARD_WORLD_19,
+		world_20 = MLV_KEYBOARD_WORLD_20,
+		world_21 = MLV_KEYBOARD_WORLD_21,
+		world_22 = MLV_KEYBOARD_WORLD_22,
+		world_23 = MLV_KEYBOARD_WORLD_23,
+		world_24 = MLV_KEYBOARD_WORLD_24,
+		world_25 = MLV_KEYBOARD_WORLD_25,
+		world_26 = MLV_KEYBOARD_WORLD_26,
+		world_27 = MLV_KEYBOARD_WORLD_27,
+		world_28 = MLV_KEYBOARD_WORLD_28,
+		world_29 = MLV_KEYBOARD_WORLD_29,
+		world_30 = MLV_KEYBOARD_WORLD_30,
+		world_31 = MLV_KEYBOARD_WORLD_31,
+		world_32 = MLV_KEYBOARD_WORLD_32,
+		world_33 = MLV_KEYBOARD_WORLD_33,
+		world_34 = MLV_KEYBOARD_WORLD_34,
+		world_35 = MLV_KEYBOARD_WORLD_35,
+		world_36 = MLV_KEYBOARD_WORLD_36,
+		world_37 = MLV_KEYBOARD_WORLD_37,
+		world_38 = MLV_KEYBOARD_WORLD_38,
+		world_39 = MLV_KEYBOARD_WORLD_39,
+		world_40 = MLV_KEYBOARD_WORLD_40,
+		world_41 = MLV_KEYBOARD_WORLD_41,
+		world_42 = MLV_KEYBOARD_WORLD_42,
+		world_43 = MLV_KEYBOARD_WORLD_43,
+		world_44 = MLV_KEYBOARD_WORLD_44,
+		world_45 = MLV_KEYBOARD_WORLD_45,
+		world_46 = MLV_KEYBOARD_WORLD_46,
+		world_47 = MLV_KEYBOARD_WORLD_47,
+		world_48 = MLV_KEYBOARD_WORLD_48,
+		world_49 = MLV_KEYBOARD_WORLD_49,
+		world_50 = MLV_KEYBOARD_WORLD_50,
+		world_51 = MLV_KEYBOARD_WORLD_51,
+		world_52 = MLV_KEYBOARD_WORLD_52,
+		world_53 = MLV_KEYBOARD_WORLD_53,
+		world_54 = MLV_KEYBOARD_WORLD_54,
+		world_55 = MLV_KEYBOARD_WORLD_55,
+		world_56 = MLV_KEYBOARD_WORLD_56,
+		world_57 = MLV_KEYBOARD_WORLD_57,
+		world_58 = MLV_KEYBOARD_WORLD_58,
+		world_59 = MLV_KEYBOARD_WORLD_59,
+		world_60 = MLV_KEYBOARD_WORLD_60,
+		world_61 = MLV_KEYBOARD_WORLD_61,
+		world_62 = MLV_KEYBOARD_WORLD_62,
+		world_63 = MLV_KEYBOARD_WORLD_63,
+		world_64 = MLV_KEYBOARD_WORLD_64,
+		world_65 = MLV_KEYBOARD_WORLD_65,
+		world_66 = MLV_KEYBOARD_WORLD_66,
+		world_67 = MLV_KEYBOARD_WORLD_67,
+		world_68 = MLV_KEYBOARD_WORLD_68,
+		world_69 = MLV_KEYBOARD_WORLD_69,
+		world_70 = MLV_KEYBOARD_WORLD_70,
+		world_71 = MLV_KEYBOARD_WORLD_71,
+		world_72 = MLV_KEYBOARD_WORLD_72,
+		world_73 = MLV_KEYBOARD_WORLD_73,
+		world_74 = MLV_KEYBOARD_WORLD_74,
+		world_75 = MLV_KEYBOARD_WORLD_75,
+		world_76 = MLV_KEYBOARD_WORLD_76,
+		world_77 = MLV_KEYBOARD_WORLD_77,
+		world_78 = MLV_KEYBOARD_WORLD_78,
+		world_79 = MLV_KEYBOARD_WORLD_79,
+		world_80 = MLV_KEYBOARD_WORLD_80,
+		world_81 = MLV_KEYBOARD_WORLD_81,
+		world_82 = MLV_KEYBOARD_WORLD_82,
+		world_83 = MLV_KEYBOARD_WORLD_83,
+		world_84 = MLV_KEYBOARD_WORLD_84,
+		world_85 = MLV_KEYBOARD_WORLD_85,
+		world_86 = MLV_KEYBOARD_WORLD_86,
+		world_87 = MLV_KEYBOARD_WORLD_87,
+		world_88 = MLV_KEYBOARD_WORLD_88,
+		world_89 = MLV_KEYBOARD_WORLD_89,
+		world_90 = MLV_KEYBOARD_WORLD_90,
+		world_91 = MLV_KEYBOARD_WORLD_91,
+		world_92 = MLV_KEYBOARD_WORLD_92,
+		world_93 = MLV_KEYBOARD_WORLD_93,
+		world_94 = MLV_KEYBOARD_WORLD_94,
+		world_95 = MLV_KEYBOARD_WORLD_95,
+
+		kp0 = MLV_KEYBOARD_KP0,
+		kp1 = MLV_KEYBOARD_KP1,
+		kp2 = MLV_KEYBOARD_KP2,
+		kp3 = MLV_KEYBOARD_KP3,
+		kp4 = MLV_KEYBOARD_KP4,
+		kp5 = MLV_KEYBOARD_KP5,
+		kp6 = MLV_KEYBOARD_KP6,
+		kp7 = MLV_KEYBOARD_KP7,
+		kp8 = MLV_KEYBOARD_KP8,
+		kp9 = MLV_KEYBOARD_KP9,
+		kp_period = MLV_KEYBOARD_KP_PERIOD,
+		kp_divide = MLV_KEYBOARD_KP_DIVIDE,
+		kp_multiply = MLV_KEYBOARD_KP_MULTIPLY,
+		kp_minus = MLV_KEYBOARD_KP_MINUS,
+		kp_plus = MLV_KEYBOARD_KP_PLUS,
+		kp_enter = MLV_KEYBOARD_KP_ENTER,
+		kp_equals = MLV_KEYBOARD_KP_EQUALS,
+
+		up = MLV_KEYBOARD_UP,
+		down = MLV_KEYBOARD_DOWN,
+		right = MLV_KEYBOARD_RIGHT,
+		left = MLV_KEYBOARD_LEFT,
+		insert = MLV_KEYBOARD_INSERT,
+		home = MLV_KEYBOARD_HOME,
+		end = MLV_KEYBOARD_END,
+		pageup = MLV_KEYBOARD_PAGEUP,
+		pagedown = MLV_KEYBOARD_PAGEDOWN,
+
+		f1 = MLV_KEYBOARD_F1,
+		f2 = MLV_KEYBOARD_F2,
+		f3 = MLV_KEYBOARD_F3,
+		f4 = MLV_KEYBOARD_F4,
+		f5 = MLV_KEYBOARD_F5,
+		f6 = MLV_KEYBOARD_F6,
+		f7 = MLV_KEYBOARD_F7,
+		f8 = MLV_KEYBOARD_F8,
+		f9 = MLV_KEYBOARD_F9,
+		f10 = MLV_KEYBOARD_F10,
+		f11 = MLV_KEYBOARD_F11,
+		f12 = MLV_KEYBOARD_F12,
+		f13 = MLV_KEYBOARD_F13,
+		f14 = MLV_KEYBOARD_F14,
+		f15 = MLV_KEYBOARD_F15,
+
+		numlock = MLV_KEYBOARD_NUMLOCK,
+		capslock = MLV_KEYBOARD_CAPSLOCK,
+		scrollock = MLV_KEYBOARD_SCROLLOCK,
+		rshift = MLV_KEYBOARD_RSHIFT,
+		lshift = MLV_KEYBOARD_LSHIFT,
+		rctrl = MLV_KEYBOARD_RCTRL,
+		lctrl = MLV_KEYBOARD_LCTRL,
+		ralt = MLV_KEYBOARD_RALT,
+		lalt = MLV_KEYBOARD_LALT,
+		rmeta = MLV_KEYBOARD_RMETA,
+		lmeta = MLV_KEYBOARD_LMETA,
+		lsuper = MLV_KEYBOARD_LSUPER,
+		rsuper = MLV_KEYBOARD_RSUPER,
+		mode = MLV_KEYBOARD_MODE,
+		compose = MLV_KEYBOARD_COMPOSE,
+
+		help = MLV_KEYBOARD_HELP,
+		print = MLV_KEYBOARD_PRINT,
+		sysreq = MLV_KEYBOARD_SYSREQ,
+		break_ = MLV_KEYBOARD_BREAK,
+		menu = MLV_KEYBOARD_MENU,
+		power = MLV_KEYBOARD_POWER,
+		euro = MLV_KEYBOARD_EURO,
+		undo = MLV_KEYBOARD_UNDO,
+
+		last = MLV_KEYBOARD_LAST
+	} key_t;
+
+	typedef enum {
+		kmod_none = MLV_KEYBOARD_KMOD_NONE,
+		kmod_lshift = MLV_KEYBOARD_KMOD_LSHIFT,
+		kmod_rshift = MLV_KEYBOARD_KMOD_RSHIFT,
+		kmod_lctrl = MLV_KEYBOARD_KMOD_LCTRL,
+		kmod_rctrl = MLV_KEYBOARD_KMOD_RCTRL,
+		kmod_lalt = MLV_KEYBOARD_KMOD_LALT,
+		kmod_ralt = MLV_KEYBOARD_KMOD_RALT,
+		kmod_lmeta = MLV_KEYBOARD_KMOD_LMETA,
+		kmod_rmeta = MLV_KEYBOARD_KMOD_RMETA,
+		kmod_num = MLV_KEYBOARD_KMOD_NUM,
+		kmod_caps = MLV_KEYBOARD_KMOD_CAPS,
+		kmod_mode = MLV_KEYBOARD_KMOD_MODE,
+		kmod_reserved = MLV_KEYBOARD_KMOD_RESERVED
+	} modifier_t;
+}
+
 namespace color {
 	color_t rgba( Uint8 red, Uint8 green, Uint8  blue, Uint8 alpha ){
 		return MLV_rgba( red, green, blue, alpha );
@@ -1014,18 +1277,19 @@ namespace event {
 		{ }
 	};
 
-	struct key_t {
-		MLV_Keyboard_button sym;
-		MLV_Keyboard_modifier mod;
+	struct keyboard_t {
+		keyboard::key_t key;
+		keyboard::modifier_t modifier;
 		int unicode;
-		key_t(): 
-			sym(MLV_KEYBOARD_NONE), mod(MLV_KEYBOARD_KMOD_NONE), unicode(0)
+		keyboard_t(): 
+			key(mlv::keyboard::none), modifier(mlv::keyboard::kmod_none), 
+			unicode(0)
 		{ }
 
-		key_t(
-			MLV_Keyboard_button sym, MLV_Keyboard_modifier mod, int unicode
+		keyboard_t(
+			keyboard::key_t key, keyboard::modifier_t modifier, int unicode
 		): 
-			sym(sym), mod(mod), unicode(unicode)
+			key(key), modifier(modifier), unicode(unicode)
 		{ }
 	};
 
@@ -1040,7 +1304,7 @@ namespace event {
 
 	struct event_data_t {
 		mouse_t mouse;
-		key_t key;
+		keyboard_t key;
 		button_state_t button_state;
 	};
 };
@@ -1862,40 +2126,48 @@ class window_t {
 		 *        du  clavier.
 		 * 
 		 * Lorsque l'utilisateur appuie sur une touche, la fonction remplit le contenu 
-		 * des trois paramètres sym, mod et unicode correspondant respectivement au 
+		 * des trois paramètres key, modifier et unicode correspondant respectivement au 
 		 * code de la touche, au mode dans lequel se trouve le clavier 
 		 * (majuscule etc ...) et au caractère unicode obtenu en combinant le mode du 
 		 * clavier et le code de la touche appuyée.
 		 *
-		 * La fonction accepte des valeurs nulles pour les pointeurs sym, mod et 
+		 * La fonction accepte des valeurs nulles pour les pointeurs key, modifier et 
 		 * unicode.
 		 * Dans ce cas la fonction ignore les champs en questions.
 		 *
 		 * \bug Voir les bugs de la fonction MLV_get_event().
 		 *
-		 * \param sym        Le code de la touche.
-		 * \param mod        Le mode dans lequel se trouve le clavier.
+		 * \param key        Le code de la touche.
+		 * \param modifier   Le mode dans lequel se trouve le clavier.
 		 * \param unicode    Le caractère codé en unicode de la lettre obtenue en combinant
 		 *                   le code et le mode précédent.
 		 */
-		void wait_keyboard( event::key_t & key ){
-			MLV_wait_keyboard( &(key.sym), &(key.mod), &(key.unicode) );
+		void wait_keyboard( event::keyboard_t & keyboard ){
+			MLV_wait_keyboard(
+				(MLV_Keyboard_button*) &(keyboard.key), 
+				(MLV_Keyboard_modifier*) &(keyboard.modifier),
+				&(keyboard.unicode)
+			);
 		}
 
 		mlv::event::event_t wait_keyboard_or_mouse(
-			event::key_t & key, point_t & mouse_position
+			event::keyboard_t & keyboard, point_t & mouse_position
 		){
 			return (mlv::event::event_t) MLV_wait_keyboard_or_mouse(
-				&(key.sym), &(key.mod), &(key.unicode),
+				(MLV_Keyboard_button*) &(keyboard.key), 
+				(MLV_Keyboard_modifier*) &(keyboard.modifier),
+				&(keyboard.unicode),
 				&(mouse_position.x), &(mouse_position.y)
 			);
 		}
 
 		mlv::event::event_t wait_keyboard_or_mouse_or_seconds(
-			event::key_t & key, point_t & mouse_position, int time
+			event::keyboard_t & keyboard, point_t & mouse_position, int time
 		){
 			return (mlv::event::event_t) MLV_wait_keyboard_or_mouse_or_seconds(
-				&(key.sym), &(key.mod), &(key.unicode),
+				(MLV_Keyboard_button*) &(keyboard.key), 
+				(MLV_Keyboard_modifier*) &(keyboard.modifier),
+				&(keyboard.unicode),
 				&(mouse_position.x), &(mouse_position.y),
 				time
 			);
@@ -1903,10 +2175,12 @@ class window_t {
 
 #ifndef MLV_202
 		mlv::event::event_t wait_keyboard_or_mouse_or_milliseconds(
-			event::key_t & key, point_t & mouse_position, int time
+			event::keyboard_t & keyboard, point_t & mouse_position, int time
 		){
 			return (mlv::event::event_t) MLV_wait_keyboard_or_mouse_or_milliseconds(
-				&(key.sym), &(key.mod), &(key.unicode),
+				(MLV_Keyboard_button*) &(keyboard.key), 
+				(MLV_Keyboard_modifier*) &(keyboard.modifier),
+				&(keyboard.unicode),
 				&(mouse_position.x), &(mouse_position.y),
 				time
 			);
@@ -1949,15 +2223,20 @@ class window_t {
 
 
 
-		event::key_t wait_keyboard(){
-			event::key_t key;
-			wait_keyboard( key );
-			return key;
+		event::keyboard_t wait_keyboard(){
+			event::keyboard_t keyboard;
+			wait_keyboard( keyboard );
+			return keyboard;
 		}
 
-		event::event_t wait_keyboard_or_seconds( event::key_t & key, int time ){
+		event::event_t wait_keyboard_or_seconds(
+			event::keyboard_t & keyboard, int time 
+		){
 			return (event::event_t) MLV_wait_keyboard_or_seconds(
-				&(key.sym), &(key.mod), &(key.unicode), time 
+				(MLV_Keyboard_button*) &(keyboard.key), 
+				(MLV_Keyboard_modifier*) &(keyboard.modifier),
+				&(keyboard.unicode),
+				time
 			);
 		}
 

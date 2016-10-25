@@ -64,9 +64,9 @@ int main(int argc, char *argv[]){
 	//
 	// Attends que l'utilisateur appuye sur la touche echap pour quitter.
 	//
-	mlv::event::key_t key;
-	while( key.sym != MLV_KEYBOARD_ESCAPE ){
-		window.wait_keyboard(key);
+	mlv::event::keyboard_t keyboard;
+	while( keyboard.key != mlv::keyboard::escape ){
+		window.wait_keyboard(keyboard);
 	}
 
 	return 0;
