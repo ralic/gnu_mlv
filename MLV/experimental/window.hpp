@@ -82,6 +82,13 @@ struct point_t {
 	int y;
 };
 
+void wait_seconds( int seconds ){
+	MLV_wait_seconds(seconds);
+}
+
+void wait_milliseconds( int milliseconds ){
+	MLV_wait_milliseconds(milliseconds);
+}
 
 namespace box {
 
@@ -1441,6 +1448,74 @@ class image_t {
 		void draw_point(const point_t & point, color_t color){
 			MLV_draw_point_on_image(point.x, point.y, color, image);
 		}
+
+};
+
+
+class music_t {
+	public:
+		music_t( const std::string & music_path ):
+			mlv_music( MLV_load_music(music_path.c_str()) )
+		{ }
+
+		~music_t(){
+			MLV_free_music( mlv_music );
+		}
+
+	private:
+		MLV_Music* mlv_music;
+		friend class audio_center_t;
+
+};
+
+class sound_t {
+	public:
+		sound_t( const std::string & sound_path ):
+			mlv_sound( MLV_load_sound(sound_path.c_str()) )
+		{ }
+
+		~sound_t(){
+			MLV_free_sound( mlv_sound );
+		}
+
+	private:
+		MLV_Sound* mlv_sound;
+		friend class audio_center_t;
+
+};
+
+class audio_center_t {
+	public:
+		audio_center_t(): state( MLV_init_audio() ) { }
+
+		~audio_center_t(){ 
+			if( is_valid() ){
+				MLV_free_audio();
+			}
+		}
+
+		void play_music( const music_t & music, float volume, int loop ){
+			MLV_play_music( music.mlv_music, volume, loop );
+		}
+
+		void play_sound( const sound_t & sound, float volume ){
+			MLV_play_sound( sound.mlv_sound, volume );
+		}
+
+		void stop_all_sounds(){
+			MLV_stop_all_sounds();
+		}
+
+		void stop_music(){
+			MLV_stop_music();
+		}
+
+		bool is_valid(){
+			return state == 0;
+		}
+
+	private:
+		int state;
 
 };
 
