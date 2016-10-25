@@ -1173,6 +1173,10 @@ class image_t {
 			return MLV_get_image_height( image );
 		}
 
+		void set_alpha( MLV_Alpha alpha ){
+			MLV_set_alpha_on_image( alpha, image );
+		}
+
 		/** \~french 
 		 * \brief Redimensionne l'image en ne respectant pas les proportions de l'image
 		 *        originale.
