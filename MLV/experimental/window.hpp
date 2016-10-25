@@ -25,9 +25,9 @@
 #include <iostream>
 
 
-// Comment this line if you use MLV_2.0.2
-// For older version, please update you MLV library.
-#define MLV_3XX_OR_GREATER
+// Uncomment the next line if you use MLV_2.0.2. You can also add this line 
+// before including window.hpp in your code
+// #define MLV_202
 
 
 namespace mlv {
@@ -1312,7 +1312,7 @@ class image_t {
 			_free_array( vx, vy );
 		}
 
-#ifdef MLV_3XX_OR_GREATER
+#ifndef MLV_202
 		/** \~french 
 		 * \brief Dessine un triangle (vide).
 		 *
@@ -1344,7 +1344,7 @@ class image_t {
 			_free_array( vx, vy );
 		}
 
-#ifdef MLV_3XX_OR_GREATER
+#ifndef MLV_202
 		/** \~french 
 		 * \brief Dessine un triangle plein.
 		 *
@@ -1583,7 +1583,7 @@ class window_t {
 			_free_array( vx, vy );
 		}
 
-#ifdef MLV_3XX_OR_GREATER
+#ifndef MLV_202
 		/** \~french 
 		 * \brief Dessine un triangle (vide).
 		 *
@@ -1615,7 +1615,7 @@ class window_t {
 			_free_array( vx, vy );
 		}
 
-#ifdef MLV_3XX_OR_GREATER
+#ifndef MLV_202
 		/** \~french 
 		 * \brief Dessine un triangle plein.
 		 *
@@ -1822,7 +1822,7 @@ class window_t {
 			);
 		}
 
-#ifdef MLV_3XX_OR_GREATER
+#ifndef MLV_202
 		mlv::event::event_t wait_keyboard_or_mouse_or_milliseconds(
 			event::key_t & key, point_t & mouse_position, int time
 		){

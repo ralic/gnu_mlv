@@ -122,7 +122,7 @@ int main( int argc, char *argv[] ){
 	}
 	window.wait_milliseconds( 1500 );
 
-#ifdef MLV_3XX_OR_GREATER
+#ifndef MLV_202
 	//
 	// Tant que le temps imparti n'est pas écoulé, l'utilisateur est invité à 
     // écrire un mot dans la boîte de saisi. 
