@@ -991,6 +991,14 @@ namespace event {
 	struct mouse_t {
 		point_t position;
 		button_state_t button;
+		mouse_t():
+			position(0,0), button(released)
+		{ }
+		mouse_t(
+			const point_t & position, button_state_t button
+		):
+			position(position), button(button)
+		{ }
 	};
 
 	struct key_t {
@@ -1011,6 +1019,10 @@ namespace event {
 	struct input_box_t {
 		std::string text;
 		box::input_t* input_box;
+
+		input_box_t():
+			text(""), input_box(0)
+		{}
 	};
 
 	struct event_data_t {
