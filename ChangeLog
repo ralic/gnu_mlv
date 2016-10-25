@@ -8,6 +8,8 @@ mlv-2.0.2-dev
      * MLV_wait_keyboard_or_mouse_or_seconds()
      * MLV_wait_mouse_or_seconds()
      * MLV_wait_keyboard_or_seconds()
+   * Add a C++ wrapper with oriented object classes. The wrapper is in 
+     MLV/experimental/window.hpp and it is a pure header.
  * Documentation :
    * Correct documentation for making a MacOSX package (doxygen compilation)
    * Improve the part explaining how to make a release of MLV.
