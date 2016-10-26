@@ -2319,6 +2319,7 @@ class window_t {
 			MLV_leonardo_go_to( point.x, point.y );
 		}
 
+		// Angle en degrés
 		void leonardo_orient_to(double angle){
 			MLV_leonardo_orient_to(angle);
 		}
