@@ -2301,6 +2301,47 @@ class window_t {
 			}
 		}
 
+		#ifndef MLV_202
+		void show_leonardo(){
+			MLV_show_leonardo();
+		}
+
+		void set_leonardo_color( mlv::color_t color ){
+			MLV_leonardo_color( color );
+		}
+
+		// Time in millisecond
+		void set_leonardo_speed( int time ){
+			MLV_leonardo_speed( time );
+		}
+
+		void leonardo_go_to( const point_t & point ){
+			MLV_leonardo_go_to( point.x, point.y );
+		}
+
+		void leonardo_orient_to(double angle){
+			MLV_leonardo_orient_to(angle);
+		}
+
+		void leonardo_write( bool boolean ){
+			MLV_leonardo_write( boolean ? 1 : 0 );
+		}
+
+		void leonardo_forward( float distance ){
+			MLV_leonardo_forward( distance );
+		}
+	
+		void leonardo_left( double angle ){
+			MLV_leonardo_left( angle );
+		}
+
+		void leonardo_right( double angle ){
+			MLV_leonardo_right( angle );
+		}
+
+		#endif
+
+
 	};
 
 } // namespace mlv
