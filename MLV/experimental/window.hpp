@@ -18,6 +18,9 @@
  *    along with this Library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifndef __MLV__MLV__CPP_WRAPPER__
+#define __MLV__MLV__CPP_WRAPPER__
+
 #include <string>
 #include <cassert>
 #include <MLV/MLV_all.h>
@@ -2347,3 +2350,4 @@ class window_t {
 
 } // namespace mlv
 
+#endif
