@@ -92,6 +92,7 @@ examples/medium/12_desktop_size
 examples/sandbox/example.c
 
 MLV/test_list
+MLV/test_random
 MLV/test_turtle
 
 packaging/debian/debian/changelog
