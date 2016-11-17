@@ -17,6 +17,10 @@ mlv-2.0.2-dev
    * Add a small tutorial to use MLV with CMake
  * Image :
    * We add MLV_get_screen() that return the image on the screen.
+ * Random:
+   * We add MLV_set_seed( seed ) to set a particular seed for the rangdom
+     generator. the seed initialisation is steel optional, since the seed is 
+     yet randomly initialized.
  * Shape :
    * We implement MLV_draw_triangle(), MLV_draw_filled_triangle(),
      MLV_draw_triangle_on_image() and MLV_draw_filled_traingle_on_image()
@@ -41,7 +45,9 @@ mlv-2.0.2-dev
      the window.
  * Bug :
    * Remove a bug in MLV_draw_pixel and MLV_draw_pixel_on_image. Now image is 
-     not toric. 
+     not toric.
+   * Now MLV_get_random_integer(begin, end) return an integer from begin 
+     (included) to end (included) as explained in the documentation.
  * Example :
    * Add example on MLV_draw_triangle()
    * Change MLV_actualise_window by MLV_update_window

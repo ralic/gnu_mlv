@@ -122,6 +122,7 @@ noinst_HEADERS = \
 
 check_PROGRAMS = \
 	test_list \
+	test_random \
 	test_turtle
 
 TESTS = $(check_PROGRAMS)
@@ -135,3 +136,8 @@ test_list_SOURCES = test_list.c
 test_list_CPPFLAGS = ${MLV_CPPFLAGS}
 test_list_LDFLAGS = ${MLV_LDFLAGS}
 test_list_LDADD = ${MLV_LIBADD}
+
+test_random_SOURCES = test_random.c
+test_random_CPPFLAGS = ${MLV_CPPFLAGS}
+test_random_LDFLAGS = ${MLV_LDFLAGS}
+test_random_LDADD = ${MLV_LIBADD}

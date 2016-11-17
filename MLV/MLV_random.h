@@ -2,6 +2,7 @@
  *   This file is part of the MLV Library.
  *
  *   Copyright (C) 2010,2011,2012 Adrien Boussicault, Marc Zipstein
+ *   Copyright (C) 2016 Adrien Boussicault
  *
  *
  *    This Library is free software: you can redistribute it and/or modify
@@ -32,9 +33,28 @@
 #ifndef __MLV__MLV_RANDOM_H__
 #define __MLV__MLV_RANDOM_H__
 
+#include <stdint.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/** \~french
+ *
+ * \brief Initialise la graine du générateur de nombre interne.
+ *
+ * Par défaut, la graine de générateur de nombre est automatiquement 
+ * initialisé, à des valeurs différentes à chaque execution du programme.
+ *
+ * Utilisez cette fonction si vous voulez que le générateur de nombre
+ * aléatoire utilise une graine particulière (pour faire des tests 
+ * reproductibles d'une execution sur l'autre).
+ * Dans le cas contraire, vous n'avez pas besoin d'utiliser cette fonction.
+ *
+ * \param seed La graine (entier sur 32 bits).
+ *
+ */
+void MLV_set_seed( int32_t seed );
 
 /** \~french 
  * \brief Renvoie 0 ou 1 aléatoirement.

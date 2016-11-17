@@ -2,7 +2,7 @@
  *   This file is part of the MLV Library.
  *
  *   Copyright (C) 2010,2011,2012 Adrien Boussicault, Marc Zipstein
- *
+ *   Copyright (C) 2016 Eric Laporte (Bug on MLV_get_random_integer)
  *
  *    This Library is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by
@@ -31,12 +31,16 @@
 #include "warning_error.h"
 #include "memory_management.h"
 
-int MLV_get_random_boolean(int begin, int end){
+void MLV_set_seed( int32_t seed ){
+	g_random_set_seed(seed);
+}
+
+int MLV_get_random_boolean(){
 	return g_random_boolean( );
 }
 
 int MLV_get_random_integer(int begin, int end){
-	return g_random_int_range( begin, end );
+	return g_random_int_range( begin, end+1 );
 }
 
 double MLV_get_random_double(double begin, double end){
