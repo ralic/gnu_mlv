@@ -5,3 +5,8 @@
 
 override_dh_compress:
 	dh_compress -X.html -X.css -X.js -X.c -X.png -X.xml -X.ttf -X.ogg -X.jpg -XMakefile -Xexamples/beginner/gpl.txt
+
+override_dh_link:
+	ln -sf /usr/share/common-licenses/GPL-3 debian/libmlv3-dev/usr/share/doc/libmlv3-dev/doc/mlv/examples/beginner/gpl.txt
+	ln -sf /usr/share/fonts/truetype/tlwg/Garuda-Oblique.ttf debian/libmlv3-dev/usr/share/doc/libmlv3-dev/doc/mlv/examples/advanced/Garuda-Oblique.ttf
+	dh_link -Xgpl.txt -XGaruda-Oblique.ttf
