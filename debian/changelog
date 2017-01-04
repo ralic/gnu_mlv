@@ -1,6 +1,6 @@
 mlv (3.0.0-1) unstable; urgency=low
 
-  * Update debian package to version 9.
+  * Update debian package to version 9 (Closes: Bug#846340).
 
  -- Adrien Boussicault <adrien.boussicault@labri.fr>  Wed, 04 Jan 2017 12:57:01 +0100
 
