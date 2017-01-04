@@ -1,0 +1,7 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@ --parallel --with autotools_dev
+
+override_dh_compress:
+	dh_compress -X.html -X.css -X.js -X.c -X.png -X.xml -X.ttf -X.ogg -X.jpg -XMakefile -Xexamples/beginner/gpl.txt

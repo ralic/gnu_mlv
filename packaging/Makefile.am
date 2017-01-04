@@ -18,8 +18,8 @@
 #    along with this Library.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-SUBDIRS = debian/debian windows
+SUBDIRS = windows
 
 
-EXTRA_DIST= fedora/creer_paquet_rpm
+EXTRA_DIST= fedora/creer_paquet_rpm debian_helper/README
 
