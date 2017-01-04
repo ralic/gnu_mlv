@@ -29,16 +29,23 @@
 # This version follow the libtool version recommendation :
 # http://www.gnu.org/software/libtool/manual/html_node/Updating-version-info.html
 #
-define([mlvcurrent], [2])dnl
+# In MLV ABI is equal to API and is equal to mlvcurrent - mlvage.
+
+define([mlvcurrent], [3])dnl
 define([mlvrevision], [0])dnl
-define([mlvage], [2])dnl
+define([mlvage], [0])dnl
 
 # We deduce other version numbers
 define([mlvmajorversion], m4_eval(mlvcurrent - mlvage))dnl
 define([mlvminorversion], m4_eval(mlvage))dnl
+define([mlvabiversion], m4_eval(mlvmajorversion))dnl
+define([mlvapiversion], m4_eval(mlvabiversion))dnl
 
-AC_INIT([MLV], [mlvcurrent.mlvrevision.mlvage-dev], [adrien.boussicault@labri.fr], [], [http://www-igm.univ-mlv.fr/~boussica/mlv/index.html])
+AC_INIT([MLV], [mlvcurrent.mlvrevision.mlvage], [adrien.boussicault@labri.fr], [], [http://www-igm.univ-mlv.fr/~boussica/mlv/index.html])
 
+
+AC_SUBST(MLV_ABI_VERSION,[mlvabiversion])
+AC_SUBST(MLV_API_VERSION,[mlvapiversion])
 AC_SUBST(MLV_MAJOR_VERSION,[mlvmajorversion])
 AC_SUBST(MLV_MINOR_VERSION,[mlvminorversion])
 AC_SUBST(MLV_CURRENT,[mlvcurrent])
@@ -70,7 +77,7 @@ AC_SUBST(MAIL_MARC_ZIPSTEIN,[marc.zipstein@univ-mlv.fr])
 AC_SUBST(MLV_PACKAGE_REPOSITORY,[${MLV_SOURCE_REPOSITORY}/${PACKAGE_TARNAME}-${PACKAGE_VERSION}])
 
 
-AC_SUBST(MLV_DEBIAN_VERSION,[${MLV_MAJOR_VERSION}])
+AC_SUBST(MLV_DEBIAN_VERSION,[${MLV_ABI_VERSION}])
 AC_SUBST(MLV_DEBIAN_32_BINARY_PACKAGE,[lib${PACKAGE_TARNAME}${MLV_DEBIAN_VERSION}_${PACKAGE_VERSION}-1_i386.deb])
 AC_SUBST(MLV_DEBIAN_64_BINARY_PACKAGE,[lib${PACKAGE_TARNAME}${MLV_DEBIAN_VERSION}_${PACKAGE_VERSION}-1_amd64.deb])
 AC_SUBST(MLV_DEBIAN_32_DEV_PACKAGE,[lib${PACKAGE_TARNAME}${MLV_DEBIAN_VERSION}-dev_${PACKAGE_VERSION}-1_i386.deb])
@@ -452,22 +459,9 @@ AC_CONFIG_FILES([
 	doc/Doxyheader_French \
 	doc/Doxyheader_Spanish \
 	packaging/Makefile \
-	packaging/debian/script_pkg \
-	packaging/debian/debian/Makefile \
-	packaging/debian/debian/control \
-	packaging/debian/debian/libmlv${MLV_DEBIAN_VERSION}-dev.dirs:packaging/debian/debian/libmlv-dev.dirs \
-	packaging/debian/debian/libmlv${MLV_DEBIAN_VERSION}-dev.install:packaging/debian/debian/libmlv-dev.install \
-	packaging/debian/debian/libmlv${MLV_DEBIAN_VERSION}.dirs:packaging/debian/debian/libmlv.dirs \
-	packaging/debian/debian/libmlv${MLV_DEBIAN_VERSION}.install:packaging/debian/debian/libmlv.install \
-	packaging/debian/debian/libmlv${MLV_DEBIAN_VERSION}.postinst:packaging/debian/debian/libmlv.postinst \
-	packaging/debian/debian/libmlv${MLV_DEBIAN_VERSION}.postrm:packaging/debian/debian/libmlv.postrm \
-	packaging/debian/debian/libmlv.symbols \
-	packaging/debian/debian/libmlv${MLV_DEBIAN_VERSION}.symbols:packaging/debian/debian/libmlv.symbols \
-	packaging/debian/debian/libmlv.shlibs \
-	packaging/debian/debian/libmlv${MLV_DEBIAN_VERSION}.shlibs:packaging/debian/debian/libmlv.shlibs \
-	packaging/debian/debian/copyright \
+	packaging/debian_helper/control \
+	packaging/debian_helper/copyright \
 	packaging/fedora/rpmbuild/SPECS/mlv.spec \
-	packaging/debian/debian/changelog
 	packaging/windows/Makefile \
 	packaging/windows/cross-compilation/definition_of_environement_variables \
 	packaging/windows/cross-compilation/mingw_compilation_for_mlv \
@@ -488,7 +482,6 @@ AC_CONFIG_FILES([
 
 AC_OUTPUT
 
-chmod +x packaging/debian/script_pkg 
 chmod +x packaging/windows/cross-compilation/mingw_compilation_for_mlv
 chmod +x packaging/windows/create_win32_binaries
 chmod +x packaging/windows/create_canonical_developpement_kit

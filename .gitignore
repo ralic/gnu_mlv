@@ -95,20 +95,8 @@ MLV/test_list
 MLV/test_random
 MLV/test_turtle
 
-packaging/debian/debian/changelog
-packaging/debian/debian/control
-packaging/debian/debian/copyright
-packaging/debian/debian/libmlv.shlibs
-packaging/debian/debian/libmlv.symbols
-packaging/debian/debian/libmlv0-dev.dirs
-packaging/debian/debian/libmlv0-dev.install
-packaging/debian/debian/libmlv0.dirs
-packaging/debian/debian/libmlv0.install
-packaging/debian/debian/libmlv0.postinst
-packaging/debian/debian/libmlv0.postrm
-packaging/debian/debian/libmlv0.shlibs
-packaging/debian/debian/libmlv0.symbols
-packaging/debian/script_pkg
+packaging/debian_helper/control
+packaging/debian_helper/copyright
 
 packaging/fedora/rpmbuild/SPECS/mlv.spec
 

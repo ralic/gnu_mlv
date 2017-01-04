@@ -1,4 +1,4 @@
-mlv-2.0.2-dev
+mlv-3.0.0-dev
  * API changement : 
    * The functions that are waiting an event or the end of a timer has been 
      changed. Now, they return an event type according to the caught event.
@@ -48,6 +48,10 @@ mlv-2.0.2-dev
      not toric.
    * Now MLV_get_random_integer(begin, end) return an integer from begin 
      (included) to end (included) as explained in the documentation.
+ * Debian packaging : 
+   * Remove debian packaging from source code and add a special branch
+     inside the git repository for the debian packaging.
+   * Add some files in packaging/debian_helper to help the debian mainteners.
  * Example :
    * Add example on MLV_draw_triangle()
    * Change MLV_actualise_window by MLV_update_window

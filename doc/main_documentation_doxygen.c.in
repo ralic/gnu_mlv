@@ -234,8 +234,18 @@ Cette méthode fonctionnera toujours.
 - \ref installation_source
 
 
-
 \section installation_debian Debian et Ubuntu
+
+Tapez la commande suivante :
+
+\verbatim
+sudo apt-get install libmlv3-dev libmlv3
+\endverbatim
+
+La bibliothèque MLV est installée.
+
+
+\section installation_debian_manuellement Insaller les paquets debian manuellement
 
 Commencez par installer les bibliothèques sdl, sdl-gfx, sdl-mixer, sdl-ttf, sdl-image, sdl-image, xml2 et glib2.0 en tapant la commande suivante:
 
@@ -1113,11 +1123,13 @@ make install
 \section compilation_linux_rapide Compiler rapidement votre programme 
 
 Pour compiler votre programme, nous allons nous inspirer des exemples proposés
-par la bibliothèque situés dans le répertoire \a /usr/share/doc/mlv/examples .
+par la bibliothèque situés dans le répertoire \a /usr/share/doc/mlv/examples 
+(ou dans le répertoire \a /usr/share/doc/libmlv@MLV_ABI_VERSION@-dev/examples ).
 
 Pour compiler votre programme \a demo.c, recopiez le \a Makefile 
-situé dans le répertoire \a /usr/share/doc/mlv/examples/beginner/Makefile dans le 
-le répertoire où se trouve \a demo.c. (vous pouvez aussi trouver une version de ce 
+situé dans le répertoire \a /usr/share/doc/mlv/examples/beginner/Makefile 
+(ou dans le répertoire \a /usr/share/doc/libmlv@MLV_ABI_VERSION@-dev/dov/mlv/examples ) 
+où se trouve \a demo.c. (vous pouvez aussi trouver une version de ce 
 \a makefile à la page : \subpage outils_compilation).
 
 Modifiez le fichier \a Makefile copié en remplaçant la ligne 
@@ -1132,7 +1144,8 @@ TARGET = demo
 Pour compiler votre programme, il ne vous reste plus qu'à taper la commande
 \verbatim make \endverbatim
 
-Les exemples présents dans le répertoire  \a /usr/share/doc/mlv/examples 
+Les exemples présents dans le répertoire  \a /usr/share/doc/mlv/examples ou
+dans le repertoire /usr/share/doc/libmlv@MLV_ABI_VERSION@-dev/doc/mlv/examples et 
 constituent un bon tutoriel pour apprendre à utiliser la bibliothèque.
 Nous vous conseillons de tous les compiler et de tous les essayer.
 
@@ -1406,7 +1419,7 @@ Dans le répertoire build se trouve normalement le programme mlv_program.
 
 Un ensemble d'exemples est disponible dans le répertoire:
 
-- Pour linux et MacOSX : \a /usr/share/doc/mlv/examples
+- Pour linux et MacOSX : \a /usr/share/doc/mlv/examples (ou bien \a /usr/share/doc/libmlv@MLV_ABI_VERSION@-dev/examples )
 	
 - Pour windows : \a MLV_examples
 	
@@ -2025,6 +2038,10 @@ dossier @PACKAGE_TARNAME@-@PACKAGE_VERSION@ issu de la décompression du fichier
 @PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz.
 Si vous le faite à partir du dossier du dépot git de MLV, cela ne fonctionnera 
 pas.
+
+
+LA FIN DE CETTE SECTION EST A METTRE A JOUR ! 
+IL FAUT UTILISER LE DEPOT DEBIAN MAINTENANT !
 
 Pour créer les paquets debian, vous allez utiliser un script prévu à cet effet.
 Pour utiliser ce script, il faut commencer par le générer en tapant les commandes suivantes:

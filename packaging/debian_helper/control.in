@@ -2,6 +2,7 @@
 #   This file is part of the MLV Library.
 #
 #   Copyright (C) 2010 Adrien Boussicault, Marc Zipstein
+#   Copyright (C) 2016 Adrien Boussicault
 #
 #
 #    This library is free software: you can redistribute it and/or modify
@@ -19,24 +20,24 @@
 #
  
 Source: @PACKAGE_TARNAME@
-Priority: extra
+Priority: optional
 Maintainer: Unknown Maintener <unknown.maintener@univ-mlv.fr>
-Build-Depends: debhelper (>= 7), autotools-dev, doxygen, libsdl-gfx1.2-dev, libsdl1.2-dev, libsdl-mixer1.2-dev, libsdl-ttf2.0-dev, libglib2.0-dev, libsdl-mixer1.2-dev, libsdl-image1.2-dev, libxml2-dev
-Standards-Version: 3.8.4
+Build-Depends: debhelper (>= 9), autotools-dev, doxygen, libsdl-gfx1.2-dev, libsdl1.2-dev, libsdl-mixer1.2-dev, libsdl-ttf2.0-dev, libglib2.0-dev, libsdl-mixer1.2-dev, libsdl-image1.2-dev, libxml2-dev
+Standards-Version: 3.9.8
 Section: libs
 Homepage: @PACKAGE_URL@
 
 Package: libmlv@MLV_DEBIAN_VERSION@-dev
 Section: libdevel
 Architecture: any
-Depends: libmlv@MLV_DEBIAN_VERSION@ (= ${binary:Version}), libsdl-gfx1.2-dev, libsdl1.2-dev, libsdl-mixer1.2-dev, libsdl-ttf2.0-dev, libglib2.0-dev, libsdl-mixer1.2-dev, libsdl-image1.2-dev, libxml2-dev
+Depends: libmlv@MLV_DEBIAN_VERSION@ (= ${binary:Version}), ${misc:Depends}, libsdl1.2-dev, fonts-tlwg-garuda-ttf, libjs-jquery
 Conflicts: libmlv-dev, libmlv-0.2-dev, libmlv-0.4-dev
 Replaces: libmlv-dev, libmlv-0.2-dev, libmlv-0.4-dev
 Description: simplified multimedia library in C for beginners.
  The mlv library is a simplified multimedia library.
  The library is perfect for beginners in C programming who
  want to use graphic and sound effects.
- The library permit to:
+ The library are dedicated to:
   - draw figures, text and boxed text,
   - display images,
   - plays musics,
@@ -54,14 +55,14 @@ Description: simplified multimedia library in C for beginners.
 Package: libmlv@MLV_DEBIAN_VERSION@
 Section: libs
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libsdl-gfx1.2-5, libsdl1.2debian, libsdl-mixer1.2, libsdl-ttf2.0-0, libglib2.0-0, libsdl-mixer1.2, libsdl-image1.2, libxml2
+Depends: ${shlibs:Depends}, ${misc:Depends}, fonts-dejavu-core
 Conflicts: libmlv, libmlv-0.2, libmlv-0.4
 Replaces: libmlv, libmlv-0.2, libmlv-0.4
 Description: simplified multimedia library in C for beginners.
  The mlv library is a simplified multimedia library.
  The library is perfect for beginners in C programming who 
  want to use graphic and sound effects.
- The library permit to:
+ The library are dedicated to:
   - draw figures, text and boxed text,
   - display images,
   - plays musics,
