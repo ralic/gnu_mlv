@@ -32,7 +32,7 @@
 # In MLV ABI is equal to API and is equal to mlvcurrent - mlvage.
 
 define([mlvcurrent], [3])dnl
-define([mlvrevision], [0])dnl
+define([mlvrevision], [1])dnl
 define([mlvage], [0])dnl
 
 # We deduce other version numbers

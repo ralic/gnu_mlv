@@ -30,7 +30,6 @@ EXTRA_DIST= \
 	red_image.png \
 	map.png \
 	creature.png \
-	Location_European_nation_states.svg \
 	france.png \
 	greece.png \
 	italy.png \
