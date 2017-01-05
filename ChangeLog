@@ -1,4 +1,7 @@
-mlv-3.0.0-dev
+mlv-3.1.0
+ * Remove all non-free copyright coming from cc-by-nc-nd and cc-by-nc-na.
+
+mlv-3.0.0
  * API changement : 
    * The functions that are waiting an event or the end of a timer has been 
      changed. Now, they return an event type according to the caught event.
