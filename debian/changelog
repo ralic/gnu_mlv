@@ -1,4 +1,4 @@
-mlv (3.1.0-1) UNRELEASED; urgency=medium
+mlv (3.1.0-1) unstable; urgency=medium
 
   [ Adrien Boussicault ]
   * Remove all cc-by-nc-nd and cc-by-nc-sa copyrights (Closes: Bug#846340).
@@ -6,7 +6,7 @@ mlv (3.1.0-1) UNRELEASED; urgency=medium
   [ Samuel Thibault ]
   * Use absolute symlinks for example symlinks.
 
- -- Adrien Boussicault <adrien.boussicault@labri.fr>  Thu, 05 Jan 2017 10:00:00 +0100
+ -- Adrien Boussicault <adrien.boussicault@labri.fr>  Sat, 14 Jan 2017 23:01:08 +0100
 
 mlv (3.0.0-1) unstable; urgency=low
 
