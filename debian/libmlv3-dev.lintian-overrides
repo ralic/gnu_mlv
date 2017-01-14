@@ -1,0 +1,2 @@
+libmlv3-dev: symlink-should-be-relative usr/share/doc/libmlv3-dev/doc/mlv/examples/advanced/Garuda-Oblique.ttf /usr/share/fonts/truetype/tlwg/Garuda-Oblique.ttf
+libmlv3-dev: symlink-should-be-relative usr/share/doc/libmlv3-dev/doc/mlv/examples/beginner/gpl.txt /usr/share/common-licenses/GPL-3
